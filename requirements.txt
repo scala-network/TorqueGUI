@@ -1,0 +1,4 @@
+PySide>=1.2,<2.0
+requests
+psutil
+winpaths

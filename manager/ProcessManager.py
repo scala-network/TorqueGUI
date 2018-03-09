@@ -158,7 +158,7 @@ class WalletRPCManager(ProcessManager):
         self.rpc_request = WalletRPCRequest(app, self.user_agent)
 
         self.ready = False
-        self.block_hex = None
+        
         self.block_height = 0
         self.is_password_invalid = Event()
 
@@ -166,7 +166,7 @@ class WalletRPCManager(ProcessManager):
         is_ready_str = "Run net_service loop"
         err_str = "ERROR"
         invalid_password = "invalid password"
-        height_regex = re.compile(r"Processed block: \<([a-z0-9]+)\>, height (\d+)")
+        height_regex = re.compile(r"(Skipped block by timestamp, height:|Skipped block by height:|Skipped block by height:|Processed block: \<([a-z0-9]+)\>, height) (\d+)")
 
         for line in iter(self.proc.stdout.readline, b''):
             if not self.ready and is_ready_str in line:
@@ -182,8 +182,7 @@ class WalletRPCManager(ProcessManager):
 
             m_height = height_regex.search(line)
             if m_height:
-                self.block_hex = m_height.group(1)
-                self.block_height = m_height.group(2)
+                self.block_height = m_height.group(3)
 
         if not self.proc.stdout.closed:
             self.proc.stdout.close()

@@ -114,7 +114,7 @@ class Hub(QObject):
         counter = 0
         while not self.ui.wallet_rpc_manager.is_ready():
             self.app_process_events(0.5)
-            if self.ui.wallet_rpc_manager.block_hex:
+            if self.ui.wallet_rpc_manager.block_height:
                 block_height = str(self.ui.wallet_rpc_manager.block_height)
                 self.on_new_wallet_update_processed_block_height_event.emit(block_height)
                 counter = 0
@@ -258,7 +258,7 @@ class Hub(QObject):
             counter = 0
             while not self.ui.wallet_rpc_manager.is_ready():
                 self.app_process_events(0.5)
-                if self.ui.wallet_rpc_manager.block_hex:
+                if self.ui.wallet_rpc_manager.block_height:
                     block_height = str(self.ui.wallet_rpc_manager.block_height)
                     self.on_new_wallet_update_processed_block_height_event.emit(block_height)
                     counter = 0

@@ -31,25 +31,27 @@ class ProcessManager(Thread):
     def __init__(self, proc_args, proc_name=""):
         Thread.__init__(self)
         args_array = proc_args.encode( sys.getfilesystemencoding() ).split(u' ')
+        args_array[0] = args_array[0].replace('__SPACE_REPLACE__', ' ')
+        print(args_array)
         self.proc = Popen(args_array,
-                          shell=False, 
-                          stdout=PIPE, stderr=STDOUT, stdin=PIPE, 
+                          shell=False,
+                          stdout=PIPE, stderr=STDOUT, stdin=PIPE,
                           creationflags=CREATE_NO_WINDOW)
         self.proc_name = proc_name
         self.daemon = True
         log("[%s] started" % proc_name, LEVEL_INFO, self.proc_name)
-    
+
     def run(self):
         for line in iter(self.proc.stdout.readline, b''):
             log(">>> " + line.rstrip(), LEVEL_DEBUG, self.proc_name)
-        
+
         if not self.proc.stdout.closed:
             self.proc.stdout.close()
-            
+
     def send_command(self, cmd):
         self.proc.stdin.write( (cmd + "\n").encode("utf-8") )
         sleep(0.1)
-        
+
     def stop(self):
         if self.is_proc_running():
             self.send_command('exit')
@@ -72,18 +74,19 @@ class ProcessManager(Thread):
                 else:
                     break
         log("[%s] stopped" % self.proc_name, LEVEL_INFO, self.proc_name)
-    
+
     def is_proc_running(self):
         return (self.proc.poll() is None)
-    
+
 
 class ElectroneumdManager(ProcessManager):
     def __init__(self, resources_path, log_level=0, block_sync_size=10):
+        resources_path = resources_path.replace(' ' ,'__SPACE_REPLACE__')
         proc_args = u'%s/bin/stellited --log-level %d --block-sync-size %d --rpc-bind-port %d' % (resources_path, log_level, block_sync_size, RPC_DAEMON_PORT)
         ProcessManager.__init__(self, proc_args, "stellited")
         self.synced = Event()
         self.stopped = Event()
-        
+
     def run(self):
 #         synced_str = "You are now synchronized with the network"
         err_str = "ERROR"
@@ -96,15 +99,15 @@ class ElectroneumdManager(ProcessManager):
                 log("[%s]>>> %s" % (self.proc_name, line.rstrip()), LEVEL_ERROR, self.proc_name)
             else:
                 log("[%s]>>> %s" % (self.proc_name, line.rstrip()), LEVEL_INFO, self.proc_name)
-        
+
         if not self.proc.stdout.closed:
             self.proc.stdout.close()
-        
+
         self.stopped.set()
 
 class WalletCliManager(ProcessManager):
     fail_to_connect_str = "wallet failed to connect to daemon"
-    
+
     def __init__(self, resources_path, wallet_file_path, wallet_log_path, restore_wallet=False):
         if not restore_wallet:
             wallet_args = u'%s/bin/stellite-wallet-cli --generate-new-wallet=%s --log-file=%s' \
@@ -115,7 +118,7 @@ class WalletCliManager(ProcessManager):
         ProcessManager.__init__(self, wallet_args, "stellite-wallet-cli")
         self.ready = Event()
         self.last_error = ""
-        
+
     def run(self):
         is_ready_str = "Background refresh thread started"
         err_str = "Error:"
@@ -128,20 +131,20 @@ class WalletCliManager(ProcessManager):
                 log("[%s]>>> %s" % (self.proc_name, line.rstrip()), LEVEL_ERROR, self.proc_name)
 #             else:
 #                 log("[%s]>>> %s" % (self.proc_name, line.rstrip()), LEVEL_DEBUG, self.proc_name)
-        
+
         if not self.proc.stdout.closed:
             self.proc.stdout.close()
-    
+
     def is_ready(self):
         return self.ready.is_set()
-            
-    
+
+
     def is_connected(self):
         self.send_command("refresh")
         if self.fail_to_connect_str in self.last_error:
             return False
         return True
-    
+
 
 
 class WalletRPCManager(ProcessManager):
@@ -149,22 +152,22 @@ class WalletRPCManager(ProcessManager):
         self.user_agent = str(uuid4().hex)
         wallet_log_path = os.path.join(os.path.dirname(wallet_file_path), "stellite-wallet-rpc.log")
         wallet_rpc_args = u'%s/bin/stellite-wallet-rpc --disable-rpc-login --wallet-file %s --log-file %s --rpc-bind-port %d --log-level %d --daemon-port %d --password %s' % (resources_path, wallet_file_path, wallet_log_path, RPC_DAEMON_PORT+2, log_level, RPC_DAEMON_PORT, wallet_password)
-        
+
         ProcessManager.__init__(self, wallet_rpc_args, "stellite-wallet-rpc")
-        
+
         self.rpc_request = WalletRPCRequest(app, self.user_agent)
-        
+
         self.ready = False
         self.block_hex = None
         self.block_height = 0
-        self.is_password_invalid = Event() 
-    
+        self.is_password_invalid = Event()
+
     def run(self):
         is_ready_str = "Run net_service loop"
         err_str = "ERROR"
         invalid_password = "invalid password"
         height_regex = re.compile(r"Processed block: \<([a-z0-9]+)\>, height (\d+)")
-        
+
         for line in iter(self.proc.stdout.readline, b''):
             if not self.ready and is_ready_str in line:
                 self.ready = True
@@ -176,21 +179,21 @@ class WalletRPCManager(ProcessManager):
                     self.is_password_invalid.set()
             else:
                 log("[%s]>>> %s" % (self.proc_name, line.rstrip()), LEVEL_DEBUG, self.proc_name)
-            
+
             m_height = height_regex.search(line)
             if m_height:
                 self.block_hex = m_height.group(1)
                 self.block_height = m_height.group(2)
-        
+
         if not self.proc.stdout.closed:
-            self.proc.stdout.close()    
-            
+            self.proc.stdout.close()
+
     def is_ready(self):
         return self.ready
-    
+
     def is_invalid_password(self):
         return self.is_password_invalid.is_set()
-    
+
     def stop(self):
         self.rpc_request.stop_wallet()
         if self.is_proc_running():
@@ -207,5 +210,4 @@ class WalletRPCManager(ProcessManager):
                 else:
                     break
         self.ready = False
-        log("[%s] stopped" % self.proc_name, LEVEL_INFO, self.proc_name)        
-        
+        log("[%s] stopped" % self.proc_name, LEVEL_INFO, self.proc_name)

@@ -67,8 +67,8 @@ def main():
     # Application setup
     
     app = QSingleApplication(sys.argv)
-    app.setOrganizationName('Electroneum')
-    app.setOrganizationDomain('www.electroneum.com')
+    app.setOrganizationName('Stellite')
+    app.setOrganizationDomain('www.stellite.cash')
     app.setApplicationName(APP_NAME)
     app.setProperty("AppPath", app_path)
     app.setProperty("ResPath", resources_path)

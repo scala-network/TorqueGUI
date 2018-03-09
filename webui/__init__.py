@@ -404,6 +404,9 @@ class MainWebUI(BaseWebUI):
                 self.run_wallet_rpc(wallet_password, 2)
                 while not self.wallet_rpc_manager.is_ready():
                     self.hub.app_process_events(0.5)
+                    if self.wallet_rpc_manager.block_height:
+                         block_height = str(self.wallet_rpc_manager.block_height)
+                         self.hub.on_new_wallet_update_processed_block_height_event.emit(block_height)
                     if self.wallet_rpc_manager.is_invalid_password():
                         QMessageBox.critical(self, \
                             'Error Starting Wallet',\

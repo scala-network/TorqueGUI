@@ -44,6 +44,9 @@ html ="""
                     hide_progress();
                 });
                 
+	 app_hub.on_new_wallet_update_processed_block_height_event.connect(update_processed_block_height);
+
+		
                 app_hub.on_wallet_rescan_bc_completed_event.connect(function(){
                     rescan_spent_btn.disable(false);
                     rescan_bc_btn.disable(false);
@@ -666,7 +669,7 @@ html ="""
                 current_tx_history_page = 1;
                 
                 sync_pct = 0;
-                show_app_progress("Loading wallet...");
+                show_app_progress("Loading wallet... (Height: <span id='processed_block_height'></span>)");
                 
                 receive_address = $('#receive_address');
                 receive_integrated_address = $("#receive_integrated_address");
@@ -701,6 +704,9 @@ html ="""
                     }
                 });
             });
+	    function update_processed_block_height(height){
+	    $('#processed_block_height').html(height);
+	    }
         </script>
     </head>
     <body>

@@ -92,7 +92,7 @@ def print_money(amount):
         amount = int(amount)
     except:
         raise Exception("Error parsing amount. Money amount must be an integer.")
-    return "%s <small>STL</small>" % ("{:,.2f}".format(amount/100.))
+    return "%s <small>XTL</small>" % ("{:,.2f}".format(amount/100.))
 
 def print_money2(amount):
     try:

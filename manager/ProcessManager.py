@@ -30,13 +30,8 @@ DETACHED_PROCESS = 0x00000008  # forcing the child to have no console at all
 class ProcessManager(Thread):
     def __init__(self, proc_args, proc_name=""):
         Thread.__init__(self)
-
         args_array = proc_args.encode( sys.getfilesystemencoding() ).split(u' ')
-        i = 0
-        while i < len(args_array):
-                args_array[i] = args_array[i].replace('__SPACE_REPLACE__', ' ')
-                i += 1
-
+        args_array[0] = args_array[0].replace('__SPACE_REPLACE__', ' ')
         print(args_array)
         self.proc = Popen(args_array,
                           shell=False,
@@ -114,9 +109,6 @@ class WalletCliManager(ProcessManager):
     fail_to_connect_str = "wallet failed to connect to daemon"
 
     def __init__(self, resources_path, wallet_file_path, wallet_log_path, restore_wallet=False):
-        resources_path = resources_path.replace(' ' ,'__SPACE_REPLACE__')
-        wallet_file_path  = wallet_file_path.replace(' ' ,'__SPACE_REPLACE__')
-        wallet_log_path  = wallet_log_path.replace(' ' ,'__SPACE_REPLACE__')
         if not restore_wallet:
             wallet_args = u'%s/bin/stellite-wallet-cli --generate-new-wallet=%s --log-file=%s' \
                                                 % (resources_path, wallet_file_path, wallet_log_path)
@@ -159,9 +151,6 @@ class WalletRPCManager(ProcessManager):
     def __init__(self, resources_path, wallet_file_path, wallet_password, app, log_level=2):
         self.user_agent = str(uuid4().hex)
         wallet_log_path = os.path.join(os.path.dirname(wallet_file_path), "stellite-wallet-rpc.log")
-        resources_path = resources_path.replace(' ' ,'__SPACE_REPLACE__')
-        wallet_file_path  = wallet_file_path.replace(' ' ,'__SPACE_REPLACE__')
-        wallet_log_path = wallet_log_path.replace(' ' ,'__SPACE_REPLACE__')
         wallet_rpc_args = u'%s/bin/stellite-wallet-rpc --disable-rpc-login --wallet-file %s --log-file %s --rpc-bind-port %d --log-level %d --daemon-port %d --password %s' % (resources_path, wallet_file_path, wallet_log_path, RPC_DAEMON_PORT+2, log_level, RPC_DAEMON_PORT, wallet_password)
 
         ProcessManager.__init__(self, wallet_rpc_args, "stellite-wallet-rpc")
@@ -169,7 +158,7 @@ class WalletRPCManager(ProcessManager):
         self.rpc_request = WalletRPCRequest(app, self.user_agent)
 
         self.ready = False
-
+        
         self.block_height = 0
         self.is_password_invalid = Event()
 

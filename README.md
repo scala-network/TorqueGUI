@@ -19,7 +19,7 @@ It is changed to be compatible with Stellite.
 			sudo apt install python-pyside
 
 
-2. Build/download Electroneum binaries from [Stellite repo](https://github.com/stellitecoin/stellite/releases) and put it to `Resources/bin` sub-directory.
+2. Build/download Stellite binaries from [Stellite repo](https://github.com/stellitecoin/stellite/releases) and put it to `Resources/bin` sub-directory.
 
 3. Run the wallet (Python 2.7):
 		

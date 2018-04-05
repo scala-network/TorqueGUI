@@ -611,7 +611,7 @@ class Hub(QObject):
     
     @Slot()
     def view_daemon_log(self):
-        log_file = os.path.join(DATA_DIR, 'logs', "electroneumd.log")
+        log_file = os.path.join(DATA_DIR, 'logs', "stellited.log")
         log_dialog = LogViewer(parent=self.ui, log_file=log_file)
         log_dialog.load_log()
         

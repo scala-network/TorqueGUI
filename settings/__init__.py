@@ -15,7 +15,7 @@ from utils.common import getHomeDir, makeDir
 
 USER_AGENT = "Stellite GUI Wallet"
 APP_NAME = "Stellite Wallet"
-VERSION = [0, 0, 6]
+VERSION = [0, 0, 7]
 
 
 _data_dir = makeDir(os.path.join(os.getcwd(), 'data'))

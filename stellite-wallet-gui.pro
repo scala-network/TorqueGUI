@@ -269,6 +269,7 @@ macx {
         -lboost_serialization \
         -lboost_thread-mt \
         -lboost_system \
+        -lboost_system-mt \
         -lboost_date_time \
         -lboost_filesystem \
         -lboost_regex \

@@ -33,21 +33,9 @@ Stellite development can be supported directly through donations.
 
 Both Stellite and Bitcoin donations can be made to donate.getstellite.org if using a client that supports the [OpenAlias](https://openalias.org) standard
 
-The Stellite donation address is: `44AFFq5kSiGBoZ4NMDwYtN18obc8AemS33DBLWs3H7otXft3XjrpDtQGv7SqSsaBYBb98uNbr2VBBEt7f2wfn3RVGQBEP3A` (viewkey: `f359631075708155cc3d92a32b75a7d02a5dcf27756707b47a2b31b21c389501`)
+The Stellite donation address is: `Se321oJNkfaGrN89Vmq6qGZb8587L53u2NVZbCrhhJujemaGMVNmr952oEsQAKGFojevSWDNcJK8GS8Sy4manyrG2okoPyvfa`
 
-The Bitcoin donation address is: `1KTexdemPdxSBcG55heUuTjDRYqbC5ZL8H`
-
-Core development funding and/or some supporting services are also graciously provided by sponsors:
-
-[<img width="80" src="https://static.getstellite.org/images/sponsors/mystellite.png"/>](https://mystellite.com)
-[<img width="150" src="https://static.getstellite.org/images/sponsors/kitware.png?1"/>](http://kitware.com)
-[<img width="100" src="https://static.getstellite.org/images/sponsors/dome9.png"/>](http://dome9.com)
-[<img width="150" src="https://static.getstellite.org/images/sponsors/araxis.png"/>](http://araxis.com)
-[<img width="150" src="https://static.getstellite.org/images/sponsors/jetbrains.png"/>](http://www.jetbrains.com/)
-[<img width="150" src="https://static.getstellite.org/images/sponsors/navicat.png"/>](http://www.navicat.com/)
-[<img width="150" src="https://static.getstellite.org/images/sponsors/symas.png"/>](http://www.symas.com/)
-
-There are also several mining pools that kindly donate a portion of their fees, [a list of them can be found on our Bitcointalk post](https://bitcointalk.org/index.php?topic=583449.0).
+The Bitcoin donation address is: `1STLDjXKsQdCBRwHjBEeNVF4aH1N96nyx`
 
 ## License
 
@@ -228,7 +216,7 @@ More info: http://stackoverflow.com/a/35098040/1683164
 
 8. Build the GUI
     ```
-    cd stellite-core
+    cd StelliteGUI
     export PATH=$(ls -rd /c/Qt/5.[6,7,8]/mingw53_32/bin | head -1):$PATH
     ./build.sh
     cd build

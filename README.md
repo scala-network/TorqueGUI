@@ -1,15 +1,15 @@
 # Stellite GUI
 
 Copyright (c) 2017-2018, The Stellite Project
+
 Copyright (c) 2014-2017, The Monero Project
 
 ## Development Resources
 
-- Web: [getstellite.org](https://getstellite.org)
-- Forum: [forum.getstellite.org](https://forum.getstellite.org)
-- Mail: [dev@getstellite.org](mailto:dev@getstellite.org)
-- Github: [https://github.com/stellitecoin/stellite-core](https://github.com/stellitecoin/stellite-core)
-- IRC: [#stellite-dev on Freenode](irc://chat.freenode.net/#stellite-dev)
+- Web: [stellite.cash](https://stellite.cash)
+- Discord: [https://discord.gg/C9JVYHA](https://discord.gg/C9JVYHA)
+- Mail: [admin@stellite.cash](mailto:admin@stellite.cash)
+- Github: [https://github.com/stellitecoin/StelliteGUI/](https://github.com/stellitecoin/StelliteGUI/)
 
 ## Introduction
 

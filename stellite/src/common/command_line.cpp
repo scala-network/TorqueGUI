@@ -130,7 +130,7 @@ namespace command_line
   const command_line::arg_descriptor<size_t> arg_block_sync_size  = {
     "block-sync-size"
   , "How many blocks to sync at once during chain synchronization (0 = adaptive)."
-  , 0
+  , 1
   };
   const command_line::arg_descriptor<std::string> arg_check_updates = {
     "check-updates"

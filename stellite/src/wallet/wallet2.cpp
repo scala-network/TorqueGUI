@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2017, The Stellite Project
+// Copyright (c) 2014-2017, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -80,11 +80,11 @@ using namespace cryptonote;
 // arbitrary, used to generate different hashes from the same input
 #define CHACHA8_KEY_TAIL 0x8c
 
-#define UNSIGNED_TX_PREFIX "Stellite unsigned tx set\003"
-#define SIGNED_TX_PREFIX "Stellite signed tx set\003"
+#define UNSIGNED_TX_PREFIX "Monero unsigned tx set\003"
+#define SIGNED_TX_PREFIX "Monero signed tx set\003"
 
 #define RECENT_OUTPUT_RATIO (0.5) // 50% of outputs are from the recent zone
-#define RECENT_OUTPUT_ZONE ((time_t)(1.8 * 86400)) // last 1.8 day makes up the recent zone (taken from stellitelink.pdf, Miller et al)
+#define RECENT_OUTPUT_ZONE ((time_t)(1.8 * 86400)) // last 1.8 day makes up the recent zone (taken from monerolink.pdf, Miller et al)
 
 #define FEE_ESTIMATE_GRACE_BLOCKS 10 // estimate fee valid for that many blocks
 
@@ -98,7 +98,7 @@ using namespace cryptonote;
       ioservice.stop(); \
     } while(0)
 
-#define KEY_IMAGE_EXPORT_FILE_MAGIC "Stellite key image export\002"
+#define KEY_IMAGE_EXPORT_FILE_MAGIC "Monero key image export\002"
 
 namespace
 {
@@ -108,7 +108,7 @@ struct options {
   const command_line::arg_descriptor<std::string> daemon_host = {"daemon-host", tools::wallet2::tr("Use daemon instance at host <arg> instead of localhost"), ""};
   const command_line::arg_descriptor<std::string> password = {"password", tools::wallet2::tr("Wallet password (escape/quote as needed)"), "", true};
   const command_line::arg_descriptor<std::string> password_file = {"password-file", tools::wallet2::tr("Wallet password file"), "", true};
-  const command_line::arg_descriptor<int> daemon_port = {"daemon-port", tools::wallet2::tr("Use daemon instance at port <arg> instead of 20189"), 0};
+  const command_line::arg_descriptor<int> daemon_port = {"daemon-port", tools::wallet2::tr("Use daemon instance at port <arg> instead of 18081"), 0};
   const command_line::arg_descriptor<std::string> daemon_login = {"daemon-login", tools::wallet2::tr("Specify username[:password] for daemon RPC client"), "", true};
   const command_line::arg_descriptor<bool> testnet = {"testnet", tools::wallet2::tr("For testnet. Daemon must also be launched with --testnet flag"), false};
   const command_line::arg_descriptor<bool> restricted = {"restricted-rpc", tools::wallet2::tr("Restricts to view-only commands"), false};
@@ -2240,7 +2240,7 @@ crypto::secret_key wallet2::generate(const std::string& wallet_, const std::stri
   // avg seconds per block
   const int seconds_per_block = DIFFICULTY_TARGET;
   // ~num blocks per month
-  const uint64_t blocks_per_month = 60*60*24*30/seconds_per_block;
+  const uint64_t blocks_per_month = 60*24*30;
 
   // try asking the daemon first
   if(m_refresh_from_block_height == 0 && !recover){
@@ -2880,7 +2880,7 @@ bool wallet2::is_tx_spendtime_unlocked(uint64_t unlock_time, uint64_t block_heig
     uint64_t current_time = static_cast<uint64_t>(time(NULL));
     // XXX: this needs to be fast, so we'd need to get the starting heights
     // from the daemon to be correct once voting kicks in
-    uint64_t v2height = m_testnet ? 624634 : 1009827;
+    uint64_t v2height = m_testnet ? 624634 : 67500;
     uint64_t leeway = CRYPTONOTE_LOCKED_TX_ALLOWED_DELTA_SECONDS;
     if(current_time + leeway >= unlock_time)
       return true;
@@ -5117,9 +5117,9 @@ uint64_t wallet2::get_daemon_blockchain_target_height(string &err)
 uint64_t wallet2::get_approximate_blockchain_height() const
 {
   // time of v2 fork
-  const time_t fork_time = m_testnet ? 1448285909 : 1458748658;
+  const time_t fork_time = m_testnet ? 1448285909 : 1520584977;
   // v2 fork block
-  const uint64_t fork_block = m_testnet ? 624634 : 1009827;
+  const uint64_t fork_block = m_testnet ? 624634 : 67500;
   // avg seconds per block
   const int seconds_per_block = DIFFICULTY_TARGET;
   // Calculated blockchain height
@@ -5565,7 +5565,7 @@ std::string wallet2::make_uri(const std::string &address, const std::string &pay
     }
   }
 
-  std::string uri = "stellite:" + address;
+  std::string uri = "monero:" + address;
   unsigned int n_fields = 0;
 
   if (!payment_id.empty())
@@ -5594,9 +5594,9 @@ std::string wallet2::make_uri(const std::string &address, const std::string &pay
 //----------------------------------------------------------------------------------------------------
 bool wallet2::parse_uri(const std::string &uri, std::string &address, std::string &payment_id, uint64_t &amount, std::string &tx_description, std::string &recipient_name, std::vector<std::string> &unknown_parameters, std::string &error)
 {
-  if (uri.substr(0, 7) != "stellite:")
+  if (uri.substr(0, 7) != "monero:")
   {
-    error = std::string("URI has wrong scheme (expected \"stellite:\"): ") + uri;
+    error = std::string("URI has wrong scheme (expected \"monero:\"): ") + uri;
     return false;
   }
 

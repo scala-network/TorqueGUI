@@ -1718,7 +1718,7 @@ Ringgrootte: </translation>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="82"/>
         <source>Don&apos;t forget to write down your seed. You can view your seed and change your settings on settings page.</source>
-        <translation>Vergeet u hersteltekst niet op te schrijven. U kunt u hersteltekst bekijken en instellingen aanpassen op de instellingen pagina.</translation>
+        <translation>Vergeet uw hersteltekst niet op te schrijven. U kunt uw hersteltekst bekijken en instellingen aanpassen op de instellingen pagina.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="128"/>
@@ -1825,7 +1825,7 @@ Ringgrootte: </translation>
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="44"/>
         <source>Enter your 25 word mnemonic seed</source>
-        <translation>Vul u hersteltekst van 25 woorden in</translation>
+        <translation>Vul uw hersteltekst van 25 woorden in</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="88"/>
@@ -1853,7 +1853,7 @@ Ringgrootte: </translation>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="197"/>
         <source>Restore wallet from keys or mnemonic seed</source>
-        <translation>Herstel een portemonnee met behulp van u hersteltekst of sleutels</translation>
+        <translation>Herstel een portemonnee met behulp van uw hersteltekst of sleutels</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="241"/>
@@ -1877,13 +1877,13 @@ Ringgrootte: </translation>
         <location filename="../wizard/WizardPassword.qml" line="57"/>
         <location filename="../wizard/WizardPassword.qml" line="59"/>
         <source>Give your wallet a password</source>
-        <translation>Beveilig u portemonnee met een wachtwoord</translation>
+        <translation>Beveilig uw portemonnee met een wachtwoord</translation>
     </message>
     <message>
         <location filename="../wizard/WizardPassword.qml" line="127"/>
         <source> &lt;br&gt;Note: this password cannot be recovered. If you forget it then the wallet will have to be restored from its 25 word mnemonic seed.&lt;br/&gt;&lt;br/&gt;
                         &lt;b&gt;Enter a strong password&lt;/b&gt; (using letters, numbers, and/or symbols):</source>
-        <translation> &lt;br&gt;Let op: dit wachtwoord kan niet hersteld worden. Als u het wachtwoord vergeet, kan de portemonnee alleen hersteld worden worden met u hersteltekst van 25 woorden.&lt;br/&gt;&lt;br/&gt;
+        <translation> &lt;br&gt;Let op: dit wachtwoord kan niet hersteld worden. Als u het wachtwoord vergeet, kan de portemonnee alleen hersteld worden met uw hersteltekst van 25 woorden.&lt;br/&gt;&lt;br/&gt;
                         &lt;b&gt;Vul een sterk wachtwoord in&lt;/b&gt; (gebruik letters, cijfers, en/of symbolen):</translation>
     </message>
 </context>

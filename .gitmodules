@@ -1,0 +1,3 @@
+[submodule "stellite"]
+	path = stellite
+	url = git@github.com:stellitecoin/stellite.git

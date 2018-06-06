@@ -71,7 +71,7 @@ Packaging for your favorite distribution would be a welcome contribution!
 
 3. Go into the repository
 
-	`cd stellite-core`
+	`cd stelliteGUI`
 
 4. Install the GUI dependencies
 
@@ -141,13 +141,13 @@ The executable can be found in the build/release/bin folder.
 
     This is the directory where Qt 5.x is installed on **your** system
 
-6. Grab an up-to-date copy of the stellite-core repository
+6. Grab an up-to-date copy of the stelliteGUI repository
 
-  `git clone https://github.com/stellitecoin/stellite-core.git`
+  `git clone https://github.com/stellitecoin/StelliteGUI.git`
 
 7. Go into the repository
 
-  `cd stellite-core`
+  `cd stelliteGUI`
 
 8. Start the build
 

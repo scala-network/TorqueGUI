@@ -211,7 +211,7 @@ More info: http://stackoverflow.com/a/35098040/1683164
 7. Clone repository
     ```
     cd
-    git clone https://github.com/stellitecoin/stellite-core.git
+    git clone https://github.com/stellitecoin/StelliteGUI.git
     ```
 
 8. Build the GUI

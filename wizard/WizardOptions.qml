@@ -60,7 +60,7 @@ ColumnLayout {
     QtObject {
         id: d
         readonly property string daemonAddressTestnet : "localhost:38081"
-        readonly property string daemonAddressMainnet : "localhost:20189"
+        readonly property string daemonAddressMainnet : "nodes.stellite.cash:20189"
     }
 
     Behavior on opacity {

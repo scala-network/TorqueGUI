@@ -494,7 +494,7 @@ Rectangle {
         TextBlock {
             id: guiStelliteVersion
             Layout.fillWidth: true
-            text: qsTr("Embedded Stellite version: 1.2.4.1 Titanium V2, ") + Version.GUI_MONERO_VERSION + translationManager.emptyString
+            text: qsTr("Embedded Stellite version: 1.2.4.2 Titanium V3, ") + Version.GUI_MONERO_VERSION + translationManager.emptyString
         }
         TextBlock {
             Layout.fillWidth: true

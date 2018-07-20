@@ -151,7 +151,14 @@ The executable can be found in the build/release/bin folder.
 
 8. Start the build
 
-  `./build.sh`
+  `./build.sh release-static`
+9. When its done compiling
+
+`cd build`
+
+10. time to make a deply
+
+`make deploy`
 
 The executable can be found in the `build/release/bin` folder.
 

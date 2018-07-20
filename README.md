@@ -156,7 +156,7 @@ The executable can be found in the build/release/bin folder.
 
 `cd build`
 
-10. time to make a deply
+10. time to make a deploy
 
 `make deploy`
 

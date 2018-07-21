@@ -152,6 +152,7 @@ The executable can be found in the build/release/bin folder.
 8. Start the build
 
   `./build.sh release-static`
+  
 9. When its done compiling
 
 `cd build`

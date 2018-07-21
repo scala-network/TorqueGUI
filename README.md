@@ -59,7 +59,7 @@ Packaging for your favorite distribution would be a welcome contribution!
 
   - For Ubuntu and Mint
 
-	`sudo apt install build-essential cmake libboost-all-dev miniupnpc libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev`
+	`sudo apt install build-essential cmake libboost-all-dev miniupnpc libminiupnpc-dev libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev`
 
   - For Gentoo
 

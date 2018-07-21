@@ -65,7 +65,7 @@ Packaging for your favorite distribution would be a welcome contribution!
 
 	`sudo emerge app-arch/xz-utils app-doc/doxygen dev-cpp/gtest dev-libs/boost dev-libs/expat dev-libs/openssl dev-util/cmake media-gfx/graphviz net-dns/unbound net-libs/ldns net-libs/miniupnpc sys-libs/libunwind`
 
-2. Grab an up-to-date copy of the stellite-core repository
+2. Grab an up-to-date copy of the stelliteGUI repository
 
 	`git clone --recursive https://github.com/stellitecoin/StelliteGUI.git`
 
@@ -118,6 +118,11 @@ Packaging for your favorite distribution would be a welcome contribution!
   - For Gentoo
 
     `QT_SELECT=5 ./build.sh`
+    
+6. cd build and make deploy
+
+`cd build`
+`make deploy`
 
 The executable can be found in the build/release/bin folder.
 

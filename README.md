@@ -63,7 +63,7 @@ Packaging for your favorite distribution would be a welcome contribution!
 
   - For Gentoo
 
-	`sudo emerge app-arch/xz-utils app-doc/doxygen dev-cpp/gtest dev-libs/boost dev-libs/expat dev-libs/openssl dev-util/cmake media-gfx/graphviz net-dns/unbound net-libs/ldns net-libs/miniupnpc sys-libs/libunwind`
+	`sudo emerge app-arch/xz-utils app-doc/doxygen dev-cpp/gtest dev-libs/boost dev-libs/expat dev-libs/openssl dev-util/cmake media-gfx/graphviz net-dns/unbound net-libs/ldns net-libs/miniupnpc net-libs/zeromq sys-libs/libunwind`
 
 2. Grab an up-to-date copy of the stelliteGUI repository
 
@@ -132,6 +132,8 @@ The executable can be found in the build/release/bin folder.
 2. Install [homebrew](http://brew.sh/)
 3. Install [stellite](https://github.com/stellitecoin/stellite) dependencies:
 
+  `brew install git`
+  
   `brew install boost --c++11`
 
   `brew install openssl` - to install openssl headers

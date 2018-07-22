@@ -49,7 +49,7 @@ Make sure you have more then 8GB RAM in the virtual machine for a proper compile
 
 ### On Linux:
 
-(Tested on Ubuntu 18.04 LTSX64, 16.04 x86, 16.10 x64, Gentoo x64 and Linux Mint 18 "Sarah" - Cinnamon x64)
+(Tested on Ubuntu 18.04 LTS X64, 16.04 x86, 16.10 x64, Gentoo x64 and Linux Mint 18 "Sarah" - Cinnamon x64)
 
 1. Install Stellite dependencies
 

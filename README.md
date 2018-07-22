@@ -122,6 +122,7 @@ Packaging for your favorite distribution would be a welcome contribution!
 6. cd build and make deploy
 
 `cd build`
+
 `make deploy`
 
 The executable can be found in the build/release/bin folder.

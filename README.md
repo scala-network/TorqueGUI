@@ -138,6 +138,16 @@ The executable can be found in the build/release/bin folder.
   `brew install pkgconfig`
 
   `brew install cmake`
+  
+  `brew install unbound`
+
+  `brew install miniupnpc`
+
+  `brew install --with-pgm --devel zeromq`
+
+  `brew install doxygen`
+
+  `brew install pcsc-lite`
 
   `brew install qt5`  (or download QT 5.8+ from [qt.io](https://www.qt.io/download-open-source/))
 

@@ -143,7 +143,7 @@ The executable can be found in the build/release/bin folder.
 
   `brew install miniupnpc`
 
-  `brew install --with-pgm --devel zeromq`
+  `brew install zeromq`
 
   `brew install doxygen`
 

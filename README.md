@@ -49,7 +49,7 @@ Make sure you have more then 8GB RAM in the virtual machine for a proper compile
 
 ### On Linux:
 
-(Tested on Ubuntu 16.04 x86, 16.10 x64, Gentoo x64 and Linux Mint 18 "Sarah" - Cinnamon x64)
+(Tested on Ubuntu 18.04 LTSX64, 16.04 x86, 16.10 x64, Gentoo x64 and Linux Mint 18 "Sarah" - Cinnamon x64)
 
 1. Install Stellite dependencies
 
@@ -125,9 +125,9 @@ The executable can be found in the build/release/bin folder.
 
 ### On OS X:
 
-1. Install Xcode from AppStore
-2. Install [homebrew](http://brew.sh/)
-3. Install [stellite](https://github.com/stellitecoin/stellite) dependencies:
+1. Install or update Xcode from the AppStore
+2. Install [homebrew](http://brew.sh/) via the Terminal
+3. Install [stellite](https://github.com/stellitecoin/stellite) dependencies via the Terminal:
 
   `brew install git`
   
@@ -148,6 +148,7 @@ The executable can be found in the build/release/bin folder.
 5. Add the Qt bin directory to your path
 
     Example: `export PATH=$PATH:$HOME/Qt/5.8/clang_64/bin`
+    Example: `export PATH=$PATH:/usr/local/Cellar/Qt/5.11.1/bin`
 
     This is the directory where Qt 5.x is installed on **your** system
 
@@ -212,13 +213,13 @@ More info: http://stackoverflow.com/a/35098040/1683164
     There is no more need to download some special installer from the Qt website, the standard MSYS2 package for Qt will do in almost all circumstances.
 
 
-6. Open ```MinGW-w64 Win64 Shell``` shell
+6. Close and then open the ```MSYS2 MinGW 64-bit``` shell
 
    ```%MSYS_ROOT%\msys2_shell.cmd --mingw64```
 
    ```c:\msys64``` if your host OS is x64-based
 
-7. (This part might not be needed anymore) Install the latest version of boost, specificly the required static libraries
+7. (This part might not be needed anymore because of installed Boost in step 3) Install the latest version of boost, specificly the required static libraries
     ```
     cd
     wget http://sourceforge.net/projects/boost/files/boost/1.63.0/boost_1_63_0.tar.bz2
@@ -238,6 +239,7 @@ More info: http://stackoverflow.com/a/35098040/1683164
     ```
     cd StelliteGUI
     export PATH=$(ls -rd /mingw64/bin | head -1):$PATH
+    export PATH=$(ls -rd /usr/bin | head -1):$PATH
     ./build.sh
     cd build
     make deploy

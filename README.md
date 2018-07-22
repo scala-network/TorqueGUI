@@ -113,7 +113,7 @@ Packaging for your favorite distribution would be a welcome contribution!
 
   - For Ubuntu and Mint
 
-	`./build.sh`
+	`./build.sh release-static`
 
   - For Gentoo
 

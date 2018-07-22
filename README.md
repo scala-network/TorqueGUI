@@ -212,11 +212,11 @@ More info: http://stackoverflow.com/a/35098040/1683164
     There is no more need to download some special installer from the Qt website, the standard MSYS2 package for Qt will do in almost all circumstances.
 
 
-6. Open ```MinGW-w64 Win32 Shell``` shell
+6. Open ```MinGW-w64 Win64 Shell``` shell
 
    ```%MSYS_ROOT%\msys2_shell.cmd --mingw64```
 
-   if your host OS is x86-based or ```c:\msys64``` if your host OS is x64-based
+   ```c:\msys64``` if your host OS is x64-based
 
 7. (This part might not be needed anymore) Install the latest version of boost, specificly the required static libraries
     ```
@@ -237,7 +237,7 @@ More info: http://stackoverflow.com/a/35098040/1683164
 9. Build the GUI
     ```
     cd StelliteGUI
-    export PATH=$(ls -rd /c/Qt/5.[6,7,8]/mingw53_32/bin | head -1):$PATH
+    export PATH=$(ls -rd /mingw64/bin | head -1):$PATH
     ./build.sh
     cd build
     make deploy

@@ -41,15 +41,11 @@ The Bitcoin donation address is: `1STLDjXKsQdCBRwHjBEeNVF4aH1N96nyx`
 
 See [LICENSE](LICENSE).
 
-## Installing Stellite Core from a Package
+## Compiling StelliteGUI in a VM
 
-Packages are available for
+Make sure you have more then 8GB RAM in the virtual machine for a proper compile.
 
-* Arch Linux via AUR: [stellite-core-git](https://aur.archlinux.org/packages/stellite-core-git/)
-
-Packaging for your favorite distribution would be a welcome contribution!
-
-## Compiling Stellite Core from Source
+## Compiling StelliteGUI from Source
 
 ### On Linux:
 

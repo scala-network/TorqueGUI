@@ -49,7 +49,7 @@ Make sure you have more then 8GB RAM in the virtual machine for a proper compile
 
 ### On Linux:
 
-(Tested on Ubuntu 18.04 LTS X64, 16.04 x86, 16.10 x64, Gentoo x64 and Linux Mint 18 "Sarah" - Cinnamon x64)
+(Tested on Ubuntu 18.04 LTS x64, 16.04 x86, 16.10 x64, Gentoo x64 and Linux Mint 18 "Sarah" - Cinnamon x64)
 
 1. Install Stellite dependencies
 
@@ -148,6 +148,7 @@ The executable can be found in the build/release/bin folder.
 5. Add the Qt bin directory to your path
 
     Example: `export PATH=$PATH:$HOME/Qt/5.8/clang_64/bin`
+    
     Example: `export PATH=$PATH:/usr/local/Cellar/Qt/5.11.1/bin`
 
     This is the directory where Qt 5.x is installed on **your** system

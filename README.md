@@ -230,23 +230,13 @@ More info: http://stackoverflow.com/a/35098040/1683164
 
    ```c:\msys64``` if your host OS is x64-based
 
-7. (This part might not be needed anymore because of installed Boost in step 3) Install the latest version of boost, specificly the required static libraries
-    ```
-    cd
-    wget http://sourceforge.net/projects/boost/files/boost/1.63.0/boost_1_63_0.tar.bz2
-    tar xjf boost_1_63_0.tar.bz2
-    cd boost_1_63_0
-    ./bootstrap.sh mingw
-    ./b2 --prefix=/mingw64/boost --layout=tagged --without-mpi --without-python toolset=gcc address-model=32_64 variant=debug,release link=static threading=multi runtime-link=static -j$(nproc) install
-    ```
-
-8. Clone repository
+7. Clone repository
     ```
     cd
     git clone --recursive https://github.com/stellitecoin/StelliteGUI.git
     ```
 
-9. Build the GUI
+8. Build the GUI
     ```
     cd StelliteGUI
     export PATH=$(ls -rd /mingw64/bin | head -1):$PATH
@@ -257,3 +247,14 @@ More info: http://stackoverflow.com/a/35098040/1683164
     ```
 
 The executable can be found in the ```.\release\bin``` directory.
+
+
+9. If you get errors with boost try to Install the latest version of boost, specificly the required static libraries
+    ```
+    cd
+    wget http://sourceforge.net/projects/boost/files/boost/1.63.0/boost_1_63_0.tar.bz2
+    tar xjf boost_1_63_0.tar.bz2
+    cd boost_1_63_0
+    ./bootstrap.sh mingw
+    ./b2 --prefix=/mingw64/boost --layout=tagged --without-mpi --without-python toolset=gcc address-model=32_64 variant=debug,release link=static threading=multi runtime-link=static -j$(nproc) install
+    ```

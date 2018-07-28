@@ -209,13 +209,7 @@ More info: http://stackoverflow.com/a/35098040/1683164
     ```
     pacman -S git-core mingw-w64-x86_64-libpsl mingw-w64-x86_64-toolchain make mingw-w64-x86_64-cmake mingw-w64-x86_64-boost mingw-w64-x86_64-openssl mingw-w64-x86_64-zeromq mingw-w64-x86_64-libsodium mingw-w64-x86_64-miniupnpc pkg-config mingw-w64-x86_64-unbound
     ```
-4. Install git into msys2 environment
-
-    ```
-    pacman -S git
-    ```
-
-5. Install Qt5
+4. Install Qt5
 
     ```
     pacman -S mingw-w64-x86_64-qt5
@@ -224,19 +218,19 @@ More info: http://stackoverflow.com/a/35098040/1683164
     There is no more need to download some special installer from the Qt website, the standard MSYS2 package for Qt will do in almost all circumstances.
 
 
-6. Close and then open the ```MSYS2 MinGW 64-bit``` shell
+5. Close and then open the ```MSYS2 MinGW 64-bit``` shell
 
    ```%MSYS_ROOT%\msys2_shell.cmd --mingw64```
 
    ```c:\msys64``` if your host OS is x64-based
 
-7. Clone repository
+6. Clone repository
     ```
     cd
     git clone --recursive https://github.com/stellitecoin/StelliteGUI.git
     ```
 
-8. Build the GUI
+7. Build the GUI
     ```
     cd StelliteGUI
     export PATH=$(ls -rd /mingw64/bin | head -1):$PATH
@@ -249,7 +243,7 @@ More info: http://stackoverflow.com/a/35098040/1683164
 The executable can be found in the ```.\release\bin``` directory.
 
 
-9. If you see errors with boost try to Install the 1.66.0.02 version of boost, specificly the required static libraries
+8. If you see errors with boost try to install the 1.66.0-2 version of boost, specificly the required static libraries
     ```
 	wget http://repo.msys2.org/mingw/x86_64/mingw-w64-x86_64-boost-1.66.0-2-any.pkg.tar.xz
 	Pacman -U mingw-w64-x86_64-boost-1.66.0-2-any.pkg.tar.xz

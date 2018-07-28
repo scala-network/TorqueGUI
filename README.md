@@ -249,12 +249,9 @@ More info: http://stackoverflow.com/a/35098040/1683164
 The executable can be found in the ```.\release\bin``` directory.
 
 
-9. If you get errors with boost try to Install the latest version of boost, specificly the required static libraries
+9. If you see errors with boost try to Install the 1.66.0.02 version of boost, specificly the required static libraries
     ```
-    cd
-    wget http://sourceforge.net/projects/boost/files/boost/1.63.0/boost_1_63_0.tar.bz2
-    tar xjf boost_1_63_0.tar.bz2
-    cd boost_1_63_0
-    ./bootstrap.sh mingw
-    ./b2 --prefix=/mingw64/boost --layout=tagged --without-mpi --without-python toolset=gcc address-model=32_64 variant=debug,release link=static threading=multi runtime-link=static -j$(nproc) install
+	wget http://repo.msys2.org/mingw/x86_64/mingw-w64-x86_64-boost-1.66.0-2-any.pkg.tar.xz
+	Pacman -U mingw-w64-x86_64-boost-1.66.0-2-any.pkg.tar.xz
+	
     ```

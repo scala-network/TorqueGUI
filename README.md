@@ -207,7 +207,7 @@ More info: http://stackoverflow.com/a/35098040/1683164
 3. Install MSYS2 packages for StelliteGUI dependencies; the needed 64-bit packages have `x86_64` in their names
 
     ```
-    pacman -S git-core mingw-w64-x86_64-libpsl mingw-w64-x86_64-toolchain make mingw-w64-x86_64-cmake mingw-w64-x86_64-boost mingw-w64-x86_64-openssl mingw-w64-x86_64-zeromq mingw-w64-x86_64-libsodium
+    pacman -S git-core mingw-w64-x86_64-libpsl mingw-w64-x86_64-toolchain make mingw-w64-x86_64-cmake mingw-w64-x86_64-boost mingw-w64-x86_64-openssl mingw-w64-x86_64-zeromq mingw-w64-x86_64-libsodium mingw-w64-x86_64-miniupnpc pkg-config mingw-w64-x86_64-unbound
     ```
 4. Install git into msys2 environment
 

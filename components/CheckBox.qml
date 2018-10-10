@@ -1,5 +1,6 @@
 // Copyright (c) 2014-2015, The Stellite Project
-// 
+// Copyright (c) 2014-2018, The Monero Project
+//
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are
@@ -29,61 +30,81 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 
-Item {
+import "../components" as MoneroComponents
+
+RowLayout {
     id: checkBox
     property alias text: label.text
-    property string checkedIcon
+    property string checkedIcon: "../images/checkedIcon-black.png"
     property string uncheckedIcon
     property bool checked: false
     property alias background: backgroundRect.color
-    property int fontSize: 14
+    property int fontSize: 14 * scaleRatio
     property alias fontColor: label.color
     signal clicked()
-    height: 25
-    width: label.x + label.width
-    Layout.minimumWidth: label.x + label.contentWidth
-    clip: true
+    height: 25 * scaleRatio
 
-    Rectangle {
-        anchors.left: parent.left
-        height: parent.height - 1
-        width: 25
-        //radius: 4
-        y: 0
-        color: "#DBDBDB"
+    function toggle(){
+        checkBox.checked = !checkBox.checked
+        checkBox.clicked()
     }
 
-    Rectangle {
-        id: backgroundRect
-        anchors.left: parent.left
-        height: parent.height - 1
-        width: 25
-        //radius: 4
-        y: 1
-        color: "#FFFFFF"
-
-        Image {
-            anchors.centerIn: parent
-            source: checkBox.checked ? checkBox.checkedIcon :
-                                       checkBox.uncheckedIcon
+    RowLayout {
+        Layout.fillWidth: true
+        Rectangle {
+            anchors.left: parent.left
+            width: 25 * scaleRatio
+            height: checkBox.height - 1
+            radius: 3
+            y: 0
+            color: "transparent"
+            border.color:
+                if(checkBox.checked){
+                    return MoneroComponents.Style.inputBorderColorActive;
+                } else {
+                    return MoneroComponents.Style.inputBorderColorInActive;
+                }
         }
-    }
 
-    Text {
-        id: label
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.left: parent.left
-        anchors.leftMargin: 25 + 12
-        font.family: "Arial"
-        font.pixelSize: checkBox.fontSize
-        color: "#525252"
-    }
+        Rectangle {
+            id: backgroundRect
+            anchors.left: parent.left
+            width: 25 * scaleRatio
+            height: checkBox.height - 1
+            y: 1
+            color: "transparent"
 
-    MouseArea {
-        anchors.fill: parent
-        onClicked: {
-            checkBox.checked = !checkBox.checked
-            checkBox.clicked()
+            Image {
+                anchors.centerIn: parent
+                source: checkBox.checkedIcon
+                visible: checkBox.checked
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                onClicked: {
+                    toggle()
+                }
+            }
+        }
+
+        Text {
+            id: label
+            font.family: MoneroComponents.Style.fontRegular.name
+            font.pixelSize: checkBox.fontSize
+            color: MoneroComponents.Style.defaultFontColor
+            wrapMode: Text.Wrap
+            Layout.fillWidth: true
+            anchors.left: backgroundRect.right
+            anchors.leftMargin: !isMobile ? 10 : 8
+            MouseArea {
+                anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                onClicked: {
+                    toggle()
+                }
+            }
         }
     }
 }

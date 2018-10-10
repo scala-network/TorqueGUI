@@ -1,5 +1,6 @@
+// Copyright (c) 2017-2018, The Monero Project
 // Copyright (c) 2017, The Stellite Project
-// 
+//
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are
@@ -28,7 +29,7 @@
 
 import QtQuick 2.0
 import QtQuick.Controls 1.4
-import stelliteComponents.Wallet 1.0
+import moneroComponents.Wallet 1.0
 
 Item {
     id: item

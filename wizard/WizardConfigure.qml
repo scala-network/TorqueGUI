@@ -1,5 +1,6 @@
+// Copyright (c) 2014-2018, The Monero Project
 // Copyright (c) 2014-2015, The Stellite Project
-// 
+//
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are
@@ -76,7 +77,7 @@ Item {
         wrapMode: Text.Wrap
         //renderType: Text.NativeRendering
         color: "#3F3F3F"
-        text: qsTr("We’re almost there - let’s just configure some Stellite preferences") + translationManager.emptyString
+        text: qsTr("We’re almost there - let’s just configure some Monero preferences") + translationManager.emptyString
     }
 
     Column {
@@ -100,8 +101,6 @@ Item {
                 background: "#F0EEEE"
                 fontColor: "#4A4646"
                 fontSize: 18
-                checkedIcon: "../images/checkedVioletIcon.png"
-                uncheckedIcon: "../images/uncheckedIcon.png"
                 checked: true
             }
 
@@ -129,8 +128,6 @@ Item {
                 background: "#F0EEEE"
                 fontColor: "#4A4646"
                 fontSize: 18
-                checkedIcon: "../images/checkedVioletIcon.png"
-                uncheckedIcon: "../images/uncheckedIcon.png"
                 checked: true
             }
 
@@ -160,8 +157,6 @@ Item {
                 background: "#F0EEEE"
                 fontColor: "#4A4646"
                 fontSize: 18
-                checkedIcon: "../images/checkedVioletIcon.png"
-                uncheckedIcon: "../images/uncheckedIcon.png"
                 checked: true
             }
 
@@ -172,8 +167,8 @@ Item {
                 font.pixelSize: 15
                 color: "#4A4646"
                 wrapMode: Text.Wrap
-                text: qsTr("Mining secures the Stellite network, and also pays a small reward for the work done. This option " +
-                           "will let Stellite mine when your computer is on mains power and is idle. It will stop mining when you continue working.")
+                text: qsTr("Mining secures the Monero network, and also pays a small reward for the work done. This option " +
+                           "will let Monero mine when your computer is on mains power and is idle. It will stop mining when you continue working.")
                         + translationManager.emptyString
             }
         }

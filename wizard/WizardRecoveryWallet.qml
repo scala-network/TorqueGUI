@@ -1,5 +1,6 @@
+// Copyright (c) 2014-2018, The Monero Project
 // Copyright (c) 2014-2015, The Stellite Project
-// 
+//
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are
@@ -28,7 +29,7 @@
 
 import QtQuick 2.2
 import QtQuick.Dialogs 1.2
-import stelliteComponents.Wallet 1.0
+import moneroComponents.Wallet 1.0
 import QtQuick.Layouts 1.1
 import 'utils.js' as Utils
 
@@ -76,23 +77,29 @@ ColumnLayout {
     }
 
     function recoveryWallet(settingsObject, fromSeed) {
-        var testnet = appWindow.persistentSettings.testnet;
+        var nettype = appWindow.persistentSettings.nettype;
         var restoreHeight = settingsObject.restore_height;
         var tmp_wallet_filename = oshelper.temporaryFilename()
         console.log("Creating temporary wallet", tmp_wallet_filename)
 
+        // delete the temporary wallet object before creating new
+        if (typeof m_wallet !== 'undefined') {
+            walletManager.closeWallet()
+            console.log("deleting temporary wallet")
+        }
+
         // From seed or keys
         if(fromSeed)
-            var wallet = walletManager.recoveryWallet(tmp_wallet_filename, settingsObject.words, testnet, restoreHeight)
+            var wallet = walletManager.recoveryWallet(tmp_wallet_filename, settingsObject.words, nettype, restoreHeight)
         else
-            var wallet = walletManager.createWalletFromKeys(tmp_wallet_filename, settingsObject.wallet_language, testnet,
+            var wallet = walletManager.createWalletFromKeys(tmp_wallet_filename, settingsObject.wallet_language, nettype,
                                                             settingsObject.recover_address, settingsObject.recover_viewkey,
                                                             settingsObject.recover_spendkey, restoreHeight)
 
 
         var success = wallet.status === Wallet.Status_Ok;
         if (success) {
-            settingsObject['wallet'] = wallet;
+            m_wallet = wallet;
             settingsObject['is_recovering'] = true;
             settingsObject['tmp_wallet_filename'] = tmp_wallet_filename
         } else {

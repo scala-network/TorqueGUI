@@ -3,9 +3,10 @@
 
 #include <QObject>
 #include <QUrl>
-#include <wallet/wallet2_api.h>
+#include <wallet/api/wallet2_api.h>
 #include <QMutex>
 #include <QPointer>
+#include "NetworkType.h"
 
 class Wallet;
 namespace Monero {
@@ -32,35 +33,41 @@ public:
     static WalletManager * instance();
     // wizard: createWallet path;
     Q_INVOKABLE Wallet * createWallet(const QString &path, const QString &password,
-                                      const QString &language, bool testnet = false);
+                                      const QString &language, NetworkType::Type nettype = NetworkType::MAINNET);
 
     /*!
      * \brief openWallet - opens wallet by given path
      * \param path       - wallet filename
      * \param password   - wallet password. Empty string in wallet isn't password protected
-     * \param testnet    - determines if we running testnet
+     * \param nettype    - type of network the wallet is running on
      * \return wallet object pointer
      */
-    Q_INVOKABLE Wallet * openWallet(const QString &path, const QString &password, bool testnet = false);
+    Q_INVOKABLE Wallet * openWallet(const QString &path, const QString &password, NetworkType::Type nettype = NetworkType::MAINNET);
 
     /*!
      * \brief openWalletAsync - asynchronous version of "openWallet". Returns immediately. "walletOpened" signal
      *                          emitted when wallet opened;
      */
-    Q_INVOKABLE void openWalletAsync(const QString &path, const QString &password, bool testnet = false);
+    Q_INVOKABLE void openWalletAsync(const QString &path, const QString &password, NetworkType::Type nettype = NetworkType::MAINNET);
 
     // wizard: recoveryWallet path; hint: internally it recorvers wallet and set password = ""
     Q_INVOKABLE Wallet * recoveryWallet(const QString &path, const QString &memo,
-                                       bool testnet = false, quint64 restoreHeight = 0);
+                                       NetworkType::Type nettype = NetworkType::MAINNET, quint64 restoreHeight = 0);
 
     Q_INVOKABLE Wallet * createWalletFromKeys(const QString &path,
                                               const QString &language,
-                                              bool testnet,
+                                              NetworkType::Type nettype,
                                               const QString &address,
                                               const QString &viewkey,
                                               const QString &spendkey = "",
                                               quint64 restoreHeight = 0);
 
+    Q_INVOKABLE Wallet * createWalletFromDevice(const QString &path,
+                                                const QString &password,
+                                                NetworkType::Type nettype,
+                                                const QString &deviceName,
+                                                quint64 restoreHeight = 0,
+                                                const QString &subaddressLookahead = "");
     /*!
      * \brief closeWallet - closes current open wallet and frees memory
      * \return wallet address
@@ -99,12 +106,10 @@ public:
     Q_INVOKABLE QString maximumAllowedAmountAsSting() const;
 
     Q_INVOKABLE bool paymentIdValid(const QString &payment_id) const;
-    Q_INVOKABLE bool addressValid(const QString &address, bool testnet) const;
-    Q_INVOKABLE bool keyValid(const QString &key, const QString &address, bool isViewKey, bool testnet) const;
+    Q_INVOKABLE bool addressValid(const QString &address, NetworkType::Type nettype) const;
+    Q_INVOKABLE bool keyValid(const QString &key, const QString &address, bool isViewKey, NetworkType::Type nettype) const;
 
-    Q_INVOKABLE QString paymentIdFromAddress(const QString &address, bool testnet) const;
-
-    Q_INVOKABLE QString checkPayment(const QString &address, const QString &txid, const QString &txkey, const QString &daemon_address) const;
+    Q_INVOKABLE QString paymentIdFromAddress(const QString &address, NetworkType::Type nettype) const;
 
     Q_INVOKABLE void setDaemonAddress(const QString &address);
     Q_INVOKABLE bool connected() const;
@@ -112,6 +117,8 @@ public:
     Q_INVOKABLE quint64 blockchainHeight() const;
     Q_INVOKABLE quint64 blockchainTargetHeight() const;
     Q_INVOKABLE double miningHashRate() const;
+    Q_INVOKABLE bool localDaemonSynced() const;
+    Q_INVOKABLE bool isDaemonLocal(const QString &daemon_address) const;
 
     Q_INVOKABLE bool isMining() const;
     Q_INVOKABLE bool startMining(const QString &address, quint32 threads, bool backgroundMining, bool ignoreBattery);
@@ -129,7 +136,9 @@ public:
     Q_INVOKABLE qint64 addi(qint64 x, qint64 y) const { return x + y; }
     Q_INVOKABLE qint64 subi(qint64 x, qint64 y) const { return x - y; }
 
+#ifndef DISABLE_PASS_STRENGTH_METER
     Q_INVOKABLE double getPasswordStrength(const QString &password) const;
+#endif
 
     Q_INVOKABLE QString resolveOpenAlias(const QString &address) const;
     Q_INVOKABLE bool parse_uri(const QString &uri, QString &address, QString &payment_id, uint64_t &amount, QString &tx_description, QString &recipient_name, QVector<QString> &unknown_parameters, QString &error);

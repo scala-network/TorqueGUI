@@ -1,4 +1,5 @@
 // Copyright (c) 2014-2015, The Stellite Project
+// Copyright (c) 2014-2018, The Monero Project
 //
 // All rights reserved.
 //
@@ -33,19 +34,19 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Window 2.0
 
-import "../components" as StelliteComponents
+import "../components" as MoneroComponents
 
 Window {
     id: root
     modality: Qt.ApplicationModal
     flags: Qt.Window | Qt.FramelessWindowHint
-    property int countDown: 5;
+    property int countDown: 10;
     signal rejected()
     signal started();
 
     function open() {
         show()
-        countDown = 5;
+        countDown = 10;
         timer.start();
     }
 
@@ -90,7 +91,7 @@ Window {
             }
 
             Text {
-                text: qsTr("Starting Stellite daemon in %1 seconds").arg(countDown);
+                text: qsTr("Starting local node in %1 seconds").arg(countDown);
                 font.pixelSize: 18
                 Layout.alignment: Qt.AlignHCenter
                 Layout.fillWidth: true
@@ -104,14 +105,10 @@ Window {
             spacing: 60
             Layout.alignment: Qt.AlignHCenter
 
-            StelliteComponents.StandardButton {
+            MoneroComponents.StandardButton {
                 id: okButton
                 visible:false
                 fontSize: 14
-                shadowReleasedColor: "#7d13ce"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#7a5fcb"
-                pressedColor: "#7d13ce"
                 text: qsTr("Start daemon (%1)").arg(countDown)
                 KeyNavigation.tab: cancelButton
                 onClicked: {
@@ -122,13 +119,9 @@ Window {
                 }
             }
 
-            StelliteComponents.StandardButton {
+            MoneroComponents.StandardButton {
                 id: cancelButton
                 fontSize: 14
-                shadowReleasedColor: "#7d13ce"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#7a5fcb"
-                pressedColor: "#7d13ce"
                 text: qsTr("Use custom settings")
 
                 onClicked: {

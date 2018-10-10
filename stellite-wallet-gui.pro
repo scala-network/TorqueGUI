@@ -1,12 +1,24 @@
+# qml components require at least QT 5.7.0
+lessThan (QT_MAJOR_VERSION, 5) | lessThan (QT_MINOR_VERSION, 7) {
+  error("Can't build with Qt $${QT_VERSION}. Use at least Qt 5.7.0")
+}
+
 TEMPLATE = app
 
 QT += qml quick widgets
 
-WALLET_ROOT=$$PWD/stellite
+WALLET_ROOT=$$PWD/monero
 
-CONFIG += c++11
+CONFIG += c++11 link_pkgconfig
+packagesExist(libpcsclite) {
+    PKGCONFIG += libpcsclite
+}
+!win32 {
+    QMAKE_CXXFLAGS += -fPIC -fstack-protector -fstack-protector-strong
+    QMAKE_LFLAGS += -fstack-protector -fstack-protector-strong
+}
 
-# cleaning "auto-generated" bitstellite directory on "make distclean"
+# cleaning "auto-generated" bitmonero directory on "make distclean"
 QMAKE_DISTCLEAN += -r $$WALLET_ROOT
 
 INCLUDEPATH +=  $$WALLET_ROOT/include \
@@ -26,6 +38,7 @@ HEADERS += \
     src/libwalletqt/TransactionInfo.h \
     src/libwalletqt/QRCodeImageProvider.h \
     src/libwalletqt/Transfer.h \
+    src/NetworkType.h \
     oshelper.h \
     TranslationManager.h \
     src/model/TransactionHistoryModel.h \
@@ -35,8 +48,11 @@ HEADERS += \
     src/QR-Code-generator/QrSegment.hpp \
     src/model/AddressBookModel.h \
     src/libwalletqt/AddressBook.h \
+    src/model/SubaddressModel.h \
+    src/libwalletqt/Subaddress.h \
     src/zxcvbn-c/zxcvbn.h \
     src/libwalletqt/UnsignedTransaction.h \
+    Logger.h \
     MainApp.h
 
 SOURCES += main.cpp \
@@ -58,9 +74,18 @@ SOURCES += main.cpp \
     src/QR-Code-generator/QrSegment.cpp \
     src/model/AddressBookModel.cpp \
     src/libwalletqt/AddressBook.cpp \
+    src/model/SubaddressModel.cpp \
+    src/libwalletqt/Subaddress.cpp \
     src/zxcvbn-c/zxcvbn.c \
     src/libwalletqt/UnsignedTransaction.cpp \
+    Logger.cpp \
     MainApp.cpp
+
+CONFIG(DISABLE_PASS_STRENGTH_METER) {
+    HEADERS -= src/zxcvbn-c/zxcvbn.h
+    SOURCES -= src/zxcvbn-c/zxcvbn.c
+    DEFINES += "DISABLE_PASS_STRENGTH_METER"
+}
 
 !ios {
     HEADERS += src/daemon/DaemonManager.h
@@ -71,6 +96,7 @@ lupdate_only {
 SOURCES = *.qml \
           components/*.qml \
           pages/*.qml \
+          pages/settings/*.qml \
           wizard/*.qml \
           wizard/*js
 }
@@ -86,14 +112,29 @@ ios:arm64 {
     LIBS += \
         -L$$PWD/../ofxiOSBoost/build/libs/boost/lib/arm64 \
 }
-!ios {
+!ios:!android {
 LIBS += -L$$WALLET_ROOT/lib \
         -lwallet_merged \
+        -llmdb \
+        -lepee \
+        -lunbound \
+        -leasylogging \
+}
+
+android {
+    message("Host is Android")
+    LIBS += -L$$WALLET_ROOT/lib \
+        -lwallet_merged \
+        -llmdb \
         -lepee \
         -lunbound \
         -leasylogging
 }
 
+
+
+QMAKE_CXXFLAGS += -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1 -Wformat -Wformat-security
+QMAKE_CFLAGS += -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1 -Wformat -Wformat-security
 
 ios {
     message("Host is IOS")
@@ -103,8 +144,10 @@ ios {
     CONFIG += arm64
     LIBS += -L$$WALLET_ROOT/lib-ios \
         -lwallet_merged \
+        -llmdb \
         -lepee \
-        -lunbound
+        -lunbound \
+        -leasylogging
 
     LIBS+= \
         -L$$PWD/../OpenSSL-for-iPhone/lib \
@@ -195,9 +238,17 @@ win32 {
         -lboost_regex-mt \
         -lboost_chrono-mt \
         -lboost_program_options-mt \
+        -lboost_locale-mt \
+        -licuio \
+        -licuin \
+        -licuuc \
+        -licudt \
+        -licutu \
+        -liconv \
         -lssl \
         -lcrypto \
         -Wl,-Bdynamic \
+        -lwinscard \
         -lws2_32 \
         -lwsock32 \
         -lIphlpapi \
@@ -213,6 +264,7 @@ win32 {
         message("Target is 64bit")
     }
 
+    QMAKE_LFLAGS += -Wl,--dynamicbase -Wl,--nxcompat
 }
 
 linux {
@@ -238,15 +290,15 @@ linux {
         -lboost_chrono \
         -lboost_program_options \
         -lssl \
+        -llmdb \
         -lcrypto
 
     if(!android) {
         LIBS+= \
             -Wl,-Bdynamic \
-            -lGL \
-            -ldl
+            -lGL
     }
-    # currently stellite has an issue with "static" build and linunwind-dev,
+    # currently monero has an issue with "static" build and linunwind-dev,
     # so we link libunwind-dev only for non-Ubuntu distros
     CONFIG(libunwind_off) {
         message(Building without libunwind)
@@ -254,6 +306,8 @@ linux {
         message(Building with libunwind)
         LIBS += -Wl,-Bdynamic -lunwind
     }
+
+    QMAKE_LFLAGS += -pie -Wl,-z,relro -Wl,-z,now -Wl,-z,noexecstack
 }
 
 macx {
@@ -269,7 +323,6 @@ macx {
         -lboost_serialization \
         -lboost_thread-mt \
         -lboost_system \
-        -lboost_system-mt \
         -lboost_date_time \
         -lboost_filesystem \
         -lboost_regex \
@@ -278,33 +331,14 @@ macx {
         -lssl \
         -lcrypto \
         -ldl
+    LIBS+= -framework PCSC
 
+    QMAKE_LFLAGS += -pie
 }
 
 
 # translation stuff
-TRANSLATIONS =  \ # English is default language, no explicit translation file
-                $$PWD/translations/stellite-core.ts \ # translation source (copy this file when creating a new translation)
-                $$PWD/translations/stellite-core_ar.ts \ # Arabic
-                $$PWD/translations/stellite-core_pt-br.ts \ # Portuguese (Brazil)
-                $$PWD/translations/stellite-core_de.ts \ # German
-                $$PWD/translations/stellite-core_eo.ts \ # Esperanto
-                $$PWD/translations/stellite-core_es.ts \ # Spanish
-                $$PWD/translations/stellite-core_fi.ts \ # Finnish
-                $$PWD/translations/stellite-core_fr.ts \ # French
-                $$PWD/translations/stellite-core_hr.ts \ # Croatian
-                $$PWD/translations/stellite-core_id.ts \ # Indonesian
-                $$PWD/translations/stellite-core_hi.ts \ # Hindi
-                $$PWD/translations/stellite-core_it.ts \ # Italian
-                $$PWD/translations/stellite-core_ja.ts \ # Japanese
-                $$PWD/translations/stellite-core_nl.ts \ # Dutch
-                $$PWD/translations/stellite-core_pl.ts \ # Polish
-                $$PWD/translations/stellite-core_ru.ts \ # Russian
-                $$PWD/translations/stellite-core_sv.ts \ # Swedish
-                $$PWD/translations/stellite-core_zh-cn.ts \ # Chinese (Simplified-China)
-                $$PWD/translations/stellite-core_zh-tw.ts \ # Chinese (Traditional-Taiwan)
-                $$PWD/translations/stellite-core_he.ts \ # Hebrew
-                $$PWD/translations/stellite-core_ko.ts \ # Korean
+TRANSLATIONS = $$files($$PWD/translations/monero-core_*.ts)
 
 CONFIG(release, debug|release) {
     DESTDIR = release/bin
@@ -317,14 +351,7 @@ CONFIG(release, debug|release) {
 #    LANGREL_OPTIONS = -markuntranslated "MISS_TR "
 }
 
-TARGET_FULL_PATH = $$OUT_PWD/$$DESTDIR
-TRANSLATION_TARGET_DIR = $$TARGET_FULL_PATH/translations
-
-macx {
-    TARGET_FULL_PATH = $$sprintf("%1/%2/%3.app", $$OUT_PWD, $$DESTDIR, $$TARGET)
-    TRANSLATION_TARGET_DIR = $$TARGET_FULL_PATH/Contents/Resources/translations
-}
-
+TRANSLATION_TARGET_DIR = $$OUT_PWD/translations
 
 !ios {
     isEmpty(QMAKE_LUPDATE) {
@@ -351,11 +378,27 @@ macx {
 
     QMAKE_EXTRA_TARGETS += langupd deploy deploy_win
     QMAKE_EXTRA_COMPILERS += langrel
+
+    # Compile an initial version of translation files when running qmake
+    # the first time and generate the resource file for translations.
+    !exists($$TRANSLATION_TARGET_DIR) {
+        mkpath($$TRANSLATION_TARGET_DIR)
+    }
+    qrc_entry = "<RCC>"
+    qrc_entry += '  <qresource prefix="/">'
+    write_file($$TRANSLATION_TARGET_DIR/translations.qrc, qrc_entry)
+    for(tsfile, TRANSLATIONS) {
+        qmfile = $$TRANSLATION_TARGET_DIR/$$basename(tsfile)
+        qmfile ~= s/.ts$/.qm/
+        system($$LANGREL $$LANGREL_OPTIONS $$tsfile -qm $$qmfile)
+        qrc_entry = "    <file>$$basename(qmfile)</file>"
+        write_file($$TRANSLATION_TARGET_DIR/translations.qrc, qrc_entry, append)
+    }
+    qrc_entry = "  </qresource>"
+    qrc_entry += "</RCC>"
+    write_file($$TRANSLATION_TARGET_DIR/translations.qrc, qrc_entry, append)
+    RESOURCES += $$TRANSLATION_TARGET_DIR/translations.qrc
 }
-
-
-
-
 
 
 # Update: no issues with the "slow link process" anymore,
@@ -378,7 +421,7 @@ macx {
 }
 
 win32 {
-    deploy.commands += windeployqt $$sprintf("%1/%2/%3.exe", $$OUT_PWD, $$DESTDIR, $$TARGET) -release -qmldir=$$PWD
+    deploy.commands += windeployqt $$sprintf("%1/%2/%3.exe", $$OUT_PWD, $$DESTDIR, $$TARGET) -release -no-translations -qmldir=$$PWD
     # Win64 msys2 deploy settings
     contains(QMAKE_HOST.arch, x86_64) {
         deploy.commands += $$escape_expand(\n\t) $$PWD/windeploy_helper.sh $$DESTDIR
@@ -390,7 +433,7 @@ linux:!android {
 }
 
 android{
-    deploy.commands += make install INSTALL_ROOT=$$DESTDIR && androiddeployqt --input android-libstellite-wallet-gui.so-deployment-settings.json --output $$DESTDIR --deployment bundled --android-platform android-21 --jdk /usr/lib/jvm/java-8-openjdk-amd64 -qmldir=$$PWD
+    deploy.commands += make install INSTALL_ROOT=$$DESTDIR && androiddeployqt --input android-libmonero-wallet-gui.so-deployment-settings.json --output $$DESTDIR --deployment bundled --android-platform android-21 --jdk /usr/lib/jvm/java-8-openjdk-amd64 -qmldir=$$PWD
 }
 
 
@@ -400,12 +443,13 @@ OTHER_FILES += \
 
 DISTFILES += \
     notes.txt \
-    stellite/src/wallet/CMakeLists.txt \
+    monero/src/wallet/CMakeLists.txt \
     components/MobileHeader.qml
 
 
 # windows application icon
-RC_FILE = stellite-core.rc
+RC_ICONS = images/appicon.ico
 
-# mac application icon
+# mac Info.plist & application icon
+QMAKE_INFO_PLIST = $$PWD/share/Info.plist
 ICON = $$PWD/images/appicon.icns

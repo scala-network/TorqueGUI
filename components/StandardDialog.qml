@@ -1,3 +1,4 @@
+// Copyright (c) 2014-2018, The Monero Project
 // Copyright (c) 2014-2015, The Stellite Project
 //
 // All rights reserved.
@@ -27,18 +28,18 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
-import QtQuick.Controls 1.4
+import QtQuick.Controls 2.0
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Window 2.0
 
-import "../components" as StelliteComponents
+import "../components" as MoneroComponents
 
-Window {
+Rectangle {
     id: root
-    modality: Qt.ApplicationModal
-    flags: Qt.Window | Qt.FramelessWindowHint
+    color: "transparent"
+    visible: false
     property alias title: dialogTitle.text
     property alias text: dialogContent.text
     property alias content: root.text
@@ -53,6 +54,15 @@ Window {
     // same signals as Dialog has
     signal accepted()
     signal rejected()
+    signal closeCallback();
+
+    Image {
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        source: "../images/middlePanelBg.jpg"
+    }
 
     // Make window draggable
     MouseArea {
@@ -64,29 +74,42 @@ Window {
     }
 
     function open() {
+        // Center
+        if(!isMobile) {
+            root.x = parent.width/2 - root.width/2
+            root.y = 100
+        }
         show()
+        root.z = 11
+        root.visible = true;
+    }
+
+    function close() {
+        root.visible = false;
+        closeCallback();
     }
 
     // TODO: implement without hardcoding sizes
-    width:  480
-    height: 280
+    width: isMobile ? screenWidth : 520
+    height: isMobile ? screenHeight : 380
 
     ColumnLayout {
         id: mainLayout
         spacing: 10
-        anchors { fill: parent; margins: 35 }
+        anchors { fill: parent; margins: 15 }
 
         RowLayout {
             id: column
             //anchors {fill: parent; margins: 16 }
+            Layout.topMargin: 14 * scaleRatio
             Layout.alignment: Qt.AlignHCenter
 
-            Label {
+            MoneroComponents.Label {
                 id: dialogTitle
                 horizontalAlignment: Text.AlignHCenter
-                font.pixelSize: 32
-                font.family: "Arial"
-                color: "#555555"
+                fontSize: 18 * scaleRatio
+                fontFamily: "Arial"
+                color: MoneroComponents.Style.defaultFontColor
             }
 
         }
@@ -96,10 +119,28 @@ Window {
                 id : dialogContent
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                font.family: "Arial"
+                renderType: Text.QtRendering
+                font.family: MoneroComponents.Style.fontLight.name
                 textFormat: TextEdit.AutoText
                 readOnly: true
-                font.pixelSize: 12
+                font.pixelSize: 14 * scaleRatio
+                selectByMouse: false
+                wrapMode: TextEdit.Wrap
+                color: MoneroComponents.Style.defaultFontColor
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        appWindow.showStatusMessage(qsTr("Double tap to copy"),3)
+                    }
+                    onDoubleClicked: {
+                        parent.selectAll()
+                        parent.copy()
+                        parent.deselect()
+                        console.log("copied to clipboard");
+                        appWindow.showStatusMessage(qsTr("Content copied to clipboard"),3)
+                    }
+                }
             }
         }
 
@@ -109,14 +150,8 @@ Window {
             spacing: 60
             Layout.alignment: Qt.AlignHCenter
 
-            StelliteComponents.StandardButton {
+            MoneroComponents.StandardButton {
                 id: cancelButton
-                width: 120
-                fontSize: 14
-                shadowReleasedColor: "#7d13ce"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#7a5fcb"
-                pressedColor: "#7d13ce"
                 text: qsTr("Cancel") + translationManager.emptyString
                 onClicked: {
                     root.close()
@@ -124,15 +159,9 @@ Window {
                 }
             }
 
-            StelliteComponents.StandardButton {
+            MoneroComponents.StandardButton {
                 id: okButton
-                width: 120
-                fontSize: 14
-                shadowReleasedColor: "#7d13ce"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#7a5fcb"
-                pressedColor: "#7d13ce"
-                text: qsTr("Ok")
+                text: qsTr("OK")
                 KeyNavigation.tab: cancelButton
                 onClicked: {
                     root.close()
@@ -143,7 +172,36 @@ Window {
         }
     }
 
+    // window borders
+    Rectangle{
+        width: 1
+        color: MoneroComponents.Style.grey
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+    }
+
+    Rectangle{
+        width: 1
+        color: MoneroComponents.Style.grey
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+    }
+
+    Rectangle{
+        height: 1
+        color: MoneroComponents.Style.grey
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.right: parent.right
+    }
+
+    Rectangle{
+        height: 1
+        color: MoneroComponents.Style.grey
+        anchors.left: parent.left
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+    }
 }
-
-
-

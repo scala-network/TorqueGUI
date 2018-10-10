@@ -1,5 +1,6 @@
+// Copyright (c) 2014-2018, The Monero Project
 // Copyright (c) 2014-2015, The Stellite Project
-// 
+//
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are
@@ -89,7 +90,7 @@ Item {
             console.log("setting demo token")
             bearerToken = encodeURIComponent(Helper.demoToken())
             tweetsModel.phrase = ""
-            tweetsModel.from = "@stellitecurrency"
+            tweetsModel.from = "@stellitecash"
             // reload()
             return;
         }

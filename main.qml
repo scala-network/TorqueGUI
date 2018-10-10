@@ -1,3 +1,4 @@
+// Copyright (c) 2014-2018, The Monero Project
 // Copyright (c) 2014-2015, The Stellite Project
 //
 // All rights reserved.
@@ -33,12 +34,15 @@ import QtQuick.Controls.Styles 1.1
 import QtQuick.Dialogs 1.2
 import Qt.labs.settings 1.0
 
-import stelliteComponents.Wallet 1.0
-import stelliteComponents.PendingTransaction 1.0
+import moneroComponents.Wallet 1.0
+import moneroComponents.PendingTransaction 1.0
+import moneroComponents.NetworkType 1.0
 
 
 import "components"
 import "wizard"
+import "../js/Utils.js" as Utils
+import "js/Windows.js" as Windows
 
 ApplicationWindow {
     id: appWindow
@@ -53,11 +57,12 @@ ApplicationWindow {
     property var currentWallet;
     property var transaction;
     property var transactionDescription;
-    property alias password : passwordDialog.password
+    property var walletPassword
     property bool isNewWallet: false
     property int restoreHeight:0
     property bool daemonSynced: false
-    property int maxWindowHeight: (Screen.height < 900)? 720 : 800;
+    property bool walletSynced: false
+    property int maxWindowHeight: (isAndroid || isIOS)? screenHeight : (screenHeight < 900)? 720 : 800;
     property bool daemonRunning: false
     property alias toolTip: toolTip
     property string walletName
@@ -66,8 +71,15 @@ ApplicationWindow {
     property int timeToUnlock: 0
     property bool qrScannerEnabled: (typeof builtWithScanner != "undefined") && builtWithScanner
     property int blocksToSync: 1
-    property var isMobile: (appWindow.width > 700) ? false : true
+    property var isMobile: (appWindow.width > 700 && !isAndroid) ? false : true
     property var cameraUi
+    property bool remoteNodeConnected: false
+    property bool androidCloseTapped: false;
+    // Default daemon addresses
+    readonly property string localDaemonAddress : persistentSettings.nettype == NetworkType.MAINNET ? "localhost:18081" : persistentSettings.nettype == NetworkType.TESTNET ? "localhost:28081" : "localhost:38081"
+    property string currentDaemonAddress;
+    property bool startLocalNodeCancelled: false
+    property int estimatedBlockchainSize: 50 // GB
 
     // true if wallet ever synchronized
     property bool walletInitialized : false
@@ -80,7 +92,7 @@ ApplicationWindow {
     }
 
     function sequencePressed(obj, seq) {
-        if(seq === undefined)
+        if(seq === undefined || !leftPanel.enabled)
             return
         if(seq === "Ctrl") {
             ctrlPressed = true
@@ -96,14 +108,17 @@ ApplicationWindow {
         else if(seq === "Ctrl+B") middlePanel.state = "AddressBook"
         else if(seq === "Ctrl+M") middlePanel.state = "Mining"
         else if(seq === "Ctrl+I") middlePanel.state = "Sign"
+        else if(seq === "Ctrl+G") middlePanel.state = "SharedRingDB"
         else if(seq === "Ctrl+E") middlePanel.state = "Settings"
+        else if(seq === "Ctrl+Y") leftPanel.keysClicked()
         else if(seq === "Ctrl+D") middlePanel.state = "Advanced"
         else if(seq === "Ctrl+Tab" || seq === "Alt+Tab") {
             /*
             if(middlePanel.state === "Dashboard") middlePanel.state = "Transfer"
             else if(middlePanel.state === "Transfer") middlePanel.state = "Receive"
             else if(middlePanel.state === "Receive") middlePanel.state = "TxKey"
-            else if(middlePanel.state === "TxKey") middlePanel.state = "History"
+            else if(middlePanel.state === "TxKey") middlePanel.state = "SharedRingDB"
+            else if(middlePanel.state === "SharedRingDB") middlePanel.state = "History"
             else if(middlePanel.state === "History") middlePanel.state = "AddressBook"
             else if(middlePanel.state === "AddressBook") middlePanel.state = "Mining"
             else if(middlePanel.state === "Mining") middlePanel.state = "Sign"
@@ -111,11 +126,13 @@ ApplicationWindow {
             else if(middlePanel.state === "Settings") middlePanel.state = "Dashboard"
             */
             if(middlePanel.state === "Settings") middlePanel.state = "Transfer"
-            else if(middlePanel.state === "Transfer") middlePanel.state = "Receive"
-            else if(middlePanel.state === "Receive") middlePanel.state = "TxKey"
-            else if(middlePanel.state === "TxKey") middlePanel.state = "History"
-            else if(middlePanel.state === "History") middlePanel.state = "AddressBook"
-            else if(middlePanel.state === "AddressBook") middlePanel.state = "Sign"
+            else if(middlePanel.state === "Transfer") middlePanel.state = "AddressBook"
+            else if(middlePanel.state === "AddressBook") middlePanel.state = "Receive"
+            else if(middlePanel.state === "Receive") middlePanel.state = "History"
+            else if(middlePanel.state === "History") middlePanel.state = "Mining"
+            else if(middlePanel.state === "Mining") middlePanel.state = "TxKey"
+            else if(middlePanel.state === "TxKey") middlePanel.state = "SharedRingDB"
+            else if(middlePanel.state === "SharedRingDB") middlePanel.state = "Sign"
             else if(middlePanel.state === "Sign") middlePanel.state = "Settings"
         } else if(seq === "Ctrl+Shift+Backtab" || seq === "Alt+Shift+Backtab") {
             /*
@@ -124,19 +141,24 @@ ApplicationWindow {
             else if(middlePanel.state === "Sign") middlePanel.state = "Mining"
             else if(middlePanel.state === "Mining") middlePanel.state = "AddressBook"
             else if(middlePanel.state === "AddressBook") middlePanel.state = "History"
-            else if(middlePanel.state === "History") middlePanel.state = "TxKey"
+            else if(middlePanel.state === "History") middlePanel.state = "SharedRingDB"
+            else if(middlePanel.state === "SharedRingDB") middlePanel.state = "TxKey"
             else if(middlePanel.state === "TxKey") middlePanel.state = "Receive"
             else if(middlePanel.state === "Receive") middlePanel.state = "Transfer"
             else if(middlePanel.state === "Transfer") middlePanel.state = "Dashboard"
             */
             if(middlePanel.state === "Settings") middlePanel.state = "Sign"
-            else if(middlePanel.state === "Sign") middlePanel.state = "AddressBook"
-            else if(middlePanel.state === "AddressBook") middlePanel.state = "History"
-            else if(middlePanel.state === "History") middlePanel.state = "TxKey"
-            else if(middlePanel.state === "TxKey") middlePanel.state = "Receive"
-            else if(middlePanel.state === "Receive") middlePanel.state = "Transfer"
+            else if(middlePanel.state === "Sign") middlePanel.state = "SharedRingDB"
+            else if(middlePanel.state === "SharedRingDB") middlePanel.state = "TxKey"
+            else if(middlePanel.state === "TxKey") middlePanel.state = "Mining"
+            else if(middlePanel.state === "Mining") middlePanel.state = "History"
+            else if(middlePanel.state === "History") middlePanel.state = "Receive"
+            else if(middlePanel.state === "Receive") middlePanel.state = "AddressBook"
+            else if(middlePanel.state === "AddressBook") middlePanel.state = "Transfer"
             else if(middlePanel.state === "Transfer") middlePanel.state = "Settings"
         }
+
+        if (middlePanel.state !== "Advanced") updateBalance();
 
         leftPanel.selectItem(middlePanel.state)
     }
@@ -158,13 +180,12 @@ ApplicationWindow {
         persistentSettings.restore_height = 0
         restoreHeight = 0;
         persistentSettings.is_recovering = false
-        appWindow.password = ""
+        walletPassword = ""
         fileDialog.open();
     }
 
     function initialize() {
         console.log("initializing..")
-        walletInitialized = false;
 
         // Use stored log level
         if (persistentSettings.logLevel == 5)
@@ -186,7 +207,7 @@ ApplicationWindow {
             console.log("Daemon change - closing " + currentWallet)
             closeWallet();
             currentWallet = undefined
-        } else {
+        } else if (!walletInitialized) {
 
             // set page to transfer if not changing daemon
             middlePanel.state = "Transfer";
@@ -194,32 +215,42 @@ ApplicationWindow {
 
         }
 
-        walletManager.setDaemonAddress(persistentSettings.daemon_address)
+
+        // Local daemon settings
+        walletManager.setDaemonAddress(localDaemonAddress)
+
+
         // wallet already opened with wizard, we just need to initialize it
-        if (typeof wizard.settings['wallet'] !== 'undefined') {
+        if (typeof wizard.m_wallet !== 'undefined') {
             console.log("using wizard wallet")
             //Set restoreHeight
+            if (persistentSettings.restore_height == 0 && persistentSettings.is_recovering_from_device && walletManager.localDaemonSynced()) {
+                persistentSettings.restore_height = walletManager.blockchainHeight() - 1;
+            }
             if(persistentSettings.restore_height > 0){
                 // We store restore height in own variable for performance reasons.
                 restoreHeight = persistentSettings.restore_height
             }
 
-            connectWallet(wizard.settings['wallet'])
+            connectWallet(wizard.m_wallet)
 
             isNewWallet = true
             // We don't need the wizard wallet any more - delete to avoid conflict with daemon adress change
-            delete wizard.settings['wallet']
+            delete wizard.m_wallet
         }  else {
             var wallet_path = walletPath();
             if(isIOS)
-                wallet_path = stelliteAccountsDir + wallet_path;
-            // console.log("opening wallet at: ", wallet_path, "with password: ", appWindow.password);
-            console.log("opening wallet at: ", wallet_path, ", testnet: ", persistentSettings.testnet);
-            walletManager.openWalletAsync(wallet_path, appWindow.password,
-                                              persistentSettings.testnet);
+                wallet_path = moneroAccountsDir + wallet_path;
+            // console.log("opening wallet at: ", wallet_path, "with password: ", appWindow.walletPassword);
+            console.log("opening wallet at: ", wallet_path, ", network type: ", persistentSettings.nettype == NetworkType.MAINNET ? "mainnet" : persistentSettings.nettype == NetworkType.TESTNET ? "testnet" : "stagenet");
+            walletManager.openWalletAsync(wallet_path, walletPassword,
+                                              persistentSettings.nettype);
         }
 
+        // Hide titlebar based on persistentSettings.customDecorations
+        titleBar.visible = persistentSettings.customDecorations;
     }
+
     function closeWallet() {
 
         // Disconnect all listeners
@@ -234,27 +265,48 @@ ApplicationWindow {
             currentWallet.connectionStatusChanged.disconnect(onWalletConnectionStatusChanged)
             middlePanel.paymentClicked.disconnect(handlePayment);
             middlePanel.sweepUnmixableClicked.disconnect(handleSweepUnmixable);
-            middlePanel.checkPaymentClicked.disconnect(handleCheckPayment);
+            middlePanel.getProofClicked.disconnect(handleGetProof);
+            middlePanel.checkProofClicked.disconnect(handleCheckProof);
         }
+
         currentWallet = undefined;
-        if (isIOS) {
-            console.log("closing sync - ios")
-            walletManager.closeWallet();
-        } else
-            walletManager.closeWalletAsync();
+        walletManager.closeWallet();
+
     }
 
     function connectWallet(wallet) {
         currentWallet = wallet
+
+        // TODO:
+        // When the wallet variable is undefined, it yields a zero balance.
+        // This can scare users, restart the GUI (as a quick fix).
+        //
+        // To reproduce, follow these steps:
+        // 1) Open the GUI, load up a wallet that has a balance
+        // 2) Settings -> close wallet
+        // 3) Create a new wallet
+        // 4) Settings -> close wallet
+        // 5) Open the wallet from step 1
+
+        if(!wallet || wallet === undefined || wallet.path === undefined){
+            informationPopup.title  = qsTr("Error") + translationManager.emptyString;
+            informationPopup.text = qsTr("Couldn't open wallet: ") + 'please restart GUI.';
+            informationPopup.icon = StandardIcon.Critical
+            informationPopup.open()
+            informationPopup.onCloseCallback = function() {
+                appWindow.close();
+            }
+        }
+
         walletName = usefulName(wallet.path)
         updateSyncing(false)
 
         viewOnly = currentWallet.viewOnly;
 
         // New wallets saves the testnet flag in keys file.
-        if(persistentSettings.testnet != currentWallet.testnet) {
-            console.log("Using testnet flag from keys file")
-            persistentSettings.testnet = currentWallet.testnet;
+        if(persistentSettings.nettype != currentWallet.nettype) {
+            console.log("Using network type from keys file")
+            persistentSettings.nettype = currentWallet.nettype;
         }
 
         // connect handlers
@@ -268,16 +320,25 @@ ApplicationWindow {
         currentWallet.connectionStatusChanged.connect(onWalletConnectionStatusChanged)
         middlePanel.paymentClicked.connect(handlePayment);
         middlePanel.sweepUnmixableClicked.connect(handleSweepUnmixable);
-        middlePanel.checkPaymentClicked.connect(handleCheckPayment);
+        middlePanel.getProofClicked.connect(handleGetProof);
+        middlePanel.checkProofClicked.connect(handleCheckProof);
 
-        console.log("initializing with daemon address: ", persistentSettings.daemon_address)
+
         console.log("Recovering from seed: ", persistentSettings.is_recovering)
         console.log("restore Height", persistentSettings.restore_height)
 
         // Use saved daemon rpc login settings
-        currentWallet.setDaemonLogin(persistentSettings.daemonUsername, persistentSettings.daemonPassword);
+        currentWallet.setDaemonLogin(persistentSettings.daemonUsername, persistentSettings.daemonPassword)
 
-        currentWallet.initAsync(persistentSettings.daemon_address, 0, persistentSettings.is_recovering, persistentSettings.restore_height);
+        if(persistentSettings.useRemoteNode)
+            currentDaemonAddress = persistentSettings.remoteNodeAddress
+        else
+            currentDaemonAddress = localDaemonAddress
+
+        console.log("initializing with daemon address: ", currentDaemonAddress)
+        currentWallet.initAsync(currentDaemonAddress, 0, persistentSettings.is_recovering, persistentSettings.is_recovering_from_device, persistentSettings.restore_height);
+        // save wallet keys in case wallet settings have been changed in the init
+        currentWallet.setPassword(walletPassword);
     }
 
     function walletPath() {
@@ -292,22 +353,32 @@ ApplicationWindow {
         return path.replace(/.*[\/\\]/, '').replace(/\.keys$/, '')
     }
 
+    function updateBalance() {
+        if (!currentWallet)
+            return;
+        middlePanel.unlockedBalanceText = leftPanel.unlockedBalanceText =  middlePanel.state === "Receive" ? qsTr("HIDDEN") : walletManager.displayAmount(currentWallet.unlockedBalance(currentWallet.currentSubaddressAccount));
+        middlePanel.balanceText = leftPanel.balanceText = middlePanel.state === "Receive" ? qsTr("HIDDEN") : walletManager.displayAmount(currentWallet.balance(currentWallet.currentSubaddressAccount));
+    }
+
     function onWalletConnectionStatusChanged(status){
         console.log("Wallet connection status changed " + status)
         middlePanel.updateStatus();
         leftPanel.networkStatus.connected = status
-        leftPanel.progressBar.visible = (status === Wallet.ConnectionStatus_Connected) && !daemonSynced
+
+        // update local daemon status.
+        if(!isMobile && walletManager.isDaemonLocal(appWindow.persistentSettings.daemon_address))
+            daemonRunning = status;
 
         // Update fee multiplier dropdown on transfer page
         middlePanel.transferView.updatePriorityDropdown();
 
         // If wallet isnt connected and no daemon is running - Ask
-        if(isDaemonLocal() && !walletInitialized && status === Wallet.ConnectionStatus_Disconnected && !daemonManager.running(persistentSettings.testnet)){
+        if(!isMobile && walletManager.isDaemonLocal(appWindow.persistentSettings.daemon_address) && !walletInitialized && status === Wallet.ConnectionStatus_Disconnected && !daemonManager.running(persistentSettings.nettype)){
             daemonManagerDialog.open();
         }
         // initialize transaction history once wallet is initialized first time;
         if (!walletInitialized) {
-            currentWallet.history.refresh()
+            currentWallet.history.refresh(currentWallet.currentSubaddressAccount)
             walletInitialized = true
         }
      }
@@ -316,25 +387,25 @@ ApplicationWindow {
         walletName = usefulName(wallet.path)
         console.log(">>> wallet opened: " + wallet)
         if (wallet.status !== Wallet.Status_Ok) {
-            if (appWindow.password === '') {
-                console.error("Error opening wallet with empty password: ", wallet.errorString);
-                console.log("closing wallet async : " + wallet.address)
-                closeWallet();
-                // try to open wallet with password;
-                passwordDialog.open(walletName);
-            } else {
-                // opening with password but password doesn't match
-                console.error("Error opening wallet with password: ", wallet.errorString);
-
-                informationPopup.title  = qsTr("Error") + translationManager.emptyString;
-                informationPopup.text = qsTr("Couldn't open wallet: ") + wallet.errorString;
-                informationPopup.icon = StandardIcon.Critical
-                console.log("closing wallet async : " + wallet.address)
-                closeWallet();
-                informationPopup.open()
-                informationPopup.onCloseCallback = function() {
-                    passwordDialog.open(walletName)
-                }
+            passwordDialog.onAcceptedCallback = function() {
+                walletPassword = passwordDialog.password;
+                appWindow.initialize();
+            }
+            passwordDialog.onRejectedCallback = function() {
+                walletPassword = "";
+                //appWindow.enableUI(false)
+                rootItem.state = "wizard";
+            }
+            // opening with password but password doesn't match
+            console.error("Error opening wallet with password: ", wallet.errorString);
+            informationPopup.title  = qsTr("Error") + translationManager.emptyString;
+            informationPopup.text = qsTr("Couldn't open wallet: ") + wallet.errorString;
+            informationPopup.icon = StandardIcon.Critical
+            console.log("closing wallet async : " + wallet.address)
+            closeWallet();
+            informationPopup.open()
+            informationPopup.onCloseCallback = function() {
+                passwordDialog.open(walletName)
             }
             return;
         }
@@ -350,16 +421,33 @@ ApplicationWindow {
 
     function onWalletUpdate() {
         console.log(">>> wallet updated")
-        middlePanel.unlockedBalanceText = leftPanel.unlockedBalanceText =  walletManager.displayAmount(currentWallet.unlockedBalance);
-        middlePanel.balanceText = leftPanel.balanceText = walletManager.displayAmount(currentWallet.balance);
+        updateBalance();
         // Update history if new block found since last update
         if(foundNewBlock) {
             foundNewBlock = false;
             console.log("New block found - updating history")
-            currentWallet.history.refresh()
+            currentWallet.history.refresh(currentWallet.currentSubaddressAccount)
             timeToUnlock = currentWallet.history.minutesToUnlock
-            leftPanel.minutesToUnlockTxt = (timeToUnlock > 0)? (timeToUnlock == 20)? qsTr("Unlocked balance (waiting for block)").arg(timeToUnlock) : qsTr("Unlocked balance (~%1 min)").arg(timeToUnlock) : qsTr("Unlocked balance");
+            leftPanel.minutesToUnlockTxt = (timeToUnlock > 0)? (timeToUnlock == 20)? qsTr("Unlocked balance (waiting for block)") : qsTr("Unlocked balance (~%1 min)").arg(timeToUnlock) : qsTr("Unlocked balance");
         }
+    }
+
+    function connectRemoteNode() {
+        console.log("connecting remote node");
+        persistentSettings.useRemoteNode = true;
+        currentDaemonAddress = persistentSettings.remoteNodeAddress;
+        currentWallet.initAsync(currentDaemonAddress);
+        walletManager.setDaemonAddress(currentDaemonAddress);
+        remoteNodeConnected = true;
+    }
+
+    function disconnectRemoteNode() {
+        console.log("disconnecting remote node");
+        persistentSettings.useRemoteNode = false;
+        currentDaemonAddress = localDaemonAddress
+        currentWallet.initAsync(currentDaemonAddress);
+        walletManager.setDaemonAddress(currentDaemonAddress);
+        remoteNodeConnected = false;
     }
 
     function onWalletRefresh() {
@@ -368,6 +456,9 @@ ApplicationWindow {
         // Daemon connected
         leftPanel.networkStatus.connected = currentWallet.connected()
 
+        // Wallet height
+        var bcHeight = currentWallet.blockChainHeight();
+
         // Check daemon status
         var dCurrentBlock = currentWallet.daemonBlockChainHeight();
         var dTargetBlock = currentWallet.daemonBlockChainTargetHeight();
@@ -375,17 +466,25 @@ ApplicationWindow {
         // TODO: implement onDaemonSynced or similar in wallet API and don't start refresh thread before daemon is synced
         // targetBlock = currentBlock = 1 before network connection is established.
         daemonSynced = dCurrentBlock >= dTargetBlock && dTargetBlock != 1
-        // Update daemon sync progress
-        leftPanel.progressBar.updateProgress(dCurrentBlock,dTargetBlock);
-        leftPanel.progressBar.visible =  !daemonSynced && currentWallet.connected() !== Wallet.ConnectionStatus_Disconnected
+        walletSynced = bcHeight >= dTargetBlock
+
+        // Update progress bars
+        if(!daemonSynced) {
+            leftPanel.daemonProgressBar.updateProgress(dCurrentBlock,dTargetBlock, dTargetBlock-dCurrentBlock);
+            leftPanel.progressBar.updateProgress(0,dTargetBlock, dTargetBlock, qsTr("Waiting for daemon to sync"));
+        } else {
+            leftPanel.daemonProgressBar.updateProgress(dCurrentBlock,dTargetBlock, 0, qsTr("Daemon is synchronized (%1)").arg(dCurrentBlock.toFixed(0)));
+            if(walletSynced)
+                leftPanel.progressBar.updateProgress(bcHeight,dTargetBlock,dTargetBlock-bcHeight, qsTr("Wallet is synchronized"))
+        }
+
         // Update wallet sync progress
         updateSyncing((currentWallet.connected() !== Wallet.ConnectionStatus_Disconnected) && !daemonSynced)
         // Update transfer page status
         middlePanel.updateStatus();
 
         // Refresh is succesfull if blockchain height > 1
-        if (currentWallet.blockChainHeight() > 1){
-
+        if (bcHeight > 1){
             // Save new wallet after first refresh
             // Wallet is nomrmally saved to disk on app exit. This prevents rescan from block 0 after app crash
             if(isNewWallet){
@@ -394,7 +493,7 @@ ApplicationWindow {
                 isNewWallet = false
 
                 // Update History
-                currentWallet.history.refresh();
+                currentWallet.history.refresh(currentWallet.currentSubaddressAccount);
             }
 
             // recovering from seed is finished after first refresh
@@ -402,6 +501,10 @@ ApplicationWindow {
                 persistentSettings.is_recovering = false
             }
         }
+
+        // Update history on every refresh if it's empty
+        if(currentWallet.history.count == 0)
+            currentWallet.history.refresh(currentWallet.currentSubaddressAccount)
 
         onWalletUpdate();
     }
@@ -411,13 +514,13 @@ ApplicationWindow {
         currentWallet.pauseRefresh();
 
         appWindow.showProcessingSplash(qsTr("Waiting for daemon to start..."))
-        daemonManager.start(flags, persistentSettings.testnet, persistentSettings.blockchainDataDir);
+        daemonManager.start(flags, persistentSettings.nettype, persistentSettings.blockchainDataDir, persistentSettings.bootstrapNodeAddress);
         persistentSettings.daemonFlags = flags
     }
 
     function stopDaemon(){
         appWindow.showProcessingSplash(qsTr("Waiting for daemon to stop..."))
-        daemonManager.stop(persistentSettings.testnet);
+        daemonManager.stop(persistentSettings.nettype);
     }
 
     function onDaemonStarted(){
@@ -442,7 +545,7 @@ ApplicationWindow {
         currentWallet.startRefresh();
         daemonRunning = false;
         informationPopup.title = qsTr("Daemon failed to start") + translationManager.emptyString;
-        informationPopup.text  = qsTr("Please check your wallet and daemon log for errors. You can also try to start %1 manually.").arg((isWindows)? "stellited.exe" : "stellited")
+        informationPopup.text  = qsTr("Please check your wallet and daemon log for errors. You can also try to start %1 manually.").arg((isWindows)? "monerod.exe" : "monerod")
         informationPopup.icon  = StandardIcon.Critical
         informationPopup.onCloseCallback = null
         informationPopup.open();
@@ -456,31 +559,39 @@ ApplicationWindow {
         }
 
         leftPanel.progressBar.updateProgress(blockHeight,targetHeight, blocksToSync);
+
+        // If wallet is syncing, daemon is already synced
+        leftPanel.daemonProgressBar.updateProgress(1,1,0,qsTr("Daemon is synchronized"));
+
         foundNewBlock = true;
     }
 
     function onWalletMoneyReceived(txId, amount) {
         // refresh transaction history here
         currentWallet.refresh()
-        currentWallet.history.refresh() // this will refresh model
+        console.log("Confirmed money found")
+        // history refresh is handled by walletUpdated
+        currentWallet.history.refresh(currentWallet.currentSubaddressAccount) // this will refresh model
+        currentWallet.subaddress.refresh(currentWallet.currentSubaddressAccount)
     }
 
     function onWalletUnconfirmedMoneyReceived(txId, amount) {
         // refresh history
         console.log("unconfirmed money found")
-        currentWallet.history.refresh()
+        currentWallet.history.refresh(currentWallet.currentSubaddressAccount)
     }
 
     function onWalletMoneySent(txId, amount) {
         // refresh transaction history here
+        console.log("monero sent found")
         currentWallet.refresh()
-        currentWallet.history.refresh() // this will refresh model
+        currentWallet.history.refresh(currentWallet.currentSubaddressAccount) // this will refresh model
     }
 
     function walletsFound() {
         if (persistentSettings.wallet_path.length > 0) {
             if(isIOS)
-                return walletManager.walletExists(stelliteAccountsDir + persistentSettings.wallet_path);
+                return walletManager.walletExists(moneroAccountsDir + persistentSettings.wallet_path);
             else
                 return walletManager.walletExists(persistentSettings.wallet_path);
         }
@@ -518,17 +629,23 @@ ApplicationWindow {
                     + ", fee: " + walletManager.displayAmount(transaction.fee));
 
             // here we show confirmation popup;
+            transactionConfirmationPopup.title = qsTr("Please confirm transaction:\n") + translationManager.emptyString;
+            transactionConfirmationPopup.text = "";
+            transactionConfirmationPopup.text += (address === "" ? "" : (qsTr("Address: ") + address));
+            transactionConfirmationPopup.text += (paymentId === "" ? "" : (qsTr("\nPayment ID: ") + paymentId));
+            transactionConfirmationPopup.text +=  qsTr("\n\nAmount: ") + walletManager.displayAmount(transaction.amount);
+            transactionConfirmationPopup.text +=  qsTr("\nFee: ") + walletManager.displayAmount(transaction.fee);
+            transactionConfirmationPopup.text +=  qsTr("\nRingsize: ") + (mixinCount + 1);
+            if(mixinCount !== 6){
+                transactionConfirmationPopup.text +=  qsTr("\n\nWARNING: non default ring size, which may harm your privacy. Default of 7 is recommended.");
+            }
+            transactionConfirmationPopup.text +=  qsTr("\n\nNumber of transactions: ") + transaction.txCount
+            transactionConfirmationPopup.text +=  (transactionDescription === "" ? "" : (qsTr("\nDescription: ") + transactionDescription))
+            for (var i = 0; i < transaction.subaddrIndices.length; ++i){
+                transactionConfirmationPopup.text += qsTr("\nSpending address index: ") + transaction.subaddrIndices[i];
+            }
 
-            transactionConfirmationPopup.title = qsTr("Confirmation") + translationManager.emptyString
-            transactionConfirmationPopup.text  = qsTr("Please confirm transaction:\n")
-                        + (address === "" ? "" : (qsTr("\nAddress: ") + address))
-                        + (paymentId === "" ? "" : (qsTr("\nPayment ID: ") + paymentId))
-                        + qsTr("\n\nAmount: ") + walletManager.displayAmount(transaction.amount)
-                        + qsTr("\nFee: ") + walletManager.displayAmount(transaction.fee)
-                        + qsTr("\n\nRingsize: ") + (mixinCount + 1)
-                        + qsTr("\n\Number of transactions: ") + transaction.txCount
-                        + (transactionDescription === "" ? "" : (qsTr("\n\nDescription: ") + transactionDescription))
-                        + translationManager.emptyString
+            transactionConfirmationPopup.text += translationManager.emptyString;
             transactionConfirmationPopup.icon = StandardIcon.Question
             transactionConfirmationPopup.open()
         }
@@ -681,7 +798,7 @@ ApplicationWindow {
                     txid_text += ", "
                 txid_text += txid[i]
             }
-            informationPopup.text  = (viewOnly)? qsTr("Transaction saved to file: %1").arg(path) : qsTr("Money sent successfully: %1 transaction(s) ").arg(txid.length) + txid_text + translationManager.emptyString
+            informationPopup.text  = (viewOnly)? qsTr("Transaction saved to file: %1").arg(path) : qsTr("Monero sent successfully: %1 transaction(s) ").arg(txid.length) + txid_text + translationManager.emptyString
             informationPopup.icon  = StandardIcon.Information
             if (transactionDescription.length > 0) {
                 for (var i = 0; i < txid.length; ++i)
@@ -699,50 +816,81 @@ ApplicationWindow {
         currentWallet.store();
     }
 
-    // called on "checkPayment"
-    function handleCheckPayment(address, txid, txkey) {
-        console.log("Checking payment: ")
-        console.log("\taddress: ", address,
-                    ", txid: ", txid,
-                    ", txkey: ", txkey);
+    // called on "getProof"
+    function handleGetProof(txid, address, message) {
+        console.log("Getting payment proof: ")
+        console.log("\ttxid: ", txid,
+                    ", address: ", address,
+                    ", message: ", message);
 
-        var result = walletManager.checkPayment(address, txid, txkey, persistentSettings.daemon_address);
-        var results = result.split("|");
-        if (results.length < 4) {
-            informationPopup.title  = qsTr("Error") + translationManager.emptyString;
-            informationPopup.text = "internal error";
-            informationPopup.icon = StandardIcon.Critical
-            informationPopup.onCloseCallback = null
-            informationPopup.open()
-            return
+        var result;
+        if (address.length > 0)
+            result = currentWallet.getTxProof(txid, address, message);
+        if (!result || result.indexOf("error|") === 0)
+            result = currentWallet.getSpendProof(txid, message);
+        informationPopup.title  = qsTr("Payment proof") + translationManager.emptyString;
+        if (result.indexOf("error|") === 0) {
+            var errorString = result.split("|")[1];
+            informationPopup.text = qsTr("Couldn't generate a proof because of the following reason: \n") + errorString + translationManager.emptyString;
+            informationPopup.icon = StandardIcon.Critical;
+        } else {
+            informationPopup.text  = result;
+            informationPopup.icon = StandardIcon.Critical;
         }
-        var success = results[0] == "true";
-        var received = results[1]
-        var height = results[2]
-        var error = results[3]
-        if (success) {
-            informationPopup.title  = qsTr("Payment check") + translationManager.emptyString;
+        informationPopup.onCloseCallback = null
+        informationPopup.open()
+    }
+
+    // called on "checkProof"
+    function handleCheckProof(txid, address, message, signature) {
+        console.log("Checking payment proof: ")
+        console.log("\ttxid: ", txid,
+                    ", address: ", address,
+                    ", message: ", message,
+                    ", signature: ", signature);
+
+        var result;
+        if (address.length > 0)
+            result = currentWallet.checkTxProof(txid, address, message, signature);
+        else
+            result = currentWallet.checkSpendProof(txid, message, signature);
+        var results = result.split("|");
+        if (address.length > 0 && results.length == 5 && results[0] === "true") {
+            var good = results[1] === "true";
+            var received = results[2];
+            var in_pool = results[3] === "true";
+            var confirmations = results[4];
+
+            informationPopup.title  = qsTr("Payment proof check") + translationManager.emptyString;
             informationPopup.icon = StandardIcon.Information
-            if (received > 0) {
+            if (!good) {
+                informationPopup.text = qsTr("Bad signature");
+                informationPopup.icon = StandardIcon.Critical;
+            } else if (received > 0) {
                 received = received / 1e12
-                if (height == 0) {
-                    informationPopup.text = qsTr("This address received %1 stellite, but the transaction is not yet mined").arg(received);
+                if (in_pool) {
+                    informationPopup.text = qsTr("This address received %1 monero, but the transaction is not yet mined").arg(received);
                 }
                 else {
-                    var dCurrentBlock = currentWallet.daemonBlockChainHeight();
-                    var confirmations = dCurrentBlock - height
-                    informationPopup.text = qsTr("This address received %1 stellite, with %2 confirmation(s).").arg(received).arg(confirmations);
+                    informationPopup.text = qsTr("This address received %1 monero, with %2 confirmation(s).").arg(received).arg(confirmations);
                 }
             }
             else {
                 informationPopup.text = qsTr("This address received nothing");
             }
         }
+        else if (results.length == 2 && results[0] === "true") {
+            var good = results[1] === "true";
+            informationPopup.title = qsTr("Payment proof check") + translationManager.emptyString;
+            informationPopup.icon = good ? StandardIcon.Information : StandardIcon.Critical;
+            informationPopup.text = good ? qsTr("Good signature") : qsTr("Bad signature");
+        }
         else {
             informationPopup.title  = qsTr("Error") + translationManager.emptyString;
-            informationPopup.text = error;
+            informationPopup.text = currentWallet.errorString;
             informationPopup.icon = StandardIcon.Critical
         }
+        informationPopup.onCloseCallback = null
         informationPopup.open()
     }
 
@@ -797,29 +945,11 @@ ApplicationWindow {
 
     objectName: "appWindow"
     visible: true
-//    width: Screen.width //rightPanelExpanded ? 1269 : 1269 - 300
+//    width: screenWidth //rightPanelExpanded ? 1269 : 1269 - 300
 //    height: 900 //300//maxWindowHeight;
     color: "#FFFFFF"
-    flags: persistentSettings.customDecorations ? (Qt.FramelessWindowHint | Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint) : (Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint | Qt.WindowTitleHint | Qt.WindowMaximizeButtonHint)
+    flags: persistentSettings.customDecorations ? Windows.flagsCustomDecorations : Windows.flags
     onWidthChanged: x -= 0
-
-    function setCustomWindowDecorations(custom) {
-      var x = appWindow.x
-      var y = appWindow.y
-      if (x < 0)
-        x = 0
-      if (y < 0)
-        y = 0
-      persistentSettings.customDecorations = custom
-      if (custom)
-        appWindow.flags = Qt.FramelessWindowHint | Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint
-      else
-        appWindow.flags = Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint | Qt.WindowTitleHint | Qt.WindowMaximizeButtonHint
-      appWindow.hide()
-      appWindow.x = x
-      appWindow.y = y
-      appWindow.show()
-    }
 
     Component.onCompleted: {
         x = (Screen.width - width) / 2
@@ -856,7 +986,14 @@ ApplicationWindow {
             rootItem.state = "wizard"
         } else {
             rootItem.state = "normal"
+            passwordDialog.onAcceptedCallback = function() {
+                walletPassword = passwordDialog.password;
                 initialize(persistentSettings);
+            }
+            passwordDialog.onRejectedCallback = function() {
+                rootItem.state = "wizard"
+            }
+            passwordDialog.open(usefulName(walletPath()))
         }
 
         checkUpdates();
@@ -879,11 +1016,12 @@ ApplicationWindow {
         property int    auto_donations_amount : 50
         property bool   allow_background_mining : false
         property bool   miningIgnoreBattery : true
-        property bool   testnet: false
-        property string daemon_address: "nodes.stellite.cash:20189"
+        property var    nettype: NetworkType.MAINNET
+        property string daemon_address: nettype == NetworkType.TESTNET ? "localhost:28081" : nettype == NetworkType.STAGENET ? "localhost:38081" : "localhost:18081"
         property string payment_id
         property int    restore_height : 0
         property bool   is_recovering : false
+        property bool   is_recovering_from_device : false
         property bool   customDecorations : true
         property string daemonFlags
         property int logLevel: 0
@@ -892,6 +1030,12 @@ ApplicationWindow {
         property string daemonPassword: ""
         property bool transferShowAdvanced: false
         property string blockchainDataDir: ""
+        property bool useRemoteNode: false
+        property string remoteNodeAddress: ""
+        property string bootstrapNodeAddress: ""
+        property bool segregatePreForkOutputs: true
+        property bool keyReuseMitigation2: true
+        property int segregationHeight: 0
     }
 
     // Information dialog
@@ -899,6 +1043,8 @@ ApplicationWindow {
         // dynamically change onclose handler
         property var onCloseCallback
         id: informationPopup
+        anchors.fill: parent
+        z: parent.z + 1
         cancelVisible: false
         onAccepted:  {
             if (onCloseCallback) {
@@ -909,21 +1055,36 @@ ApplicationWindow {
 
     // Confrirmation aka question dialog
     StandardDialog {
+        z: parent.z + 1
         id: transactionConfirmationPopup
         onAccepted: {
             close();
-
-            // Save transaction to file if view only wallet
-            if(viewOnly) {
-                saveTxDialog.open();
-                return;
-            } else
-                handleTransactionConfirmed()
+            passwordDialog.onAcceptedCallback = function() {
+                if(walletPassword === passwordDialog.password){
+                    // Save transaction to file if view only wallet
+                    if(viewOnly) {
+                        saveTxDialog.open();
+                    } else {
+                        handleTransactionConfirmed()
+                    }
+                } else {
+                    informationPopup.title  = qsTr("Error") + translationManager.emptyString;
+                    informationPopup.text = qsTr("Wrong password");
+                    informationPopup.open()
+                    informationPopup.onCloseCallback = function() {
+                        passwordDialog.open()
+                    }
+                }
+            }
+            passwordDialog.onRejectedCallback = null;
+            passwordDialog.open()
         }
     }
 
     StandardDialog {
+        z: parent.z + 1
         id: confirmationDialog
+        anchors.fill: parent
         property var onAcceptedCallback
         property var onRejectedCallback
         onAccepted:  {
@@ -941,12 +1102,28 @@ ApplicationWindow {
     FileDialog {
         id: fileDialog
         title: "Please choose a file"
-        folder: "file://" +stelliteAccountsDir
+        folder: "file://" +moneroAccountsDir
         nameFilters: [ "Wallet files (*.keys)"]
+        sidebarVisible: false
+
 
         onAccepted: {
             persistentSettings.wallet_path = walletManager.urlToLocalPath(fileDialog.fileUrl)
-            initialize();
+            if(isIOS)
+                persistentSettings.wallet_path = persistentSettings.wallet_path.replace(moneroAccountsDir,"")
+            console.log("ÖPPPPNA")
+            console.log(moneroAccountsDir)
+            console.log(fileDialog.fileUrl)
+            console.log(persistentSettings.wallet_path)
+            passwordDialog.onAcceptedCallback = function() {
+                walletPassword = passwordDialog.password;
+                initialize();
+            }
+            passwordDialog.onRejectedCallback = function() {
+                console.log("Canceled")
+                rootItem.state = "wizard";
+            }
+            passwordDialog.open(usefulName(walletPath()));
         }
         onRejected: {
             console.log("Canceled")
@@ -955,23 +1132,120 @@ ApplicationWindow {
 
     }
 
-    PasswordDialog {
-        id: passwordDialog
+    // Choose blockchain folder
+    FileDialog {
+        id: blockchainFileDialog
+        title: "Please choose a folder"
+        selectFolder: true
+        folder: "file://" + persistentSettings.blockchainDataDir
 
         onAccepted: {
-            appWindow.initialize();
+            var dataDir = walletManager.urlToLocalPath(blockchainFileDialog.fileUrl)
+            var validator = daemonManager.validateDataDir(dataDir);
+            if(!validator.valid) {
+
+                confirmationDialog.title = qsTr("Warning") + translationManager.emptyString;
+                confirmationDialog.text = "";
+                if(validator.readOnly)
+                    confirmationDialog.text  += qsTr("Error: Filesystem is read only") + "\n\n"
+                if(validator.storageAvailable < 20)
+                    confirmationDialog.text  += qsTr("Warning: There's only %1 GB available on the device. Blockchain requires ~%2 GB of data.").arg(validator.storageAvailable).arg(estimatedBlockchainSize) + "\n\n"
+                else
+                    confirmationDialog.text  += qsTr("Note: There's %1 GB available on the device. Blockchain requires ~%2 GB of data.").arg(validator.storageAvailable).arg(estimatedBlockchainSize) + "\n\n"
+                if(!validator.lmdbExists)
+                    confirmationDialog.text  += qsTr("Note: lmdb folder not found. A new folder will be created.") + "\n\n"
+
+
+                confirmationDialog.icon = StandardIcon.Question
+                confirmationDialog.cancelText = qsTr("Cancel")
+
+                // Continue
+                confirmationDialog.onAcceptedCallback = function() {
+                    persistentSettings.blockchainDataDir = dataDir
+                }
+
+                // Cancel
+                confirmationDialog.onRejectedCallback = function() {
+                };
+
+                confirmationDialog.open()
+            } else {
+                persistentSettings.blockchainDataDir = dataDir
+            }
+
+            delete validator;
+
+
         }
         onRejected: {
-            //appWindow.enableUI(false)
-            rootItem.state = "wizard"
+            console.log("data dir selection canceled")
         }
 
+    }
+
+
+    PasswordDialog {
+        id: passwordDialog
+        visible: false
+        z: parent.z + 1
+        anchors.fill: parent
+        property var onAcceptedCallback
+        property var onRejectedCallback
+        onAccepted: {
+            if (onAcceptedCallback)
+                onAcceptedCallback();
+        }
+        onRejected: {
+            if (onRejectedCallback)
+                onRejectedCallback();
+        }
+    }
+
+    NewPasswordDialog {
+        id: newPasswordDialog
+        z: parent.z + 1
+        visible:false
+        anchors.fill: parent
+        onAccepted: {
+            if (currentWallet.setPassword(newPasswordDialog.password)) {
+                appWindow.walletPassword = newPasswordDialog.password;
+                informationPopup.title = qsTr("Information") + translationManager.emptyString;
+                informationPopup.text  = qsTr("Password changed successfully") + translationManager.emptyString;
+                informationPopup.icon  = StandardIcon.Information;
+            } else {
+                informationPopup.title  = qsTr("Error") + translationManager.emptyString;
+                informationPopup.text  = qsTr("Error: ") + currentWallet.errorString;
+                informationPopup.icon  = StandardIcon.Critical;
+            }
+            informationPopup.onCloseCallback = null;
+            informationPopup.open();
+        }
+        onRejected: {
+        }
+    }
+
+    InputDialog {
+        id: inputDialog
+        visible: false
+        z: parent.z + 1
+        anchors.fill: parent
+        property var onAcceptedCallback
+        property var onRejectedCallback
+        onAccepted:  {
+            if (onAcceptedCallback)
+                onAcceptedCallback()
+        }
+        onRejected:  {
+            if (onRejectedCallback)
+                onRejectedCallback()
+        }
     }
 
     DaemonManagerDialog {
         id: daemonManagerDialog
         onRejected: {
             loadPage("Settings");
+            startLocalNodeCancelled = true
         }
 
     }
@@ -980,8 +1254,8 @@ ApplicationWindow {
         id: splash
         width: appWindow.width / 1.5
         height: appWindow.height / 2
-        x: (appWindow.width - width) / 2 + appWindow.x
-        y: (appWindow.height - height) / 2 + appWindow.y
+        x: (appWindow.width - width) / 2
+        y: (appWindow.height - height) / 2
         messageText: qsTr("Please wait...")
     }
 
@@ -999,14 +1273,15 @@ ApplicationWindow {
                 PropertyChanges { target: middlePanel; visible: false }
                 PropertyChanges { target: titleBar; basicButtonVisible: false }
                 PropertyChanges { target: wizard; visible: true }
-                PropertyChanges { target: appWindow; width: (Screen.width < 930)? Screen.width : 930; }
+                PropertyChanges { target: appWindow; width: (screenWidth < 930 || isAndroid || isIOS)? screenWidth : 930; }
                 PropertyChanges { target: appWindow; height: maxWindowHeight; }
-                PropertyChanges { target: resizeArea; visible: false }
-                PropertyChanges { target: titleBar; maximizeButtonVisible: false }
+                PropertyChanges { target: resizeArea; visible: true }
+                PropertyChanges { target: titleBar; showMaximizeButton: false }
 //                PropertyChanges { target: frameArea; blocked: true }
                 PropertyChanges { target: titleBar; visible: false }
                 PropertyChanges { target: titleBar; y: 0 }
                 PropertyChanges { target: titleBar; title: qsTr("Program setup wizard") + translationManager.emptyString }
+                PropertyChanges { target: mobileHeader; visible: false }
             }, State {
                 name: "normal"
                 PropertyChanges { target: leftPanel; visible: (isMobile)? false : true }
@@ -1014,14 +1289,15 @@ ApplicationWindow {
                 PropertyChanges { target: middlePanel; visible: true }
                 PropertyChanges { target: titleBar; basicButtonVisible: true }
                 PropertyChanges { target: wizard; visible: false }
-                PropertyChanges { target: appWindow; width:  (Screen.width < 969)? Screen.width : 969 } //rightPanelExpanded ? 1269 : 1269 - 300;
+                PropertyChanges { target: appWindow; width: (screenWidth < 969 || isAndroid || isIOS)? screenWidth : 969 } //rightPanelExpanded ? 1269 : 1269 - 300;
                 PropertyChanges { target: appWindow; height: maxWindowHeight; }
                 PropertyChanges { target: resizeArea; visible: true }
-                PropertyChanges { target: titleBar; maximizeButtonVisible: true }
+                PropertyChanges { target: titleBar; showMaximizeButton: true }
 //                PropertyChanges { target: frameArea; blocked: true }
                 PropertyChanges { target: titleBar; visible: true }
 //                PropertyChanges { target: titleBar; y: 0 }
-                PropertyChanges { target: titleBar; title: qsTr("Stellite") + translationManager.emptyString }
+                PropertyChanges { target: titleBar; title: qsTr("Monero") + translationManager.emptyString }
+                PropertyChanges { target: mobileHeader; visible: isMobile ? true : false }
             }
         ]
 
@@ -1030,7 +1306,26 @@ ApplicationWindow {
             visible: isMobile
             anchors.left: parent.left
             anchors.right: parent.right
-            height: visible? 65 : 0
+            height: visible? 65 * scaleRatio : 0
+
+            MouseArea {
+                enabled: persistentSettings.customDecorations
+                property var previousPosition
+                anchors.fill: parent
+                propagateComposedEvents: true
+                onPressed: previousPosition = globalCursor.getPosition()
+                onPositionChanged: {
+                    if (pressedButtons == Qt.LeftButton) {
+                        var pos = globalCursor.getPosition()
+                        var dx = pos.x - previousPosition.x
+                        var dy = pos.y - previousPosition.y
+
+                        appWindow.x += dx
+                        appWindow.y += dy
+                        previousPosition = pos
+                    }
+                }
+            }
         }
 
         LeftPanel {
@@ -1038,15 +1333,97 @@ ApplicationWindow {
             anchors.top: mobileHeader.bottom
             anchors.left: parent.left
             anchors.bottom: parent.bottom
-            onDashboardClicked: {middlePanel.state = "Dashboard"; if(isMobile) hideMenu()}
-            onTransferClicked: {middlePanel.state = "Transfer"; if(isMobile) hideMenu()}
-            onReceiveClicked: {middlePanel.state = "Receive"; if(isMobile) hideMenu()}
-            onTxkeyClicked: {middlePanel.state = "TxKey"; if(isMobile) hideMenu()}
-            onHistoryClicked: {middlePanel.state = "History"; if(isMobile) hideMenu()}
-            onAddressBookClicked: {middlePanel.state = "AddressBook"; if(isMobile) hideMenu()}
-            onMiningClicked: {middlePanel.state = "Mining"; if(isMobile) hideMenu()}
-            onSignClicked: {middlePanel.state = "Sign"; if(isMobile) hideMenu()}
-            onSettingsClicked: {middlePanel.state = "Settings"; if(isMobile) hideMenu()}
+            onDashboardClicked: {
+                middlePanel.state = "Dashboard";
+                middlePanel.flickable.contentY = 0;
+                if(isMobile) {
+                    hideMenu();
+                }
+                updateBalance();
+            }
+
+            onTransferClicked: {
+                middlePanel.state = "Transfer";
+                middlePanel.flickable.contentY = 0;
+                if(isMobile) {
+                    hideMenu();
+                }
+                updateBalance();
+            }
+
+            onReceiveClicked: {
+                middlePanel.state = "Receive";
+                middlePanel.flickable.contentY = 0;
+                if(isMobile) {
+                    hideMenu();
+                }
+                updateBalance();
+            }
+
+            onTxkeyClicked: {
+                middlePanel.state = "TxKey";
+                middlePanel.flickable.contentY = 0;
+                if(isMobile) {
+                    hideMenu();
+                }
+                updateBalance();
+            }
+
+            onSharedringdbClicked: {
+                middlePanel.state = "SharedRingDB";
+                middlePanel.flickable.contentY = 0;
+                if(isMobile) {
+                    hideMenu();
+                }
+                updateBalance();
+            }
+
+            onHistoryClicked: {
+                middlePanel.state = "History";
+                middlePanel.flickable.contentY = 0;
+                if(isMobile) {
+                    hideMenu();
+                }
+                updateBalance();
+            }
+
+            onAddressBookClicked: {
+                middlePanel.state = "AddressBook";
+                middlePanel.flickable.contentY = 0;
+                if(isMobile) {
+                    hideMenu();
+                }
+                updateBalance();
+            }
+
+            onMiningClicked: {
+                middlePanel.state = "Mining";
+                middlePanel.flickable.contentY = 0;
+                if(isMobile) {
+                    hideMenu();
+                }
+                updateBalance();
+            }
+
+            onSignClicked: {
+                middlePanel.state = "Sign";
+                middlePanel.flickable.contentY = 0;
+                if(isMobile) {
+                    hideMenu();
+                }
+                updateBalance();
+            }
+
+            onSettingsClicked: {
+                middlePanel.state = "Settings";
+                middlePanel.flickable.contentY = 0;
+                if(isMobile) {
+                    hideMenu();
+                }
+                updateBalance();
+            }
+
+            onKeysClicked: Utils.showSeedPage();
         }
 
         RightPanel {
@@ -1072,22 +1449,6 @@ ApplicationWindow {
             text: qsTr("send to the same destination") + translationManager.emptyString
             visible: false
         }
-
-//        MouseArea {
-//            id: frameArea
-//            property bool blocked: false
-//            anchors.top: parent.top
-//            anchors.left: parent.left
-//            anchors.right: parent.right
-//            height: 30
-//            z: 1
-//            hoverEnabled: true
-//            propagateComposedEvents: true
-//            onPressed: mouse.accepted = false
-//            onReleased: mouse.accepted = false
-//            onMouseXChanged: titleBar.mouseX = mouseX
-//            onContainsMouseChanged: titleBar.containsMouse = containsMouse
-//        }
 
         SequentialAnimation {
             id: goToBasicAnimation
@@ -1187,7 +1548,7 @@ ApplicationWindow {
         WizardMain {
             id: wizard
             anchors.fill: parent
-            onUseStelliteClicked: {
+            onUseMoneroClicked: {
                 rootItem.state = "normal" // TODO: listen for this state change in appWindow;
                 appWindow.initialize();
             }
@@ -1244,11 +1605,20 @@ ApplicationWindow {
 
         TitleBar {
             id: titleBar
-            anchors.left: parent.left
-            anchors.right: parent.right
             x: 0
             y: 0
-            customDecorations: persistentSettings.customDecorations
+            anchors.left: parent.left
+            anchors.right: parent.right
+            showMinimizeButton: true
+            showMaximizeButton: true
+            showWhatIsButton: false
+            showMoneroLogo: true
+            onCloseClicked: appWindow.close();
+            onMaximizeClicked: {
+                appWindow.visibility = appWindow.visibility !== Window.Maximized ? Window.Maximized :
+                                                                                    Window.Windowed
+            }
+            onMinimizeClicked: appWindow.visibility = Window.Minimized
             onGoToBasicVersion: {
                 if (yes) {
                     // basicPanel.currentView = middlePanel.currentView
@@ -1303,7 +1673,7 @@ ApplicationWindow {
                 y: 6
                 lineHeight: 0.7
                 font.family: "Arial"
-                font.pixelSize: 12
+                font.pixelSize: 12 * scaleRatio
                 color: "#FFFFFF"
             }
         }
@@ -1314,11 +1684,70 @@ ApplicationWindow {
         }
     }
 
+    // TODO: Make the callback dynamic
+    Timer {
+        id: statusMessageTimer
+        interval: 5;
+        running: false;
+        repeat: false
+        onTriggered: resetAndroidClose()
+        triggeredOnStart: false
+    }
+
+    Rectangle {
+        id: statusMessage
+        z: 99
+        visible: false
+        property alias text: statusMessageText.text
+        anchors.bottom: parent.bottom
+        width: statusMessageText.contentWidth + 20 * scaleRatio
+        anchors.horizontalCenter: parent.horizontalCenter
+        color: "black"
+        height: 40 * scaleRatio
+        Text {
+            id: statusMessageText
+            anchors.fill: parent
+            anchors.margins: 10 * scaleRatio
+            font.pixelSize: 14 * scaleRatio
+            color: "white"
+        }
+    }
+
+    function resetAndroidClose() {
+        console.log("resetting android close");
+        androidCloseTapped = false;
+        statusMessage.visible = false
+    }
+
+    function showStatusMessage(msg,timeout) {
+        console.log("showing status message")
+        statusMessageTimer.interval = timeout * 1000;
+        statusMessageTimer.start()
+        statusMessageText.text = msg;
+        statusMessage.visible = true
+    }
+
     onClosing: {
+        close.accepted = false;
+        console.log("blocking close event");
+        if(isAndroid) {
+            console.log("blocking android exit");
+            if(qrScannerEnabled)
+                cameraUi.state = "Stopped"
+
+            if(!androidCloseTapped) {
+                androidCloseTapped = true;
+                appWindow.showStatusMessage(qsTr("Tap again to close..."),3)
+
+                // first close
+                return;
+            }
+
+
+        }
 
         // If daemon is running - prompt user before exiting
-        if(typeof daemonManager != "undefined" && daemonManager.running(persistentSettings.testnet)) {
-            close.accepted = false;
+        if(typeof daemonManager != "undefined" && daemonManager.running(persistentSettings.nettype)) {
 
             // Show confirmation dialog
             confirmationDialog.title = qsTr("Daemon is running") + translationManager.emptyString;
@@ -1330,7 +1759,7 @@ ApplicationWindow {
             }
 
             confirmationDialog.onRejectedCallback = function() {
-                daemonManager.stop(persistentSettings.testnet);
+                daemonManager.stop(persistentSettings.nettype);
                 closeAccepted();
             };
 
@@ -1342,6 +1771,7 @@ ApplicationWindow {
     }
 
     function closeAccepted(){
+        console.log("close accepted");
         // Close wallet non async on exit
         daemonManager.exit();
         walletManager.closeWallet();
@@ -1376,14 +1806,32 @@ ApplicationWindow {
         onTriggered: checkUpdates()
     }
 
-    function isDaemonLocal() {
-        var daemonAddress = appWindow.persistentSettings.daemon_address
-        if (daemonAddress === "")
-            return false
-        var daemonHost = daemonAddress.split(":")[0]
-        if (daemonHost === "127.0.0.1" || daemonHost === "localhost")
-            return true
-        return false
+    function releaseFocus() {
+        // Workaround to release focus from textfield when scrolling (https://bugreports.qt.io/browse/QTBUG-34867)
+        if(isAndroid) {
+            console.log("releasing focus")
+            middlePanel.focus = true
+            middlePanel.focus = false
+        }
     }
 
+    // Daemon console
+    DaemonConsole {
+        id: daemonConsolePopup
+        height:500
+        width:800
+        title: qsTr("Daemon log") + translationManager.emptyString
+        onAccepted: {
+            close();
+        }
+    }
+
+    // background gradient
+    Rectangle {
+        id: inactiveOverlay
+        visible: false
+        anchors.fill: parent
+        color: "black"
+        opacity: 0.8
+    }
 }

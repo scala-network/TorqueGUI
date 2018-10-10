@@ -1,5 +1,6 @@
 // Copyright (c) 2014-2015, The Stellite Project
-// 
+// Copyright (c) 2014-2018, The Monero Project
+//
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are
@@ -51,7 +52,7 @@ Item {
     Rectangle {
         id: scroll
 
-        width: 15
+        width: 4
         height: {
             var t = (flickable.height * flickable.height) / flickable.contentHeight
             return t < 20 ? 20 : t
@@ -62,7 +63,7 @@ Item {
         visible: flickable.contentHeight > flickable.height
 
         Behavior on opacity {
-            NumberAnimation { duration: 100; easing.type: Easing.InQuad }
+            NumberAnimation { duration: 200; easing.type: Easing.InQuad }
         }
 
         MouseArea {

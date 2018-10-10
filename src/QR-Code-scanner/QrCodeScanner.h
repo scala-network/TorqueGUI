@@ -1,4 +1,5 @@
 // Copyright (c) 2014-2017, The Stellite Project
+// Copyright (c) 2014-2018, The Monero Project
 //
 // All rights reserved.
 //
@@ -44,7 +45,7 @@ class QrCodeScanner : public QObject
 
 public:
     QrCodeScanner(QObject *parent = Q_NULLPTR);
-
+    ~QrCodeScanner();
     void setSource(QCamera*);
 
     bool enabled() const;
@@ -57,7 +58,7 @@ public Q_SLOTS:
 Q_SIGNALS:
     void enabledChanged();
 
-    void decoded(const QString &address, const QString &payment_id, const QString &amount, const QString &tx_description, const QString &recipient_name);
+    void decoded(const QString &address, const QString &payment_id, const QString &amount, const QString &tx_description, const QString &recipient_name, const QVariantMap &extra_parameters);
     void decode(int type, const QString &data);
     void notifyError(const QString &error, bool warning = false);
 

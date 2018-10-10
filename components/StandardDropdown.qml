@@ -1,5 +1,6 @@
+// Copyright (c) 2014-2018, The Monero Project
 // Copyright (c) 2014-2015, The Stellite Project
-// 
+//
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are
@@ -28,8 +29,11 @@
 
 import QtQuick 2.0
 
+import "../components" as MoneroComponents
+
 Item {
     id: dropdown
+    property int itemTopMargin: 0
     property alias dataModel: repeater.model
     property string shadowPressedColor
     property string shadowReleasedColor
@@ -38,7 +42,17 @@ Item {
     property string textColor: "#FFFFFF"
     property alias currentIndex: column.currentIndex
     property bool expanded: false
-    height: 37
+    property int dropdownHeight: 42
+    property int fontHeaderSize: 16 * scaleRatio
+    property int fontItemSize: 14 * scaleRatio
+    property string colorBorder: MoneroComponents.Style.inputBorderColorInActive
+    property string colorHeaderBackground: "transparent"
+    property bool headerBorder: true
+    property bool headerFontBold: false
+
+    height: dropdownHeight
+
+    signal changed();
 
     onExpandedChanged: if(expanded) appWindow.currentItem = dropdown
     function hide() { dropdown.expanded = false }
@@ -54,83 +68,36 @@ Item {
         return true
     }
 
+    // Workaroud for suspected memory leak in 5.8 causing malloc crash on app exit
+    function update() {
+        firstColText.text = column.currentIndex < repeater.model.rowCount() ? qsTr(repeater.model.get(column.currentIndex).column1) + translationManager.emptyString : ""
+    }
+
     Item {
         id: head
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
-        height: 37
+        anchors.topMargin: parent.itemTopMargin
+        height: dropdown.dropdownHeight
 
         Rectangle {
-            anchors.left: parent.left
-            anchors.right: parent.right
-            height: parent.height - 1
-            y: dropdown.expanded || droplist.height > 0 ? 0 : 1
-            color: dropdown.expanded || droplist.height > 0 ? dropdown.shadowPressedColor : dropdown.shadowReleasedColor
-            //radius: 4
-        }
-
-        Rectangle {
-            anchors.left: parent.left
-            anchors.right: parent.right
-            height: parent.height - 1
-            y: dropdown.expanded || droplist.height > 0 ? 1 : 0
-            color: dropdown.expanded || droplist.height > 0 ? dropdown.pressedColor : dropdown.releasedColor
-            //radius: 4
-        }
-
-        Rectangle {
-            anchors.left: parent.left
-            anchors.bottom: parent.bottom
-            height: 3
-            width: 3
-            color: dropdown.pressedColor
-            visible: dropdown.expanded || droplist.height > 0
-        }
-
-        Rectangle {
-            anchors.right: parent.right
-            anchors.bottom: parent.bottom
-            height: 3
-            width: 3
-            color: dropdown.pressedColor
-            visible: dropdown.expanded || droplist.height > 0
+            color: dropdown.colorHeaderBackground
+            border.width: dropdown.headerBorder ? 1 : 0
+            border.color: dropdown.colorBorder
+            radius: 4
+            anchors.fill: parent
         }
 
         Text {
             id: firstColText
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
-            anchors.leftMargin: 12
+            anchors.leftMargin: 12 * scaleRatio
             elide: Text.ElideRight
-            font.family: "Arial"
-            font.bold: true
-            font.pixelSize: 12
-            color: "#FFFFFF"
-            text: column.currentIndex < repeater.model.rowCount() ? qsTr(repeater.model.get(column.currentIndex).column1) + translationManager.emptyString : ""
-        }
-
-        Text {
-            id: secondColText
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.right: separator.left
-            anchors.rightMargin: 12
-            width: dropdown.expanded ? w : (separator.x - 12) - (firstColText.x + firstColText.width + 5)
-            font.family: "Arial"
-            font.pixelSize: 12
-            color: "#FFFFFF"
-            text: column.currentIndex < repeater.model.rowCount() ? qsTr(repeater.model.get(column.currentIndex).column2) + translationManager.emptyString : ""
-
-            property int w: 0
-            Component.onCompleted: w = implicitWidth
-        }
-
-        Rectangle {
-            id: separator
-            anchors.right: dropIndicator.left
-            anchors.verticalCenter: parent.verticalCenter
-            height: 18
-            width: 1
+            font.family: MoneroComponents.Style.fontRegular.name
+            font.bold: dropdown.headerFontBold
+            font.pixelSize: dropdown.fontHeaderSize
             color: "#FFFFFF"
         }
 
@@ -139,12 +106,12 @@ Item {
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             anchors.right: parent.right
-            width: 32
+            width: 32 * scaleRatio
 
             Image {
                 anchors.centerIn: parent
                 source: "../images/whiteDropIndicator.png"
-                rotation: dropdown.expanded ? 180 : 0
+                rotation: dropdown.expanded ? 180  * scaleRatio : 0
             }
         }
 
@@ -152,6 +119,8 @@ Item {
             id: dropArea
             anchors.fill: parent
             onClicked: dropdown.expanded = !dropdown.expanded
+            hoverEnabled: true
+            cursorShape: Qt.PointingHandCursor
         }
     }
 
@@ -168,14 +137,14 @@ Item {
         Rectangle {
             anchors.left: parent.left
             anchors.top: parent.top
-            width: 3; height: 3
+            width: 3 * scaleRatio; height: 3 * scaleRatio
             color: dropdown.pressedColor
         }
 
         Rectangle {
             anchors.right: parent.right
             anchors.top: parent.top
-            width: 3; height: 3
+            width: 3 * scaleRatio; height: 3 * scaleRatio
             color: dropdown.pressedColor
         }
 
@@ -205,24 +174,24 @@ Item {
                 property string stringSent:  qsTr("Sent") + translationManager.emptyString
                 property string stringReceived:  qsTr("Received") + translationManager.emptyString
 
-
                 delegate: Rectangle {
                     anchors.left: parent.left
                     anchors.right: parent.right
-                    height: 30
+                    height: (dropdown.dropdownHeight * 0.75) * scaleRatio
                     //radius: index === repeater.count - 1 ? 4 : 0
                     color: itemArea.containsMouse || index === column.currentIndex || itemArea.containsMouse ? dropdown.releasedColor : dropdown.pressedColor
 
                     Text {
+                        id: col1Text
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
                         anchors.right: col2Text.left
-                        anchors.leftMargin: 12
-                        anchors.rightMargin: column2.length > 0 ? 12 : 0
-                        font.family: "Arial"
+                        anchors.leftMargin: 12 * scaleRatio
+                        anchors.rightMargin: 0
+                        font.family: MoneroComponents.Style.fontRegular.name
                         font.bold: true
-                        font.pixelSize: 12
-                        color: "#FFFFFF"
+                        font.pixelSize: fontItemSize
+                        color: itemArea.containsMouse || index === column.currentIndex || itemArea.containsMouse ? "#FA6800" : "#FFFFFF"
                         text: qsTr(column1) + translationManager.emptyString
                     }
 
@@ -230,24 +199,24 @@ Item {
                         id: col2Text
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.right: parent.right
-                        anchors.rightMargin: 45
-                        font.family: "Arial"
-                        font.pixelSize: 12
+                        anchors.rightMargin: 45 * scaleRatio
+                        font.family: MoneroComponents.Style.fontRegular.name
+                        font.pixelSize: 14 * scaleRatio
                         color: "#FFFFFF"
-                        text: column2
+                        text: ""
                     }
 
                     Rectangle {
                         anchors.left: parent.left
                         anchors.top: parent.top
-                        width: 3; height: 3
+                        width: 3 * scaleRatio; height: 3 * scaleRatio
                         color: parent.color
                     }
 
                     Rectangle {
                         anchors.right: parent.right
                         anchors.top: parent.top
-                        width: 3; height: 3
+                        width: 3 * scaleRatio; height: 3 * scaleRatio
                         color: parent.color
                     }
 
@@ -255,9 +224,13 @@ Item {
                         id: itemArea
                         anchors.fill: parent
                         hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+
                         onClicked: {
                             dropdown.expanded = false
                             column.currentIndex = index
+                            changed();
+                            dropdown.update()
                         }
                     }
                 }

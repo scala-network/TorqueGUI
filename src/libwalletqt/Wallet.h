@@ -4,11 +4,13 @@
 #include <QObject>
 #include <QTime>
 #include <QMutex>
+#include <QList>
 #include <QtConcurrent/QtConcurrent>
 
-#include "wallet/wallet2_api.h" // we need to have an access to the Monero::Wallet::Status enum here;
+#include "wallet/api/wallet2_api.h" // we need to have an access to the Monero::Wallet::Status enum here;
 #include "PendingTransaction.h" // we need to have an access to the PendingTransaction::Priority enum here;
 #include "UnsignedTransaction.h"
+#include "NetworkType.h"
 
 namespace Monero {
     class Wallet; // forward declaration
@@ -20,6 +22,8 @@ class TransactionHistoryModel;
 class TransactionHistorySortFilterModel;
 class AddressBook;
 class AddressBookModel;
+class Subaddress;
+class SubaddressModel;
 
 class Wallet : public QObject
 {
@@ -27,27 +31,26 @@ class Wallet : public QObject
     Q_PROPERTY(QString seed READ getSeed)
     Q_PROPERTY(QString seedLanguage READ getSeedLanguage)
     Q_PROPERTY(Status status READ status)
-    Q_PROPERTY(bool testnet READ testnet)
+    Q_PROPERTY(NetworkType::Type nettype READ nettype)
 //    Q_PROPERTY(ConnectionStatus connected READ connected)
+    Q_PROPERTY(quint32 currentSubaddressAccount READ currentSubaddressAccount)
     Q_PROPERTY(bool synchronized READ synchronized)
     Q_PROPERTY(QString errorString READ errorString)
-    Q_PROPERTY(QString address READ address)
-    Q_PROPERTY(quint64 balance READ balance)
-    Q_PROPERTY(quint64 unlockedBalance READ unlockedBalance)
     Q_PROPERTY(TransactionHistory * history READ history)
     Q_PROPERTY(QString paymentId READ paymentId WRITE setPaymentId)
     Q_PROPERTY(TransactionHistorySortFilterModel * historyModel READ historyModel NOTIFY historyModelChanged)
     Q_PROPERTY(QString path READ path)
     Q_PROPERTY(AddressBookModel * addressBookModel READ addressBookModel)
     Q_PROPERTY(AddressBook * addressBook READ addressBook)
+    Q_PROPERTY(SubaddressModel * subaddressModel READ subaddressModel)
+    Q_PROPERTY(Subaddress * subaddress READ subaddress)
     Q_PROPERTY(bool viewOnly READ viewOnly)
     Q_PROPERTY(QString secretViewKey READ getSecretViewKey)
     Q_PROPERTY(QString publicViewKey READ getPublicViewKey)
     Q_PROPERTY(QString secretSpendKey READ getSecretSpendKey)
     Q_PROPERTY(QString publicSpendKey READ getPublicSpendKey)
     Q_PROPERTY(QString daemonLogPath READ getDaemonLogPath CONSTANT)
-    Q_PROPERTY(QString walletLogPath READ getWalletLogPath CONSTANT)
-    Q_PROPERTY(quint64 walletCreationHeight READ getWalletCreationHeight CONSTANT)
+    Q_PROPERTY(quint64 walletCreationHeight READ getWalletCreationHeight WRITE setWalletCreationHeight NOTIFY walletCreationHeightChanged)
 
 public:
 
@@ -80,8 +83,8 @@ public:
     //! returns last operation's status
     Status status() const;
 
-    //! returns true testnet wallet.
-    bool testnet() const;
+    //! returns network type of the wallet.
+    NetworkType::Type nettype() const;
 
     //! returns whether the wallet is connected, and version status
     Q_INVOKABLE ConnectionStatus connected(bool forceCheck = false);
@@ -98,7 +101,7 @@ public:
     Q_INVOKABLE bool setPassword(const QString &password);
 
     //! returns wallet's public address
-    QString address() const;
+    Q_INVOKABLE QString address(quint32 accountIndex, quint32 addressIndex) const;
 
     //! returns wallet file's path
     QString path() const;
@@ -108,10 +111,10 @@ public:
     Q_INVOKABLE bool store(const QString &path = "");
 
     //! initializes wallet
-    Q_INVOKABLE bool init(const QString &daemonAddress, quint64 upperTransactionLimit = 0, bool isRecovering = false, quint64 restoreHeight = 0);
+    Q_INVOKABLE bool init(const QString &daemonAddress, quint64 upperTransactionLimit = 0, bool isRecovering = false, bool isRecoveringFromDevice = false, quint64 restoreHeight = 0);
 
     //! initializes wallet asynchronously
-    Q_INVOKABLE void initAsync(const QString &daemonAddress, quint64 upperTransactionLimit = 0, bool isRecovering = false, quint64 restoreHeight = 0);
+    Q_INVOKABLE void initAsync(const QString &daemonAddress, quint64 upperTransactionLimit = 0, bool isRecovering = false, bool isRecoveringFromDevice = false, quint64 restoreHeight = 0);
 
     // Set daemon rpc user/pass
     Q_INVOKABLE void setDaemonLogin(const QString &daemonUsername = "", const QString &daemonPassword = "");
@@ -126,10 +129,22 @@ public:
     Q_INVOKABLE void setTrustedDaemon(bool arg);
 
     //! returns balance
-    Q_INVOKABLE quint64 balance() const;
+    Q_INVOKABLE quint64 balance(quint32 accountIndex) const;
+    Q_INVOKABLE quint64 balanceAll() const;
 
     //! returns unlocked balance
-    Q_INVOKABLE quint64 unlockedBalance() const;
+    Q_INVOKABLE quint64 unlockedBalance(quint32 accountIndex) const;
+    Q_INVOKABLE quint64 unlockedBalanceAll() const;
+
+    //! account/address management
+    quint32 currentSubaddressAccount() const;
+    Q_INVOKABLE void switchSubaddressAccount(quint32 accountIndex);
+    Q_INVOKABLE void addSubaddressAccount(const QString& label);
+    Q_INVOKABLE quint32 numSubaddressAccounts() const;
+    Q_INVOKABLE quint32 numSubaddresses(quint32 accountIndex) const;
+    Q_INVOKABLE void addSubaddress(const QString& label);
+    Q_INVOKABLE QString getSubaddressLabel(quint32 accountIndex, quint32 addressIndex) const;
+    Q_INVOKABLE void setSubaddressLabel(quint32 accountIndex, quint32 addressIndex, const QString &label);
 
     //! returns if view only wallet
     Q_INVOKABLE bool viewOnly() const;
@@ -143,6 +158,10 @@ public:
 
     //! returns daemon's blockchain target height
     Q_INVOKABLE quint64 daemonBlockChainTargetHeight() const;
+
+    //! export/import key images
+    Q_INVOKABLE bool exportKeyImages(const QString& path);
+    Q_INVOKABLE bool importKeyImages(const QString& path);
 
     //! refreshes the wallet
     Q_INVOKABLE bool refresh();
@@ -209,6 +228,12 @@ public:
     //! returns adress book model
     AddressBookModel *addressBookModel() const;
 
+    //! returns subaddress
+    Subaddress *subaddress();
+
+    //! returns subadress model
+    SubaddressModel *subaddressModel();
+
     //! generate payment id
     Q_INVOKABLE QString generatePaymentId() const;
 
@@ -232,6 +257,11 @@ public:
     Q_INVOKABLE bool setUserNote(const QString &txid, const QString &note);
     Q_INVOKABLE QString getUserNote(const QString &txid) const;
     Q_INVOKABLE QString getTxKey(const QString &txid) const;
+    Q_INVOKABLE QString checkTxKey(const QString &txid, const QString &tx_key, const QString &address);
+    Q_INVOKABLE QString getTxProof(const QString &txid, const QString &address, const QString &message) const;
+    Q_INVOKABLE QString checkTxProof(const QString &txid, const QString &address, const QString &message, const QString &signature);
+    Q_INVOKABLE QString getSpendProof(const QString &txid, const QString &message) const;
+    Q_INVOKABLE QString checkSpendProof(const QString &txid, const QString &message, const QString &signature) const;
     // Rescan spent outputs
     Q_INVOKABLE bool rescanSpent();
 
@@ -245,8 +275,26 @@ public:
     QString getPublicSpendKey() const {return QString::fromStdString(m_walletImpl->publicSpendKey());}
 
     quint64 getWalletCreationHeight() const {return m_walletImpl->getRefreshFromBlockHeight();}
+    void setWalletCreationHeight(quint64 height);
+
     QString getDaemonLogPath() const;
     QString getWalletLogPath() const;
+
+    // Blackalled outputs
+    Q_INVOKABLE bool blackballOutput(const QString &amount, const QString &offset);
+    Q_INVOKABLE bool blackballOutputs(const QList<QString> &outputs, bool add);
+    Q_INVOKABLE bool blackballOutputs(const QString &filename, bool add);
+    Q_INVOKABLE bool unblackballOutput(const QString &amount, const QString &offset);
+
+    // Rings
+    Q_INVOKABLE QString getRing(const QString &key_image);
+    Q_INVOKABLE QString getRings(const QString &txid);
+    Q_INVOKABLE bool setRing(const QString &key_image, const QString &ring, bool relative);
+
+    // key reuse mitigation options
+    Q_INVOKABLE void segregatePreForkOutputs(bool segregate);
+    Q_INVOKABLE void segregationHeight(quint64 height);
+    Q_INVOKABLE void keyReuseMitigation2(bool mitigation);
 
     // TODO: setListenter() when it implemented in API
 signals:
@@ -263,6 +311,7 @@ signals:
     void unconfirmedMoneyReceived(const QString &txId, quint64 amount);
     void newBlock(quint64 height, quint64 targetHeight);
     void historyModelChanged() const;
+    void walletCreationHeightChanged();
 
     // emitted when transaction is created async
     void transactionCreated(PendingTransaction * transaction, QString address, QString paymentId, quint32 mixinCount);
@@ -294,12 +343,16 @@ private:
     int     m_connectionStatusTtl;
     mutable QTime   m_connectionStatusTime;
     mutable bool    m_initialized;
+    uint32_t m_currentSubaddressAccount;
     AddressBook * m_addressBook;
     mutable AddressBookModel * m_addressBookModel;
+    Subaddress * m_subaddress;
+    mutable SubaddressModel * m_subaddressModel;
     QMutex m_connectionStatusMutex;
     bool m_connectionStatusRunning;
     QString m_daemonUsername;
     QString m_daemonPassword;
+    Monero::WalletListener *m_walletListener;
 };
 
 

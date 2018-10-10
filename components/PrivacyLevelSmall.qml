@@ -1,5 +1,6 @@
 // Copyright (c) 2014-2015, The Stellite Project
-// 
+// Copyright (c) 2014-2018, The Monero Project
+//
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are
@@ -71,11 +72,7 @@ Item {
             //radius: 2
             width: row.x
 
-            color: {
-                if(item.fillLevel < 5) return "#7a5fcb"
-                if(item.fillLevel < 13) return "#AAFFBB"
-                return "#36B25C"
-            }
+            color: "#7a5fcb"
 
             Timer {
                 interval: 500

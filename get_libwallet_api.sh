@@ -1,6 +1,6 @@
 #!/bin/bash
 MONERO_URL=https://github.com/stellitecoin/stellite.git
-MONERO_BRANCH=master
+MONERO_BRANCH=V5HT_9T
 
 pushd $(pwd)
 ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -17,12 +17,15 @@ if [ ! -d $MONERO_DIR/src ]; then
 fi
 git submodule update --remote
 git -C $MONERO_DIR fetch
-git -C $MONERO_DIR checkout release-v0.11.0.0
+git -C $MONERO_DIR checkout V5HT_9T
 
 # get stellite core tag
 get_tag
 # create local stellite branch
 git -C $MONERO_DIR checkout -B $VERSIONTAG
+
+git -C $MONERO_DIR submodule init
+git -C $MONERO_DIR submodule update
 
 # Merge stellite PR dependencies
 
@@ -72,8 +75,7 @@ else
 fi
 
 if [ "$BUILD_LIBWALLET" != true ]; then
-    # exit this script
-    return
+    exit 0
 fi
 
 echo "GUI_MONERO_VERSION=\"$VERSIONTAG\"" > $MONERO_DIR/version.sh
@@ -108,6 +110,7 @@ elif [ "$BUILD_TYPE" == "debug-android" ]; then
 elif [ "$BUILD_TYPE" == "debug" ]; then
     echo "Building libwallet debug"
     CMAKE_BUILD_TYPE=Debug
+    STATIC=true
 else
     echo "Valid build types are release, release-static, release-android, debug-android and debug"
     exit 1;
@@ -115,14 +118,14 @@ fi
 
 
 echo "cleaning up existing stellite build dir, libs and includes"
-#rm -fr $MONERO_DIR/build
+rm -fr $MONERO_DIR/build
 rm -fr $MONERO_DIR/lib
 rm -fr $MONERO_DIR/include
 rm -fr $MONERO_DIR/bin
 
 
-mkdir -p $MONERO_DIR/build/release
-pushd $MONERO_DIR/build/release
+mkdir -p $MONERO_DIR/build/$BUILD_TYPE
+pushd $MONERO_DIR/build/$BUILD_TYPE
 
 # reusing function from "utils.sh"
 platform=$(get_platform)
@@ -208,7 +211,7 @@ if test -z "$CPU_CORE_COUNT"; then
 fi
 
 # Build libwallet_merged
-pushd $MONERO_DIR/build/release/src/wallet
+pushd $MONERO_DIR/build/$BUILD_TYPE/src/wallet
 eval $make_exec version -C ../..
 eval $make_exec  -j$CPU_CORE_COUNT
 eval $make_exec  install -j$CPU_CORE_COUNT
@@ -217,21 +220,24 @@ popd
 # Build stellited
 # win32 need to build daemon manually with msys2 toolchain
 if [ "$platform" != "mingw32" ] && [ "$ANDROID" != true ]; then
-    pushd $MONERO_DIR/build/release/src/daemon
+    pushd $MONERO_DIR/build/$BUILD_TYPE/src/daemon
     eval make  -j$CPU_CORE_COUNT
     eval make install -j$CPU_CORE_COUNT
     popd
 fi
 
 # build install epee
-eval make -C $MONERO_DIR/build/release/contrib/epee all install
+eval make -C $MONERO_DIR/build/$BUILD_TYPE/contrib/epee all install
 
 # install easylogging
-eval make -C $MONERO_DIR/build/release/external/easylogging++ all install
+eval make -C $MONERO_DIR/build/$BUILD_TYPE/external/easylogging++ all install
 
-# Install libunwind
+# install lmdb
+eval make -C $MONERO_DIR/build/$BUILD_TYPE/external/db_drivers/liblmdb all install
+
+# Install libunbound
 echo "Installing libunbound..."
-pushd $MONERO_DIR/build/release/external/unbound
+pushd $MONERO_DIR/build/$BUILD_TYPE/external/unbound
 # no need to make, it was already built as dependency for libwallet
 # make -j$CPU_CORE_COUNT
 $make_exec install -j$CPU_CORE_COUNT

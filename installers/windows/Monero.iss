@@ -1,10 +1,14 @@
-; Stellite GUI Wallet Beta 2 Installer for Windows
-; Copyright (c) 2014-2017, The Stellite Project
+; Stellite Lithium Luna GUI Wallet Installer for Windows
+; Copyright (c) 2014-2018, The Monero Project
 ; See LICENSE
 
 [Setup]
 AppName=Stellite GUI Wallet
-AppVersion=0.10.3.1
+; For InnoSetup this is the property that uniquely identifies the application as such
+; Thus it's important to keep this stable over releases
+; With a different "AppName" InnoSetup would treat a mere update as a completely new application and thus mess up
+
+AppVersion=0.12.3.0
 DefaultDirName={pf}\Stellite GUI Wallet
 DefaultGroupName=Stellite GUI Wallet
 UninstallDisplayIcon={app}\stellite-wallet-gui.exe
@@ -15,6 +19,8 @@ WizardSmallImageFile=WizardSmallImage.bmp
 WizardImageFile=WelcomeImage.bmp
 DisableWelcomePage=no
 LicenseFile=LICENSE
+AppPublisher=The Monero Developer Community
+AppPublisherURL=https://stellite.cash
 
 
 [Languages]
@@ -29,170 +35,200 @@ Name: "en"; MessagesFile: "compiler:Default.isl"
 
 
 [Files]
-Source: "ReadMe.htm"; DestDir: "{app}"; Flags: comparetimestamp
+; The use of the flag "ignoreversion" for the following entries leads to the following behaviour:
+; When updating / upgrading an existing installation ALL existing files are replaced with the files in this
+; installer, regardless of file dates, version info within the files, or type of file (textual file or
+; .exe/.dll file possibly with version info).
+;
+; This is far more robust than relying on version info or on file dates (flag "comparetimestamp").
+; As of version 0.12.3.0, the Monero .exe files do not carry version info anyway in their .exe headers.
+; The only small drawback seems to be somewhat longer update times because each and every file is
+; copied again, even if already present with correct file date and identical content.
+;
+; Note that it would be very dangerous to use "ignoreversion" on files that may be shared with other
+; applications somehow. Luckily this is no issue here because ALL files are "private" to Monero.
+
+Source: "ReadMe.htm"; DestDir: "{app}"; Flags: ignoreversion
 Source: "FinishImage.bmp"; Flags: dontcopy
 
-; Stellite GUI wallet
-Source: "bin\stellite-wallet-gui.exe"; DestDir: "{app}"; Flags: comparetimestamp
+; Monero GUI wallet
+Source: "bin\monero-wallet-gui.exe"; DestDir: "{app}"; Flags: ignoreversion
 
-; Stellite GUI wallet log file
-; Beta 2 does not have the "--log-file" command-line option of the CLI wallet and insists to put the .log beside the .exe
+; Monero GUI wallet log file
+; The GUI wallet does not have the "--log-file" command-line option of the CLI wallet and insists to put the .log beside the .exe
 ; so pre-create the file and give the necessary permissions to the wallet to write into it
-Source: "stellite-wallet-gui.log"; DestDir: "{app}"; Flags: comparetimestamp; Permissions: users-modify
+; Flag is "onlyifdoesntexist": We do not want to overwrite an already existing log
+Source: "monero-wallet-gui.log"; DestDir: "{app}"; Flags: onlyifdoesntexist; Permissions: users-modify
 
-; Stellite CLI wallet
-Source: "bin\stellite-wallet-cli.exe"; DestDir: "{app}"; Flags: comparetimestamp
+; Monero CLI wallet
+Source: "bin\monero-wallet-cli.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\monero-gen-trusted-multisig.exe"; DestDir: "{app}"; Flags: ignoreversion
 
-; Stellite wallet RPC interface implementation
-Source: "bin\stellite-wallet-rpc.exe"; DestDir: "{app}"; Flags: comparetimestamp
+; Monero wallet RPC interface implementation
+Source: "bin\monero-wallet-rpc.exe"; DestDir: "{app}"; Flags: ignoreversion
 
-; Stellite daemon
-Source: "bin\stellited.exe"; DestDir: "{app}"; Flags: comparetimestamp
+; Monero daemon
+Source: "bin\monerod.exe"; DestDir: "{app}"; Flags: ignoreversion
 
-; Stellite daemon wrapped in a batch file that stops before the text window closes, to see any error messages
-Source: "stellite-daemon.bat"; DestDir: "{app}"; Flags: comparetimestamp;
+; Monero daemon wrapped in a batch file that stops before the text window closes, to see any error messages
+Source: "monero-daemon.bat"; DestDir: "{app}"; Flags: ignoreversion;
 
-; Stellite blockchain utilities
-Source: "bin\stellite-blockchain-export.exe"; DestDir: "{app}"; Flags: comparetimestamp
-Source: "bin\stellite-blockchain-import.exe"; DestDir: "{app}"; Flags: comparetimestamp
-Source: "bin\stellite-utils-deserialize.exe"; DestDir: "{app}"; Flags: comparetimestamp
+; Monero blockchain utilities
+Source: "bin\monero-blockchain-export.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\monero-blockchain-import.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\monero-blockchain-blackball.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\monero-blockchain-usage.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\monero-blockchain-import.exe"; DestDir: "{app}"; Flags: ignoreversion
+
+; was present in 0.10.3.1, not present anymore in 0.11.1.0 and after
+; Source: "bin\monero-utils-deserialize.exe"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Various .qm files for translating the wallet UI "on the fly" into all supported languages
-Source: "bin\translations\*"; DestDir: "{app}\translations"; Flags: recursesubdirs comparetimestamp
+Source: "bin\translations\*"; DestDir: "{app}\translations"; Flags: recursesubdirs ignoreversion
 
 ; Core Qt runtime
-Source: "bin\Qt5Core.dll"; DestDir: "{app}"; Flags: comparetimestamp
-Source: "bin\Qt5Gui.dll"; DestDir: "{app}"; Flags: comparetimestamp
-Source: "bin\Qt5Multimedia.dll"; DestDir: "{app}"; Flags: comparetimestamp
-Source: "bin\Qt5MultimediaQuick_p.dll"; DestDir: "{app}"; Flags: comparetimestamp
-Source: "bin\Qt5Network.dll"; DestDir: "{app}"; Flags: comparetimestamp
-Source: "bin\Qt5Qml.dll"; DestDir: "{app}"; Flags: comparetimestamp
-Source: "bin\Qt5Quick.dll"; DestDir: "{app}"; Flags: comparetimestamp
-Source: "bin\Qt5Svg.dll"; DestDir: "{app}"; Flags: comparetimestamp
-Source: "bin\Qt5Widgets.dll"; DestDir: "{app}"; Flags: comparetimestamp
-Source: "bin\Qt5XmlPatterns.dll"; DestDir: "{app}"; Flags: comparetimestamp
+; Use wildcards to deal with differences in those files between Qt version, like
+;  "Qt5MultimediaQuick_p.dll" versus "Qt5MultimediaQuick.dll" and "Qt5RemoteObjects.dll" as new file
+Source: "bin\Qt5*.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Qt QML elements like the local files selector "FolderListModel" and "Settings"
-Source: "bin\Qt\*"; DestDir: "{app}\Qt"; Flags: recursesubdirs comparetimestamp
+Source: "bin\Qt\*"; DestDir: "{app}\Qt"; Flags: recursesubdirs ignoreversion
 
 ; Qt audio support
-Source: "bin\audio\*"; DestDir: "{app}\audio"; Flags: recursesubdirs comparetimestamp
+Source: "bin\audio\*"; DestDir: "{app}\audio"; Flags: recursesubdirs ignoreversion
 
 ; Qt bearer / network connection management
-Source: "bin\bearer\*"; DestDir: "{app}\bearer"; Flags: recursesubdirs comparetimestamp
+Source: "bin\bearer\*"; DestDir: "{app}\bearer"; Flags: recursesubdirs ignoreversion
 
-; Qt Windows platform plugin	
-Source: "bin\platforms\qwindows.dll"; DestDir: "{app}\platforms"; Flags: comparetimestamp
+; Qt Windows platform plugins
+Source: "bin\platforms\*"; DestDir: "{app}\platforms"; Flags: recursesubdirs ignoreversion
+Source: "bin\platforminputcontexts\*"; DestDir: "{app}\platforminputcontexts"; Flags: recursesubdirs ignoreversion
+; No more "styles" subdirectory in 0.12.3.0
 
-; Qt support for SVG icons	
-Source: "bin\iconengines\*"; DestDir: "{app}\iconengines"; Flags: recursesubdirs comparetimestamp
+; Qt support for SVG icons
+Source: "bin\iconengines\*"; DestDir: "{app}\iconengines"; Flags: recursesubdirs ignoreversion
 
-; Qt support for various image formats (JPEG, BMP, SVG etc)	
-Source: "bin\imageformats\*"; DestDir: "{app}\imageformats"; Flags: recursesubdirs comparetimestamp
+; Qt support for various image formats (JPEG, BMP, SVG etc)
+Source: "bin\imageformats\*"; DestDir: "{app}\imageformats"; Flags: recursesubdirs ignoreversion
 
-; Qt multimedia support	
-Source: "bin\QtMultimedia\*"; DestDir: "{app}\QtMultimedia"; Flags: recursesubdirs comparetimestamp
-Source: "bin\mediaservice\*"; DestDir: "{app}\mediaservice"; Flags: recursesubdirs comparetimestamp
+; Qt multimedia support
+Source: "bin\QtMultimedia\*"; DestDir: "{app}\QtMultimedia"; Flags: recursesubdirs ignoreversion
+Source: "bin\mediaservice\*"; DestDir: "{app}\mediaservice"; Flags: recursesubdirs ignoreversion
 
 ; Qt support for "m3u" playlists
-; candidate for elimination? Don't think the GUI wallet needs such playlists	
-Source: "bin\playlistformats\*"; DestDir: "{app}\playlistformats"; Flags: recursesubdirs comparetimestamp
+; candidate for elimination? Don't think the GUI wallet needs such playlists
+Source: "bin\playlistformats\*"; DestDir: "{app}\playlistformats"; Flags: recursesubdirs ignoreversion
 
 ; Qt graphical effects as part of the core runtime, effects like blurring and blending
-Source: "bin\QtGraphicalEffects\*"; DestDir: "{app}\QtGraphicalEffects"; Flags: recursesubdirs comparetimestamp
+Source: "bin\QtGraphicalEffects\*"; DestDir: "{app}\QtGraphicalEffects"; Flags: recursesubdirs ignoreversion
 
-; Some more Qt graphical effects
-; "private" as a name for this directory looks a little strange. Historical reasons?	
-Source: "bin\private\*"; DestDir: "{app}\private"; Flags: recursesubdirs comparetimestamp
+; Qt "private" directory with "effects"
+Source: "bin\private\*"; DestDir: "{app}\private"; Flags: recursesubdirs ignoreversion
 
 ; Qt QML files
-Source: "bin\QtQml\*"; DestDir: "{app}\QtQml"; Flags: recursesubdirs comparetimestamp
+Source: "bin\QtQml\*"; DestDir: "{app}\QtQml"; Flags: recursesubdirs ignoreversion
 
 ; Qt Quick files
-Source: "bin\QtQuick\*"; DestDir: "{app}\QtQuick"; Flags: recursesubdirs comparetimestamp
-Source: "bin\QtQuick.2\*"; DestDir: "{app}\QtQuick.2"; Flags: recursesubdirs comparetimestamp
+Source: "bin\QtQuick\*"; DestDir: "{app}\QtQuick"; Flags: recursesubdirs ignoreversion
+Source: "bin\QtQuick.2\*"; DestDir: "{app}\QtQuick.2"; Flags: recursesubdirs ignoreversion
+
+; Qt Quick Controls 2 modules of the Qt Toolkit
+Source: "bin\Material\*"; DestDir: "{app}\Material"; Flags: recursesubdirs ignoreversion
+Source: "bin\Universal\*"; DestDir: "{app}\Universal"; Flags: recursesubdirs ignoreversion
 
 ; Qt Quick 2D Renderer fallback for systems / environments with "low-level graphics" i.e. without 3D support
-Source: "bin\scenegraph\*"; DestDir: "{app}\scenegraph"; Flags: recursesubdirs comparetimestamp
-Source: "bin\start-low-graphics-mode.bat"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\scenegraph\*"; DestDir: "{app}\scenegraph"; Flags: recursesubdirs ignoreversion
+Source: "bin\start-low-graphics-mode.bat"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Mesa, open-source OpenGL implementation; part of "low-level graphics" support
-Source: "bin\opengl32sw.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\opengl32sw.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Left out subdirectory "qmltooling" with the Qt QML debugger: Probably not relevant in an end-user package
 
 ; Microsoft Direct3D runtime
-Source: "bin\D3Dcompiler_47.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\D3Dcompiler_47.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; bzip2 support
-Source: "bin\libbz2-1.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\libbz2-1.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; ANGLE ("Almost Native Graphics Layer Engine") support, as used by Qt
-Source: "bin\libEGL.dll"; DestDir: "{app}"; Flags: comparetimestamp
-Source: "bin\libGLESV2.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\libEGL.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\libGLESV2.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; FreeType font engine, as used by Qt
-Source: "bin\libfreetype-6.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\libfreetype-6.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; GCC runtime, x64 version
-Source: "bin\libgcc_s_seh-1.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\libgcc_s_seh-1.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; GLib, low level core library e.g. for GNOME and GTK+
 ; Really needed under Windows?
-Source: "bin\libglib-2.0-0.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\libglib-2.0-0.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Graphite font support
 ; Really needed?
-Source: "bin\libgraphite2.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\libgraphite2.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; HarfBuzz OpenType text shaping engine
 ; Really needed?
-Source: "bin\libharfbuzz-0.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\libharfbuzz-0.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; LibIconv, conversions between character encodings
-Source: "bin\libiconv-2.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\libiconv-2.dll"; DestDir: "{app}"; Flags: ignoreversion
 
-; Part of cygwin? Needed by Qt somehow?
-Source: "bin\libicudt57.dll"; DestDir: "{app}"; Flags: comparetimestamp
-Source: "bin\libicuin57.dll"; DestDir: "{app}"; Flags: comparetimestamp
-Source: "bin\libicuuc57.dll"; DestDir: "{app}"; Flags: comparetimestamp
+; ICU, International Components for Unicode
+; After changes for supporting UTF-8 path and file names by using Boost Locale, all those 5
+; ICU libraries are needed starting from 0.12.0.0
+; Use wildcards instead of specific version number like 61 because that seems to change frequently
+Source: "bin\libicudt??.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\libicuin??.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\libicuio??.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\libicutu??.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\libicuuc??.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Library for native language support, part of GNU gettext
-Source: "bin\libintl-8.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\libintl-8.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; JasPer, support for JPEG-2000
-Source: "bin\libjasper-1.dll"; DestDir: "{app}"; Flags: comparetimestamp
+; was present in 0.10.3.1, not present anymore in 0.11.1.0 and after
+; Source: "bin\libjasper-1.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; libjpeg, C library for reading and writing JPEG image files
-Source: "bin\libjpeg-8.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\libjpeg-8.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Little CMS, color management system
-Source: "bin\liblcms2-2.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\liblcms2-2.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; XZ Utils, LZMA compression library
-Source: "bin\liblzma-5.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\liblzma-5.dll"; DestDir: "{app}"; Flags: ignoreversion
 
-; MNG / Portable Network Graphics ("animated PNG") 
-Source: "bin\libmng-2.dll"; DestDir: "{app}"; Flags: comparetimestamp
+; MNG / Portable Network Graphics ("animated PNG")
+Source: "bin\libmng-2.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; PCRE, Perl Compatible Regular Expressions
-Source: "bin\libpcre-1.dll"; DestDir: "{app}"; Flags: comparetimestamp
-Source: "bin\libpcre16-0.dll"; DestDir: "{app}"; Flags: comparetimestamp
+; "libpcre2-16-0.dll" is new for 0.12.0.0
+; Uclear whether "libpcre16-0.dll" is still needed; some versions of "Qt5Core.dll" seem to reference it, some not
+Source: "bin\libpcre-1.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\libpcre16-0.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\libpcre2-16-0.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; libpng, the official PNG reference library
-Source: "bin\libpng16-16.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\libpng16-16.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; libstdc++, GNU Standard C++ Library
-Source: "bin\libstdc++-6.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\libstdc++-6.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; LibTIFF, TIFF Library and Utilities
-Source: "bin\libtiff-5.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\libtiff-5.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; C++ threading support
-Source: "bin\libwinpthread-1.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\libwinpthread-1.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; zlib compression library
-Source: "bin\zlib1.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\zlib1.dll"; DestDir: "{app}"; Flags: ignoreversion
+
+; Stack protection
+Source: "bin\libssp-0.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 
 [Tasks]
@@ -214,6 +250,7 @@ var
 procedure InitializeWizard;
 var s: String;
     width: Integer;
+    blockChainDir: String;
 begin
   // Large image for the "Welcome" page, with page reconfigured
   WizardForm.WelcomeLabel1.Visible := false;
@@ -228,7 +265,7 @@ begin
   // Additional wizard page for entering a special blockchain location
   blockChainDefaultDir := ExpandConstant('{commonappdata}\bitstellite');
   s := 'The default folder to store the Stellite blockchain is ' + blockChainDefaultDir;
-  s := s + '. As this will need up to 20 GB of free space, you may want to use a folder on a different drive.';
+  s := s + '. As this will need more than 60 GB of free space, you may want to use a folder on a different drive.';
   s := s + ' If yes, specify that folder here.';
 
   BlockChainDirPage := CreateInputDirPage(wpSelectDir,
@@ -237,11 +274,17 @@ begin
     False, '');
   BlockChainDirPage.Add('');
 
-  BlockChainDirPage.Values[0] := GetPreviousData('BlockChainDir', '');
-  if BlockChainDirPage.Values[0] = '' then begin
-    // Unfortunately 'TInputDirWizardDirPage' does not allow empty field
-    BlockChainDirPage.Values[0] := blockChainDefaultDir;
+  // Evaluate proposal for the blockchain location
+  // In case of an update take the blockchain location from the actual setting in the registry
+  RegQueryStringValue(HKEY_CURRENT_USER, 'Software\monero-project\monero-core', 'blockchainDataDir', blockChainDir);
+  if blockChainDir = '' then begin
+    blockChainDir := GetPreviousData('BlockChainDir', '');
   end;
+  if blockChainDir = '' then begin
+    // Unfortunately 'TInputDirWizardDirPage' does not allow empty field, so "propose" Monero default location
+    blockChainDir := blockChainDefaultDir;
+  end;
+  BlockChainDirPage.Values[0] := blockChainDir;
 end;
 
 procedure RegisterPreviousData(PreviousDataKey: Integer);
@@ -257,6 +300,17 @@ begin
   s := BlockChainDirPage.Values[0];
   Result := s;
   // No quotes for folder name with blanks as this is never used as part of a command line
+end;
+
+function BlockChainDirOrEmpty(Param: String) : String;
+VAR s: String;
+begin
+  s := BlockChainDir('');
+  if s = blockChainDefaultDir then begin
+    // No need to add the default dir as setting
+    s := '';
+  end;
+  Result := s;
 end;
 
 function UpdateReadyMemo(Space, NewLine, MemoUserInfoInfo, MemoDirInfo, MemoTypeInfo,
@@ -308,7 +362,7 @@ begin
     s[0] := 'REM Execute the Stellite daemon and then stay with window open after it exits';
     s[1] := '"' + ExpandConstant('{app}\stellited.exe') + '" ' + DaemonFlags('');
     s[2] := 'PAUSE';
-    SaveStringsToFile(ExpandConstant('{app}\stellite-daemon.bat'), s, false); 
+    SaveStringsToFile(ExpandConstant('{app}\stellite-daemon.bat'), s, false);
   end;
 end;
 
@@ -334,7 +388,10 @@ Name: "{group}\Uninstall GUI Wallet"; Filename: "{uninstallexe}"
 ; and insists on displaying ALL icons on one single level
 Name: "{group}\Utilities\Stellite Daemon"; Filename: "{app}\stellited.exe"; Parameters: {code:DaemonFlags}
 Name: "{group}\Utilities\Read Me"; Filename: "{app}\ReadMe.htm"
-Name: "{group}\Utilities\Textual (CLI) Wallet"; Filename: "{app}\stellite-wallet-cli.exe"
+
+; CLI wallet: Needs a working directory ("Start in:") set in the icon, because with no such directory set
+; it tries to create new wallets without a path given in the probably non-writable program folder and will abort with an error
+Name: "{group}\Utilities\Textual (CLI) Wallet"; Filename: "{app}\stellite-wallet-cli.exe"; WorkingDir: "{userdocs}\Stellite\wallets"
 
 ; Icons for troubleshooting problems / testing / debugging
 ; To show that they are in some way different (not for everyday use), make them visually different
@@ -356,6 +413,6 @@ Name: "{userdesktop}\GUI Wallet"; Filename: "{app}\stellite-wallet-gui.exe"; Tas
 ; So if the wallet is used to start the daemon instead of the separate icon the wallet will pass the correct flags
 ; Side effect, mostly positive: The uninstaller will clean the registry
 Root: HKCU; Subkey: "Software\stellitecoin"; Flags: uninsdeletekeyifempty
-Root: HKCU; Subkey: "Software\stellitecoin\stellite-core"; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\stellitecoin\stellite-core"; ValueType: string; ValueName: "daemonFlags"; ValueData: {code:DaemonFlags};
+Root: HKCU; Subkey: "Software\stellitecoin\stellite"; Flags: uninsdeletekey
+Root: HKCU; Subkey: "Software\stellitecoin\stellite"; ValueType: string; ValueName: "blockchainDataDir"; ValueData: {code:BlockChainDirOrEmpty};
 

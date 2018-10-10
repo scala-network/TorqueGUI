@@ -2,7 +2,7 @@
 #include "AddressBook.h"
 #include <QDebug>
 #include <QHash>
-#include <wallet/wallet2_api.h>
+#include <wallet/api/wallet2_api.h>
 
 AddressBookModel::AddressBookModel(QObject *parent, AddressBook *addressBook)
     : QAbstractListModel(parent) , m_addressBook(addressBook)
@@ -60,7 +60,7 @@ QVariant AddressBookModel::data(const QModelIndex &index, int role) const
 
 bool AddressBookModel::deleteRow(int row)
 {
-    m_addressBook->deleteRow(row);
+    return m_addressBook->deleteRow(row);
 }
 
 int AddressBookModel::lookupPaymentID(const QString &payment_id) const

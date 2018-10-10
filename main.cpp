@@ -120,11 +120,11 @@ int main(int argc, char *argv[])
     parser.addHelpOption();
     parser.process(app);
 
-    Monero::Utils::onStartup();
+    Stellite::Utils::onStartup();
 
     // Log settings
     const QString logPath = getLogPath(parser.value(logPathOption));
-    Monero::Wallet::init(argv[0], "monero-wallet-gui", logPath.toStdString().c_str(), true);
+    Stellite::Wallet::init(argv[0], "monero-wallet-gui", logPath.toStdString().c_str(), true);
     qInstallMessageHandler(messageHandler);
 
 

@@ -36,7 +36,7 @@ QVariant AddressBookModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
-    Monero::AddressBookRow * ar = m_addressBook->getRow(index.row());
+    Stellite::AddressBookRow * ar = m_addressBook->getRow(index.row());
 
     QVariant result = "";
     switch (role) {

@@ -7,7 +7,7 @@ TEMPLATE = app
 
 QT += qml quick widgets
 
-WALLET_ROOT=$$PWD/monero
+WALLET_ROOT=$$PWD/stellite
 
 CONFIG += c++11 link_pkgconfig
 packagesExist(libpcsclite) {
@@ -18,7 +18,7 @@ packagesExist(libpcsclite) {
     QMAKE_LFLAGS += -fstack-protector -fstack-protector-strong
 }
 
-# cleaning "auto-generated" bitmonero directory on "make distclean"
+# cleaning "auto-generated" bitstellite directory on "make distclean"
 QMAKE_DISTCLEAN += -r $$WALLET_ROOT
 
 INCLUDEPATH +=  $$WALLET_ROOT/include \

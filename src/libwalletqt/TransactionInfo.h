@@ -33,8 +33,8 @@ class TransactionInfo : public QObject
 
 public:
     enum Direction {
-        Direction_In  =  Monero::TransactionInfo::Direction_In,
-        Direction_Out =  Monero::TransactionInfo::Direction_Out,
+        Direction_In  =  Stellite::TransactionInfo::Direction_In,
+        Direction_Out =  Stellite::TransactionInfo::Direction_Out,
         Direction_Both // invalid direction value, used for filtering
     };
 
@@ -65,10 +65,10 @@ public:
     //! Could be useful later when addressbook is implemented
     Q_INVOKABLE QList<Transfer*> transfers() const;
 private:
-    explicit TransactionInfo(Monero::TransactionInfo * pimpl, QObject *parent = 0);
+    explicit TransactionInfo(Stellite::TransactionInfo * pimpl, QObject *parent = 0);
 private:
     friend class TransactionHistory;
-    Monero::TransactionInfo * m_pimpl;
+    Stellite::TransactionInfo * m_pimpl;
     mutable QList<Transfer*> m_transfers;
 };
 

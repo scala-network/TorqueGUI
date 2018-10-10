@@ -12,7 +12,7 @@
 #include "UnsignedTransaction.h"
 #include "NetworkType.h"
 
-namespace Monero {
+namespace Stellite {
     class Wallet; // forward declaration
 }
 

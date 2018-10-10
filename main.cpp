@@ -124,7 +124,7 @@ int main(int argc, char *argv[])
 
     // Log settings
     const QString logPath = getLogPath(parser.value(logPathOption));
-    Stellite::Wallet::init(argv[0], "monero-wallet-gui", logPath.toStdString().c_str(), true);
+    Stellite::Wallet::init(argv[0], "stellite-wallet-gui", logPath.toStdString().c_str(), true);
     qInstallMessageHandler(messageHandler);
 
 
@@ -236,9 +236,9 @@ int main(int argc, char *argv[])
 //  backups - I reckon we save that in My Documents\Monero Accounts\ on
 //  Windows, ~/Stellite Accounts/ on nix / osx
 #if defined(Q_OS_WIN) || defined(Q_OS_IOS)
-    QStringList moneroAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation);
+    QStringList stelliteAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation);
 #else
-    QStringList moneroAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::HomeLocation);
+    QStringList stelliteAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::HomeLocation);
 #endif
 
     engine.rootContext()->setContextProperty("isWindows", isWindows);
@@ -254,10 +254,10 @@ int main(int argc, char *argv[])
 #endif
 
 
-    if (!moneroAccountsRootDir.empty())
+    if (!stelliteAccountsRootDir.empty())
     {
-        QString moneroAccountsDir = moneroAccountsRootDir.at(0) + "/Stellite/wallets";
-        engine.rootContext()->setContextProperty("stelliteAccountsDir", moneroAccountsDir);
+        QString stelliteAccountsDir = stelliteAccountsRootDir.at(0) + "/Stellite/wallets";
+        engine.rootContext()->setContextProperty("stelliteAccountsDir", stelliteAccountsDir);
     }
 
 

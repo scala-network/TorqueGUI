@@ -52,23 +52,23 @@ Source: "ReadMe.htm"; DestDir: "{app}"; Flags: ignoreversion
 Source: "FinishImage.bmp"; Flags: dontcopy
 
 ; Monero GUI wallet
-Source: "bin\monero-wallet-gui.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\stellite-wallet-gui.exe"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Monero GUI wallet log file
 ; The GUI wallet does not have the "--log-file" command-line option of the CLI wallet and insists to put the .log beside the .exe
 ; so pre-create the file and give the necessary permissions to the wallet to write into it
 ; Flag is "onlyifdoesntexist": We do not want to overwrite an already existing log
-Source: "monero-wallet-gui.log"; DestDir: "{app}"; Flags: onlyifdoesntexist; Permissions: users-modify
+Source: "stellite-wallet-gui.log"; DestDir: "{app}"; Flags: onlyifdoesntexist; Permissions: users-modify
 
 ; Monero CLI wallet
-Source: "bin\monero-wallet-cli.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\stellite-wallet-cli.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\monero-gen-trusted-multisig.exe"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Monero wallet RPC interface implementation
 Source: "bin\monero-wallet-rpc.exe"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Monero daemon
-Source: "bin\monerod.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\stellited.exe"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Monero daemon wrapped in a batch file that stops before the text window closes, to see any error messages
 Source: "monero-daemon.bat"; DestDir: "{app}"; Flags: ignoreversion;
@@ -76,7 +76,7 @@ Source: "monero-daemon.bat"; DestDir: "{app}"; Flags: ignoreversion;
 ; Monero blockchain utilities
 Source: "bin\monero-blockchain-export.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\monero-blockchain-import.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\monero-blockchain-blackball.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\stellite-blockchain-blackball.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\monero-blockchain-usage.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\monero-blockchain-import.exe"; DestDir: "{app}"; Flags: ignoreversion
 

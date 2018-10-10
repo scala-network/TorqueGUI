@@ -1342,9 +1342,9 @@ Stara datoteka predpomnilnika denarnice bo preimenovana in se jo lahko obnovi po
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="113"/>
-        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-blackball tool to create a list of known spent outputs.&lt;br&gt;</source>
+        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the stellite.cash website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the stellite-blockchain-blackball tool to create a list of known spent outputs.&lt;br&gt;</source>
         <translation>Da lahko v Monero transakciji zakrijete kateri inputi so plačani, tretja oseba ne sme vedeti, kateri inputi v obroču so že plačani. To bi zmanjšalo varnost, ki jo zagotavljajo obročni podpisi. Če je znano, da so vsi inputi razen enega izplačani, potem je zadnji input, ki se ga izplačuje očiten. S tem so obročni podpisi, eden izmed treh stebrov varne zasebnosti Monera, neefektivni.
-        Da se transakcije izognejo takšnim inputom, se uporablja lista znano že zapravljenih inputov, ki se jih ne uporablja v novih transakcijah. Takšno listo ureja Monero projekt in je dobavljiva na getmonero.org. To listo lahko uvoziš tukaj.&lt;br&gt; Alternativno lahko sam preiščeš blockchain (vključno z Monero kloni, ki si delijo ključe) z uporabo orodja monero-blockchain-blackball, ki ustvari listo znanih, že zapravljenih outputov.&lt;br&gt;</translation>
+        Da se transakcije izognejo takšnim inputom, se uporablja lista znano že zapravljenih inputov, ki se jih ne uporablja v novih transakcijah. Takšno listo ureja Monero projekt in je dobavljiva na stellite.cash. To listo lahko uvoziš tukaj.&lt;br&gt; Alternativno lahko sam preiščeš blockchain (vključno z Monero kloni, ki si delijo ključe) z uporabo orodja stellite-blockchain-blackball, ki ustvari listo znanih, že zapravljenih outputov.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="134"/>
@@ -2705,8 +2705,8 @@ Spending address index: </source>
     </message>
     <message>
         <location filename="../main.qml" line="873"/>
-        <source>This address received %1 monero, with %2 confirmation(s).</source>
-        <translation>Ta naslov je prejel %1 monerov, s %2 potrditev.</translation>
+        <source>This address received %1 stellite, with %2 confirmation(s).</source>
+        <translation>Ta naslov je prejel %1 stellitev, s %2 potrditev.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="884"/>
@@ -2780,8 +2780,8 @@ Spending address index: </source>
     </message>
     <message>
         <location filename="../main.qml" line="1789"/>
-        <source>New version of monero-wallet-gui is available: %1&lt;br&gt;%2</source>
-        <translation>Na voljo je nova različica grafičnega vmesnika (monero-wallet-gui): %1&lt;br&gt;%2</translation>
+        <source>New version of stellite-wallet-gui is available: %1&lt;br&gt;%2</source>
+        <translation>Na voljo je nova različica grafičnega vmesnika (stellite-wallet-gui): %1&lt;br&gt;%2</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1821"/>
@@ -2822,7 +2822,7 @@ Spending address index: </source>
     </message>
     <message>
         <location filename="../main.qml" line="870"/>
-        <source>This address received %1 monero, but the transaction is not yet mined</source>
+        <source>This address received %1 stellite, but the transaction is not yet mined</source>
         <translation>Ta naslov je prejel %1 monera(ov), ampak transakcija še ni v bloku</translation>
     </message>
     <message>

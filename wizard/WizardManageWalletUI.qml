@@ -373,7 +373,7 @@ ColumnLayout {
             Layout.maximumWidth: 600 * scaleRatio
             Layout.minimumWidth: 200 * scaleRatio
             id: fileUrlInput
-            text: moneroAccountsDir + "/"
+            text: stelliteAccountsDir + "/"
 
             // workaround for the bug "filechooser only opens once"
             MouseArea {

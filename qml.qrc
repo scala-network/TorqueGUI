@@ -169,10 +169,10 @@
         <file>images/minimize.png</file>
         <file>images/fullscreen.png</file>
         <file>images/close.png</file>
-        <file>images/moneroLogo_white.png</file>
-        <file>images/moneroIcon-trans28x28.png</file>
-        <file>images/moneroIcon-trans84x84.png</file>
-        <file>images/moneroIcon-trans56x56.png</file>
+        <file>images/stelliteLogo_white.png</file>
+        <file>images/stelliteIcon-trans28x28.png</file>
+        <file>images/stelliteIcon-trans84x84.png</file>
+        <file>images/stelliteIcon-trans56x56.png</file>
         <file>images/question.png</file>
         <file>images/expand.png</file>
         <file>images/titlebarGradient.jpg</file>
@@ -188,7 +188,7 @@
         <file>components/InlineButton.qml</file>
         <file>images/lightning.png</file>
         <file>images/leftPanelBg.jpg</file>
-        <file>images/moneroIcon-28x28.png</file>
+        <file>images/stelliteIcon-28x28.png</file>
         <file>images/lightning-white.png</file>
         <file>images/middlePanelBg.jpg</file>
         <file>components/InputMulti.qml</file>

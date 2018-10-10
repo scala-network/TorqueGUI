@@ -2,4 +2,4 @@
 
 set QMLSCENE_DEVICE=softwarecontext
 
-start /b monero-wallet-gui.exe
+start /b stellite-wallet-gui.exe

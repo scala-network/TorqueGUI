@@ -34,7 +34,7 @@ DaemonManager *DaemonManager::instance(const QStringList *args)
 
 bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const QString &dataDir, const QString &bootstrapNodeAddress)
 {
-    // prepare command line arguments and pass to monerod
+    // prepare command line arguments and pass to stellited
     QStringList arguments;
 
     // Start daemon with --detach flag on non-windows platforms
@@ -214,7 +214,7 @@ bool DaemonManager::running(NetworkType::Type nettype) const
     QString status;
     sendCommand("status", nettype, status);
     qDebug() << status;
-    // `./monerod status` returns BUSY when syncing.
+    // `./stellited status` returns BUSY when syncing.
     // Treat busy as connected, until fixed upstream.
     if (status.contains("Height:") || status.contains("BUSY") ) {
         return true;

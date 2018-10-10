@@ -544,7 +544,7 @@ Rectangle {
     FileDialog {
         id: signTxDialog
         title: qsTr("Please choose a file") + translationManager.emptyString
-        folder: "file://" +moneroAccountsDir
+        folder: "file://" +stelliteAccountsDir
         nameFilters: [ "Unsigned transfers (*)"]
 
         onAccepted: {
@@ -605,7 +605,7 @@ Rectangle {
     FileDialog {
         id: submitTxDialog
         title: qsTr("Please choose a file") + translationManager.emptyString
-        folder: "file://" +moneroAccountsDir
+        folder: "file://" +stelliteAccountsDir
         nameFilters: [ "signed transfers (*)"]
 
         onAccepted: {

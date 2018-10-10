@@ -7,7 +7,7 @@
 
 #include <wallet/api/wallet2_api.h>
 
-//namespace Monero {
+//namespace Stellite {
 //class PendingTransaction;
 //}
 

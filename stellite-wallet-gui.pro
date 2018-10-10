@@ -298,7 +298,7 @@ linux {
             -Wl,-Bdynamic \
             -lGL
     }
-    # currently monero has an issue with "static" build and linunwind-dev,
+    # currently stellite has an issue with "static" build and linunwind-dev,
     # so we link libunwind-dev only for non-Ubuntu distros
     CONFIG(libunwind_off) {
         message(Building without libunwind)
@@ -338,7 +338,7 @@ macx {
 
 
 # translation stuff
-TRANSLATIONS = $$files($$PWD/translations/monero-core_*.ts)
+TRANSLATIONS = $$files($$PWD/translations/stellite-core_*.ts)
 
 CONFIG(release, debug|release) {
     DESTDIR = release/bin
@@ -433,7 +433,7 @@ linux:!android {
 }
 
 android{
-    deploy.commands += make install INSTALL_ROOT=$$DESTDIR && androiddeployqt --input android-libmonero-wallet-gui.so-deployment-settings.json --output $$DESTDIR --deployment bundled --android-platform android-21 --jdk /usr/lib/jvm/java-8-openjdk-amd64 -qmldir=$$PWD
+    deploy.commands += make install INSTALL_ROOT=$$DESTDIR && androiddeployqt --input android-libstellite-wallet-gui.so-deployment-settings.json --output $$DESTDIR --deployment bundled --android-platform android-21 --jdk /usr/lib/jvm/java-8-openjdk-amd64 -qmldir=$$PWD
 }
 
 
@@ -443,7 +443,7 @@ OTHER_FILES += \
 
 DISTFILES += \
     notes.txt \
-    monero/src/wallet/CMakeLists.txt \
+    stellite/src/wallet/CMakeLists.txt \
     components/MobileHeader.qml
 
 

@@ -1343,8 +1343,8 @@ O ficheiro de cache antigo será renomeado e poderá ser restaurado mais tarde.
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="113"/>
-        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-blackball tool to create a list of known spent outputs.&lt;br&gt;</source>
-        <translation>De forma a esconder qual é a verdadeira transação que está a ser gasta, Monero utiliza varias transacções selecionadas automaticamente na mesma transação, uma terceira pessoa não deve conseguir distinguir qual é a transação verdadeira das falsas. Caso o consiga fazer irá enfraquecer a a protecção dada pelas ring signatures. Se todas as transacções excepto uma forem conhecidas por já terem sido gastas, então torna-se evidente qual é a transação que está a ser gasta e a utilização de ring signatures fica sem efeito, sendo as ring signatures uma das 3 camadas que permite a protecção de privacidade em Monero.&lt;br&gt;Para ajudar a evitar essas transacções, é-lhe fornecida uma lista com transacções já conhecidas como gastas e assim pode evitar usa-las numa nova transação. Esta lista é mantida pelo Monero Project e está disponivel no site oficinal getmonero.org, e pode importar essa lista para aqui.&lt;br&gt;Em alternativa, pode utilizar a ferramenta monero-blockchain-blackball e criar essa mesma lista de transacções conhecidas como gastas.</translation>
+        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the stellite.cash website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the stellite-blockchain-blackball tool to create a list of known spent outputs.&lt;br&gt;</source>
+        <translation>De forma a esconder qual é a verdadeira transação que está a ser gasta, Monero utiliza varias transacções selecionadas automaticamente na mesma transação, uma terceira pessoa não deve conseguir distinguir qual é a transação verdadeira das falsas. Caso o consiga fazer irá enfraquecer a a protecção dada pelas ring signatures. Se todas as transacções excepto uma forem conhecidas por já terem sido gastas, então torna-se evidente qual é a transação que está a ser gasta e a utilização de ring signatures fica sem efeito, sendo as ring signatures uma das 3 camadas que permite a protecção de privacidade em Monero.&lt;br&gt;Para ajudar a evitar essas transacções, é-lhe fornecida uma lista com transacções já conhecidas como gastas e assim pode evitar usa-las numa nova transação. Esta lista é mantida pelo Monero Project e está disponivel no site oficinal stellite.cash, e pode importar essa lista para aqui.&lt;br&gt;Em alternativa, pode utilizar a ferramenta stellite-blockchain-blackball e criar essa mesma lista de transacções conhecidas como gastas.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="134"/>
@@ -2721,8 +2721,8 @@ Spending address index: </source>
     </message>
     <message>
         <location filename="../main.qml" line="873"/>
-        <source>This address received %1 monero, with %2 confirmation(s).</source>
-        <translation>Este endereço recebeu %1 monero, com %2 confirmação(ões)</translation>
+        <source>This address received %1 stellite, with %2 confirmation(s).</source>
+        <translation>Este endereço recebeu %1 stellite, com %2 confirmação(ões)</translation>
     </message>
     <message>
         <location filename="../main.qml" line="884"/>
@@ -2796,7 +2796,7 @@ Spending address index: </source>
     </message>
     <message>
         <location filename="../main.qml" line="1789"/>
-        <source>New version of monero-wallet-gui is available: %1&lt;br&gt;%2</source>
+        <source>New version of stellite-wallet-gui is available: %1&lt;br&gt;%2</source>
         <translation>Nova versão da GUI do Monero disponível: %1&lt;br&gt;%2</translation>
     </message>
     <message>
@@ -2838,8 +2838,8 @@ Spending address index: </source>
     </message>
     <message>
         <location filename="../main.qml" line="870"/>
-        <source>This address received %1 monero, but the transaction is not yet mined</source>
-        <translation>Este endereço recebeu %1 monero, porém a transação ainda não foi minerada</translation>
+        <source>This address received %1 stellite, but the transaction is not yet mined</source>
+        <translation>Este endereço recebeu %1 stellite, porém a transação ainda não foi minerada</translation>
     </message>
     <message>
         <location filename="../main.qml" line="877"/>

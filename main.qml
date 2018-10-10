@@ -240,7 +240,7 @@ ApplicationWindow {
         }  else {
             var wallet_path = walletPath();
             if(isIOS)
-                wallet_path = moneroAccountsDir + wallet_path;
+                wallet_path = stelliteAccountsDir + wallet_path;
             // console.log("opening wallet at: ", wallet_path, "with password: ", appWindow.walletPassword);
             console.log("opening wallet at: ", wallet_path, ", network type: ", persistentSettings.nettype == NetworkType.MAINNET ? "mainnet" : persistentSettings.nettype == NetworkType.TESTNET ? "testnet" : "stagenet");
             walletManager.openWalletAsync(wallet_path, walletPassword,
@@ -545,7 +545,7 @@ ApplicationWindow {
         currentWallet.startRefresh();
         daemonRunning = false;
         informationPopup.title = qsTr("Daemon failed to start") + translationManager.emptyString;
-        informationPopup.text  = qsTr("Please check your wallet and daemon log for errors. You can also try to start %1 manually.").arg((isWindows)? "monerod.exe" : "monerod")
+        informationPopup.text  = qsTr("Please check your wallet and daemon log for errors. You can also try to start %1 manually.").arg((isWindows)? "stellited.exe" : "stellited")
         informationPopup.icon  = StandardIcon.Critical
         informationPopup.onCloseCallback = null
         informationPopup.open();
@@ -591,7 +591,7 @@ ApplicationWindow {
     function walletsFound() {
         if (persistentSettings.wallet_path.length > 0) {
             if(isIOS)
-                return walletManager.walletExists(moneroAccountsDir + persistentSettings.wallet_path);
+                return walletManager.walletExists(stelliteAccountsDir + persistentSettings.wallet_path);
             else
                 return walletManager.walletExists(persistentSettings.wallet_path);
         }
@@ -869,10 +869,10 @@ ApplicationWindow {
             } else if (received > 0) {
                 received = received / 1e12
                 if (in_pool) {
-                    informationPopup.text = qsTr("This address received %1 monero, but the transaction is not yet mined").arg(received);
+                    informationPopup.text = qsTr("This address received %1 stellite, but the transaction is not yet mined").arg(received);
                 }
                 else {
-                    informationPopup.text = qsTr("This address received %1 monero, with %2 confirmation(s).").arg(received).arg(confirmations);
+                    informationPopup.text = qsTr("This address received %1 stellite, with %2 confirmation(s).").arg(received).arg(confirmations);
                 }
             }
             else {
@@ -1102,7 +1102,7 @@ ApplicationWindow {
     FileDialog {
         id: fileDialog
         title: "Please choose a file"
-        folder: "file://" +moneroAccountsDir
+        folder: "file://" +stelliteAccountsDir
         nameFilters: [ "Wallet files (*.keys)"]
         sidebarVisible: false
 
@@ -1110,9 +1110,9 @@ ApplicationWindow {
         onAccepted: {
             persistentSettings.wallet_path = walletManager.urlToLocalPath(fileDialog.fileUrl)
             if(isIOS)
-                persistentSettings.wallet_path = persistentSettings.wallet_path.replace(moneroAccountsDir,"")
+                persistentSettings.wallet_path = persistentSettings.wallet_path.replace(stelliteAccountsDir,"")
             console.log("ÖPPPPNA")
-            console.log(moneroAccountsDir)
+            console.log(stelliteAccountsDir)
             console.log(fileDialog.fileUrl)
             console.log(persistentSettings.wallet_path)
             passwordDialog.onAcceptedCallback = function() {

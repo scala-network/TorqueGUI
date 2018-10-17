@@ -119,6 +119,7 @@ LIBS += -L$$WALLET_ROOT/lib \
         -lepee \
         -lunbound \
         -leasylogging \
+	-lsodium
 }
 
 android {
@@ -128,7 +129,8 @@ android {
         -llmdb \
         -lepee \
         -lunbound \
-        -leasylogging
+        -leasylogging \
+	-lsodium
 }
 
 
@@ -147,7 +149,8 @@ ios {
         -llmdb \
         -lepee \
         -lunbound \
-        -leasylogging
+        -leasylogging \
+	-lsodium
 
     LIBS+= \
         -L$$PWD/../OpenSSL-for-iPhone/lib \
@@ -290,6 +293,7 @@ linux {
         -lboost_chrono \
         -lboost_program_options \
         -lssl \
+	-lsodium \
         -llmdb \
         -lcrypto
 
@@ -329,6 +333,7 @@ macx {
         -lboost_chrono \
         -lboost_program_options \
         -lssl \
+	-lsodium \
         -lcrypto \
         -ldl
     LIBS+= -framework PCSC

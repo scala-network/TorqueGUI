@@ -1,6 +1,6 @@
 #!/bin/bash
 MONERO_URL=https://github.com/stellitecoin/stellite.git
-MONERO_BRANCH=V5HT_9T
+MONERO_BRANCH=V5SR
 
 pushd $(pwd)
 ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -17,7 +17,7 @@ if [ ! -d $MONERO_DIR/src ]; then
 fi
 git submodule update --remote
 git -C $MONERO_DIR fetch
-git -C $MONERO_DIR checkout V5HT_9T
+git -C $MONERO_DIR checkout V5SR
 
 # get stellite core tag
 get_tag

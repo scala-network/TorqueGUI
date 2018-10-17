@@ -738,10 +738,12 @@ QString Wallet::getDaemonLogPath() const
     return QString::fromStdString(m_walletImpl->getDefaultDataDir()) + "/bitstellite.log";
 }
 
+
 bool Wallet::blackballOutput(const QString &amount, const QString &offset)
 {
     return m_walletImpl->blackballOutput(amount.toStdString(), offset.toStdString());
 }
+
 
 bool Wallet::blackballOutputs(const QList<QString> &pubkeys, bool add)
 {
@@ -773,10 +775,12 @@ bool Wallet::blackballOutputs(const QString &filename, bool add)
     }
 }
 
-bool Wallet::unblackballOutput(const QString &amount, const QString &offset)
+
+bool Wallet::unblackballOutput(const QString &amount, const QString &offset) 
 {
-    return m_walletImpl->unblackballOutput(amount.toStdString(), offset.toStdString());
+    return m_walletImpl->unblackballOutput(amount.toStdString(), offset.toStdString()); 
 }
+
 
 QString Wallet::getRing(const QString &key_image)
 {

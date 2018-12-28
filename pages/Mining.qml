@@ -214,7 +214,7 @@ Rectangle {
                 id: statusLabel
                 color: MoneroComponents.Style.defaultFontColor
                 text: qsTr("Status") + translationManager.emptyString
-                fontSize: 10 * scaleRatio
+                fontSize: 16 * scaleRatio
                 Layout.preferredWidth: 120 * scaleRatio
             }
 

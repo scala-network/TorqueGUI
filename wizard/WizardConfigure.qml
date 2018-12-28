@@ -76,7 +76,7 @@ Item {
         wrapMode: Text.Wrap
         //renderType: Text.NativeRendering
         color: "#3F3F3F"
-        text: qsTr("We’re almost there - let’s just configure some Monero preferences") + translationManager.emptyString
+        text: qsTr("We’re almost there - let’s just configure some Stellite preferences") + translationManager.emptyString
     }
 
     Column {
@@ -166,8 +166,8 @@ Item {
                 font.pixelSize: 15
                 color: "#4A4646"
                 wrapMode: Text.Wrap
-                text: qsTr("Mining secures the Monero network, and also pays a small reward for the work done. This option " +
-                           "will let Monero mine when your computer is on mains power and is idle. It will stop mining when you continue working.")
+                text: qsTr("Mining secures the Stellite network, and also pays a small reward for the work done. This option " +
+                           "will let Stellite mine when your computer is on mains power and is idle. It will stop mining when you continue working.")
                         + translationManager.emptyString
             }
         }

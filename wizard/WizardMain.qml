@@ -380,7 +380,7 @@ ColumnLayout {
         id: sendButton
         Layout.alignment: Qt.AlignBottom | Qt.AlignRight
         Layout.margins:  (isMobile) ? 20 * scaleRatio : 50 * scaleRatio
-        text: qsTr("USE MONERO") + translationManager.emptyString
+        text: qsTr("Use Stellite") + translationManager.emptyString
         visible: parent.paths[currentPath][currentPage] === finishPage
         onClicked: {
             wizard.applySettings();

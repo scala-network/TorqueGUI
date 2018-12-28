@@ -602,7 +602,7 @@ Rectangle {
                 informationPopup.open();
             } else {
                 informationPopup.title = qsTr("Information") + translationManager.emptyString
-                informationPopup.text  = qsTr("Monero sent successfully") + translationManager.emptyString
+                informationPopup.text  = qsTr("Stellite sent successfully") + translationManager.emptyString
                 informationPopup.icon  = StandardIcon.Information
                 informationPopup.onCloseCallback = null
                 informationPopup.open();

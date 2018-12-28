@@ -13,7 +13,6 @@ CONFIG += c++11 link_pkgconfig
 packagesExist(hidapi-libusb) {
     PKGCONFIG += hidapi-libusb
 }
-
 !win32 {
     QMAKE_CXXFLAGS += -fPIC -fstack-protector -fstack-protector-strong
     QMAKE_LFLAGS += -fstack-protector -fstack-protector-strong
@@ -102,8 +101,6 @@ SOURCES = *.qml \
           wizard/*js
 }
 
-# Linker flags required by Trezor
-TREZOR_LINKER = $$cat($$WALLET_ROOT/lib/trezor_link_flags.txt)
 
 ios:armv7 {
     message("target is armv7")
@@ -121,8 +118,8 @@ LIBS += -L$$WALLET_ROOT/lib \
         -llmdb \
         -lepee \
         -lunbound \
-        -leasylogging \
-	    -lsodium
+        -lsodium \
+        -leasylogging
 }
 
 android {
@@ -132,8 +129,8 @@ android {
         -llmdb \
         -lepee \
         -lunbound \
-        -leasylogging \
-	    -lsodium
+        -lsodium \
+        -leasylogging
 }
 
 
@@ -152,8 +149,8 @@ ios {
         -llmdb \
         -lepee \
         -lunbound \
-        -leasylogging \
-	    -lsodium
+        -lsodium \
+        -leasylogging
 
     LIBS+= \
         -L$$PWD/../OpenSSL-for-iPhone/lib \
@@ -261,7 +258,7 @@ win32 {
         -lIphlpapi \
         -lcrypt32 \
         -lhidapi \
-        -lgdi32 $$TREZOR_LINKER
+        -lgdi32
     
     !contains(QMAKE_TARGET.arch, x86_64) {
         message("Target is 32bit")
@@ -282,10 +279,10 @@ linux {
         LIBS+= -Wl,-Bstatic    
         QMAKE_LFLAGS += -static-libgcc -static-libstdc++
    #     contains(QT_ARCH, x86_64) {
-	            LIBS+= -lunbound \
-	                   -lusb-1.0 \
-	                   -lhidapi-hidraw \
-	                   -ludev
+            LIBS+= -lunbound \
+                   -lusb-1.0 \
+                   -lhidapi-hidraw \
+                   -ludev
    #     }
     } else {
       # On some distro's we need to add dynload
@@ -302,10 +299,10 @@ linux {
         -lboost_chrono \
         -lboost_program_options \
         -lssl \
-	    -lsodium \
         -llmdb \
+        -lsodium \
         -lhidapi-libusb \
-        -lcrypto $$TREZOR_LINKER
+        -lcrypto
 
     if(!android) {
         LIBS+= \
@@ -344,9 +341,9 @@ macx {
         -lboost_chrono \
         -lboost_program_options \
         -lssl \
-	    -lsodium \
+        -lsodium \
         -lcrypto \
-        -ldl $$TREZOR_LINKER
+        -ldl
 
     QMAKE_LFLAGS += -pie
 }

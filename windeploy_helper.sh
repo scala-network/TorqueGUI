@@ -8,6 +8,9 @@ TARGET=$1
 
 BUILD_TYPE=$2
 
+
+
+
 if [[ -z $BUILD_TYPE ]]; then
 	BUILD_TYPE=Release
 fi

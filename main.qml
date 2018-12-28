@@ -1,5 +1,4 @@
 // Copyright (c) 2014-2018, The Monero Project
-// Copyright (c) 2014-2015, The Stellite Project
 //
 // All rights reserved.
 //
@@ -41,7 +40,7 @@ import moneroComponents.NetworkType 1.0
 
 import "components"
 import "wizard"
-import "../js/Utils.js" as Utils
+import "js/Utils.js" as Utils
 import "js/Windows.js" as Windows
 
 ApplicationWindow {
@@ -49,6 +48,7 @@ ApplicationWindow {
     title: "Stellite"
 
     property var currentItem
+    property bool hideBalanceForced: false
     property bool whatIsEnable: false
     property bool ctrlPressed: false
     property bool rightPanelExpanded: false
@@ -72,11 +72,13 @@ ApplicationWindow {
     property bool qrScannerEnabled: (typeof builtWithScanner != "undefined") && builtWithScanner
     property int blocksToSync: 1
     property var isMobile: (appWindow.width > 700 && !isAndroid) ? false : true
+    property bool isMining: false
     property var cameraUi
     property bool remoteNodeConnected: false
     property bool androidCloseTapped: false;
+    property int userLastActive;  // epoch
     // Default daemon addresses
-    readonly property string localDaemonAddress : persistentSettings.nettype == NetworkType.MAINNET ? "localhost:20189" : persistentSettings.nettype == NetworkType.TESTNET ? "localhost:30189" : "localhost:40189"
+    readonly property string localDaemonAddress : persistentSettings.nettype == NetworkType.MAINNET ? "localhost:20189" : persistentSettings.nettype == NetworkType.TESTNET ? "localhost:28081" : "localhost:38081"
     property string currentDaemonAddress;
     property bool startLocalNodeCancelled: false
     property int estimatedBlockchainSize: 50 // GB
@@ -219,6 +221,8 @@ ApplicationWindow {
         // Local daemon settings
         walletManager.setDaemonAddress(localDaemonAddress)
 
+        // enable user inactivity timer
+        userInActivityTimer.running = true;
 
         // wallet already opened with wizard, we just need to initialize it
         if (typeof wizard.m_wallet !== 'undefined') {
@@ -244,7 +248,7 @@ ApplicationWindow {
             // console.log("opening wallet at: ", wallet_path, "with password: ", appWindow.walletPassword);
             console.log("opening wallet at: ", wallet_path, ", network type: ", persistentSettings.nettype == NetworkType.MAINNET ? "mainnet" : persistentSettings.nettype == NetworkType.TESTNET ? "testnet" : "stagenet");
             walletManager.openWalletAsync(wallet_path, walletPassword,
-                                              persistentSettings.nettype);
+                                              persistentSettings.nettype, persistentSettings.kdfRounds);
         }
 
         // Hide titlebar based on persistentSettings.customDecorations
@@ -356,8 +360,18 @@ ApplicationWindow {
     function updateBalance() {
         if (!currentWallet)
             return;
-        middlePanel.unlockedBalanceText = leftPanel.unlockedBalanceText =  middlePanel.state === "Receive" ? qsTr("HIDDEN") : walletManager.displayAmount(currentWallet.unlockedBalance(currentWallet.currentSubaddressAccount));
-        middlePanel.balanceText = leftPanel.balanceText = middlePanel.state === "Receive" ? qsTr("HIDDEN") : walletManager.displayAmount(currentWallet.balance(currentWallet.currentSubaddressAccount));
+
+        var balance_unlocked = qsTr("HIDDEN");
+        var balance = qsTr("HIDDEN");
+        if(!hideBalanceForced && !persistentSettings.hideBalance){
+            balance_unlocked = walletManager.displayAmount(currentWallet.unlockedBalance(currentWallet.currentSubaddressAccount));
+            balance = walletManager.displayAmount(currentWallet.balance(currentWallet.currentSubaddressAccount));
+        }
+
+        middlePanel.unlockedBalanceText = balance_unlocked;
+        leftPanel.unlockedBalanceText = balance_unlocked;
+        middlePanel.balanceText = balance;
+        leftPanel.balanceText = balance;
     }
 
     function onWalletConnectionStatusChanged(status){
@@ -398,15 +412,9 @@ ApplicationWindow {
             }
             // opening with password but password doesn't match
             console.error("Error opening wallet with password: ", wallet.errorString);
-            informationPopup.title  = qsTr("Error") + translationManager.emptyString;
-            informationPopup.text = qsTr("Couldn't open wallet: ") + wallet.errorString;
-            informationPopup.icon = StandardIcon.Critical
+            passwordDialog.showError(qsTr("Couldn't open wallet: ") + wallet.errorString);
             console.log("closing wallet async : " + wallet.address)
             closeWallet();
-            informationPopup.open()
-            informationPopup.onCloseCallback = function() {
-                passwordDialog.open(walletName)
-            }
             return;
         }
 
@@ -636,9 +644,6 @@ ApplicationWindow {
             transactionConfirmationPopup.text +=  qsTr("\n\nAmount: ") + walletManager.displayAmount(transaction.amount);
             transactionConfirmationPopup.text +=  qsTr("\nFee: ") + walletManager.displayAmount(transaction.fee);
             transactionConfirmationPopup.text +=  qsTr("\nRingsize: ") + (mixinCount + 1);
-            if(mixinCount !== 6){
-                transactionConfirmationPopup.text +=  qsTr("\n\nWARNING: non default ring size, which may harm your privacy. Default of 7 is recommended.");
-            }
             transactionConfirmationPopup.text +=  qsTr("\n\nNumber of transactions: ") + transaction.txCount
             transactionConfirmationPopup.text +=  (transactionDescription === "" ? "" : (qsTr("\nDescription: ") + transactionDescription))
             for (var i = 0; i < transaction.subaddrIndices.length; ++i){
@@ -923,6 +928,7 @@ ApplicationWindow {
 
     // close wallet and show wizard
     function showWizard(){
+        clearMoneroCardLabelText();
         walletInitialized = false;
         closeWallet();
         currentWallet = undefined;
@@ -930,6 +936,8 @@ ApplicationWindow {
         rootItem.state = "wizard"
         // reset balance
         leftPanel.balanceText = leftPanel.unlockedBalanceText = walletManager.displayAmount(0);
+        // disable inactivity timer
+        userInActivityTimer.running = false;
     }
 
     function hideMenu() {
@@ -1017,7 +1025,7 @@ ApplicationWindow {
         property bool   allow_background_mining : false
         property bool   miningIgnoreBattery : true
         property var    nettype: NetworkType.MAINNET
-        property string daemon_address: nettype == NetworkType.TESTNET ? "localhost:28081" : nettype == NetworkType.STAGENET ? "localhost:38081" : "localhost:18081"
+        property string daemon_address: nettype == NetworkType.TESTNET ? "localhost:28081" : nettype == NetworkType.STAGENET ? "localhost:38081" : "localhost:20189"
         property string payment_id
         property int    restore_height : 0
         property bool   is_recovering : false
@@ -1029,6 +1037,7 @@ ApplicationWindow {
         property string daemonUsername: ""
         property string daemonPassword: ""
         property bool transferShowAdvanced: false
+        property bool receiveShowAdvanced: false
         property string blockchainDataDir: ""
         property bool useRemoteNode: false
         property string remoteNodeAddress: ""
@@ -1036,6 +1045,10 @@ ApplicationWindow {
         property bool segregatePreForkOutputs: true
         property bool keyReuseMitigation2: true
         property int segregationHeight: 0
+        property int kdfRounds: 1
+        property bool hideBalance: false
+        property bool lockOnUserInActivity: true
+        property int lockOnUserInActivityInterval: 10  // minutes
     }
 
     // Information dialog
@@ -1068,12 +1081,7 @@ ApplicationWindow {
                         handleTransactionConfirmed()
                     }
                 } else {
-                    informationPopup.title  = qsTr("Error") + translationManager.emptyString;
-                    informationPopup.text = qsTr("Wrong password");
-                    informationPopup.open()
-                    informationPopup.onCloseCallback = function() {
-                        passwordDialog.open()
-                    }
+                    passwordDialog.showError(qsTr("Wrong password"));
                 }
             }
             passwordDialog.onRejectedCallback = null;
@@ -1244,6 +1252,7 @@ ApplicationWindow {
     DaemonManagerDialog {
         id: daemonManagerDialog
         onRejected: {
+            middlePanel.settingsView.settingsStateViewState = "Node";
             loadPage("Settings");
             startLocalNodeCancelled = true
         }
@@ -1276,11 +1285,13 @@ ApplicationWindow {
                 PropertyChanges { target: appWindow; width: (screenWidth < 930 || isAndroid || isIOS)? screenWidth : 930; }
                 PropertyChanges { target: appWindow; height: maxWindowHeight; }
                 PropertyChanges { target: resizeArea; visible: true }
-                PropertyChanges { target: titleBar; showMaximizeButton: false }
+                PropertyChanges { target: titleBar; showMaximizeButton: true }
 //                PropertyChanges { target: frameArea; blocked: true }
-                PropertyChanges { target: titleBar; visible: false }
+                PropertyChanges { target: titleBar; visible: true }
                 PropertyChanges { target: titleBar; y: 0 }
-                PropertyChanges { target: titleBar; title: qsTr("Program setup wizard") + translationManager.emptyString }
+                PropertyChanges { target: titleBar; showMoneroLogo: false }
+                PropertyChanges { target: titleBar; titleBarGradientImageOpacity: 0.2 }
+                PropertyChanges { target: titleBar; small: true }
                 PropertyChanges { target: mobileHeader; visible: false }
             }, State {
                 name: "normal"
@@ -1562,6 +1573,7 @@ ApplicationWindow {
         property int minHeight: 400
         MouseArea {
             id: resizeArea
+            enabled: persistentSettings.customDecorations
             hoverEnabled: true
             anchors.right: parent.right
             anchors.bottom: parent.bottom
@@ -1575,6 +1587,7 @@ ApplicationWindow {
 
             Image {
                 anchors.centerIn: parent
+                visible: persistentSettings.customDecorations
                 source: parent.containsMouse || parent.pressed ? "images/resizeHovered.png" :
                                                                  "images/resize.png"
             }
@@ -1692,6 +1705,12 @@ ApplicationWindow {
         repeat: false
         onTriggered: resetAndroidClose()
         triggeredOnStart: false
+    }
+
+    Timer {
+        id: userInActivityTimer
+        interval: 2000; running: false; repeat: true
+        onTriggered: checkInUserActivity()
     }
 
     Rectangle {
@@ -1813,6 +1832,38 @@ ApplicationWindow {
             middlePanel.focus = true
             middlePanel.focus = false
         }
+    }
+
+    // reset label text. othewise potential privacy leak showing unlock time when switching wallets
+    function clearMoneroCardLabelText(){
+        leftPanel.minutesToUnlockTxt = qsTr("Unlocked balance")
+        leftPanel.balanceLabelText = qsTr("Balance")
+    }
+
+    function userActivity() {
+        // register user activity
+        var epoch = Math.floor((new Date).getTime()/1000);
+        appWindow.userLastActive = epoch;
+    }
+
+    function checkInUserActivity() {
+        if(!persistentSettings.lockOnUserInActivity) return;
+
+        // prompt password after X seconds of inactivity
+        var epoch = Math.floor((new Date).getTime() / 1000);
+        var inactivity = epoch - appWindow.userLastActive;
+        if(inactivity < (persistentSettings.lockOnUserInActivityInterval * 60)) return;
+
+        passwordDialog.onAcceptedCallback = function() {
+            if(walletPassword === passwordDialog.password){
+                passwordDialog.close();
+            } else {
+                passwordDialog.showError(qsTr("Wrong password"));
+            }
+        }
+
+        passwordDialog.onRejectedCallback = function() { appWindow.showWizard(); }
+        passwordDialog.open();
     }
 
     // Daemon console

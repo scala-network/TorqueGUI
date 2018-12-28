@@ -1,6 +1,5 @@
 // Copyright (c) 2014-2018, The Monero Project
-// Copyright (c) 2014-2015, The Stellite Project
-//
+// 
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are
@@ -139,9 +138,9 @@ ListView {
 
             Image {
                 id: arrowImage
-                source: isOut ? "../images/downArrow.png" : "../images/upArrow-green.png"
+                source: isOut ? "../images/downArrow.png" : confirmationsRequired === 60  ? "../images/miningxmr.png" : "../images/upArrow-green.png"
                 height: 18 * scaleRatio
-                width: 12 * scaleRatio
+                width: (confirmationsRequired === 60  ? 18 : 12) * scaleRatio
                 anchors.top: parent.top
                 anchors.topMargin: 12 * scaleRatio
             }
@@ -152,7 +151,7 @@ ListView {
                 anchors.leftMargin: 18 * scaleRatio
                 font.family: MoneroComponents.Style.fontLight.name
                 font.pixelSize: 14 * scaleRatio
-                text: isOut ? "Sent" : "Received"
+                text: isOut ? qsTr("Sent") + translationManager.emptyString : qsTr("Received") + translationManager.emptyString
                 color: "#808080"
             }
 
@@ -168,15 +167,31 @@ ListView {
                 text: {
                     var _amount = amount;
                     if(_amount === 0){
-                        // *sometimes* amount is 0, while the 'destinations string'
+                        // *sometimes* amount is 0, while the 'destinations string' 
                         // has the correct amount, so we try to fetch it from that instead.
                         _amount = TxUtils.destinationsToAmount(destinations);
                         _amount = (_amount *1);
                     }
 
-                    return _amount + " XMR";
+                    return _amount + " XTL";
                 }
-                color: isOut ? "white" : "#2eb358"
+                color: isOut ? MoneroComponents.Style.white : MoneroComponents.Style.green
+
+                MouseArea {
+                        hoverEnabled: true
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        onEntered: {
+                            parent.color = MoneroComponents.Style.orange
+                        }
+                        onExited: {
+                            parent.color = isOut ? MoneroComponents.Style.white : MoneroComponents.Style.green                        }
+                        onClicked: {
+                                console.log("Copied to clipboard");
+                                clipboard.setText(parent.text.split(" ")[0]);
+                                appWindow.showStatusMessage(qsTr("Copied to clipboard"),3)
+                        }
+                    }
             }
 
             Rectangle {
@@ -219,7 +234,7 @@ ListView {
                             address = TxUtils.destinationsToAddress(destinations);
                             if(address){
                                 var truncated = TxUtils.addressTruncate(address);
-                                return "To " + truncated;
+                                return qsTr("To ") + translationManager.emptyString + truncated;
                             } else {
                                 return "Unknown recipient";
                             }
@@ -294,7 +309,7 @@ ListView {
                 anchors.left: parent.left
                 anchors.leftMargin: 30 * scaleRatio
 
-                labelHeader: "Transaction ID"
+                labelHeader: qsTr("Transaction ID") + translationManager.emptyString
                 labelValue: hash.substring(0, 18) + "..."
                 copyValue: hash
             }
@@ -312,7 +327,7 @@ ListView {
                     if(!isOut && !fee){
                         return "-";
                     } else if(isOut && fee){
-                        return fee + " XMR";
+                        return fee + " XTL";
                     } else {
                         return "Unknown"
                     }

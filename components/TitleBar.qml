@@ -1,6 +1,5 @@
 // Copyright (c) 2014-2018, The Monero Project
-// Copyright (c) 2014-2015, The Stellite Project
-//
+// 
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are
@@ -56,6 +55,7 @@ Rectangle {
     property bool showCloseButton: true
     property bool showMoneroLogo: false
     property bool small: false
+    property alias titleBarGradientImageOpacity: titleBarGradientImage.opacity
 
     signal closeClicked
     signal maximizeClicked
@@ -69,6 +69,7 @@ Rectangle {
         z: parent.z + 1
 
         Image {
+           id: titleBarGradientImage
            anchors.fill: parent
            height: titleBar.height
            width: titleBar.width
@@ -85,6 +86,7 @@ Rectangle {
         z: parent.z + 1
 
         Image {
+            visible: !isMobile
             anchors.left: parent.left
             anchors.top: parent.top
             anchors.topMargin: 11

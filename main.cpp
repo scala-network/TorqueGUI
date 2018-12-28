@@ -1,6 +1,5 @@
 // Copyright (c) 2014-2018, The Monero Project
-// Copyright (c) 2014-2015, The Stellite Project
-//
+// 
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are
@@ -36,6 +35,8 @@
 #include <QObject>
 #include <QDesktopWidget>
 #include <QScreen>
+#include <QRegExp>
+#include <QThread>
 #include "clipboardAdapter.h"
 #include "filter.h"
 #include "oscursor.h"
@@ -141,10 +142,24 @@ int main(int argc, char *argv[])
     qreal physicalDpi = QGuiApplication::primaryScreen()->physicalDotsPerInch();
     qreal calculated_ratio = physicalDpi/ref_dpi;
 
-    qWarning().nospace() << "Qt:" << QT_VERSION_STR << " | screen: " << rect.width()
-                         << "x" << rect.height() << " - dpi: " << dpi << " - ratio:"
-                         << calculated_ratio;
+    QString GUI_VERSION = "-";
+    QFile f(":/version.js");
+    if(!f.open(QFile::ReadOnly)) {
+        qWarning() << "Could not read qrc:///version.js";
+    } else {
+        QByteArray contents = f.readAll();
+        f.close();
 
+        QRegularExpression re("var GUI_VERSION = \"(.*)\"");
+        QRegularExpressionMatch version_match = re.match(contents);
+        if (version_match.hasMatch()) {
+            GUI_VERSION = version_match.captured(1);  // "v0.13.0.3"
+        }
+    }
+
+    qWarning().nospace().noquote() << "Qt:" << QT_VERSION_STR << " GUI:" << GUI_VERSION
+                                   << " | screen: " << rect.width() << "x" << rect.height()
+                                   << " - dpi: " << dpi << " - ratio:" << calculated_ratio;
 
     // registering types for QML
     qmlRegisterType<clipboardAdapter>("moneroComponents.Clipboard", 1, 0, "Clipboard");
@@ -270,6 +285,7 @@ int main(int argc, char *argv[])
 
     engine.rootContext()->setContextProperty("defaultAccountName", accountName);
     engine.rootContext()->setContextProperty("applicationDirectory", QApplication::applicationDirPath());
+    engine.rootContext()->setContextProperty("numberMiningThreadsAvailable", QThread::idealThreadCount());
 
     bool builtWithScanner = false;
 #ifdef WITH_SCANNER
@@ -308,6 +324,6 @@ int main(int argc, char *argv[])
     QObject::connect(eventFilter, SIGNAL(sequenceReleased(QVariant,QVariant)), rootObject, SLOT(sequenceReleased(QVariant,QVariant)));
     QObject::connect(eventFilter, SIGNAL(mousePressed(QVariant,QVariant,QVariant)), rootObject, SLOT(mousePressed(QVariant,QVariant,QVariant)));
     QObject::connect(eventFilter, SIGNAL(mouseReleased(QVariant,QVariant,QVariant)), rootObject, SLOT(mouseReleased(QVariant,QVariant,QVariant)));
-
+    QObject::connect(eventFilter, SIGNAL(userActivity()), rootObject, SLOT(userActivity()));
     return app.exec();
 }

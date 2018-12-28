@@ -1,6 +1,5 @@
-// Copyright (c) 2014-2015, The Stellite Project
 // Copyright (c) 2014-2018, The Monero Project
-//
+// 
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are
@@ -30,13 +29,13 @@
 
 import QtQml 2.0
 import QtQuick 2.2
-// QtQuick.Controls 2.0 isn't stable enough yet. Needs more testing.
-//import QtQuick.Controls 2.0
+import QtQuick.Controls 2.0
 import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.1
 import QtGraphicalEffects 1.0
 import moneroComponents.Wallet 1.0
 
+import "components" as MoneroComponents
 import "./pages"
 import "./pages/settings"
 
@@ -119,7 +118,7 @@ Rectangle {
             }, State {
                 name: "Transfer"
                 PropertyChanges { target: root; currentView: transferView }
-                PropertyChanges { target: mainFlickable; contentHeight: 1000 * scaleRatio }
+                PropertyChanges { target: mainFlickable; contentHeight: 700 * scaleRatio }
             }, State {
                name: "Receive"
                PropertyChanges { target: root; currentView: receiveView }
@@ -139,7 +138,7 @@ Rectangle {
             }, State {
                 name: "Sign"
                PropertyChanges { target: root; currentView: signView }
-               PropertyChanges { target: mainFlickable; contentHeight: 1200 * scaleRatio  }
+               PropertyChanges { target: mainFlickable; contentHeight: 1000 * scaleRatio  }
             }, State {
                 name: "Settings"
                PropertyChanges { target: root; currentView: settingsView }
@@ -147,11 +146,11 @@ Rectangle {
             }, State {
                 name: "Mining"
                 PropertyChanges { target: root; currentView: miningView }
-                PropertyChanges { target: mainFlickable; contentHeight: minHeight  }
+                PropertyChanges { target: mainFlickable; contentHeight: 700 * scaleRatio}
             }, State {
                 name: "Keys"
                 PropertyChanges { target: root; currentView: keysView }
-                PropertyChanges { target: mainFlickable; contentHeight: minHeight  + 200 * scaleRatio }
+                PropertyChanges { target: mainFlickable; contentHeight: keysView.keysHeight }
             }
         ]
 
@@ -162,7 +161,7 @@ Rectangle {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-
+        z: parent.z + 1
 
         Rectangle { height: 4; width: parent.width / 5; color: "#FFE00A" }
         Rectangle { height: 4; width: parent.width / 5; color: "#6B0072" }
@@ -183,13 +182,19 @@ Rectangle {
             Layout.fillHeight: true
             clip: true
 
+            ScrollBar.vertical: ScrollBar {
+                parent: mainFlickable.parent
+                anchors.left: parent.right
+                anchors.leftMargin: 3
+                anchors.top: parent.top
+                anchors.topMargin: 4
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: persistentSettings.customDecorations ? 4 : 0 
+            }
+
             onFlickingChanged: {
                 releaseFocus();
             }
-
-            // Disabled scrollbars, gives crash on startup on windows
-//            ScrollIndicator.vertical: ScrollIndicator { }
-//            ScrollBar.vertical: ScrollBar { }       // uncomment to test
 
             // Views container
             StackView {

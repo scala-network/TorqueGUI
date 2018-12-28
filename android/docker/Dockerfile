@@ -1,4 +1,4 @@
-FROM stellite-android
+FROM monero-android
 
 #INSTALL JAVA
 RUN echo "deb http://ftp.fr.debian.org/debian/ jessie-backports main contrib non-free" >> /etc/apt/sources.list

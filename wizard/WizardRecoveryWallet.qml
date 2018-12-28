@@ -1,6 +1,5 @@
 // Copyright (c) 2014-2018, The Monero Project
-// Copyright (c) 2014-2015, The Stellite Project
-//
+// 
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are
@@ -78,6 +77,7 @@ ColumnLayout {
 
     function recoveryWallet(settingsObject, fromSeed) {
         var nettype = appWindow.persistentSettings.nettype;
+        var kdfRounds = appWindow.persistentSettings.kdfRounds;
         var restoreHeight = settingsObject.restore_height;
         var tmp_wallet_filename = oshelper.temporaryFilename()
         console.log("Creating temporary wallet", tmp_wallet_filename)
@@ -90,11 +90,11 @@ ColumnLayout {
 
         // From seed or keys
         if(fromSeed)
-            var wallet = walletManager.recoveryWallet(tmp_wallet_filename, settingsObject.words, nettype, restoreHeight)
+            var wallet = walletManager.recoveryWallet(tmp_wallet_filename, settingsObject.words, nettype, restoreHeight, kdfRounds)
         else
             var wallet = walletManager.createWalletFromKeys(tmp_wallet_filename, settingsObject.wallet_language, nettype,
                                                             settingsObject.recover_address, settingsObject.recover_viewkey,
-                                                            settingsObject.recover_spendkey, restoreHeight)
+                                                            settingsObject.recover_spendkey, restoreHeight, kdfRounds)
 
 
         var success = wallet.status === Wallet.Status_Ok;

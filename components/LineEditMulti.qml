@@ -74,7 +74,11 @@ ColumnLayout {
     property bool mouseSelection: true
     property alias readOnly: input.readOnly
     property bool copyButton: false
-    property bool showingHeader: true
+    property bool pasteButton: false
+    property var onPaste: function(clipboardText) {
+        item.text = clipboardText;
+    }
+    property bool showingHeader: labelText != "" || copyButton || pasteButton
     property var wrapMode: Text.NoWrap
     property alias addressValidation: input.addressValidation
     property string backgroundColor: "" // mock
@@ -109,24 +113,34 @@ ColumnLayout {
             }
         }
 
-        MoneroComponents.LabelButton {
-            id: labelButton
-            onClicked: labelButtonClicked()
-            visible: labelButtonVisible
-        }
+        RowLayout {
+            anchors.right: parent.right
+            spacing: 16 * scaleRatio
 
-        MoneroComponents.LabelButton {
-            id: copyButtonId
-            visible: copyButton && input.text !== ""
-            text: qsTr("Copy")
-            anchors.right: labelButton.visible ? inputLabel.right : parent.right
-            anchors.rightMargin: labelButton.visible? 4 : 0
-            onClicked: {
-                if (input.text.length > 0) {
-                    console.log("Copied to clipboard");
-                    clipboard.setText(input.text);
-                    appWindow.showStatusMessage(qsTr("Copied to clipboard"), 3);
+            MoneroComponents.LabelButton {
+                id: labelButton
+                onClicked: labelButtonClicked()
+                visible: labelButtonVisible
+            }
+
+            MoneroComponents.LabelButton {
+                id: copyButtonId
+                visible: copyButton && input.text !== ""
+                text: qsTr("Copy")
+                onClicked: {
+                    if (input.text.length > 0) {
+                        console.log("Copied to clipboard");
+                        clipboard.setText(input.text);
+                        appWindow.showStatusMessage(qsTr("Copied to clipboard"), 3);
+                    }
                 }
+            }
+
+            MoneroComponents.LabelButton {
+                id: pasteButtonId
+                onClicked: item.onPaste(clipboard.text())
+                text: qsTr("Paste")
+                visible: pasteButton
             }
         }
     }
@@ -135,9 +149,8 @@ ColumnLayout {
         id: input
         readOnly: false
         addressValidation: false
-        anchors.top: item.showingHeader ? inputLabelRect.bottom : item.top
         Layout.fillWidth: true
-        topPadding: item.showingHeader ? 10 * scaleRatio : 0
+        topPadding: 10 * scaleRatio
         bottomPadding: 10 * scaleRatio
         wrapMode: item.wrapMode
         fontSize: item.fontSize

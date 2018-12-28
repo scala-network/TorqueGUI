@@ -1,6 +1,5 @@
 // Copyright (c) 2014-2018, The Monero Project
-// Copyright (c) 2014-2015, The Stellite Project
-//
+// 
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are
@@ -43,6 +42,7 @@ Item {
     property string placeholderColor: MoneroComponents.Style.defaultFontColor
     property real placeholderOpacity: 0.35
 
+    property alias acceptableInput: input.acceptableInput
     property alias validator: input.validator
     property alias readOnly : input.readOnly
     property alias cursorPosition: input.cursorPosition
@@ -107,8 +107,7 @@ Item {
         id: inputLabel
         anchors.top: parent.top
         anchors.left: parent.left
-        anchors.topMargin: 2 * scaleRatio
-        font.family: MoneroComponents.Style.fontLight.name
+        font.family: MoneroComponents.Style.fontRegular.name
         font.pixelSize: labelFontSize
         font.bold: labelFontBold
         textFormat: Text.RichText

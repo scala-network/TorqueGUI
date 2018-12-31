@@ -1,4 +1,3 @@
-// Copyright (c) 2014-2015, The Stellite Project
 // Copyright (c) 2014-2018, The Monero Project
 //
 // All rights reserved.
@@ -49,23 +48,24 @@ Rectangle {
     property var model
     property var current_address
     property int current_subaddress_table_index: 0
-    property bool advancedRowVisible: false
     property alias receiveHeight: mainLayout.height
     property alias addressText : pageReceive.current_address
 
     function makeQRCodeString() {
-        var s = "stellite:"
-        var nfields = 0
-        s += current_address;
-        var amount = amountToReceiveLine.text.trim()
-        if (amount !== "" && amount.slice(-1) !== ".") {
-          s += (nfields++ ? "&" : "?")
-          s += "tx_amount=" + amount
+        var XMR_URI_SCHEME = "stellite:"
+        var XMR_AMOUNT = "tx_amount"
+        var qrCodeString =""
+        var amount = amountToReceiveLine.text
+        qrCodeString += (XMR_URI_SCHEME + current_address)
+        if (amount !== ""){
+          qrCodeString += ("?" + XMR_AMOUNT + "=" + amount)
         }
-        return s
+        return qrCodeString
     }
 
     function update() {
+        const max_tracking = 3;
+
         if (!appWindow.currentWallet || !trackingEnabled.checked) {
             trackingLineText.text = "";
             trackingModel.clear();
@@ -81,10 +81,10 @@ Rectangle {
         var count = model.rowCount()
         var totalAmount = 0
         var nTransactions = 0
-        var blockchainHeight = 0
+        var blockchainHeight = null
         var txs = []
 
-        for (var i = 0; i < count; ++i) {
+        for (var i = 0; i < count && txs.length < max_tracking; ++i) {
             var idx = model.index(i, 0)
             var isout = model.data(idx, TransactionHistoryModel.TransactionIsOutRole);
             var subaddrAccount = model.data(idx, TransactionHistoryModel.TransactionSubaddrAccountRole);
@@ -104,8 +104,8 @@ Rectangle {
                 if (blockHeight == 0) {
                     in_txpool = true;
                 } else {
-                    if (blockchainHeight == 0)
-                        blockchainHeight = walletManager.blockchainHeight()
+                    if (blockchainHeight == null)
+                        blockchainHeight = appWindow.currentWallet.blockChainHeight()
                     confirmations = blockchainHeight - blockHeight - 1
                     displayAmount = model.data(idx, TransactionHistoryModel.TransactionDisplayAmountRole);
                 }
@@ -131,24 +131,18 @@ Rectangle {
             trackingLineText.text = qsTr("%1 transactions found").arg(nTransactions) + ":" + translationManager.emptyString
         }
 
-        var max_tracking = 3;
         toReceiveSatisfiedLine.text = "";
         var expectedAmount = walletManager.amountFromString(amountToReceiveLine.text)
         if (expectedAmount && expectedAmount != amount) {
             var displayTotalAmount = walletManager.displayAmount(totalAmount)
-            if (amount > expectedAmount) toReceiveSatisfiedLine.text += qsTr("With more Monero");
-            else if (amount < expectedAmount) toReceiveSatisfiedLine.text = qsTr("With not enough Monero")
+            if (amount > expectedAmount) toReceiveSatisfiedLine.text += qsTr("With more Stellite");
+            else if (amount < expectedAmount) toReceiveSatisfiedLine.text = qsTr("With not enough Stellite")
             toReceiveSatisfiedLine.text += ": " + "<br>" +
                     qsTr("Expected") + ": " + amountToReceiveLine.text + "<br>" +
                     qsTr("Total received") + ": " + displayTotalAmount + translationManager.emptyString;
         }
 
         trackingModel.clear();
-
-        if (txs.length > 3) {
-            txs.length = 3;
-        }
-
         txs.forEach(function(tx){
             trackingModel.append({
                 "amount": tx.amount,
@@ -247,6 +241,7 @@ Rectangle {
 
                         Rectangle {
                             anchors.fill: parent
+                            anchors.topMargin: 5
                             anchors.rightMargin: 80
                             color: "transparent"
 
@@ -390,7 +385,7 @@ Rectangle {
                             inputDialog.inputText = qsTr("(Untitled)")
                             inputDialog.onAcceptedCallback = function() {
                                 appWindow.currentWallet.subaddress.addRow(appWindow.currentWallet.currentSubaddressAccount, inputDialog.inputText)
-                                current_subaddress_table_index = appWindow.currentWallet.numSubaddresses() - 1
+                                current_subaddress_table_index = appWindow.currentWallet.numSubaddresses(appWindow.currentWallet.currentSubaddressAccount) - 1
                             }
                             inputDialog.onRejectedCallback = null;
                             inputDialog.open()
@@ -403,20 +398,20 @@ Rectangle {
         RowLayout {
             CheckBox2 {
                 id: showAdvancedCheckbox
-                checked: false
+                checked: persistentSettings.receiveShowAdvanced
                 onClicked: {
-                    advancedRowVisible = !advancedRowVisible;
+                    persistentSettings.receiveShowAdvanced = !persistentSettings.receiveShowAdvanced
                 }
                 text: qsTr("Advanced options") + translationManager.emptyString
             }
         }
-
+        
         GridLayout {
             id: advancedRow
             columns: (isMobile)? 1 : 2
             Layout.fillWidth: true
             columnSpacing: 32 * scaleRatio
-            visible: advancedRowVisible
+            visible: persistentSettings.receiveShowAdvanced
 
             ColumnLayout {
                 Layout.alignment: Qt.AlignTop
@@ -448,7 +443,7 @@ Rectangle {
 
                     Layout.fillWidth: true
                     Layout.minimumWidth: 200
-                    Layout.maximumWidth: mainLayout.qrCodeSize
+                    spacing: parent.spacing
 
                     LineEdit {
                         id: amountToReceiveLine
@@ -457,48 +452,63 @@ Rectangle {
                         placeholderText: qsTr("Amount to receive") + translationManager.emptyString
                         fontBold: true
                         inlineIcon: true
-                        validator: RegExpValidator {
-                            regExp: /(\d{1,8})([.]\d{1,12})?$/
-                        }
-                    }
-                }
-
-                Rectangle {
-                    color: "white"
-                    Layout.topMargin: parent.spacing - 4
-                    Layout.fillWidth: true
-                    Layout.maximumWidth: mainLayout.qrCodeSize
-                    Layout.preferredHeight: width
-                    radius: 4
-
-                    Image {
-                        id: qrCode
-                        anchors.fill: parent
-                        anchors.margins: 6
-
-                        smooth: false
-                        fillMode: Image.PreserveAspectFit
-                        source: "image://qrcode/" + makeQRCodeString()
-                        MouseArea {
-                            anchors.fill: parent
-                            acceptedButtons: Qt.RightButton
-                            onClicked: {
-                                if (mouse.button == Qt.RightButton)
-                                    qrMenu.open()
+                        onTextChanged: {
+                            if(amountToReceiveLine.text.indexOf('.') === 0){
+                                amountToReceiveLine.text = '0' + amountToReceiveLine.text;
                             }
-                            onPressAndHold: qrFileDialog.open()
+                        }
+                        validator: RegExpValidator {
+                            regExp: /^(\d{1,8})?([\.]\d{1,12})?$/
                         }
                     }
 
-                    Menu {
-                        id: qrMenu
-                        title: "QrCode"
-                        y: parent.height / 2
+                    Rectangle {
+                        color: "white"
 
-                        MenuItem {
-                           text: qsTr("Save As") + translationManager.emptyString;
-                           onTriggered: qrFileDialog.open()
+                        Layout.fillWidth: true
+                        Layout.maximumWidth: mainLayout.qrCodeSize
+                        Layout.preferredHeight: width
+                        radius: 4
+
+                        Image {
+                            id: qrCode
+                            anchors.fill: parent
+                            anchors.margins: 1
+
+                            smooth: false
+                            fillMode: Image.PreserveAspectFit
+                            source: "image://qrcode/" + makeQRCodeString()
+                            MouseArea {
+                                anchors.fill: parent
+                                acceptedButtons: Qt.RightButton
+                                onClicked: {
+                                    if (mouse.button == Qt.RightButton)
+                                        qrMenu.open()
+                                }
+                                onPressAndHold: qrFileDialog.open()
+                            }
                         }
+
+                        Menu {
+                            id: qrMenu
+                            title: "QrCode"
+                            y: parent.height / 2
+
+                            MenuItem {
+                                text: qsTr("Save As") + translationManager.emptyString;
+                                onTriggered: qrFileDialog.open()
+                            }
+                        }
+                    }
+
+                    LineEditMulti {
+                        id: paymentUrl
+                        Layout.fillWidth: true
+                        labelText: qsTr("Payment URL") + translationManager.emptyString
+                        text: makeQRCodeString()                        
+                        readOnly: true
+                        copyButton: true
+                        wrapMode: Text.WrapAnywhere
                     }
                 }
             }
@@ -720,6 +730,10 @@ Rectangle {
         timer.running = true
 
         trackingEnabled.checked = false
+    }
+
+    function clearFields() {
+        amountToReceiveLine.text = "";
     }
 
     function onPageClosed() {

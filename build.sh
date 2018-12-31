@@ -1,6 +1,7 @@
 #!/bin/bash
 
 BUILD_TYPE=$1
+BUILD_TREZOR=${BUILD_TREZOR-true}
 source ./utils.sh
 platform=$(get_platform)
 # default build type
@@ -72,8 +73,9 @@ if [[ $platform == *bsd* ]]; then
 fi
 
 # build libwallet
+export BUILD_TREZOR
 ./get_libwallet_api.sh $BUILD_TYPE
-
+ 
 # build zxcvbn
 if [ "$DISABLE_PASS_STRENGTH_METER" != true ]; then
     $MAKE -C src/zxcvbn-c || exit

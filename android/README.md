@@ -1,4 +1,4 @@
-Copyright (c) 2014-2017, The Stellite Project
+Copyright (c) 2014-2018, The Monero Project
 
 
 ## Current status : ALPHA
@@ -17,12 +17,12 @@ Copyright (c) 2014-2017, The Stellite Project
 # Build GUI
 
         cd android/docker
-        docker build -t stellite-gui-android .
-        docker create -it --name stellite-gui-android stellite-gui-android bash
+        docker build -t monero-gui-android .
+        docker create -it --name monero-gui-android monero-gui-android bash
 
 # Get the apk
 
-        docker cp stellite-gui-android:/opt/android/stellite-core/build/release/bin/bin/QtApp-debug.apk .
+        docker cp monero-gui-android:/opt/android/monero-gui/build/release/bin/bin/QtApp-debug.apk .
        
 ## Deployment
 
@@ -31,7 +31,7 @@ Copyright (c) 2014-2017, The Stellite Project
   First, see section [Enable adb debugging on your device](https://developer.android.com/studio/command-line/adb.html#Enabling)
   The only place where we are allowed to play is `/data/local/tmp`. So : 
 
-        adb  push /opt/android/stellite-core/build/release/bin/bin/QtApp-debug.apk /data/local/tmp
+        adb  push /opt/android/monero-gui/build/release/bin/bin/QtApp-debug.apk /data/local/tmp
         adb  shell pm install -r /data/local/tmp/QtApp-debug.apk
    
   - Troubleshooting: 

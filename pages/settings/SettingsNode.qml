@@ -131,6 +131,7 @@ Rectangle{
                     topPadding: 0
                     text: qsTr("The blockchain is downloaded to your computer. Provides higher security and requires more local storage.") + translationManager.emptyString
                     width: parent.width - (localNodeIcon.width + localNodeIcon.anchors.leftMargin + anchors.leftMargin)
+                    readOnly: true
 
                     // @TODO: Legacy. Remove after Qt 5.8.
                     // https://stackoverflow.com/questions/41990013
@@ -229,8 +230,9 @@ Rectangle{
                     textMargin: 0
                     leftPadding: 0
                     topPadding: 0
-                    text: qsTr("Uses a third-party server to connect to the Monero network. Less secure, but easier on your computer.") + translationManager.emptyString
+                    text: qsTr("Uses a third-party server to connect to the Stellite network. Less secure, but easier on your computer.") + translationManager.emptyString
                     width: parent.width - (remoteNodeIcon.width + remoteNodeIcon.anchors.leftMargin + anchors.leftMargin)
+                    readOnly: true
 
                     // @TODO: Legacy. Remove after Qt 5.8.
                     // https://stackoverflow.com/questions/41990013
@@ -274,7 +276,7 @@ Rectangle{
             MoneroComponents.WarningBox {
                 Layout.topMargin: 26 * scaleRatio
                 Layout.bottomMargin: 6 * scaleRatio
-                text: qsTr("To find a remote node, type 'Monero remote node' into your favorite search engine. Please ensure the node is run by a trusted third-party.") + translationManager.emptyString
+                text: qsTr("To find a remote node, type 'Stellite remote node' into your favorite search engine. Please ensure the node is run by a trusted third-party.") + translationManager.emptyString
             }
 
             MoneroComponents.RemoteNodeEdit {
@@ -328,83 +330,39 @@ Rectangle{
                 }
             }
 
-            Rectangle {
-                id: rectConnectRemote
-                Layout.topMargin: 12 * scaleRatio
-                color: MoneroComponents.Style.buttonBackgroundColorDisabled
-                width: btnConnectRemote.width + 40
-                height: 26
-                radius: 2
+            MoneroComponents.StandardButton {
+                id: btnConnectRemote
+                enabled: remoteNodeEdit.isValid()
+                small: true
+                text: qsTr("Connect") + translationManager.emptyString
+                onClicked: {
+                    // Update daemon login
+                    persistentSettings.remoteNodeAddress = remoteNodeEdit.getAddress();
+                    persistentSettings.daemonUsername = daemonUsername.text;
+                    persistentSettings.daemonPassword = daemonPassword.text;
+                    persistentSettings.useRemoteNode = true
 
-                Text {
-                    id: btnConnectRemote
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    color: MoneroComponents.Style.defaultFontColor
-                    font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 14 * scaleRatio
-                    font.bold: true
-                    text: qsTr("Connect") + translationManager.emptyString
-                }
+                    currentWallet.setDaemonLogin(persistentSettings.daemonUsername, persistentSettings.daemonPassword);
 
-                MouseArea {
-                    cursorShape: Qt.PointingHandCursor
-                    anchors.fill: parent
-                    onClicked: {
-                        // Update daemon login
-                        persistentSettings.remoteNodeAddress = remoteNodeEdit.getAddress();
-                        persistentSettings.daemonUsername = daemonUsername.text;
-                        persistentSettings.daemonPassword = daemonPassword.text;
-                        persistentSettings.useRemoteNode = true
-    
-                        currentWallet.setDaemonLogin(persistentSettings.daemonUsername, persistentSettings.daemonPassword);
-    
-                        appWindow.connectRemoteNode()
-                    }
+                    appWindow.connectRemoteNode()
                 }
             }
         }
 
         ColumnLayout {
             id: localNodeLayout
-            anchors.margins: 0
             spacing: 20 * scaleRatio
             Layout.topMargin: 40
-            anchors.left: parent.left
-            anchors.right: parent.right
             visible: !isMobile && !persistentSettings.useRemoteNode
 
-            Rectangle {
-                color: "transparent"
-                Layout.topMargin: 0 * scaleRatio
-                Layout.bottomMargin: 8 * scaleRatio
-                Layout.preferredHeight: 24 * scaleRatio
-                Layout.preferredWidth: parent.width
-
-                Rectangle {
-                    id: rectStopNode
-                    color: MoneroComponents.Style.buttonBackgroundColorDisabled
-                    width: btnStopNode.width + 40
-                    height: 24
-                    radius: 2
-
-                    Text {
-                        id: btnStopNode
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        color: MoneroComponents.Style.defaultFontColor
-                        font.family: MoneroComponents.Style.fontRegular.name
-                        font.pixelSize: 14 * scaleRatio
-                        font.bold: true
-                        text: qsTr("Stop local node") + translationManager.emptyString
-                    }
-
-                    MouseArea {
-                        cursorShape: Qt.PointingHandCursor
-                        anchors.fill: parent
-                        onClicked: {
-                            appWindow.stopDaemon();
-                        }
+            MoneroComponents.StandardButton {
+                small: true
+                text: (appWindow.daemonRunning ? qsTr("Stop local node") : qsTr("Start daemon")) + translationManager.emptyString
+                onClicked: {
+                    if (appWindow.daemonRunning) {
+                        appWindow.stopDaemon();
+                    } else {
+                        appWindow.startDaemon(persistentSettings.daemonFlags);
                     }
                 }
             }

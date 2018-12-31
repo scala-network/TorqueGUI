@@ -40,6 +40,7 @@ import "." 1.0
 Rectangle {
     property bool viewOnly: false
     id: page
+    property int keysHeight: mainLayout.height + 100 * scaleRatio // Ensure sufficient height for QR code, even in minimum width window case.
 
     color: "transparent"
 
@@ -90,7 +91,7 @@ Rectangle {
                         Layout.topMargin: 12 * scaleRatio
                         Layout.preferredWidth: statusRect.width - 80
                         Layout.leftMargin: 6
-                        text: qsTr("WARNING: Do not reuse your Monero keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.") + translationManager.emptyString
+                        text: qsTr("WARNING: Do not reuse your Stellite keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.") + translationManager.emptyString
                         wrapMode: Text.Wrap
                         font.family: Style.fontRegular.name
                         font.pixelSize: 15 * scaleRatio
@@ -268,14 +269,15 @@ Rectangle {
         seedText.text = currentWallet.seed
 
         if(typeof currentWallet != "undefined") {
-            viewOnlyQRCode.source = "image://qrcode/stellite:" + currentWallet.address+"?secret_view_key="+currentWallet.secretViewKey+"&restore_height="+currentWallet.restoreHeight
-            fullWalletQRCode.source = viewOnlyQRCode.source +"&secret_spend_key="+currentWallet.secretSpendKey
+            viewOnlyQRCode.source = "image://qrcode/stellite:" + currentWallet.address(0, 0) + "?view_key="+currentWallet.secretViewKey+"&height="+currentWallet.walletCreationHeight
+            fullWalletQRCode.source = viewOnlyQRCode.source +"&spend_key="+currentWallet.secretSpendKey
 
             if(currentWallet.viewOnly) {
                 viewOnlyQRCode.visible = true
                 showFullQr.visible = false
                 showViewOnlyQr.visible = false
-                seedText.text = qsTr("(View Only Wallet -  No mnemonic seed available)") + translationManager.emptyString
+                seedText.text = qsTr("(View Only Wallet - No mnemonic seed available)") + translationManager.emptyString
+                secretSpendKey.text = qsTr("(View Only Wallet - No secret spend key available)") + translationManager.emptyString
             }
         }
     }

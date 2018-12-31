@@ -58,12 +58,17 @@ GridLayout {
     property bool lineEditFontBold: true
 
     signal editingFinished()
+    signal textChanged()
+
+    function isValid() {
+        return daemonAddr.text.trim().length > 0 && daemonPort.acceptableInput
+    }
 
     function getAddress() {
         return daemonAddr.text.trim() + ":" + daemonPort.text.trim()
     }
 
-    LineEditMulti {
+    LineEdit {
         id: daemonAddr
         Layout.fillWidth: true
         placeholderText: qsTr("Remote Node Hostname / IP") + translationManager.emptyString
@@ -79,9 +84,10 @@ GridLayout {
         fontBold: lineEditFontBold
         fontSize: lineEditFontSize
         onEditingFinished: root.editingFinished()
+        onTextChanged: root.textChanged()
     }
 
-    LineEditMulti {
+    LineEdit {
         id: daemonPort
         Layout.fillWidth: true
         placeholderText: qsTr("Port") + translationManager.emptyString
@@ -96,7 +102,9 @@ GridLayout {
         fontColor: lineEditFontColor
         fontBold: lineEditFontBold
         fontSize: lineEditFontSize
+        validator: IntValidator{bottom: 1; top: 65535;}
 
         onEditingFinished: root.editingFinished()
+        onTextChanged: root.textChanged()
     }
 }

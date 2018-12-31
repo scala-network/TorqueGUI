@@ -1,6 +1,5 @@
 // Copyright (c) 2014-2018, The Monero Project
-// Copyright (c) 2014-2015, The Stellite Project
-//
+// 
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are
@@ -36,6 +35,7 @@ import moneroComponents.Wallet 1.0
 import "../components"
 import "../components" as MoneroComponents
 import "." 1.0
+import "../js/TxUtils.js" as TxUtils
 
 
 Rectangle {
@@ -45,29 +45,12 @@ Rectangle {
     signal sweepUnmixableClicked()
 
     color: "transparent"
+    property int mixin: 10  // (ring size 11)
     property string warningContent: ""
     property string startLinkText: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style><font size='2'> (</font><a href='#'>Start daemon</a><font size='2'>)</font>") + translationManager.emptyString
     property bool showAdvanced: false
 
     Clipboard { id: clipboard }
-
-    function scaleValueToMixinCount(scaleValue) {
-        var scaleToMixinCount = [6,7,8,9,10,11,12,13,14,16,18,20,22,25];
-        if (scaleValue < scaleToMixinCount.length) {
-            return scaleToMixinCount[scaleValue];
-        } else {
-            return 0;
-        }
-    }
-
-    function isValidOpenAliasAddress(address) {
-      address = address.trim()
-      var dot = address.indexOf('.')
-      if (dot < 0)
-        return false
-      // we can get an awful lot of valid domains, including non ASCII chars... accept anything
-      return true
-    }
 
     function oa_message(text) {
       oaPopup.title = qsTr("OpenAlias error") + translationManager.emptyString
@@ -77,28 +60,32 @@ Rectangle {
       oaPopup.open()
     }
 
-    function updateMixin() {
-        var fillLevel = (isMobile) ? privacyLevelItemSmall.fillLevel : privacyLevelItem.fillLevel
-        var mixin = scaleValueToMixinCount(fillLevel)
-        console.log("PrivacyLevel changed:"  + fillLevel)
-        console.log("mixin count: "  + mixin)
-        privacyLabel.text = qsTr("Ring size: %1").arg(mixin+1) + translationManager.emptyString
-    }
-
     function updateFromQrCode(address, payment_id, amount, tx_description, recipient_name) {
         console.log("updateFromQrCode")
         addressLine.text = address
-        paymentIdLine.text = payment_id
+        setPaymentId(payment_id);
         amountLine.text = amount
-        descriptionLine.text = recipient_name + " " + tx_description
+        setDescription(recipient_name + " " + tx_description);
         cameraUi.qrcode_decoded.disconnect(updateFromQrCode)
+    }
+
+    function setDescription(value) {
+        descriptionLine.text = value;
+        descriptionCheckbox.checked = descriptionLine.text != "";
+    }
+
+    function setPaymentId(value) {
+        paymentIdLine.text = value;
+        paymentIdCheckbox.checked = paymentIdLine.text != "";
     }
 
     function clearFields() {
         addressLine.text = ""
-        paymentIdLine.text = ""
+        setPaymentId("");
         amountLine.text = ""
-        descriptionLine.text = ""
+        setDescription("");
+        priorityDropdown.currentIndex = 0
+        updatePriorityDropdown()
     }
 
     // Information dialog
@@ -161,9 +148,14 @@ Rectangle {
                       fontBold: true
                       inlineButtonText: qsTr("All") + translationManager.emptyString
                       inlineButton.onClicked: amountLine.text = "(all)"
+                      onTextChanged: {
+                          if(amountLine.text.indexOf('.') === 0){
+                              amountLine.text = '0' + amountLine.text;
+                          }
+                      }
 
                       validator: RegExpValidator {
-                          regExp: /(.|)(\d{1,8})([.]\d{1,12})?$/
+                          regExp: /^(\d{1,8})?([\.]\d{1,12})?$/
                       }
                   }
               }
@@ -204,6 +196,7 @@ Rectangle {
                   shadowPressedColor: "#B32D00"
                   releasedColor: "#363636"
                   pressedColor: "#202020"
+                  currentIndex: 0
               }
           }
           // Make sure dropdown is on top
@@ -227,6 +220,18 @@ Rectangle {
               wrapMode: Text.WrapAnywhere
               addressValidation: true
               onInputLabelLinkActivated: { appWindow.showPageRequest("AddressBook") }
+              pasteButton: true
+              onPaste: function(clipboardText) {
+                  const parsed = walletManager.parse_uri_to_object(clipboardText);
+                  if (!parsed.error) {
+                    addressLine.text = parsed.address;
+                    setPaymentId(parsed.payment_id);
+                    amountLine.text = parsed.amount;
+                    setDescription(parsed.tx_description);
+                  } else {
+                     addressLine.text = clipboardText; 
+                  }
+              }
           }
 
           StandardButton {
@@ -244,11 +249,10 @@ Rectangle {
 
       StandardButton {
           id: resolveButton
-          anchors.left: parent.left
           width: 80
           text: qsTr("Resolve") + translationManager.emptyString
-          visible: isValidOpenAliasAddress(addressLine.text)
-          enabled : isValidOpenAliasAddress(addressLine.text)
+          visible: TxUtils.isValidOpenAliasAddress(addressLine.text)
+          enabled : visible
           onClicked: {
               var result = walletManager.resolveOpenAlias(addressLine.text)
               if (result) {
@@ -288,25 +292,57 @@ Rectangle {
           }
       }
 
-      RowLayout {
+      ColumnLayout {
+          CheckBox {
+              id: paymentIdCheckbox
+              border: false
+              checkedIcon: "qrc:///images/minus-white.png"
+              uncheckedIcon: "qrc:///images/plus-white.png"
+              fontSize: paymentIdLine.labelFontSize
+              iconOnTheLeft: false
+              Layout.fillWidth: true
+              text: qsTr("Payment ID <font size='2'>( Optional )</font>") + translationManager.emptyString
+              onClicked: {
+                  if (!paymentIdCheckbox.checked) {
+                    paymentIdLine.text = "";
+                  }
+              }
+          }
+
           // payment id input
           LineEditMulti {
               id: paymentIdLine
               fontBold: true
-              labelText: qsTr("Payment ID <font size='2'>( Optional )</font>") + translationManager.emptyString
               placeholderText: qsTr("16 or 64 hexadecimal characters") + translationManager.emptyString
               Layout.fillWidth: true
               wrapMode: Text.WrapAnywhere
               addressValidation: false
+              visible: paymentIdCheckbox.checked
           }
       }
 
-      RowLayout {
+      ColumnLayout {
+        CheckBox {
+              id: descriptionCheckbox
+              border: false
+              checkedIcon: "qrc:///images/minus-white.png"
+              uncheckedIcon: "qrc:///images/plus-white.png"
+              fontSize: descriptionLine.labelFontSize
+              iconOnTheLeft: false
+              Layout.fillWidth: true
+              text: qsTr("Description <font size='2'>( Optional )</font>") + translationManager.emptyString
+              onClicked: {
+                  if (!descriptionCheckbox.checked) {
+                    descriptionLine.text = "";
+                  }
+              }
+          }
+
           LineEditMulti {
               id: descriptionLine
-              labelText: qsTr("Description <font size='2'>( Optional )</font>") + translationManager.emptyString
               placeholderText: qsTr("Saved to local wallet history") + translationManager.emptyString
               Layout.fillWidth: true
+              visible: descriptionCheckbox.checked
           }
       }
 
@@ -323,24 +359,25 @@ Rectangle {
                   if(appWindow.viewOnly){
                       return false;
                   }
-
+                  
                   // There is no warning box displayed
                   if(root.warningContent !== ''){
                       return false;
                   }
-
+                  
                   // The transactional information is correct
                   if(!pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.nettype)){
                       return false;
                   }
-
+                  
                   // There are sufficient unlocked funds available
                   if(parseFloat(amountLine.text) > parseFloat(unlockedBalanceText)){
                       return false;
                   }
 
                   // The amount does not start with a period (example: `.4`)
-                  if(amountLine.text.startsWith('.')){
+                  // @TODO: replace with .startsWith() after Qt >=5.8
+                  if(amountLine.text.indexOf('.') === 0){
                       return false;
                   }
 
@@ -352,10 +389,8 @@ Rectangle {
                   console.log("priority: " + priority)
                   console.log("amount: " + amountLine.text)
                   addressLine.text = addressLine.text.trim()
-                  paymentIdLine.text = paymentIdLine.text.trim()
-                  root.paymentClicked(addressLine.text, paymentIdLine.text, amountLine.text, scaleValueToMixinCount(privacyLevelItem.fillLevel),
-                                 priority, descriptionLine.text)
-
+                  setPaymentId(paymentIdLine.text.trim());
+                  root.paymentClicked(addressLine.text, paymentIdLine.text, amountLine.text, root.mixin, priority, descriptionLine.text)
               }
           }
       }
@@ -408,57 +443,8 @@ Rectangle {
             }
         }
 
-        Rectangle {
-            visible: persistentSettings.transferShowAdvanced
-            Layout.fillWidth: true
-            height: 1
-            color: Style.dividerColor
-            opacity: Style.dividerOpacity
-            Layout.bottomMargin: 30 * scaleRatio
-        }
-
-        RowLayout {
-            visible: persistentSettings.transferShowAdvanced
-            anchors.left: parent.left
-            anchors.right: parent.right
-            Layout.fillWidth: true
-            Label {
-                id: privacyLabel
-                fontSize: 15
-                text: ""
-            }
-
-            Label {
-                id: costLabel
-                fontSize: 14
-                text: qsTr("Transaction cost") + translationManager.emptyString
-                anchors.right: parent.right
-            }
-        }
-
-        PrivacyLevel {
-            visible: persistentSettings.transferShowAdvanced && !isMobile
-            id: privacyLevelItem
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.rightMargin: 17 * scaleRatio
-            onFillLevelChanged: updateMixin()
-        }
-
-        PrivacyLevelSmall {
-            visible: persistentSettings.transferShowAdvanced && isMobile
-            id: privacyLevelItemSmall
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.rightMargin: 17 * scaleRatio
-            onFillLevelChanged: updateMixin()
-        }
-
         GridLayout {
             visible: persistentSettings.transferShowAdvanced
-            Layout.topMargin: 50 * scaleRatio
-
-
             columns: (isMobile) ? 2 : 6
 
             StandardButton {
@@ -484,9 +470,8 @@ Rectangle {
                     console.log("priority: " + priority)
                     console.log("amount: " + amountLine.text)
                     addressLine.text = addressLine.text.trim()
-                    paymentIdLine.text = paymentIdLine.text.trim()
-                    root.paymentClicked(addressLine.text, paymentIdLine.text, amountLine.text, scaleValueToMixinCount(privacyLevelItem.fillLevel),
-                                   priority, descriptionLine.text)
+                    setPaymentId(paymentIdLine.text.trim());
+                    root.paymentClicked(addressLine.text, paymentIdLine.text, amountLine.text, root.mixin, priority, descriptionLine.text)
 
                 }
             }
@@ -513,7 +498,7 @@ Rectangle {
                     submitTxDialog.open();
                 }
             }
-
+            
             StandardButton {
                 id: exportKeyImagesButton
                 text: qsTr("Export key images") + translationManager.emptyString
@@ -617,7 +602,7 @@ Rectangle {
                 informationPopup.open();
             } else {
                 informationPopup.title = qsTr("Information") + translationManager.emptyString
-                informationPopup.text  = qsTr("Monero sent successfully") + translationManager.emptyString
+                informationPopup.text  = qsTr("Stellite sent successfully") + translationManager.emptyString
                 informationPopup.icon  = StandardIcon.Information
                 informationPopup.onCloseCallback = null
                 informationPopup.open();
@@ -628,7 +613,7 @@ Rectangle {
         }
 
     }
-
+    
     //ExportKeyImagesDialog
     FileDialog {
         id: exportKeyImagesDialog
@@ -669,13 +654,11 @@ Rectangle {
     function onPageCompleted() {
         console.log("transfer page loaded")
         updateStatus();
-        updateMixin();
         updatePriorityDropdown()
     }
 
     function updatePriorityDropdown() {
         priorityDropdown.dataModel = priorityModelV5;
-        priorityDropdown.currentIndex = 0
         priorityDropdown.update()
     }
 
@@ -711,6 +694,8 @@ Rectangle {
                 // Light wallet is always ready
                 pageRoot.enabled = true;
                 root.warningContent = "";
+                // check if daemon was already mining and add mining logo if true
+                middlePanel.miningView.update();
             }
         }
     }

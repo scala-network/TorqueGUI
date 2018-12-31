@@ -1,5 +1,4 @@
 // Copyright (c) 2014-2018, The Monero Project
-// Copyright (c) 2014-2015, The Stellite Project
 //
 // All rights reserved.
 //
@@ -152,7 +151,7 @@ Rectangle {
                 RowLayout {
                     LineEdit {
                         id: signFileLine
-                        labelText: "Message from file"
+                        labelText: qsTr("Message from file") + translationManager.emptyString
                         placeholderText: qsTr("Path to file") + translationManager.emptyString;
                         readOnly: false
                         Layout.fillWidth: true
@@ -219,7 +218,7 @@ Rectangle {
                     LineEdit {
                         id: verifyMessageLine
                         Layout.fillWidth: true
-                        labelText: qsTr("Verify message")
+                        labelText: qsTr("Verify message") + translationManager.emptyString;
                         placeholderText: qsTr("Message to verify") + translationManager.emptyString;
                         readOnly: false
                     }
@@ -298,15 +297,10 @@ Rectangle {
 
             ColumnLayout {
                 id: verifySignatureRow
-                anchors.topMargin: 17 * scaleRatio
-
-                Label {
-                    id: verifySignatureLabel
-                    text: qsTr("Signature") + translationManager.emptyString
-                }
 
                 LineEdit {
                     id: verifySignatureLine
+                    labelText: qsTr("Signature") + translationManager.emptyString;
                     placeholderText: qsTr("Signature") + translationManager.emptyString;
                     Layout.fillWidth: true
                     copyButton: true

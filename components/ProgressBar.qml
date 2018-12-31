@@ -1,6 +1,5 @@
-// Copyright (c) 2014-2015, The Stellite Project
 // Copyright (c) 2014-2018, The Monero Project
-//
+// 
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are
@@ -105,7 +104,7 @@ Rectangle {
                 width: (maxWidth * fillLevel) / 100
                 radius: 8
                 // could change color based on progressbar status; if(item.fillLevel < 99 )
-                color: "#FA6800"
+                color: "#47d147"
             }
 
             Rectangle {

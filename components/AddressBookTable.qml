@@ -1,6 +1,5 @@
-// Copyright (c) 2014-2015, The Stellite Project
 // Copyright (c) 2014-2018, The Monero Project
-//
+// 
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are
@@ -29,6 +28,7 @@
 
 import QtQuick 2.0
 import moneroComponents.Clipboard 1.0
+import "../js/TxUtils.js" as TxUtils
 
 ListView {
     id: listView
@@ -89,7 +89,13 @@ ListView {
             font.family: "Arial"
             font.pixelSize: 16
             color: "#ffffff"
-            text: address
+            text: {
+                if(isMobile){
+                    TxUtils.addressTruncate(address, 6);
+                } else {
+                    return TxUtils.addressTruncate(address, 10);
+                }
+            }
             readOnly: true
         }
 
@@ -118,7 +124,13 @@ ListView {
             font.family: "Arial"
             font.pixelSize: 13
             color: "#545454"
-            text: paymentId
+            text: {
+                if(isMobile){
+                    TxUtils.addressTruncate(paymentId, 6);
+                } else {
+                    return TxUtils.addressTruncate(paymentId, 10);
+                }
+            }
         }
 
         ListModel {

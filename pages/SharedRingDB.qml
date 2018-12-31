@@ -104,7 +104,7 @@ Rectangle {
 
         Text {
             text: qsTr("This page allows you to interact with the shared ring database. " +
-                       "This database is meant for use by Monero wallets as well as wallets from Monero clones which reuse the Monero keys.") + translationManager.emptyString
+                       "This database is meant for use by Stellite wallets as well as wallets from Stellite clones which reuse the Stellite keys.") + translationManager.emptyString
             wrapMode: Text.Wrap
             Layout.fillWidth: true
             font.family: Style.fontRegular.name
@@ -116,20 +116,20 @@ Rectangle {
             Layout.fillWidth: true
             textFormat: Text.RichText
             text: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>" +
-                  qsTr("Blackballed outputs") + " <a href='#'>" + qsTr("Help") + "</a>" + translationManager.emptyString
+                  qsTr("Outputs marked as spent") + " <a href='#'>" + qsTr("Help") + "</a>" + translationManager.emptyString
             onLinkActivated: {
-                sharedRingDBDialog.title  = qsTr("Blackballed outputs") + translationManager.emptyString;
+                sharedRingDBDialog.title  = qsTr("Outputs marked as spent") + translationManager.emptyString;
                 sharedRingDBDialog.text = qsTr(
-                    "In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able " +
+                    "In order to obscure which inputs in a Stellite transaction are being spent, a third party should not be able " +
                     "to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection " +
                     "afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being " +
                     "actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers " +
-                    "of privacy protection Monero uses.<br>" +
+                    "of privacy protection Stellite uses.<br>" +
                     "To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new " +
-                    "transactions. Such a list is maintained by the Monero project and is available on the stellite.cash website, " +
+                    "transactions. Such a list is maintained by the Stellite project and is available on the stellite.cash website, " +
                     "and you can import this list here.<br>" +
-                    "Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself " +
-                    "using the stellite-blockchain-blackball tool to create a list of known spent outputs.<br>"
+                    "Alternatively, you can scan the blockchain (and the blockchain of key-reusing Stellite clones) yourself " +
+                    "using the stellite-blockchain-mark-spent-outputs tool to create a list of known spent outputs.<br>"
                 )
                 sharedRingDBDialog.icon = StandardIcon.Information
                 sharedRingDBDialog.open()
@@ -153,7 +153,7 @@ Rectangle {
 
             FileDialog {
                 id: loadBlackballFileDialog
-                title: qsTr("Please choose a file to load blackballed outputs from") + translationManager.emptyString;
+                title: qsTr("Please choose a file from which to load outputs to mark as spent") + translationManager.emptyString;
                 folder: "file://"
                 nameFilters: [ "*"]
 
@@ -171,7 +171,7 @@ Rectangle {
                     fontSize: mainLayout.lineEditFontSize
                     placeholderText: qsTr("Path to file") + "..." + translationManager.emptyString
                     labelFontSize: 14 * scaleRatio
-                    labelText: qsTr("Filename with outputs to blackball") + ":" + translationManager.emptyString
+                    labelText: qsTr("Filename with outputs to mark as spent") + ":" + translationManager.emptyString
                     copyButton: true
                     readOnly: false
                 }
@@ -211,7 +211,7 @@ Rectangle {
                     id: blackballOutputAmountLine
                     fontSize: mainLayout.lineEditFontSize
                     labelFontSize: 14 * scaleRatio
-                    labelText: qsTr("Or manually blackball/unblackball a single output:") + translationManager.emptyString
+                    labelText: qsTr("Or manually mark a single output as spent/unspent:") + translationManager.emptyString
                     placeholderText: qsTr("Paste output amount") + "..." + translationManager.emptyString
                     readOnly: false
                     width: mainLayout.editWidth / 2
@@ -235,7 +235,7 @@ Rectangle {
 
                 StandardButton {
                     id: blackballButton
-                    text: qsTr("Blackball") + translationManager.emptyString
+                    text: qsTr("Mark as spent") + translationManager.emptyString
                     small: true
                     enabled: !!appWindow.currentWallet && validUnsigned(blackballOutputAmountLine.text) && validUnsigned(blackballOutputOffsetLine.text)
                     onClicked: appWindow.currentWallet.blackballOutput(blackballOutputAmountLine.text, blackballOutputOffsetLine.text)
@@ -244,7 +244,7 @@ Rectangle {
                 StandardButton {
                     id: unblackballButton
                     anchors.right: parent.right
-                    text: qsTr("Unblackball") + translationManager.emptyString
+                    text: qsTr("Mark as unspent") + translationManager.emptyString
                     small: true
                     enabled: !!appWindow.currentWallet && validUnsigned(blackballOutputAmountLine.text) && validUnsigned(blackballOutputOffsetLine.text)
                     onClicked: appWindow.currentWallet.unblackballOutput(blackballOutputAmountLine.text, blackballOutputOffsetLine.text)
@@ -261,16 +261,16 @@ Rectangle {
             onLinkActivated: {
                 sharedRingDBDialog.title  = qsTr("Rings") + translationManager.emptyString;
                 sharedRingDBDialog.text = qsTr(
-                    "In order to avoid nullifying the protection afforded by Monero's ring signatures, an output should not " +
+                    "In order to avoid nullifying the protection afforded by Stellite's ring signatures, an output should not " +
                     "be spent with different rings on different blockchains. While this is normally not a concern, it can become one " +
-                    "when a key-reusing Monero clone allows you to spend existing outputs. In this case, you need to ensure this " +
+                    "when a key-reusing Stellite clone allows you to spend existing outputs. In this case, you need to ensure this " +
                     "existing outputs uses the same ring on both chains.<br>" +
-                    "This will be done automatically by Monero and any key-reusing software which is not trying to actively strip " +
+                    "This will be done automatically by Stellite and any key-reusing software which is not trying to actively strip " +
                     "you of your privacy.<br>" +
-                    "If you are using a key-reusing Monero clone too, and this clone does not include this protection, you can still " +
+                    "If you are using a key-reusing Stellite clone too, and this clone does not include this protection, you can still " +
                     "ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, " +
-                    "which allows you to then spend your Monero safely.<br>" +
-                    "If you do not use a key-reusing Monero clone without these safety features, then you do not need to do anything " +
+                    "which allows you to then spend your Stellite safely.<br>" +
+                    "If you do not use a key-reusing Stellite clone without these safety features, then you do not need to do anything " +
                     "as it is all automated.<br>"
                 )
                 sharedRingDBDialog.icon = StandardIcon.Information
@@ -282,7 +282,7 @@ Rectangle {
             textFormat: Text.RichText
             font.family: Style.fontRegular.name
             font.pixelSize: 14 * scaleRatio
-            text: qsTr("This records rings used by outputs spent on Monero on a key reusing chain, so that the same ring may be reused to avoid privacy issues.") + translationManager.emptyString
+            text: qsTr("This records rings used by outputs spent on Stellite on a key reusing chain, so that the same ring may be reused to avoid privacy issues.") + translationManager.emptyString
             wrapMode: Text.Wrap
             Layout.fillWidth: true;
             color: Style.defaultFontColor

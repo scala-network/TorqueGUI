@@ -1,6 +1,5 @@
-// Copyright (c) 2014-2015, The Stellite Project
 // Copyright (c) 2014-2018, The Monero Project
-//
+// 
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are
@@ -28,10 +27,14 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
+import "." as MoneroComponents
 
 Item {
     id: scrollItem
     property var flickable
+    property alias scrollColor: scroll.color
+    property alias scrollWidth: scroll.width
+    property alias scrollRadius: scroll.radius
     width: 15
     z: 1
 
@@ -53,9 +56,10 @@ Item {
         id: scroll
 
         width: 4
+        radius: width / 2
         height: {
             var t = (flickable.height * flickable.height) / flickable.contentHeight
-            return t < 20 ? 20 : t
+            return t < 50 ? 50 : t
         }
         y: 0; x: 0
         color: "#DBDBDB"

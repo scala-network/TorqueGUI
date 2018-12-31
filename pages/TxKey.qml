@@ -1,5 +1,4 @@
 // Copyright (c) 2014-2018, The Monero Project
-// Copyright (c) 2014-2015, The Stellite Project
 //
 // All rights reserved.
 //
@@ -56,9 +55,6 @@ Rectangle {
         // solo
         ColumnLayout {
             id: soloBox
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.top: parent.top
             spacing: 20 * scaleRatio
 
             Label {
@@ -115,8 +111,7 @@ Rectangle {
             }
 
             StandardButton {
-                anchors.left: parent.left
-                anchors.topMargin: 17 * scaleRatio
+                Layout.topMargin: 17 * scaleRatio
                 width: 60 * scaleRatio
                 small: true
                 text: qsTr("Generate") + translationManager.emptyString
@@ -205,8 +200,7 @@ Rectangle {
             }
 
             StandardButton {
-                anchors.left: parent.left
-                anchors.topMargin: 17 * scaleRatio
+                Layout.topMargin: 17 * scaleRatio
                 width: 60
                 small: true
                 text: qsTr("Check") + translationManager.emptyString

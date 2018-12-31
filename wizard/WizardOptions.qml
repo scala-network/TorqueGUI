@@ -1,6 +1,5 @@
 // Copyright (c) 2014-2018, The Monero Project
-// Copyright (c) 2014-2015, The Stellite Project
-//
+// 
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are
@@ -29,6 +28,7 @@
 
 import QtQuick 2.2
 import QtQml 2.2
+import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.1
 import moneroComponents.NetworkType 1.0
 import "../components"
@@ -127,6 +127,7 @@ ColumnLayout {
                 MouseArea {
                     id: createWalletArea
                     anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
                     hoverEnabled: true
                     onClicked: {
                         page.createWalletClicked()
@@ -169,6 +170,7 @@ ColumnLayout {
                 MouseArea {
                     id: recoverWalletArea
                     anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
                     hoverEnabled: true
                     onClicked: {
                         page.recoveryWalletClicked()
@@ -212,6 +214,7 @@ ColumnLayout {
                 MouseArea {
                     id: openWalletArea
                     anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
                     hoverEnabled: true
                     onClicked: {
                         page.openWalletClicked()
@@ -257,6 +260,7 @@ ColumnLayout {
                 MouseArea {
                     id: createWalletFromDeviceArea
                     anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
                     hoverEnabled: true
                     onClicked: {
                         page.createWalletFromDeviceClicked()
@@ -353,6 +357,36 @@ ColumnLayout {
                     testNet.checked = false;
                     console.log("Network type set to ", persistentSettings.nettype == NetworkType.STAGENET ? "Stagenet" : "Mainnet")
                 }
+            }
+        }
+    }
+
+    RowLayout {
+        Layout.leftMargin: wizardLeftMargin
+        Layout.rightMargin: wizardRightMargin
+        Layout.topMargin: 50 * scaleRatio
+        Layout.alignment: Qt.AlignHCenter
+        Layout.fillWidth: true
+        visible: showAdvancedCheckbox.checked
+
+        Text {
+            font.family: "Arial"
+            font.pixelSize: 16 * scaleRatio
+            color: "#4A4949"
+            text: qsTr("Number of KDF rounds:") + translationManager.emptyString
+        }
+        TextField {
+            id: kdfRoundsText
+            font.family: "Arial"
+            font.pixelSize: 16 * scaleRatio
+            Layout.preferredWidth: 60
+            horizontalAlignment: TextInput.AlignRight
+            selectByMouse: true
+            color: "#4A4949"
+            text: persistentSettings.kdfRounds
+            validator: IntValidator { bottom: 1 }
+            onEditingFinished: {
+                kdfRoundsText.text = persistentSettings.kdfRounds = parseInt(kdfRoundsText.text) >= 1 ? parseInt(kdfRoundsText.text) : 1;
             }
         }
     }

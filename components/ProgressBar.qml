@@ -104,7 +104,7 @@ Rectangle {
                 width: (maxWidth * fillLevel) / 100
                 radius: 8
                 // could change color based on progressbar status; if(item.fillLevel < 99 )
-                color: "#FA6800"
+                color: "#47d147"
             }
 
             Rectangle {

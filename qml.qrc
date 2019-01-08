@@ -240,5 +240,16 @@
         <file>images/miningxmr@2x.png</file>
         <file>images/eyeHide.png</file>
         <file>images/eyeShow.png</file>
+        <file>images/iconsignverify.png</file>
+        <file>images/iconringdb.png</file>
+        <file>images/iconmining.png</file>
+        <file>images/icontxkey.png</file>
+        <file>images/iconseedkeys.png</file>
+        <file>images/iconsend.png</file>
+        <file>images/iconsettings.png</file>
+        <file>images/iconadvanced.png</file>
+        <file>images/iconreceive.png</file>
+        <file>images/iconhistory.png</file>
+        <file>images/iconaddressbook.png</file>
     </qresource>
 </RCC>

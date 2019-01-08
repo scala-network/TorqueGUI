@@ -9,7 +9,7 @@ QtObject {
     property QtObject fontRegular: FontLoader { id: _fontRegular; source: "qrc:/fonts/Roboto-Regular.ttf"; }
 
     property string grey: "#404040"
-    property string orange: "#00b32b"
+    property string orange: "#334d8d"
     property string white: "#FFFFFF"
     property string green: "#2EB358"
 
@@ -24,8 +24,8 @@ QtObject {
     property string inputBorderColorInActive: Qt.rgba(255, 255, 255, 0.32)
     property string inputBorderColorInvalid: Qt.rgba(255, 0, 0, 0.40)
 
-    property string buttonBackgroundColor: "#00b32b"
-    property string buttonBackgroundColorHover: "#00e636"
+    property string buttonBackgroundColor: "#334d8d"
+    property string buttonBackgroundColorHover: "#5675c2"
     property string buttonBackgroundColorDisabled: "#707070"
     property string buttonBackgroundColorDisabledHover: "#808080"
     property string buttonTextColor: "white"

@@ -36,6 +36,7 @@ Rectangle {
     property int fillLevel: 0
     property string syncType // Wallet or Daemon
     property string syncText: qsTr("%1 blocks remaining: ").arg(syncType)
+//	property string progressbarcolor
     visible: false
     color: "transparent"
 
@@ -104,7 +105,17 @@ Rectangle {
                 width: (maxWidth * fillLevel) / 100
                 radius: 8
                 // could change color based on progressbar status; if(item.fillLevel < 99 )
-                color: "#47d147"
+                color: "#334d8d"
+//			    function progressColor (progressbarcolor){
+//                if(fillLevel < 99) {
+//                progressbarcolor = "#FA6800";
+//                } else {
+//                progressbarcolor = "#00b32b";
+//                }
+//                }
+//                color: progressbarcolor
+				
+            }
             }
 
             Rectangle {
@@ -119,4 +130,3 @@ Rectangle {
 
 
 
-}

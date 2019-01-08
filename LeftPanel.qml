@@ -291,8 +291,8 @@ Rectangle {
                     anchors.right: parent.right
                     height: 1
                 }
-              /* Disable twitter/news panel
-                Image {
+//              Disable twitter/news panel
+/*                Image {
                     anchors.left: parent.left
                     anchors.verticalCenter: logo.verticalCenter
                     anchors.leftMargin: 19
@@ -303,6 +303,11 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: appWindow.rightPanelExpanded = !appWindow.rightPanelExpanded
+                }
+				                Item { //separator
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    height: 20
                 }
               */
             }
@@ -376,6 +381,14 @@ Rectangle {
             // ------------- Transfer tab ---------------
             MoneroComponents.MenuButton {
                 id: transferButton
+								    Image {
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.left: parent.left
+        anchors.leftMargin: 15 * scaleRatio
+        anchors.rightMargin: parent.getOffset()
+        source: "../images/iconsend.png"
+        opacity: button.checked ? 1.0 : 0.4
+    }
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Send") + translationManager.emptyString
@@ -401,6 +414,14 @@ Rectangle {
 
             MoneroComponents.MenuButton {
                 id: addressBookButton
+												    Image {
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.left: parent.left
+        anchors.leftMargin: 35 * scaleRatio
+        anchors.rightMargin: parent.getOffset()
+        source: "../images/iconaddressbook.png"
+        opacity: button.checked ? 1.0 : 0.4
+    }
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Address book") + translationManager.emptyString
@@ -426,6 +447,14 @@ Rectangle {
             // ------------- Receive tab ---------------
             MoneroComponents.MenuButton {
                 id: receiveButton
+												    Image {
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.left: parent.left
+        anchors.leftMargin: 15 * scaleRatio
+        anchors.rightMargin: parent.getOffset()
+        source: "../images/iconreceive.png"
+        opacity: button.checked ? 1.0 : 0.4
+    }
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Receive") + translationManager.emptyString
@@ -450,6 +479,14 @@ Rectangle {
 
             MoneroComponents.MenuButton {
                 id: historyButton
+												    Image {
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.left: parent.left
+        anchors.leftMargin: 15 * scaleRatio
+        anchors.rightMargin: parent.getOffset()
+        source: "../images/iconhistory.png"
+        opacity: button.checked ? 1.0 : 0.4
+    }
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("History") + translationManager.emptyString
@@ -473,6 +510,14 @@ Rectangle {
             // ------------- Advanced tab ---------------
             MoneroComponents.MenuButton {
                 id: advancedButton
+												    Image {
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.left: parent.left
+        anchors.leftMargin: 15 * scaleRatio
+        anchors.rightMargin: parent.getOffset()
+        source: "../images/iconadvanced.png"
+        opacity: button.checked ? 1.0 : 0.4
+    }
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Advanced") + translationManager.emptyString
@@ -495,6 +540,14 @@ Rectangle {
             // ------------- Mining tab ---------------
             MoneroComponents.MenuButton {
                 id: miningButton
+												    Image {
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.left: parent.left
+        anchors.leftMargin: 35 * scaleRatio
+        anchors.rightMargin: parent.getOffset()
+        source: "../images/iconmining.png"
+        opacity: button.checked ? 1.0 : 0.4
+    }
                 visible: !isAndroid && !isIOS
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -520,6 +573,14 @@ Rectangle {
             // ------------- TxKey tab ---------------
             MoneroComponents.MenuButton {
                 id: txkeyButton
+												    Image {
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.left: parent.left
+        anchors.leftMargin: 35 * scaleRatio
+        anchors.rightMargin: parent.getOffset()
+        source: "../images/icontxkey.png"
+        opacity: button.checked ? 1.0 : 0.4
+    }
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Prove/check") + translationManager.emptyString
@@ -543,6 +604,14 @@ Rectangle {
             // ------------- Shared RingDB tab ---------------
             MoneroComponents.MenuButton {
                 id: sharedringdbButton
+												    Image {
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.left: parent.left
+        anchors.leftMargin: 35 * scaleRatio
+        anchors.rightMargin: parent.getOffset()
+        source: "../images/iconringdb.png"
+        opacity: button.checked ? 1.0 : 0.4
+    }
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Shared RingDB") + translationManager.emptyString
@@ -568,6 +637,14 @@ Rectangle {
             // ------------- Sign/verify tab ---------------
             MoneroComponents.MenuButton {
                 id: signButton
+												    Image {
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.left: parent.left
+        anchors.leftMargin: 35 * scaleRatio
+        anchors.rightMargin: parent.getOffset()
+        source: "../images/iconsignverify.png"
+        opacity: button.checked ? 1.0 : 0.4
+    }
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Sign/verify") + translationManager.emptyString
@@ -591,6 +668,14 @@ Rectangle {
             // ------------- Settings tab ---------------
             MoneroComponents.MenuButton {
                 id: settingsButton
+												    Image {
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.left: parent.left
+        anchors.leftMargin: 15 * scaleRatio
+        anchors.rightMargin: parent.getOffset()
+        source: "../images/iconsettings.png"
+        opacity: button.checked ? 1.0 : 0.4
+    }
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Settings") + translationManager.emptyString
@@ -613,6 +698,14 @@ Rectangle {
             // ------------- Sign/verify tab ---------------
             MoneroComponents.MenuButton {
                 id: keysButton
+												    Image {
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.left: parent.left
+        anchors.leftMargin: 35 * scaleRatio
+        anchors.rightMargin: parent.getOffset()
+        source: "../images/iconseedkeys.png"
+        opacity: button.checked ? 1.0 : 0.4
+    }
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Seed & Keys") + translationManager.emptyString

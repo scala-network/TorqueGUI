@@ -20,8 +20,8 @@
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="66"/>
-        <source>4.. / 8..</source>
-        <translation>4.. / 8..</translation>
+        <source>Stellite</source>
+        <translation>Stellite</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="74"/>
@@ -353,8 +353,8 @@
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="93"/>
-        <source>WARNING: Do not reuse your Monero keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.</source>
-        <translation>FIGYELEM! Ne használd újra a kulcsokat egy másik Monero forkon! </translation>
+        <source>WARNING: Do not reuse your Stellite keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.</source>
+        <translation>FIGYELEM! Ne használd újra a kulcsokat egy másik Stellite forkon! </translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="143"/>
@@ -610,8 +610,8 @@
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="82"/>
-        <source>Mining with your computer helps strengthen the Monero network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.&lt;br&gt; &lt;br&gt;Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
-        <translation>A saját gépen történő bányászat biztonságosabbá teszi a Monero hálózatot. Minél többen bányásznak annál nehezebb a hálózatot megtámadni. Minden kicsi számít! Ha bányászol a számítógéped hash-értékeket állít elő és amennyiben Te találod meg a következő blokkhoz tartozó helyes számot a blokkjutalom Téged illet. Sok szerencsét!</translation>
+        <source>Mining with your computer helps strengthen the Stellite network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.&lt;br&gt; &lt;br&gt;Mining also gives you a small chance to earn some Stellite. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
+        <translation>A saját gépen történő bányászat biztonságosabbá teszi a Stellite hálózatot. Minél többen bányásznak annál nehezebb a hálózatot megtámadni. Minden kicsi számít! Ha bányászol a számítógéped hash-értékeket állít elő és amennyiben Te találod meg a következő blokkhoz tartozó helyes számot a blokkjutalom Téged illet. Sok szerencsét!</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="95"/>
@@ -867,12 +867,12 @@
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="138"/>
-        <source>With more Monero</source>
+        <source>With more Stellite</source>
         <translation>Több moneroval</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="139"/>
-        <source>With not enough Monero</source>
+        <source>With not enough Stellite</source>
         <translation>Nem elég moneroval</translation>
     </message>
     <message>
@@ -1041,8 +1041,8 @@
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="89"/>
-        <source>Embedded Monero version: </source>
-        <translation>Monero verzió:</translation>
+        <source>Embedded Stellite version: </source>
+        <translation>Stellite verzió:</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="118"/>
@@ -1163,13 +1163,13 @@ A régi gyorsítótár fájlja át lesz nevezve és bármikor visszaállítható
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="232"/>
-        <source>Uses a third-party server to connect to the Monero network. Less secure, but easier on your computer.</source>
+        <source>Uses a third-party server to connect to the Stellite network. Less secure, but easier on your computer.</source>
         <translation>Távoli szerver használata a hálózat eléréséhez. Kevésbé biztonságos, de kisebb gépigényű.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="277"/>
-        <source>To find a remote node, type &apos;Monero remote node&apos; into your favorite search engine. Please ensure the node is run by a trusted third-party.</source>
-        <translation>Távoli szerver használatához írd be a kedvenc keresődbe, hogy &apos;Monero remote node&apos;. Bizonyosodj meg róla, hogy a szerver megbízható!</translation>
+        <source>To find a remote node, type &apos;Stellite remote node&apos; into your favorite search engine. Please ensure the node is run by a trusted third-party.</source>
+        <translation>Távoli szerver használatához írd be a kedvenc keresődbe, hogy &apos;Stellite remote node&apos;. Bizonyosodj meg róla, hogy a szerver megbízható!</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="291"/>
@@ -1325,8 +1325,8 @@ A régi gyorsítótár fájlja át lesz nevezve és bármikor visszaállítható
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="97"/>
-        <source>This page allows you to interact with the shared ring database. This database is meant for use by Monero wallets as well as wallets from Monero clones which reuse the Monero keys.</source>
-        <translation>Itt léphetsz kapcsolatba a megosztott gyűrűadatbázissal. Ezt az adatbázist használja a tárcád és a többi Monero-klón program is.</translation>
+        <source>This page allows you to interact with the shared ring database. This database is meant for use by Stellite wallets as well as wallets from Stellite clones which reuse the Stellite keys.</source>
+        <translation>Itt léphetsz kapcsolatba a megosztott gyűrűadatbázissal. Ezt az adatbázist használja a tárcád és a többi Stellite-klón program is.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="110"/>
@@ -1342,8 +1342,8 @@ A régi gyorsítótár fájlja át lesz nevezve és bármikor visszaállítható
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="113"/>
-        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the stellite.cash website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the stellite-blockchain-blackball tool to create a list of known spent outputs.&lt;br&gt;</source>
-        <translation>Ahhoz, hogy a gyűrű aláírások anonimak maradjanak, ki kell zárni az olyan tranzakció bemeneteket amiket egy másik (Monero-klón) blokkláncon már felhasználtak. Ha ez nem történik meg, esetleg egy rosszindulatú harmadik fél nagyobb eséllyel megtippelheti, hogy melyik a valódi tranzakció bemenet. Ez gyengítheti a Monero anonimitásának háromszintű vedelmét. Ahhoz, hogy ezeket a bemeneteket kizárd a tranzakcióidból, a stellite.cash fenntart egy folyamatosan frissített listát róluk, amit letöltés után itt tudsz importálni. Másik lehetőséged a blokklánc átvizsgálása a stellite-blockchain-blackball programmal és egy lista készítése.</translation>
+        <source>In order to obscure which inputs in a Stellite transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Stellite uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Stellite project and is available on the stellite.cash website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Stellite clones) yourself using the stellite-blockchain-blackball tool to create a list of known spent outputs.&lt;br&gt;</source>
+        <translation>Ahhoz, hogy a gyűrű aláírások anonimak maradjanak, ki kell zárni az olyan tranzakció bemeneteket amiket egy másik (Stellite-klón) blokkláncon már felhasználtak. Ha ez nem történik meg, esetleg egy rosszindulatú harmadik fél nagyobb eséllyel megtippelheti, hogy melyik a valódi tranzakció bemenet. Ez gyengítheti a Stellite anonimitásának háromszintű vedelmét. Ahhoz, hogy ezeket a bemeneteket kizárd a tranzakcióidból, a stellite.cash fenntart egy folyamatosan frissített listát róluk, amit letöltés után itt tudsz importálni. Másik lehetőséged a blokklánc átvizsgálása a stellite-blockchain-blackball programmal és egy lista készítése.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="134"/>
@@ -1408,13 +1408,13 @@ A régi gyorsítótár fájlja át lesz nevezve és bármikor visszaállítható
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="245"/>
-        <source>In order to avoid nullifying the protection afforded by Monero&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing Monero clone allows you to spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by Monero and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing Monero clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your Monero safely.&lt;br&gt;If you do not use a key-reusing Monero clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
-        <translation>A gyűrűaláírások anonimitásának megőrzése érdekében egy bemenetet nem ajánlott különböző gyűrűben, különböző blokkláncokon felhasználni. Ha a kulcsokat újra felhasználó Monero-klónt használsz ügyelj arra hogy a különböző blokkláncokon a gyűrűben ugyanazok a bemenetek szerepeljenek. Ez általában automatikus, hacsak nem egy olyan Monero-klónt használsz ami direkt gyengíteni szeretné az anonimitásodat.</translation>
+        <source>In order to avoid nullifying the protection afforded by Stellite&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing Stellite clone allows you to spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by Stellite and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing Stellite clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your Stellite safely.&lt;br&gt;If you do not use a key-reusing Stellite clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
+        <translation>A gyűrűaláírások anonimitásának megőrzése érdekében egy bemenetet nem ajánlott különböző gyűrűben, különböző blokkláncokon felhasználni. Ha a kulcsokat újra felhasználó Stellite-klónt használsz ügyelj arra hogy a különböző blokkláncokon a gyűrűben ugyanazok a bemenetek szerepeljenek. Ez általában automatikus, hacsak nem egy olyan Stellite-klónt használsz ami direkt gyengíteni szeretné az anonimitásodat.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="267"/>
-        <source>This records rings used by outputs spent on Monero on a key reusing chain, so that the same ring may be reused to avoid privacy issues.</source>
-        <translation>Az itt rögzített gyűrűkkel lehet tranzakciót indítani egy a kulcsokat újra felhasználó Monero forkon. Ugyanazon gyűrű használatával elkerülhető az anonimitás csökkenése.</translation>
+        <source>This records rings used by outputs spent on Stellite on a key reusing chain, so that the same ring may be reused to avoid privacy issues.</source>
+        <translation>Az itt rögzített gyűrűkkel lehet tranzakciót indítani egy a kulcsokat újra felhasználó Stellite forkon. Ugyanazon gyűrű használatával elkerülhető az anonimitás csökkenése.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="278"/>
@@ -1924,8 +1924,8 @@ Ringsize: </source>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="619"/>
-        <source>Monero sent successfully</source>
-        <translation>Monero sikeresen elküldve</translation>
+        <source>Payment sent successfully</source>
+        <translation>Stellite sikeresen elküldve</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="687"/>
@@ -2073,12 +2073,12 @@ Egyszerű költési bizonylat esetén nem kell megadni a kedvezményezett címé
     <name>WizardConfigure</name>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="79"/>
-        <source>We’re almost there - let’s just configure some Monero preferences</source>
+        <source>We’re almost there - let’s just configure some Stellite preferences</source>
         <translation>Majdnem kész - néhány további beállítás konfigurálása</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="97"/>
-        <source>Kickstart the Monero blockchain?</source>
+        <source>Kickstart the Stellite blockchain?</source>
         <translation>Az előre letöltött blokkláncot indítsuk?</translation>
     </message>
     <message>
@@ -2093,8 +2093,8 @@ Egyszerű költési bizonylat esetén nem kell megadni a kedvezményezett címé
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="140"/>
-        <source>Disk conservation mode uses substantially less disk-space, but the same amount of bandwidth as a regular Monero instance. However, storing the full blockchain is beneficial to the security of the Monero network. If you are on a device with limited disk space, then this option is appropriate for you.</source>
-        <translation>A lemezkímélő mód lényegesen kevesebb tárhelyet használ, de a sávszélesség-igényt nem csökkenti. Ennek ellenére a teljes blokklánc letöltése fokozza a Monero hálózat biztonságát. Ha kevés a tárhely megfontolandó a bekapcsolása.</translation>
+        <source>Disk conservation mode uses substantially less disk-space, but the same amount of bandwidth as a regular Stellite instance. However, storing the full blockchain is beneficial to the security of the Stellite network. If you are on a device with limited disk space, then this option is appropriate for you.</source>
+        <translation>A lemezkímélő mód lényegesen kevesebb tárhelyet használ, de a sávszélesség-igényt nem csökkenti. Ennek ellenére a teljes blokklánc letöltése fokozza a Stellite hálózat biztonságát. Ha kevés a tárhely megfontolandó a bekapcsolása.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="153"/>
@@ -2103,8 +2103,8 @@ Egyszerű költési bizonylat esetén nem kell megadni a kedvezményezett címé
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="169"/>
-        <source>Mining secures the Monero network, and also pays a small reward for the work done. This option will let Monero mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
-        <translation>A bányászat garantálja a Monero hálózat biztonságát és jutalmazza a bányászokat. Ezzel a beállítással a gép szabad kapacitását kihasználva bányászhatunk.</translation>
+        <source>Mining secures the Stellite network, and also pays a small reward for the work done. This option will let Stellite mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
+        <translation>A bányászat garantálja a Stellite hálózat biztonságát és jutalmazza a bányászokat. Ezzel a beállítással a gép szabad kapacitását kihasználva bányászhatunk.</translation>
     </message>
 </context>
 <context>
@@ -2135,8 +2135,8 @@ Egyszerű költési bizonylat esetén nem kell megadni a kedvezményezett címé
     <name>WizardDaemonSettings</name>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="114"/>
-        <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.                         &lt;br&gt;&lt;br&gt;                         If you don&apos;t have the option to run your own node, there&apos;s an option to connect to a remote node.</source>
-        <translation>A Monero hálózattal való kommunikációhoz csatlakozni kell egy Monero csomóponthoz. Az anonimitás megőrzéséhez ajánlott saját csomópont futtatása.                         &lt;br&gt;&lt;br&gt;                         Ha nem tudsz saját csomópontot futtatni, csatlakozhatsz egy távolihoz.</translation>
+        <source>To be able to communicate with the Stellite network your wallet needs to be connected to a Stellite node. For best privacy it&apos;s recommended to run your own node.                         &lt;br&gt;&lt;br&gt;                         If you don&apos;t have the option to run your own node, there&apos;s an option to connect to a remote node.</source>
+        <translation>A Stellite hálózattal való kommunikációhoz csatlakozni kell egy Stellite csomóponthoz. Az anonimitás megőrzéséhez ajánlott saját csomópont futtatása.                         &lt;br&gt;&lt;br&gt;                         Ha nem tudsz saját csomópontot futtatni, csatlakozhatsz egy távolihoz.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="126"/>
@@ -2168,8 +2168,8 @@ Egyszerű költési bizonylat esetén nem kell megadni a kedvezményezett címé
     <name>WizardDonation</name>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="93"/>
-        <source>Monero development is solely supported by donations</source>
-        <translation>A Monero fejlesztése csak és kizárólag magánadományokból valósul meg.</translation>
+        <source>Stellite development is solely supported by donations</source>
+        <translation>A Stellite fejlesztése csak és kizárólag magánadományokból valósul meg.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="113"/>
@@ -2183,8 +2183,8 @@ Egyszerű költési bizonylat esetén nem kell megadni a kedvezményezett címé
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="162"/>
-        <source>For every transaction, a small transaction fee is charged. This option lets you add an additional amount, as a percentage of that fee, to your transaction to support Monero development. For instance, a 50% autodonation take a transaction fee of 0.005 XMR and add a 0.0025 XMR to support Monero development.</source>
-        <translation>Minden tranzakció tartalmaz egy tranzakciós díjat. Ehhez a díjhoz hozzáadhatsz egy kisebb adományt a Monero fejlesztőinek. Pl: ha 50%-os adomány van beállítva és a Tx díja 0,005 XMR akkor egy 0,0025 XMR adomány kerül pluszban levonásra, aminek a kedvezményezettjei a Monero fejlesztők.</translation>
+        <source>For every transaction, a small transaction fee is charged. This option lets you add an additional amount, as a percentage of that fee, to your transaction to support Stellite development. For instance, a 50% autodonation take a transaction fee of 0.005 XMR and add a 0.0025 XMR to support Stellite development.</source>
+        <translation>Minden tranzakció tartalmaz egy tranzakciós díjat. Ehhez a díjhoz hozzáadhatsz egy kisebb adományt a Stellite fejlesztőinek. Pl: ha 50%-os adomány van beállítva és a Tx díja 0,005 XMR akkor egy 0,0025 XMR adomány kerül pluszban levonásra, aminek a kedvezményezettjei a Stellite fejlesztők.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="174"/>
@@ -2193,8 +2193,8 @@ Egyszerű költési bizonylat esetén nem kell megadni a kedvezményezett címé
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="190"/>
-        <source>Mining secures the Monero network, and also pays a small reward for the work done. This option will let Monero mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
-        <translation>A bányászat garantálja a Monero hálózat biztonságát és jutalmazza a bányászokat. Ezzel a beállítással a gép szabad kapacitását kihasználva bányászhatunk.</translation>
+        <source>Mining secures the Stellite network, and also pays a small reward for the work done. This option will let Stellite mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
+        <translation>A bányászat garantálja a Stellite hálózat biztonságát és jutalmazza a bányászokat. Ezzel a beállítással a gép szabad kapacitását kihasználva bányászhatunk.</translation>
     </message>
 </context>
 <context>
@@ -2406,8 +2406,8 @@ Egyszerű költési bizonylat esetén nem kell megadni a kedvezményezett címé
     <name>WizardOptions</name>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="76"/>
-        <source>Welcome to Monero!</source>
-        <translation>Üdvözöl a Monero!</translation>
+        <source>Welcome to Stellite!</source>
+        <translation>Üdvözöl a Stellite!</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="87"/>
@@ -2496,8 +2496,8 @@ Egyszerű költési bizonylat esetén nem kell megadni a kedvezményezett címé
     <name>WizardWelcome</name>
     <message>
         <location filename="../wizard/WizardWelcome.qml" line="73"/>
-        <source>Welcome to Monero!</source>
-        <translation>Üdvözöl a Monero!</translation>
+        <source>Welcome to Stellite!</source>
+        <translation>Üdvözöl a Stellite!</translation>
     </message>
     <message>
         <location filename="../wizard/WizardWelcome.qml" line="83"/>
@@ -2673,8 +2673,8 @@ Spending address index: </source>
     </message>
     <message>
         <location filename="../main.qml" line="799"/>
-        <source>Monero sent successfully: %1 transaction(s) </source>
-        <translation>Monero sikeresen elküldve: %1 tranzakció(k)</translation>
+        <source>Payment sent successfully: %1 transaction(s) </source>
+        <translation>Stellite sikeresen elküldve: %1 tranzakció(k)</translation>
     </message>
     <message>
         <location filename="../main.qml" line="829"/>
@@ -2848,8 +2848,8 @@ Spending address index: </source>
     </message>
     <message>
         <location filename="../main.qml" line="1297"/>
-        <source>Monero</source>
-        <translation>Monero</translation>
+        <source>Stellite</source>
+        <translation>Stellite</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1447"/>

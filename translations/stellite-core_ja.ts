@@ -20,8 +20,8 @@
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="66"/>
-        <source>4.. / 8..</source>
-        <translation>4.. / 8..</translation>
+        <source>Stellite</source>
+        <translation>Stellite</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="74"/>
@@ -358,8 +358,8 @@
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="93"/>
-        <source>WARNING: Do not reuse your Monero keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.</source>
-        <translation>警告: キーの再利用に関する対策が組み込まれていない限り、Moneroのキーを別のフォークで使い回さないでください。あなたのプライバシーが損なわれます。</translation>
+        <source>WARNING: Do not reuse your Stellite keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.</source>
+        <translation>警告: キーの再利用に関する対策が組み込まれていない限り、Stelliteのキーを別のフォークで使い回さないでください。あなたのプライバシーが損なわれます。</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="196"/>
@@ -610,8 +610,8 @@
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="82"/>
-        <source>Mining with your computer helps strengthen the Monero network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.&lt;br&gt; &lt;br&gt;Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
-        <translation>あなたのコンピュータでマイニングを行うことで、Moneroのネットワークをより強固にすることができます。マイニングをする人が増えるほど、ネットワークへの攻撃が難しくなります。一人一人の協力が大切です。&lt;br&gt; &lt;br&gt;マイニングをすると、低確率ですがMoneroを獲得できる可能性があります。あなたのコンピュータは、ある計算問題の解となるブロックとそのハッシュ値を計算します。正解のブロックが見つかると、あなたはそれに伴う報酬を得ます。グッドラック!</translation>
+        <source>Mining with your computer helps strengthen the Stellite network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.&lt;br&gt; &lt;br&gt;Mining also gives you a small chance to earn some Stellite. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
+        <translation>あなたのコンピュータでマイニングを行うことで、Stelliteのネットワークをより強固にすることができます。マイニングをする人が増えるほど、ネットワークへの攻撃が難しくなります。一人一人の協力が大切です。&lt;br&gt; &lt;br&gt;マイニングをすると、低確率ですがStelliteを獲得できる可能性があります。あなたのコンピュータは、ある計算問題の解となるブロックとそのハッシュ値を計算します。正解のブロックが見つかると、あなたはそれに伴う報酬を得ます。グッドラック!</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="95"/>
@@ -867,12 +867,12 @@
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="138"/>
-        <source>With more Monero</source>
+        <source>With more Stellite</source>
         <translation>指定の金額を上回っています</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="139"/>
-        <source>With not enough Monero</source>
+        <source>With not enough Stellite</source>
         <translation>指定の金額を下回っています</translation>
     </message>
     <message>
@@ -1041,8 +1041,8 @@
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="89"/>
-        <source>Embedded Monero version: </source>
-        <translation>組み込まれているMoneroのバージョン: </translation>
+        <source>Embedded Stellite version: </source>
+        <translation>組み込まれているStelliteのバージョン: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="118"/>
@@ -1164,13 +1164,13 @@ The old wallet cache file will be renamed and can be restored later.
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="232"/>
-        <source>Uses a third-party server to connect to the Monero network. Less secure, but easier on your computer.</source>
-        <translation>サードパーティーのサーバを使ってMoneroネットワークに接続します。セキュリティは低くなりますがより簡単です。</translation>
+        <source>Uses a third-party server to connect to the Stellite network. Less secure, but easier on your computer.</source>
+        <translation>サードパーティーのサーバを使ってStelliteネットワークに接続します。セキュリティは低くなりますがより簡単です。</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="277"/>
-        <source>To find a remote node, type &apos;Monero remote node&apos; into your favorite search engine. Please ensure the node is run by a trusted third-party.</source>
-        <translation>リモートノードを見つけるには、お好きな検索エンジンで&apos;Monero remote node&apos;と検索してください。ノードが信頼できるサードパーティーによって運営されていることを確認してください。</translation>
+        <source>To find a remote node, type &apos;Stellite remote node&apos; into your favorite search engine. Please ensure the node is run by a trusted third-party.</source>
+        <translation>リモートノードを見つけるには、お好きな検索エンジンで&apos;Stellite remote node&apos;と検索してください。ノードが信頼できるサードパーティーによって運営されていることを確認してください。</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="291"/>
@@ -1326,8 +1326,8 @@ The old wallet cache file will be renamed and can be restored later.
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="97"/>
-        <source>This page allows you to interact with the shared ring database. This database is meant for use by Monero wallets as well as wallets from Monero clones which reuse the Monero keys.</source>
-        <translation>このページでは共有リングデータベースを操作できます。このデータベースはMoneroウォレットおよびMoneroのキーを再利用するMoneroクローンのウォレットで利用するためのものです。</translation>
+        <source>This page allows you to interact with the shared ring database. This database is meant for use by Stellite wallets as well as wallets from Stellite clones which reuse the Stellite keys.</source>
+        <translation>このページでは共有リングデータベースを操作できます。このデータベースはStelliteウォレットおよびStelliteのキーを再利用するStelliteクローンのウォレットで利用するためのものです。</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="110"/>
@@ -1343,8 +1343,8 @@ The old wallet cache file will be renamed and can be restored later.
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="113"/>
-        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the stellite.cash website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the stellite-blockchain-blackball tool to create a list of known spent outputs.&lt;br&gt;</source>
-        <translation>第三者がリング内に既知の使用済みインプットを見つけられないことは、Moneroトランザクションのどのインプットが使用されたのかを隠すために必要です。もし見つけられるとリング署名による保護は弱まります。もし1つのインプットを除いてすべてが使用済みだと知られている場合、実際に使用されたインプットは明らかとなり、Moneroが使っている3つの主要なプライバシー保護レイヤーのうちの1つであるリング署名の効果が失われてしまいます。&lt;br&gt;トランザクションでそれらのインプットを避けるため、既知の使用済みインプットのリストを用いてそれらを新規のトランザクションで使用しないようにできます。このようなリストはMoneroプロジェクトによって保守されstellite.cashのウェブサイトで公開されており、ここではこのリストをインポートすることができます。&lt;br&gt;あるいはstellite-blockchain-blackballというツールを使い、Moneroのブロックチェーン(およびキーを再利用するMoneroクローンのブロックチェン)を自分でスキャンして既知の使用済みアウトプットのリストを生成できます。&lt;br&gt;</translation>
+        <source>In order to obscure which inputs in a Stellite transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Stellite uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Stellite project and is available on the stellite.cash website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Stellite clones) yourself using the stellite-blockchain-blackball tool to create a list of known spent outputs.&lt;br&gt;</source>
+        <translation>第三者がリング内に既知の使用済みインプットを見つけられないことは、Stelliteトランザクションのどのインプットが使用されたのかを隠すために必要です。もし見つけられるとリング署名による保護は弱まります。もし1つのインプットを除いてすべてが使用済みだと知られている場合、実際に使用されたインプットは明らかとなり、Stelliteが使っている3つの主要なプライバシー保護レイヤーのうちの1つであるリング署名の効果が失われてしまいます。&lt;br&gt;トランザクションでそれらのインプットを避けるため、既知の使用済みインプットのリストを用いてそれらを新規のトランザクションで使用しないようにできます。このようなリストはStelliteプロジェクトによって保守されstellite.cashのウェブサイトで公開されており、ここではこのリストをインポートすることができます。&lt;br&gt;あるいはstellite-blockchain-blackballというツールを使い、Stelliteのブロックチェーン(およびキーを再利用するStelliteクローンのブロックチェン)を自分でスキャンして既知の使用済みアウトプットのリストを生成できます。&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="134"/>
@@ -1409,13 +1409,13 @@ The old wallet cache file will be renamed and can be restored later.
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="245"/>
-        <source>In order to avoid nullifying the protection afforded by Monero&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing Monero clone allows you to spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by Monero and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing Monero clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your Monero safely.&lt;br&gt;If you do not use a key-reusing Monero clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
-        <translation>Moneroのリング署名による保護を無効化しないため、あるアウトプットを使う際に異なるブロックチェーンで異なるリングを使うことは避けなければなりません。これは通常問題になりませんが、キーを再利用するMoneroクローンが既存のアウトプットの使用を許している場合問題になります。この場合、既存のアウトプットは両方のチェーンで同じリングを使わなくてはなりません。&lt;br&gt;これはキーを再利用するソフトウェアが積極的にプライバシーを侵害しようとしない限り自動的に行われます。&lt;br&gt;もしキーを再利用するMoneroクローンを使っていてそのクローンがこの保護を含んでいない場合も、まずクローンの方でアウトプットを使用しその後リングをこのページに手動で追加することで、トランザクションは保護されMoneroを安全に使用できるようになります。&lt;br&gt;これらの機能を提供しないキーを再利用するMoneroクローンを使用していない場合、すべては自動化されているので何もする必要はありません。&lt;br&gt;</translation>
+        <source>In order to avoid nullifying the protection afforded by Stellite&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing Stellite clone allows you to spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by Stellite and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing Stellite clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your Stellite safely.&lt;br&gt;If you do not use a key-reusing Stellite clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
+        <translation>Stelliteのリング署名による保護を無効化しないため、あるアウトプットを使う際に異なるブロックチェーンで異なるリングを使うことは避けなければなりません。これは通常問題になりませんが、キーを再利用するStelliteクローンが既存のアウトプットの使用を許している場合問題になります。この場合、既存のアウトプットは両方のチェーンで同じリングを使わなくてはなりません。&lt;br&gt;これはキーを再利用するソフトウェアが積極的にプライバシーを侵害しようとしない限り自動的に行われます。&lt;br&gt;もしキーを再利用するStelliteクローンを使っていてそのクローンがこの保護を含んでいない場合も、まずクローンの方でアウトプットを使用しその後リングをこのページに手動で追加することで、トランザクションは保護されStelliteを安全に使用できるようになります。&lt;br&gt;これらの機能を提供しないキーを再利用するStelliteクローンを使用していない場合、すべては自動化されているので何もする必要はありません。&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="267"/>
-        <source>This records rings used by outputs spent on Monero on a key reusing chain, so that the same ring may be reused to avoid privacy issues.</source>
-        <translation>キーを再利用するチェーンでアウトプットに使用されたリングを記録し、プライバシーの問題を避けるためMoneroでも同じリングを使うようにします。</translation>
+        <source>This records rings used by outputs spent on Stellite on a key reusing chain, so that the same ring may be reused to avoid privacy issues.</source>
+        <translation>キーを再利用するチェーンでアウトプットに使用されたリングを記録し、プライバシーの問題を避けるためStelliteでも同じリングを使うようにします。</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="278"/>
@@ -1819,8 +1819,8 @@ The old wallet cache file will be renamed and can be restored later.
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="619"/>
-        <source>Monero sent successfully</source>
-        <translation>Moneroの送金に成功しました</translation>
+        <source>Payment sent successfully</source>
+        <translation>Stelliteの送金に成功しました</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="702"/>
@@ -2081,13 +2081,13 @@ Spend Proofの場合、宛先アドレスを指定する必要はありません
     <name>WizardConfigure</name>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="79"/>
-        <source>We’re almost there - let’s just configure some Monero preferences</source>
+        <source>We’re almost there - let’s just configure some Stellite preferences</source>
         <translation>あと少しで完了です - いくつかの項目を設定してください</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="97"/>
-        <source>Kickstart the Monero blockchain?</source>
-        <translation>Moneroのブロックチェーンを初期化しますか？</translation>
+        <source>Kickstart the Stellite blockchain?</source>
+        <translation>Stelliteのブロックチェーンを初期化しますか？</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="113"/>
@@ -2101,8 +2101,8 @@ Spend Proofの場合、宛先アドレスを指定する必要はありません
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="140"/>
-        <source>Disk conservation mode uses substantially less disk-space, but the same amount of bandwidth as a regular Monero instance. However, storing the full blockchain is beneficial to the security of the Monero network. If you are on a device with limited disk space, then this option is appropriate for you.</source>
-        <translation>ディスク容量節約モードを有効にすると、使用するディスク容量はずっと小さくなりますが、通信帯域の使用量は通常モードと変わりません。ただし、Moneroのネットワークの安全性を高める意味で、完全なブロックチェーンの全体を保存することが推奨されています。もしあなたのコンピュータのディスク容量が小さい場合は、このオプションを使用してください。</translation>
+        <source>Disk conservation mode uses substantially less disk-space, but the same amount of bandwidth as a regular Stellite instance. However, storing the full blockchain is beneficial to the security of the Stellite network. If you are on a device with limited disk space, then this option is appropriate for you.</source>
+        <translation>ディスク容量節約モードを有効にすると、使用するディスク容量はずっと小さくなりますが、通信帯域の使用量は通常モードと変わりません。ただし、Stelliteのネットワークの安全性を高める意味で、完全なブロックチェーンの全体を保存することが推奨されています。もしあなたのコンピュータのディスク容量が小さい場合は、このオプションを使用してください。</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="153"/>
@@ -2111,8 +2111,8 @@ Spend Proofの場合、宛先アドレスを指定する必要はありません
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="169"/>
-        <source>Mining secures the Monero network, and also pays a small reward for the work done. This option will let Monero mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
-        <translation>Moneroの採掘をすることでネットワークの安全性が高まり、また提供した計算量の対価として低い確率ですが報酬が得られます。このオプションは、あなたのコンピュータが電源に接続されていてなおかつアイドル状態の場合に、自動的にMoneroの採掘を行うことを許可します。あなたが作業を再開すると、採掘は停止されます。</translation>
+        <source>Mining secures the Stellite network, and also pays a small reward for the work done. This option will let Stellite mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
+        <translation>Stelliteの採掘をすることでネットワークの安全性が高まり、また提供した計算量の対価として低い確率ですが報酬が得られます。このオプションは、あなたのコンピュータが電源に接続されていてなおかつアイドル状態の場合に、自動的にStelliteの採掘を行うことを許可します。あなたが作業を再開すると、採掘は停止されます。</translation>
     </message>
 </context>
 <context>
@@ -2143,8 +2143,8 @@ Spend Proofの場合、宛先アドレスを指定する必要はありません
     <name>WizardDaemonSettings</name>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="114"/>
-        <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.                         &lt;br&gt;&lt;br&gt;                         If you don&apos;t have the option to run your own node, there&apos;s an option to connect to a remote node.</source>
-        <translation>Moneroネットワークと通信するためにウォレットはMoneroノードに接続されている必要があります。プライバシーを最大限に保護するため自分自身のノードを走らせることが推奨されています。
+        <source>To be able to communicate with the Stellite network your wallet needs to be connected to a Stellite node. For best privacy it&apos;s recommended to run your own node.                         &lt;br&gt;&lt;br&gt;                         If you don&apos;t have the option to run your own node, there&apos;s an option to connect to a remote node.</source>
+        <translation>Stelliteネットワークと通信するためにウォレットはStelliteノードに接続されている必要があります。プライバシーを最大限に保護するため自分自身のノードを走らせることが推奨されています。
 &lt;br&gt;&lt;br&gt;                         自分自身のノードを走らせることができない場合はリモートノードに接続することも可能です。</translation>
     </message>
     <message>
@@ -2177,8 +2177,8 @@ Spend Proofの場合、宛先アドレスを指定する必要はありません
     <name>WizardDonation</name>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="93"/>
-        <source>Monero development is solely supported by donations</source>
-        <translation>Moneroの開発は寄付のみによって支えられています</translation>
+        <source>Stellite development is solely supported by donations</source>
+        <translation>Stelliteの開発は寄付のみによって支えられています</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="113"/>
@@ -2192,8 +2192,8 @@ Spend Proofの場合、宛先アドレスを指定する必要はありません
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="162"/>
-        <source>For every transaction, a small transaction fee is charged. This option lets you add an additional amount, as a percentage of that fee, to your transaction to support Monero development. For instance, a 50% autodonation take a transaction fee of 0.005 XMR and add a 0.0025 XMR to support Monero development.</source>
-        <translation>取引には少額の手数料がかかります。このオプションはその手数料に加えて、手数料の何パーセントかをMoneroの開発チームへの寄付として支払うことを許可します。例えば自動寄付の割合が50%で、取引の手数料が0.005 XMRであった場合、0.0025 XMRが開発チームへの寄付として取引に上乗せされます。</translation>
+        <source>For every transaction, a small transaction fee is charged. This option lets you add an additional amount, as a percentage of that fee, to your transaction to support Stellite development. For instance, a 50% autodonation take a transaction fee of 0.005 XMR and add a 0.0025 XMR to support Stellite development.</source>
+        <translation>取引には少額の手数料がかかります。このオプションはその手数料に加えて、手数料の何パーセントかをStelliteの開発チームへの寄付として支払うことを許可します。例えば自動寄付の割合が50%で、取引の手数料が0.005 XMRであった場合、0.0025 XMRが開発チームへの寄付として取引に上乗せされます。</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="174"/>
@@ -2202,8 +2202,8 @@ Spend Proofの場合、宛先アドレスを指定する必要はありません
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="190"/>
-        <source>Mining secures the Monero network, and also pays a small reward for the work done. This option will let Monero mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
-        <translation>Moneroの採掘をすることでネットワークの安全性が高まり、また提供した計算量の対価として低い確率ですが報酬が得られます。このオプションは、あなたのコンピュータが電源に接続されていてなおかつアイドル状態の場合に、自動的にMoneroの採掘を行うことを許可します。あなたが作業を再開すると、採掘は停止されます。</translation>
+        <source>Mining secures the Stellite network, and also pays a small reward for the work done. This option will let Stellite mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
+        <translation>Stelliteの採掘をすることでネットワークの安全性が高まり、また提供した計算量の対価として低い確率ですが報酬が得られます。このオプションは、あなたのコンピュータが電源に接続されていてなおかつアイドル状態の場合に、自動的にStelliteの採掘を行うことを許可します。あなたが作業を再開すると、採掘は停止されます。</translation>
     </message>
 </context>
 <context>
@@ -2296,7 +2296,7 @@ Spend Proofの場合、宛先アドレスを指定する必要はありません
     <message>
         <location filename="../wizard/WizardMain.qml" line="386"/>
         <source>USE MONERO</source>
-        <translation>Moneroを使う</translation>
+        <translation>Stelliteを使う</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="399"/>
@@ -2415,8 +2415,8 @@ Spend Proofの場合、宛先アドレスを指定する必要はありません
     <name>WizardOptions</name>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="76"/>
-        <source>Welcome to Monero!</source>
-        <translation>Moneroへようこそ!</translation>
+        <source>Welcome to Stellite!</source>
+        <translation>Stelliteへようこそ!</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="87"/>
@@ -2505,8 +2505,8 @@ Spend Proofの場合、宛先アドレスを指定する必要はありません
     <name>WizardWelcome</name>
     <message>
         <location filename="../wizard/WizardWelcome.qml" line="73"/>
-        <source>Welcome to Monero!</source>
-        <translation>Moneroへようこそ!</translation>
+        <source>Welcome to Stellite!</source>
+        <translation>Stelliteへようこそ!</translation>
     </message>
     <message>
         <location filename="../wizard/WizardWelcome.qml" line="83"/>
@@ -2776,8 +2776,8 @@ Fee: </source>
     </message>
     <message>
         <location filename="../main.qml" line="799"/>
-        <source>Monero sent successfully: %1 transaction(s) </source>
-        <translation>Moneroの送金に成功しました: %1 トランザクション</translation>
+        <source>Payment sent successfully: %1 transaction(s) </source>
+        <translation>Stelliteの送金に成功しました: %1 トランザクション</translation>
     </message>
     <message>
         <location filename="../main.qml" line="829"/>
@@ -2860,8 +2860,8 @@ Fee: </source>
     </message>
     <message>
         <location filename="../main.qml" line="1297"/>
-        <source>Monero</source>
-        <translation>Monero</translation>
+        <source>Stellite</source>
+        <translation>Stellite</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1821"/>

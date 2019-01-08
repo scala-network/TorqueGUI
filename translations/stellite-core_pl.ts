@@ -20,8 +20,8 @@
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="66"/>
-        <source>4.. / 8..</source>
-        <translation>4.. / 8..</translation>
+        <source>Stellite</source>
+        <translation>Stellite</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="74"/>
@@ -358,8 +358,8 @@
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="93"/>
-        <source>WARNING: Do not reuse your Monero keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.</source>
-        <translation>UWAGA: Nie używaj swoich kluczy Monero na innym forku, CHYBA ŻE ów fork ma zabezpieczenia przed ponownym wykorzystaniem kluczy. Ucierpi na tym twoja prywatność.</translation>
+        <source>WARNING: Do not reuse your Stellite keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.</source>
+        <translation>UWAGA: Nie używaj swoich kluczy Stellite na innym forku, CHYBA ŻE ów fork ma zabezpieczenia przed ponownym wykorzystaniem kluczy. Ucierpi na tym twoja prywatność.</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="196"/>
@@ -610,8 +610,8 @@
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="82"/>
-        <source>Mining with your computer helps strengthen the Monero network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.&lt;br&gt; &lt;br&gt;Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
-        <translation>Kopanie z udziałem twojego komputera wzmacnia sieć Monero. Im więcej osób kopie, tym trudniej zaatakować sieć, a każdy najmniejszy wkład jest pomocny.&lt;br&gt; &lt;br&gt;Dodatkowo, kopanie daje ci małą szansę na zarobienie Monero. Twój komputer utworzy hashe/sumy kontrolne szukając rozwiązania dla bloku. Jeżeli znajdziesz rozwiązanie, otrzymasz swój udział w postaci zapłaty w Monero. Powodzenia!</translation>
+        <source>Mining with your computer helps strengthen the Stellite network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.&lt;br&gt; &lt;br&gt;Mining also gives you a small chance to earn some Stellite. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
+        <translation>Kopanie z udziałem twojego komputera wzmacnia sieć Stellite. Im więcej osób kopie, tym trudniej zaatakować sieć, a każdy najmniejszy wkład jest pomocny.&lt;br&gt; &lt;br&gt;Dodatkowo, kopanie daje ci małą szansę na zarobienie Stellite. Twój komputer utworzy hashe/sumy kontrolne szukając rozwiązania dla bloku. Jeżeli znajdziesz rozwiązanie, otrzymasz swój udział w postaci zapłaty w Stellite. Powodzenia!</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="95"/>
@@ -869,13 +869,13 @@ Podaj hasło portfela dla: </translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="138"/>
-        <source>With more Monero</source>
-        <translation>Z nadwyżką Monero</translation>
+        <source>With more Stellite</source>
+        <translation>Z nadwyżką Stellite</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="139"/>
-        <source>With not enough Monero</source>
-        <translation>Z deficytem Monero</translation>
+        <source>With not enough Stellite</source>
+        <translation>Z deficytem Stellite</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="141"/>
@@ -1043,8 +1043,8 @@ Podaj hasło portfela dla: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="89"/>
-        <source>Embedded Monero version: </source>
-        <translation>Wersja Monero: </translation>
+        <source>Embedded Stellite version: </source>
+        <translation>Wersja Stellite: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="118"/>
@@ -1165,13 +1165,13 @@ Poprzednia pamięć podręczna portfela zostanie zapisana pod inną nazwą i mo�
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="232"/>
-        <source>Uses a third-party server to connect to the Monero network. Less secure, but easier on your computer.</source>
-        <translation>Korzysta z zewnętrznego serwera do połączenia się z siecią Monero. Mniej bezpieczne, ale mniej obciążające dla komputera.</translation>
+        <source>Uses a third-party server to connect to the Stellite network. Less secure, but easier on your computer.</source>
+        <translation>Korzysta z zewnętrznego serwera do połączenia się z siecią Stellite. Mniej bezpieczne, ale mniej obciążające dla komputera.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="277"/>
-        <source>To find a remote node, type &apos;Monero remote node&apos; into your favorite search engine. Please ensure the node is run by a trusted third-party.</source>
-        <translation>By znaleźć węzeł zewnętrzny, wpisz &apos;Monero remote node&apos; w swojej ulubionej wyszukiwarce. Upewnij się, że węzeł jest zarządzany przez zaufaną osobę.</translation>
+        <source>To find a remote node, type &apos;Stellite remote node&apos; into your favorite search engine. Please ensure the node is run by a trusted third-party.</source>
+        <translation>By znaleźć węzeł zewnętrzny, wpisz &apos;Stellite remote node&apos; w swojej ulubionej wyszukiwarce. Upewnij się, że węzeł jest zarządzany przez zaufaną osobę.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="291"/>
@@ -1327,8 +1327,8 @@ Poprzednia pamięć podręczna portfela zostanie zapisana pod inną nazwą i mo�
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="97"/>
-        <source>This page allows you to interact with the shared ring database. This database is meant for use by Monero wallets as well as wallets from Monero clones which reuse the Monero keys.</source>
-        <translation>Tutaj możesz operować na współdzielonej bazie danych pierścieni. Owa baza danych jest do użytku dla portfeli Monero oraz portfeli klonów Monero, które używają kluczy Monero.</translation>
+        <source>This page allows you to interact with the shared ring database. This database is meant for use by Stellite wallets as well as wallets from Stellite clones which reuse the Stellite keys.</source>
+        <translation>Tutaj możesz operować na współdzielonej bazie danych pierścieni. Owa baza danych jest do użytku dla portfeli Stellite oraz portfeli klonów Stellite, które używają kluczy Stellite.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="110"/>
@@ -1344,8 +1344,8 @@ Poprzednia pamięć podręczna portfela zostanie zapisana pod inną nazwą i mo�
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="113"/>
-        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the stellite.cash website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the stellite-blockchain-blackball tool to create a list of known spent outputs.&lt;br&gt;</source>
-        <translation>W celu ukrycia, które wejścia w transakcji Monero są wydawane, osoba postronna nie powinna być w stanie stwierdzić, które wejścia w pierścieniu już zostały wydane. Gdyby była w stanie to zrobić, osłabiłoby to ochronę zapewnioną przez podpisy pierścieniowe. Jeśli wiadomo, że wszystkie wejścia poza jednym zostały wydane, to staje się oczywiste, które wejście faktycznie jest wydawane, a to niweczy efekt podpisów pierścieniowych - jednych z trzech głównych warstw ochrony prywatności używanych przez Monero.&lt;br&gt;Aby pomóc transakcjom unikać tych wejść, lista już wydanych wejść może być użyta do pominięcia ich w nowych transakcjach. Takowa lista jest zarządzana przez projekt Monero i jest dostępna na stronie stellite.cash, skąd można ją tutaj pobrać.&lt;br&gt;Ewentualnie, możesz przeskanować blockchain (oraz blockchain klona Monero, który wykorzystuje ponownie klucze) samemu używając narzędzia stellite-blockchain-blackball do utworzenia listy wydanych wyjść.&lt;br&gt;</translation>
+        <source>In order to obscure which inputs in a Stellite transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Stellite uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Stellite project and is available on the stellite.cash website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Stellite clones) yourself using the stellite-blockchain-blackball tool to create a list of known spent outputs.&lt;br&gt;</source>
+        <translation>W celu ukrycia, które wejścia w transakcji Stellite są wydawane, osoba postronna nie powinna być w stanie stwierdzić, które wejścia w pierścieniu już zostały wydane. Gdyby była w stanie to zrobić, osłabiłoby to ochronę zapewnioną przez podpisy pierścieniowe. Jeśli wiadomo, że wszystkie wejścia poza jednym zostały wydane, to staje się oczywiste, które wejście faktycznie jest wydawane, a to niweczy efekt podpisów pierścieniowych - jednych z trzech głównych warstw ochrony prywatności używanych przez Stellite.&lt;br&gt;Aby pomóc transakcjom unikać tych wejść, lista już wydanych wejść może być użyta do pominięcia ich w nowych transakcjach. Takowa lista jest zarządzana przez projekt Stellite i jest dostępna na stronie stellite.cash, skąd można ją tutaj pobrać.&lt;br&gt;Ewentualnie, możesz przeskanować blockchain (oraz blockchain klona Stellite, który wykorzystuje ponownie klucze) samemu używając narzędzia stellite-blockchain-blackball do utworzenia listy wydanych wyjść.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="134"/>
@@ -1410,13 +1410,13 @@ Poprzednia pamięć podręczna portfela zostanie zapisana pod inną nazwą i mo�
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="245"/>
-        <source>In order to avoid nullifying the protection afforded by Monero&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing Monero clone allows you to spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by Monero and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing Monero clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your Monero safely.&lt;br&gt;If you do not use a key-reusing Monero clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
-        <translation>Aby uniknąć zniweczenia ochrony dostarczonej przez podpisy pierścieniowe, wyjście nie powinno być wydane z różnymi pierścieniami w różnych blockchainach. Nie jest to zazwyczaj problemem, ale może się nim stać kiedy wykorzystujący ponownie klucze klon Monero pozwoli ci wydać istniejące wyjścia. W takim przypadku musisz upewnić się, że te istniejące wyjścia używają tego samego pierścienia w obu blockchainach.&lt;br&gt;Będzie to zrobione automatycznie przez Monero oraz każde ponownie wykorzystujące klucze oprogramowanie, które nie próbuje odebrać ci prywatności.&lt;br&gt;Jeśli także używasz wykorzystującego ponownie klucze klona Monero i ów klon nie zapewnia tej ochrony, nadal możesz ochronić swoje transakcje poprzez wydanie środków najpierw na klonie, a potem ręczne dodanie pierścienia na tej stronie, co pozwala ci wydać twoje Monero bezpiecznie.&lt;br&gt;Jeśli nie używasz wykorzystującego ponownie klucze klona Monero, który nie zapewnia tych środków bezpieczeństwa, to nie musisz wykonywać żadnych dodatkowych działań, jako że wszystko jest zautomatyzowane.&lt;br&gt;</translation>
+        <source>In order to avoid nullifying the protection afforded by Stellite&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing Stellite clone allows you to spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by Stellite and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing Stellite clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your Stellite safely.&lt;br&gt;If you do not use a key-reusing Stellite clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
+        <translation>Aby uniknąć zniweczenia ochrony dostarczonej przez podpisy pierścieniowe, wyjście nie powinno być wydane z różnymi pierścieniami w różnych blockchainach. Nie jest to zazwyczaj problemem, ale może się nim stać kiedy wykorzystujący ponownie klucze klon Stellite pozwoli ci wydać istniejące wyjścia. W takim przypadku musisz upewnić się, że te istniejące wyjścia używają tego samego pierścienia w obu blockchainach.&lt;br&gt;Będzie to zrobione automatycznie przez Stellite oraz każde ponownie wykorzystujące klucze oprogramowanie, które nie próbuje odebrać ci prywatności.&lt;br&gt;Jeśli także używasz wykorzystującego ponownie klucze klona Stellite i ów klon nie zapewnia tej ochrony, nadal możesz ochronić swoje transakcje poprzez wydanie środków najpierw na klonie, a potem ręczne dodanie pierścienia na tej stronie, co pozwala ci wydać twoje Stellite bezpiecznie.&lt;br&gt;Jeśli nie używasz wykorzystującego ponownie klucze klona Stellite, który nie zapewnia tych środków bezpieczeństwa, to nie musisz wykonywać żadnych dodatkowych działań, jako że wszystko jest zautomatyzowane.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="267"/>
-        <source>This records rings used by outputs spent on Monero on a key reusing chain, so that the same ring may be reused to avoid privacy issues.</source>
-        <translation>Tutaj rejestrowany jest pierścień użyty przez wyjścia Monero wydane na wykorzystującym ponownie klucze blockchainie, by ten sam pierścień mógł zostać użyty w celu uniknięcia deanonimizacji.</translation>
+        <source>This records rings used by outputs spent on Stellite on a key reusing chain, so that the same ring may be reused to avoid privacy issues.</source>
+        <translation>Tutaj rejestrowany jest pierścień użyty przez wyjścia Stellite wydane na wykorzystującym ponownie klucze blockchainie, by ten sam pierścień mógł zostać użyty w celu uniknięcia deanonimizacji.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="278"/>
@@ -1739,8 +1739,8 @@ Poprzednia pamięć podręczna portfela zostanie zapisana pod inną nazwą i mo�
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="619"/>
-        <source>Monero sent successfully</source>
-        <translation>Pomyślnie wysłano Monero</translation>
+        <source>Payment sent successfully</source>
+        <translation>Pomyślnie wysłano Stellite</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="687"/>
@@ -2082,13 +2082,13 @@ W przypadku &apos;Dowodu wydania&apos; nie musisz podawać adresu odbiorcy.</tra
     <name>WizardConfigure</name>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="79"/>
-        <source>We’re almost there - let’s just configure some Monero preferences</source>
-        <translation>Prawie skończone - właśnie konfigurujemy ustawienia Monero</translation>
+        <source>We’re almost there - let’s just configure some Stellite preferences</source>
+        <translation>Prawie skończone - właśnie konfigurujemy ustawienia Stellite</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="97"/>
-        <source>Kickstart the Monero blockchain?</source>
-        <translation>Uruchomić blockchain Monero?</translation>
+        <source>Kickstart the Stellite blockchain?</source>
+        <translation>Uruchomić blockchain Stellite?</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="113"/>
@@ -2102,8 +2102,8 @@ W przypadku &apos;Dowodu wydania&apos; nie musisz podawać adresu odbiorcy.</tra
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="140"/>
-        <source>Disk conservation mode uses substantially less disk-space, but the same amount of bandwidth as a regular Monero instance. However, storing the full blockchain is beneficial to the security of the Monero network. If you are on a device with limited disk space, then this option is appropriate for you.</source>
-        <translation>Tryb oszczędzania dysku używa znacząco mniej przestrzeni, ale tyle samo łącza co normalna instancja Monero. Przechowywanie całego łańcucha bloków jest jednak korzystne dla bezpieczeństwa sieci Monero. Jeśli używasz urządzenia z ograniczonym wolnym miejscem na dysku, ta opcja jest odpowiednia dla Ciebie.</translation>
+        <source>Disk conservation mode uses substantially less disk-space, but the same amount of bandwidth as a regular Stellite instance. However, storing the full blockchain is beneficial to the security of the Stellite network. If you are on a device with limited disk space, then this option is appropriate for you.</source>
+        <translation>Tryb oszczędzania dysku używa znacząco mniej przestrzeni, ale tyle samo łącza co normalna instancja Stellite. Przechowywanie całego łańcucha bloków jest jednak korzystne dla bezpieczeństwa sieci Stellite. Jeśli używasz urządzenia z ograniczonym wolnym miejscem na dysku, ta opcja jest odpowiednia dla Ciebie.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="153"/>
@@ -2112,8 +2112,8 @@ W przypadku &apos;Dowodu wydania&apos; nie musisz podawać adresu odbiorcy.</tra
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="169"/>
-        <source>Mining secures the Monero network, and also pays a small reward for the work done. This option will let Monero mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
-        <translation>Kopanie umacnia sieć Monero oraz pozwala na wykopanie niewielkiej nagrody za wykonaną pracę. Ta opcja pozwala Monero na kopanie, kiedy twój komputer jest podłączony do zasilania i bezczynny. Przestanie kopać, kiedy zaczniesz aktywnie używać komputera.</translation>
+        <source>Mining secures the Stellite network, and also pays a small reward for the work done. This option will let Stellite mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
+        <translation>Kopanie umacnia sieć Stellite oraz pozwala na wykopanie niewielkiej nagrody za wykonaną pracę. Ta opcja pozwala Stellite na kopanie, kiedy twój komputer jest podłączony do zasilania i bezczynny. Przestanie kopać, kiedy zaczniesz aktywnie używać komputera.</translation>
     </message>
 </context>
 <context>
@@ -2144,8 +2144,8 @@ W przypadku &apos;Dowodu wydania&apos; nie musisz podawać adresu odbiorcy.</tra
     <name>WizardDaemonSettings</name>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="114"/>
-        <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.                         &lt;br&gt;&lt;br&gt;                         If you don&apos;t have the option to run your own node, there&apos;s an option to connect to a remote node.</source>
-        <translation>Aby móc komunikować się z siecią Monero twój portfel musi być połączony z węzłem Monero. Dla największej prywatności poleca się uruchomić swój własny węzeł.                         &lt;br&gt;&lt;br&gt;                         Jeśli nie masz możliwości by uruchomić własny węzeł, możesz połączyć się ze zdalnym węzłem.</translation>
+        <source>To be able to communicate with the Stellite network your wallet needs to be connected to a Stellite node. For best privacy it&apos;s recommended to run your own node.                         &lt;br&gt;&lt;br&gt;                         If you don&apos;t have the option to run your own node, there&apos;s an option to connect to a remote node.</source>
+        <translation>Aby móc komunikować się z siecią Stellite twój portfel musi być połączony z węzłem Stellite. Dla największej prywatności poleca się uruchomić swój własny węzeł.                         &lt;br&gt;&lt;br&gt;                         Jeśli nie masz możliwości by uruchomić własny węzeł, możesz połączyć się ze zdalnym węzłem.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="126"/>
@@ -2177,8 +2177,8 @@ W przypadku &apos;Dowodu wydania&apos; nie musisz podawać adresu odbiorcy.</tra
     <name>WizardDonation</name>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="93"/>
-        <source>Monero development is solely supported by donations</source>
-        <translation>Rozwój Monero zależy wyłącznie od dotacji</translation>
+        <source>Stellite development is solely supported by donations</source>
+        <translation>Rozwój Stellite zależy wyłącznie od dotacji</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="113"/>
@@ -2192,8 +2192,8 @@ W przypadku &apos;Dowodu wydania&apos; nie musisz podawać adresu odbiorcy.</tra
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="162"/>
-        <source>For every transaction, a small transaction fee is charged. This option lets you add an additional amount, as a percentage of that fee, to your transaction to support Monero development. For instance, a 50% autodonation take a transaction fee of 0.005 XMR and add a 0.0025 XMR to support Monero development.</source>
-        <translation>Od każdej transakcji, pobierana jest niewielka prowizja. Ta opcja pozwala ją powiększyć o pewien procent, aby wspierać rozwój Monero. Dla przykładu, 50% dotacja automatyczna pobiera prowizję 0,005 XMR oraz 0,0025 XMR na wsparcie rozwoju Monero.</translation>
+        <source>For every transaction, a small transaction fee is charged. This option lets you add an additional amount, as a percentage of that fee, to your transaction to support Stellite development. For instance, a 50% autodonation take a transaction fee of 0.005 XMR and add a 0.0025 XMR to support Stellite development.</source>
+        <translation>Od każdej transakcji, pobierana jest niewielka prowizja. Ta opcja pozwala ją powiększyć o pewien procent, aby wspierać rozwój Stellite. Dla przykładu, 50% dotacja automatyczna pobiera prowizję 0,005 XMR oraz 0,0025 XMR na wsparcie rozwoju Stellite.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="174"/>
@@ -2202,8 +2202,8 @@ W przypadku &apos;Dowodu wydania&apos; nie musisz podawać adresu odbiorcy.</tra
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="190"/>
-        <source>Mining secures the Monero network, and also pays a small reward for the work done. This option will let Monero mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
-        <translation>Kopanie umacnia sieć Monero oraz pozwala na wykopanie niewielkiej nagrody za wykonaną pracę. Ta opcja pozwala Monero na kopanie, kiedy twój komputer jest podłączony do zasilania i bezczynny. Przestanie kopać, kiedy zaczniesz aktywnie używać komputera.</translation>
+        <source>Mining secures the Stellite network, and also pays a small reward for the work done. This option will let Stellite mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
+        <translation>Kopanie umacnia sieć Stellite oraz pozwala na wykopanie niewielkiej nagrody za wykonaną pracę. Ta opcja pozwala Stellite na kopanie, kiedy twój komputer jest podłączony do zasilania i bezczynny. Przestanie kopać, kiedy zaczniesz aktywnie używać komputera.</translation>
     </message>
 </context>
 <context>
@@ -2416,8 +2416,8 @@ W przypadku &apos;Dowodu wydania&apos; nie musisz podawać adresu odbiorcy.</tra
     <name>WizardOptions</name>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="76"/>
-        <source>Welcome to Monero!</source>
-        <translation>Witaj w świecie Monero!</translation>
+        <source>Welcome to Stellite!</source>
+        <translation>Witaj w świecie Stellite!</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="87"/>
@@ -2506,8 +2506,8 @@ W przypadku &apos;Dowodu wydania&apos; nie musisz podawać adresu odbiorcy.</tra
     <name>WizardWelcome</name>
     <message>
         <location filename="../wizard/WizardWelcome.qml" line="73"/>
-        <source>Welcome to Monero!</source>
-        <translation>Witaj w świecie Monero!</translation>
+        <source>Welcome to Stellite!</source>
+        <translation>Witaj w świecie Stellite!</translation>
     </message>
     <message>
         <location filename="../wizard/WizardWelcome.qml" line="83"/>
@@ -2679,8 +2679,8 @@ Indeks adresu do wydawania: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="799"/>
-        <source>Monero sent successfully: %1 transaction(s) </source>
-        <translation>Monero wysłane pomyślnie: %1 transakcji(s) </translation>
+        <source>Payment sent successfully: %1 transaction(s) </source>
+        <translation>Stellite wysłane pomyślnie: %1 transakcji(s) </translation>
     </message>
     <message>
         <location filename="../main.qml" line="829"/>
@@ -2779,7 +2779,7 @@ Indeks adresu do wydawania: </translation>
     <message>
         <location filename="../main.qml" line="1789"/>
         <source>New version of stellite-wallet-gui is available: %1&lt;br&gt;%2</source>
-        <translation>Nowa wersja GUI portfela Monero jest dostępna: %1&lt;br&gt;%2</translation>
+        <translation>Nowa wersja GUI portfela Stellite jest dostępna: %1&lt;br&gt;%2</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1821"/>
@@ -2855,7 +2855,7 @@ Indeks adresu do wydawania: </translation>
     <message>
         <location filename="../main.qml" line="870"/>
         <source>This address received %1 stellite, but the transaction is not yet mined</source>
-        <translation>Ten adres otrzymał %1 Monero, ale transakcja nie została jeszcze wykopana</translation>
+        <translation>Ten adres otrzymał %1 Stellite, ale transakcja nie została jeszcze wykopana</translation>
     </message>
     <message>
         <location filename="../main.qml" line="877"/>
@@ -2869,8 +2869,8 @@ Indeks adresu do wydawania: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="1297"/>
-        <source>Monero</source>
-        <translation>Monero</translation>
+        <source>Stellite</source>
+        <translation>Stellite</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1447"/>

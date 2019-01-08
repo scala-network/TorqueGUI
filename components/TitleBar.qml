@@ -77,24 +77,24 @@ Rectangle {
         }
     }
 
-    Item {
-        id: titlebarlogo
-        width: 125
-        height: parent.height
-        anchors.centerIn: parent
-        visible: customDecorations && showMoneroLogo
-        z: parent.z + 1
+ //   Item {
+//        id: titlebarlogo
+//        width: 125
+//        height: parent.height
+//        anchors.centerIn: parent
+//        visible: customDecorations && showMoneroLogo
+//        z: parent.z + 1
 
-        Image {
-            visible: !isMobile
-            anchors.left: parent.left
-            anchors.top: parent.top
-            anchors.topMargin: 11
-            width: 125
-            height: 28
-            source: "../images/titlebarLogo.png"
-        }
-    }
+//        Image {
+//            visible: !isMobile
+//            anchors.left: parent.left
+//            anchors.top: parent.top
+//            anchors.topMargin: 11
+//            width: 125
+//            height: 28
+//            source: "../images/titlebarLogo.png"
+//        }
+//    }
 
     Label {
         id: titleLabel
@@ -119,10 +119,11 @@ Rectangle {
         z: parent.z + 2
 
         Image {
-            width: 14
-            height: 14
-            anchors.centerIn: parent
-            source: "../images/expand.png"
+            width: 125
+            height: 28
+			anchors.verticalCenter: parent.verticalCenter
+			anchors.left: parent.left
+            source: "../images/titlebarLogo.png"
         }
 
         MouseArea {

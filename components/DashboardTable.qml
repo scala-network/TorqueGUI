@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Stellite Project
+// Copyright (c) 2014-2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -27,7 +27,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
-import stelliteComponents.Clipboard 1.0
+import moneroComponents.Clipboard 1.0
 
 ListView {
     id: listView

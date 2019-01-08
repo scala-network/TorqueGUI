@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Stellite Project
+// Copyright (c) 2014-2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -29,61 +29,79 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 
+import "../components" as MoneroComponents
+
 Item {
     id: checkBox
     property alias text: label.text
-    property string checkedIcon
+    property string checkedIcon: "../images/checkedIcon-black.png"
     property string uncheckedIcon
     property bool checked: false
     property alias background: backgroundRect.color
-    property int fontSize: 14
+    property bool border: true
+    property int fontSize: 14 * scaleRatio
     property alias fontColor: label.color
+    property bool iconOnTheLeft: true
     signal clicked()
-    height: 25
-    width: label.x + label.width
-    Layout.minimumWidth: label.x + label.contentWidth
-    clip: true
+    height: 25 * scaleRatio
+    width: checkBoxLayout.width
 
-    Rectangle {
-        anchors.left: parent.left
-        height: parent.height - 1
-        width: 25
-        //radius: 4
-        y: 0
-        color: "#DBDBDB"
+    function toggle(){
+        checkBox.checked = !checkBox.checked
+        checkBox.clicked()
     }
 
-    Rectangle {
-        id: backgroundRect
-        anchors.left: parent.left
-        height: parent.height - 1
-        width: 25
-        //radius: 4
-        y: 1
-        color: "#FFFFFF"
+    RowLayout {
+        id: checkBoxLayout
+        layoutDirection: iconOnTheLeft ? Qt.LeftToRight : Qt.RightToLeft
+        spacing: (!isMobile ? 10 : 8) * scaleRatio
 
-        Image {
-            anchors.centerIn: parent
-            source: checkBox.checked ? checkBox.checkedIcon :
-                                       checkBox.uncheckedIcon
+        Item {
+            id: checkMark
+            height: checkBox.height
+            width: checkBox.height
+
+            Rectangle {
+                id: backgroundRect
+                anchors.fill: parent
+                radius: 3
+                color: "transparent"
+                border.color:
+                    if(checkBox.checked){
+                        return MoneroComponents.Style.inputBorderColorActive;
+                    } else {
+                        return MoneroComponents.Style.inputBorderColorInActive;
+                    }
+                visible: checkBox.border
+            }
+
+            Image {
+                anchors.centerIn: parent
+                source: {
+                    if (checkBox.checked || checkBox.uncheckedIcon == "") {
+                        return checkBox.checkedIcon;
+                    }
+                    return checkBox.uncheckedIcon;
+                }
+                visible: checkBox.checked || checkBox.uncheckedIcon != ""
+            }
         }
-    }
 
-    Text {
-        id: label
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.left: parent.left
-        anchors.leftMargin: 25 + 12
-        font.family: "Arial"
-        font.pixelSize: checkBox.fontSize
-        color: "#525252"
+        Text {
+            id: label
+            font.family: MoneroComponents.Style.fontRegular.name
+            font.pixelSize: checkBox.fontSize
+            color: MoneroComponents.Style.defaultFontColor
+            textFormat: Text.RichText
+            wrapMode: Text.Wrap
+        }
     }
 
     MouseArea {
         anchors.fill: parent
+        cursorShape: Qt.PointingHandCursor
         onClicked: {
-            checkBox.checked = !checkBox.checked
-            checkBox.clicked()
+            toggle()
         }
     }
 }

@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Stellite Project
+// Copyright (c) 2014-2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -37,4 +37,8 @@ clipboardAdapter::clipboardAdapter(QObject *parent) :
 void clipboardAdapter::setText(const QString &text) {
     m_pClipboard->setText(text, QClipboard::Clipboard);
     m_pClipboard->setText(text, QClipboard::Selection);
+}
+
+QString clipboardAdapter::text() const {
+    return m_pClipboard->text();
 }

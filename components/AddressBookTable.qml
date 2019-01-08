@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Stellite Project
+// Copyright (c) 2014-2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -27,7 +27,8 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
-import stelliteComponents.Clipboard 1.0
+import moneroComponents.Clipboard 1.0
+import "../js/TxUtils.js" as TxUtils
 
 ListView {
     id: listView
@@ -37,13 +38,13 @@ ListView {
     footer: Rectangle {
         height: 127
         width: listView.width
-        color: "#FFFFFF"
+        color: "transparent"
 
         Text {
             anchors.centerIn: parent
             font.family: "Arial"
             font.pixelSize: 14
-            color: "#545454"
+            color: "#808080"
             text: qsTr("No more results") + translationManager.emptyString
         }
     }
@@ -53,7 +54,7 @@ ListView {
         id: delegate
         height: 64
         width: listView.width
-        color: index % 2 ? "#F8F8F8" : "#FFFFFF"
+        color: "transparent"
         z: listView.count - index
         function collapseDropdown() { dropdown.expanded = false }
 
@@ -62,11 +63,11 @@ ListView {
             anchors.left: parent.left
             anchors.top: parent.top
             anchors.topMargin: 12
-            width: text.length ? (descriptionArea.containsMouse ? dropdown.x - x - 12 : 139) : 0
+            width: text.length ? (descriptionArea.containsMouse ? 139 : 139) : 0
             font.family: "Arial"
             font.bold: true
             font.pixelSize: 19
-            color: "#444444"
+            color: "#ffffff"
             elide: Text.ElideRight
             text: description
 
@@ -87,8 +88,15 @@ ListView {
             anchors.rightMargin: 40
             font.family: "Arial"
             font.pixelSize: 16
-            color: "#545454"
-            text: address
+            color: "#ffffff"
+            text: {
+                if(isMobile){
+                    TxUtils.addressTruncate(address, 6);
+                } else {
+                    return TxUtils.addressTruncate(address, 10);
+                }
+            }
+            readOnly: true
         }
 
         Text {
@@ -100,7 +108,7 @@ ListView {
             width: 139
             font.family: "Arial"
             font.pixelSize: 12
-            color: "#535353"
+            color: "#ffffff"
             text: qsTr("Payment ID:") + translationManager.emptyString
         }
 
@@ -111,12 +119,18 @@ ListView {
             anchors.leftMargin: 12
             anchors.rightMargin: 12
             anchors.right: dropdown.left
-
+            readOnly: true
 
             font.family: "Arial"
             font.pixelSize: 13
             color: "#545454"
-            text: paymentId
+            text: {
+                if(isMobile){
+                    TxUtils.addressTruncate(paymentId, 6);
+                } else {
+                    return TxUtils.addressTruncate(paymentId, 10);
+                }
+            }
         }
 
         ListModel {
@@ -144,8 +158,10 @@ ListView {
             onOptionClicked: {
                 // Ensure tooltip is closed
                 appWindow.toolTip.visible = false;
-                if(option === 0)
+                if(option === 0) {
                     clipboard.setText(address)
+                    appWindow.showStatusMessage(qsTr("Address copied to clipboard"),3)
+                }
                 else if(option === 1){
                    console.log("Sending to: ", address +" "+ paymentId);
                    middlePanel.sendTo(address, paymentId, description);
@@ -162,7 +178,7 @@ ListView {
             anchors.right: parent.right
             anchors.bottom: parent.bottom
             height: 1
-            color: "#DBDBDB"
+            color: "#404040"
         }
     }
 }

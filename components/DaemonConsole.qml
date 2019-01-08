@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Stellite Project
+// Copyright (c) 2014-2018, The Monero Project
 //
 // All rights reserved.
 //
@@ -27,22 +27,23 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
-import QtQuick.Controls 1.4
+import QtQuick.Controls 2.0
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.4
-import QtQuick.Window 2.0
+import QtQuick.Window 2.2
 
-import "../components" as StelliteComponents
+import "../components" as MoneroComponents
+import "../js/Windows.js" as Windows
+import "../js/Utils.js" as Utils
 
 Window {
     id: root
     modality: Qt.ApplicationModal
-    flags: Qt.Window | Qt.FramelessWindowHint
-    property alias title: dialogTitle.text
+    color: "black"
+    flags: Windows.flags
     property alias text: dialogContent.text
     property alias content: root.text
-    property alias okVisible: okButton.visible
     property alias textArea: dialogContent
     property var icon
 
@@ -50,14 +51,24 @@ Window {
     signal accepted()
     signal rejected()
 
+    onClosing: {
+        inactiveOverlay.visible = false;
+    }
 
     function open() {
-        show()
+        inactiveOverlay.visible = true;
+        show();
     }
 
     // TODO: implement without hardcoding sizes
     width:  480
     height: 280
+
+    // background gradient
+    Image {
+        anchors.fill: parent
+        source: "../images/middlePanelBg.jpg"
+    }
 
     // Make window draggable
     MouseArea {
@@ -70,87 +81,127 @@ Window {
 
     ColumnLayout {
         id: mainLayout
-        spacing: 10
-        anchors { fill: parent; margins: 35 }
 
-        RowLayout {
-            id: column
-            //anchors {fill: parent; margins: 16 }
-            Layout.alignment: Qt.AlignHCenter
+        anchors.fill: parent
+        anchors.topMargin: 20 * scaleRatio
+        anchors.margins: 35 * scaleRatio
+        spacing: 20 * scaleRatio
 
-            Label {
-                id: dialogTitle
-                horizontalAlignment: Text.AlignHCenter
-                font.pixelSize: 32
-                font.family: "Arial"
-                color: "#555555"
+        Item {
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+
+            Rectangle {
+                anchors.fill: parent
+                color: "transparent"
+                border.color: MoneroComponents.Style.inputBorderColorActive
+                border.width: 1
+                radius: 4
             }
 
-        }
+            Flickable {
+                id: flickable
+                anchors.fill: parent
 
-        RowLayout {
-            TextArea {
-                id : dialogContent
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                font.family: "Arial"
-                textFormat: TextEdit.AutoText
-                readOnly: true
-                font.pixelSize: 12
-            }
-        }
+                TextArea.flickable: TextArea {
+                    id : dialogContent
+                    textFormat: TextEdit.RichText
+                    selectByMouse: true
+                    selectByKeyboard: true
+                    font.family: MoneroComponents.Style.defaultFontColor
+                    font.pixelSize: 14 * scaleRatio
+                    color: MoneroComponents.Style.defaultFontColor
+                    selectionColor: MoneroComponents.Style.dimmedFontColor
+                    wrapMode: TextEdit.Wrap
+                    readOnly: true
+                    function logCommand(msg){
+                        msg = log_color(msg, "lime");
+                        textArea.append(msg);
+                    }
+                    function logMessage(msg){
+                        msg = msg.trim();
+                        var color = "white";
+                        if(msg.toLowerCase().indexOf('error') >= 0){
+                            color = "red";
+                        } else if (msg.toLowerCase().indexOf('warning') >= 0){
+                            color = "yellow";
+                        }
 
-        // Ok/Cancel buttons
-        RowLayout {
-            id: buttons
-            spacing: 60
-            Layout.alignment: Qt.AlignHCenter
+                        // format multi-lines
+                        if(msg.split("\n").length >= 2){
+                            msg = msg.split("\n").join('<br>');
+                        }
 
-            StelliteComponents.StandardButton {
-                id: okButton
-                width: 120
-                fontSize: 14
-                shadowReleasedColor: "#7d13ce"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#7a5fcb"
-                pressedColor: "#7d13ce"
-                text: qsTr("Close") + translationManager.emptyString
-                onClicked: {
-                    root.close()
-                    root.accepted()
+                        log(msg, color);
+                    }
+                    function log_color(msg, color){
+                        return "<span style='color: " + color +  ";' >" + msg + "</span>";
+                    }
+                    function log(msg, color){
+                        var timestamp = Utils.formatDate(new Date(), {
+                            weekday: undefined,
+                            month: "numeric",
+                            timeZoneName: undefined
+                        });
 
+                        var _timestamp = log_color("[" + timestamp + "]", "#FFFFFF");
+                        var _msg = log_color(msg, color);
+                        textArea.append(_timestamp + " " + _msg);
+
+                        // scroll to bottom
+                        //if(flickable.contentHeight > content.height){
+                        //    flickable.contentY = flickable.contentHeight + 20;
+                        //}
+                    }
                 }
-            }
 
-            StelliteComponents.LineEdit {
+                ScrollBar.vertical: ScrollBar {}
+            }
+        }
+
+        RowLayout {
+            Layout.fillWidth: true
+
+            MoneroComponents.LineEdit {
                 id: sendCommandText
-                width: 300
+                Layout.fillWidth: true
                 placeholderText: qsTr("command + enter (e.g help)") + translationManager.emptyString
                 onAccepted: {
-                    if(text.length > 0)
-                        daemonManager.sendCommand(text,currentWallet.testnet);
+                    if(text.length > 0) {
+                        textArea.logCommand(">>> " + text)
+                        daemonManager.sendCommand(text, currentWallet.nettype);
+                    }
                     text = ""
                 }
             }
-
-            // Status button
-//            StelliteComponents.StandardButton {
-//                id: sendCommandButton
-//                enabled: sendCommandText.text.length > 0
-//                fontSize: 14
-//                shadowReleasedColor: "#7d13ce"
-//                shadowPressedColor: "#B32D00"
-//                releasedColor: "#7a5fcb"
-//                pressedColor: "#7d13ce"
-//                text: qsTr("Send command")
-//                onClicked: {
-//                    daemonManager.sendCommand(sendCommandText.text,currentWallet.testnet);
-//                }
-//            }
         }
     }
 
+    // window borders
+    Rectangle {
+        anchors.bottom: parent.bottom
+        anchors.top: parent.top
+        anchors.left: parent.left
+        width:1
+        color: "#2F2F2F"
+        z: 2
+    }
+
+    Rectangle {
+        anchors.bottom: parent.bottom
+        anchors.top: parent.top
+        anchors.right: parent.right
+        width:1
+        color: "#2F2F2F"
+        z: 2
+    }
+
+    Rectangle {
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        anchors.left: parent.left
+        height:1
+        color: "#2F2F2F"
+        z: 2
+    }
 }
-
-
-

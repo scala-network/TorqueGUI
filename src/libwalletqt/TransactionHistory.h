@@ -5,7 +5,7 @@
 #include <QList>
 #include <QDateTime>
 
-namespace Monero {
+namespace Stellite {
 class TransactionHistory;
 }
 
@@ -23,8 +23,8 @@ class TransactionHistory : public QObject
 public:
     Q_INVOKABLE TransactionInfo *transaction(int index);
     // Q_INVOKABLE TransactionInfo * transaction(const QString &id);
-    Q_INVOKABLE QList<TransactionInfo*> getAll() const;
-    Q_INVOKABLE void refresh();
+    Q_INVOKABLE QList<TransactionInfo*> getAll(quint32 accountIndex) const;
+    Q_INVOKABLE void refresh(quint32 accountIndex);
     quint64 count() const;
     QDateTime firstDateTime() const;
     QDateTime lastDateTime() const;
@@ -41,11 +41,11 @@ public slots:
 
 
 private:
-    explicit TransactionHistory(Monero::TransactionHistory * pimpl, QObject *parent = 0);
+    explicit TransactionHistory(Stellite::TransactionHistory * pimpl, QObject *parent = 0);
 
 private:
     friend class Wallet;
-    Monero::TransactionHistory * m_pimpl;
+    Stellite::TransactionHistory * m_pimpl;
     mutable QList<TransactionInfo*> m_tinfo;
     mutable QDateTime   m_firstDateTime;
     mutable QDateTime   m_lastDateTime;

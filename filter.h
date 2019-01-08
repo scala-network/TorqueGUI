@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Stellite Project
+// Copyright (c) 2014-2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -36,7 +36,7 @@ class filter : public QObject
     Q_OBJECT
 private:
     bool m_tabPressed;
-
+    bool m_backtabPressed;
 public:
     explicit filter(QObject *parent = 0);
 
@@ -48,6 +48,7 @@ signals:
     void sequenceReleased(const QVariant &o, const QVariant &seq);
     void mousePressed(const QVariant &o, const QVariant &x, const QVariant &y);
     void mouseReleased(const QVariant &o, const QVariant &x, const QVariant &y);
+    void userActivity();
 };
 
 #endif // FILTER_H

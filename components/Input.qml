@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Stellite Project
+// Copyright (c) 2014-2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -26,21 +26,22 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick.Controls 1.2
-import QtQuick.Controls.Styles 1.2
-import QtQuick 2.2
+import QtQuick.Controls 2.0
+import QtQuick 2.7
+
+import "../components" as MoneroComponents
 
 TextField {
-    font.family: "Arial"
+    font.family: MoneroComponents.Style.fontRegular.name
+    font.pixelSize: 18 * scaleRatio
+    font.bold: true
     horizontalAlignment: TextInput.AlignLeft
+    selectByMouse: true
+    color: MoneroComponents.Style.defaultFontColor
+    selectionColor: MoneroComponents.Style.dimmedFontColor
+    selectedTextColor: MoneroComponents.Style.defaultFontColor
 
-    style: TextFieldStyle {
-        textColor: "#3F3F3F"
-        placeholderTextColor: "#BABABA"
-
-        background: Rectangle {
-            border.width: 0
-            color: "transparent"
-        }
+    background: Rectangle {
+        color: "transparent"
     }
 }

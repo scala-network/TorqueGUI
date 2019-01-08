@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Stellite Project
+// Copyright (c) 2014-2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -27,6 +27,8 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
+
+import "../components" as MoneroComponents
 
 Item {
     id: item
@@ -213,18 +215,13 @@ Item {
             }
         }
 
-        StandardButton {
+        MoneroComponents.StandardButton {
             id: button
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             anchors.right: parent.right
             anchors.margins: 6
             width: 80
-
-            shadowReleasedColor: "#C60F00"
-            shadowPressedColor: "#8C0B00"
-            pressedColor: "#C60F00"
-            releasedColor: "#FF4F41"
             text: qsTr("SEARCH")
             onClicked: item.searchClicked(input.text, droplist.currentOption)
         }

@@ -1,3 +1,4 @@
+// Copyright (c) 2014-2018, The Monero Project
 // Copyright (c) 2014-2017, The Stellite Project
 //
 // All rights reserved.
@@ -44,6 +45,7 @@ class QrScanThread : public QThread, public zbar::Image::Handler
 public:
     QrScanThread(QObject *parent = Q_NULLPTR);
     void addFrame(const QVideoFrame &frame);
+    virtual void stop();
 
 Q_SIGNALS:
     void decoded(int type, const QString &data);
@@ -51,7 +53,6 @@ Q_SIGNALS:
 
 protected:
     virtual void run();
-    virtual void stop();
     void processVideoFrame(const QVideoFrame &);
     void processQImage(const QImage &);
     void processZImage(zbar::Image &image);

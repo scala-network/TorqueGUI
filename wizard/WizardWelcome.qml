@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Stellite Project
+// Copyright (c) 2014-2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -31,18 +31,12 @@ import QtQuick.XmlListModel 2.0
 import QtQuick.Layouts 1.1
 import QtQml 2.2
 
-
+import "../components" as MoneroComponents
 
 ColumnLayout {
 //    anchors.fill:parent
     Behavior on opacity {
         NumberAnimation { duration: 100; easing.type: Easing.InQuad }
-    }
-
-    QtObject {
-        id: d
-        readonly property string daemonAddressTestnet : "localhost:38018";
-        readonly property string daemonAddressMainnet : "localhost:18018";
     }
 
     onOpacityChanged: visible = opacity !== 0
@@ -66,13 +60,13 @@ ColumnLayout {
         id: headerColumn
         Layout.leftMargin: wizardLeftMargin
         Layout.rightMargin: wizardRightMargin
-        Layout.bottomMargin: 40
-        spacing: 20
+        Layout.bottomMargin: 40 * scaleRatio
+        spacing: 20 * scaleRatio
 
         Text {
             Layout.fillWidth: true
             font.family: "Arial"
-            font.pixelSize: 28
+            font.pixelSize: 28 * scaleRatio
             color: "#3F3F3F"
             wrapMode: Text.Wrap
             horizontalAlignment: Text.AlignHCenter
@@ -82,7 +76,7 @@ ColumnLayout {
         Text {
             Layout.fillWidth: true
             font.family: "Arial"
-            font.pixelSize: 18
+            font.pixelSize: 18 * scaleRatio
             color: "#4A4646"
             wrapMode: Text.Wrap
             horizontalAlignment: Text.AlignHCenter
@@ -122,51 +116,62 @@ ColumnLayout {
             property int margin: (isMobile) ? 0 : Math.floor(appWindow.width/12);
 
             id: gridView
-            cellWidth: 140
-            cellHeight: 120
+            cellWidth: 140 * scaleRatio
+            cellHeight: 120 * scaleRatio
             model: languagesModel
             // Hack to center the flag grid
-            property int columns: Math.floor(appWindow.width/140)
-            Layout.leftMargin: margin + (appWindow.width - cellWidth*columns) /2
+            property int columns: Math.floor(appWindow.width/cellWidth)
+            Layout.leftMargin: margin + (appWindow.width  - cellWidth*columns) /2
             Layout.rightMargin: margin
             Layout.fillWidth: true
             Layout.fillHeight: true
 
-
             clip: true
 
-            delegate: ColumnLayout {
+            delegate: Item {
                 id: flagDelegate
+                height: gridView.cellHeight
                 width: gridView.cellWidth
-//                height: gridView.cellHeight
-//                Layout.alignment: Qt.AlignHCenter
-                Rectangle {
-                    id: flagRect
-                    width: 60; height: 60
-//                    anchors.centerIn: parent
-                    radius: 30
-                    Layout.alignment: Qt.AlignHCenter
-                    color: gridView.currentIndex === index ? "#DBDBDB" : "#FFFFFF"
-                    Image {
-                        anchors.fill: parent
-                        source: flag
+
+                ColumnLayout {
+                    width: gridView.cellWidth
+                    Rectangle {
+                        id: flagRect
+                        height: 60 * scaleRatio
+                        width: 60 * scaleRatio
+                        radius: 30 * scaleRatio
+                        Layout.alignment: Qt.AlignHCenter
+                        color: {
+                            if (gridView.currentIndex === index) {
+                                return MoneroComponents.Style.buttonBackgroundColor;
+                            } else if (delegateArea.containsMouse) {
+                                return MoneroComponents.Style.dimmedFontColor;
+                            } else {
+                                return MoneroComponents.Style.buttonTextColor;
+                            }
+                        }
+
+                        Image {
+                            anchors.fill: parent
+                            source: flag
+                        }
+                    }
+
+                    Text {
+                        font.family: "Arial"
+                        font.pixelSize: 18 * scaleRatio
+                        font.bold: gridView.currentIndex === index
+                        color: "#3F3F3F"
+                        text: display_name
+                        Layout.alignment: Qt.AlignHCenter
                     }
                 }
 
-                Text {
-                    font.family: "Arial"
-                    font.pixelSize: 18
-//                    anchors.horizontalCenter: parent.horizontalCenter
-                    font.bold: gridView.currentIndex === index
-//                    elide: Text.ElideRight
-                    color: "#3F3F3F"
-                    text: display_name
-//                    horizontalAlignment: Text.AlignHCenter
-                    Layout.alignment: Qt.AlignHCenter
-                }
                 MouseArea {
                     id: delegateArea
                     anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    hoverEnabled: true
                     onClicked:  {
                         gridView.currentIndex = index
                         var data = languagesModel.get(gridView.currentIndex);

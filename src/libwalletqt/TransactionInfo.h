@@ -1,9 +1,10 @@
 #ifndef TRANSACTIONINFO_H
 #define TRANSACTIONINFO_H
 
-#include <wallet/wallet2_api.h>
+#include <wallet/api/wallet2_api.h>
 #include <QObject>
 #include <QDateTime>
+#include <QSet>
 
 class Transfer;
 
@@ -18,6 +19,9 @@ class TransactionInfo : public QObject
     Q_PROPERTY(QString displayAmount READ displayAmount)
     Q_PROPERTY(QString fee READ fee)
     Q_PROPERTY(quint64 blockHeight READ blockHeight)
+    Q_PROPERTY(QSet<quint32> subaddrIndex READ subaddrIndex)
+    Q_PROPERTY(quint32 subaddrAccount READ subaddrAccount)
+    Q_PROPERTY(QString label READ label)
     Q_PROPERTY(quint64 confirmations READ confirmations)
     Q_PROPERTY(quint64 unlockTime READ unlockTime)
     Q_PROPERTY(QString hash READ hash)
@@ -29,8 +33,8 @@ class TransactionInfo : public QObject
 
 public:
     enum Direction {
-        Direction_In  =  Monero::TransactionInfo::Direction_In,
-        Direction_Out =  Monero::TransactionInfo::Direction_Out,
+        Direction_In  =  Stellite::TransactionInfo::Direction_In,
+        Direction_Out =  Stellite::TransactionInfo::Direction_Out,
         Direction_Both // invalid direction value, used for filtering
     };
 
@@ -44,6 +48,9 @@ public:
     QString displayAmount() const;
     QString fee() const;
     quint64 blockHeight() const;
+    QSet<quint32> subaddrIndex() const;
+    quint32 subaddrAccount() const;
+    QString label() const;
     quint64 confirmations() const;
     quint64 unlockTime() const;
     //! transaction_id
@@ -58,10 +65,10 @@ public:
     //! Could be useful later when addressbook is implemented
     Q_INVOKABLE QList<Transfer*> transfers() const;
 private:
-    explicit TransactionInfo(Monero::TransactionInfo * pimpl, QObject *parent = 0);
+    explicit TransactionInfo(Stellite::TransactionInfo * pimpl, QObject *parent = 0);
 private:
     friend class TransactionHistory;
-    Monero::TransactionInfo * m_pimpl;
+    Stellite::TransactionInfo * m_pimpl;
     mutable QList<Transfer*> m_transfers;
 };
 

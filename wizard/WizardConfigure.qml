@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Stellite Project
+// Copyright (c) 2014-2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -100,8 +100,6 @@ Item {
                 background: "#F0EEEE"
                 fontColor: "#4A4646"
                 fontSize: 18
-                checkedIcon: "../images/checkedVioletIcon.png"
-                uncheckedIcon: "../images/uncheckedIcon.png"
                 checked: true
             }
 
@@ -129,8 +127,6 @@ Item {
                 background: "#F0EEEE"
                 fontColor: "#4A4646"
                 fontSize: 18
-                checkedIcon: "../images/checkedVioletIcon.png"
-                uncheckedIcon: "../images/uncheckedIcon.png"
                 checked: true
             }
 
@@ -160,8 +156,6 @@ Item {
                 background: "#F0EEEE"
                 fontColor: "#4A4646"
                 fontSize: 18
-                checkedIcon: "../images/checkedVioletIcon.png"
-                uncheckedIcon: "../images/uncheckedIcon.png"
                 checked: true
             }
 

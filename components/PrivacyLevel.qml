@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Stellite Project
+// Copyright (c) 2014-2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -25,6 +25,8 @@
 // INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+// @TODO: Remove component after wizard redesign
 
 import QtQuick 2.0
 
@@ -62,11 +64,7 @@ Item {
             //radius: 2
             width: row.x
 
-            color: {
-                if(item.fillLevel < 3) return "#7a5fcb"
-                if(item.fillLevel < 13) return "#AAFFBB"
-                return "#36B25C"
-            }
+            color: "#7a5fcb"
 
             Timer {
                 interval: 500
@@ -116,7 +114,7 @@ Item {
 
         Row {
             id: row2
-            spacing: ((bar.width - 8) / 2) / 4
+            spacing: bar.width / 14
 
             Repeater {
                 model: 4
@@ -125,7 +123,7 @@ Item {
                     id: delegateItem2
                     currentX: x + row2.x
                     currentIndex: index
-                    mainTick: currentIndex === 0 || currentIndex === 3 || currentIndex === 13
+                    mainTick: currentIndex === 0
                     Component.onCompleted: {
                         row.positions[currentIndex] = delegateItem2
                     }
@@ -135,7 +133,7 @@ Item {
 
         Row {
             id: row1
-            spacing: ((bar.width - 8) / 2) / 10
+            spacing: bar.width / 14
 
             Repeater {
                 model: 10
@@ -144,7 +142,7 @@ Item {
                     id: delegateItem1
                     currentX: x + row1.x
                     currentIndex: index + 4
-                    mainTick: currentIndex === 0 || currentIndex === 3 || currentIndex === 13
+                    mainTick: currentIndex === 13
                     Component.onCompleted: {
                         row.positions[currentIndex] = delegateItem1
                     }

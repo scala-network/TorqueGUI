@@ -247,7 +247,7 @@ Rectangle {
             text: qsTr("Copy to clipboard") + translationManager.emptyString
             onClicked: {
                 var data = "";
-                data += "GUI version: " + Version.GUI_VERSION + " (Qt " + qtRuntimeVersion + ")";
+                data += "GUI version: " + "v2.0.0.0 " + " (Qt " + qtRuntimeVersion + ")";
                 data += "\nEmbedded Monero version: " + Version.GUI_MONERO_VERSION;
                 data += "\nWallet path: ";
 

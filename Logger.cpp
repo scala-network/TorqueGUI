@@ -11,7 +11,7 @@ static const QString default_name = "stellite-wallet-gui.log";
 #if defined(Q_OS_ANDROID) || defined(Q_OS_IOS)
     static const QString osPath = QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).at(0);
 #elif defined(Q_OS_WIN)
-    static const QString osPath = QCoreApplication::applicationDirPath();
+    static const QString osPath = QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).at(0);
 #elif defined(Q_OS_MAC)
     static const QString osPath = QStandardPaths::standardLocations(QStandardPaths::HomeLocation).at(0) + "/Library/Logs";
 #else // linux + bsd

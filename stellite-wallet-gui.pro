@@ -334,6 +334,7 @@ macx {
         -lboost_serialization \
         -lhidapi \
         -lboost_thread-mt \
+        -lboost_system-mt \
         -lboost_system \
         -lboost_date_time \
         -lboost_filesystem \

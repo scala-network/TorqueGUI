@@ -177,8 +177,8 @@ Rectangle {
                             appWindow.showWizard();
                         }
                     }
-                }
-            }*/
+                }*/
+            }
 
             Item {
                 anchors.left: parent.left
@@ -387,7 +387,7 @@ Rectangle {
         anchors.leftMargin: 15 * scaleRatio
         anchors.rightMargin: parent.getOffset()
         source: "../images/iconsend.png"
-        opacity: button.checked ? 1.0 : 0.4
+//        opacity: button.checked ? 1.0 : 0.4
     }
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -420,7 +420,7 @@ Rectangle {
         anchors.leftMargin: 35 * scaleRatio
         anchors.rightMargin: parent.getOffset()
         source: "../images/iconaddressbook.png"
-        opacity: button.checked ? 1.0 : 0.4
+//        opacity: button.checked ? 1.0 : 0.4
     }
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -453,7 +453,7 @@ Rectangle {
         anchors.leftMargin: 15 * scaleRatio
         anchors.rightMargin: parent.getOffset()
         source: "../images/iconreceive.png"
-        opacity: button.checked ? 1.0 : 0.4
+//        opacity: button.checked ? 1.0 : 0.4
     }
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -485,7 +485,7 @@ Rectangle {
         anchors.leftMargin: 15 * scaleRatio
         anchors.rightMargin: parent.getOffset()
         source: "../images/iconhistory.png"
-        opacity: button.checked ? 1.0 : 0.4
+//        opacity: button.checked ? 1.0 : 0.4
     }
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -516,7 +516,7 @@ Rectangle {
         anchors.leftMargin: 15 * scaleRatio
         anchors.rightMargin: parent.getOffset()
         source: "../images/iconadvanced.png"
-        opacity: button.checked ? 1.0 : 0.4
+//        opacity: button.checked ? 1.0 : 0.4
     }
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -546,7 +546,7 @@ Rectangle {
         anchors.leftMargin: 35 * scaleRatio
         anchors.rightMargin: parent.getOffset()
         source: "../images/iconmining.png"
-        opacity: button.checked ? 1.0 : 0.4
+//        opacity: button.checked ? 1.0 : 0.4
     }
                 visible: !isAndroid && !isIOS
                 anchors.left: parent.left
@@ -579,7 +579,7 @@ Rectangle {
         anchors.leftMargin: 35 * scaleRatio
         anchors.rightMargin: parent.getOffset()
         source: "../images/icontxkey.png"
-        opacity: button.checked ? 1.0 : 0.4
+//        opacity: button.checked ? 1.0 : 0.4
     }
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -610,7 +610,7 @@ Rectangle {
         anchors.leftMargin: 35 * scaleRatio
         anchors.rightMargin: parent.getOffset()
         source: "../images/iconringdb.png"
-        opacity: button.checked ? 1.0 : 0.4
+//        opacity: button.checked ? 1.0 : 0.4
     }
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -643,7 +643,7 @@ Rectangle {
         anchors.leftMargin: 35 * scaleRatio
         anchors.rightMargin: parent.getOffset()
         source: "../images/iconsignverify.png"
-        opacity: button.checked ? 1.0 : 0.4
+//        opacity: button.checked ? 1.0 : 0.4
     }
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -674,7 +674,7 @@ Rectangle {
         anchors.leftMargin: 15 * scaleRatio
         anchors.rightMargin: parent.getOffset()
         source: "../images/iconsettings.png"
-        opacity: button.checked ? 1.0 : 0.4
+//        opacity: button.checked ? 1.0 : 0.4
     }
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -704,7 +704,7 @@ Rectangle {
         anchors.leftMargin: 35 * scaleRatio
         anchors.rightMargin: parent.getOffset()
         source: "../images/iconseedkeys.png"
-        opacity: button.checked ? 1.0 : 0.4
+//        opacity: button.checked ? 1.0 : 0.4
     }
                 anchors.left: parent.left
                 anchors.right: parent.right

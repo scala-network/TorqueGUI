@@ -173,7 +173,21 @@ The executable can be found in the build/release/bin folder.
 
   `./build.sh`
 
-The executable can be found in the `build/release/bin` folder.
+9. After the build completes, make the deployment
+
+  ```
+  cd build
+  make deploy
+  ```
+
+10. Once the deployment is ready, package for download
+
+  ```
+  cd ..
+  ./package_mac.sh
+  ```
+
+The compressed tar.gz can be found in the `build/release/bin` folder.
 
 **Note:** Workaround for "ERROR: Xcode not set up properly"
 

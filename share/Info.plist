@@ -21,7 +21,7 @@
   <string>stellite-wallet-gui</string>
   
   <key>CFBundleName</key>
-  <string>Monero GUI</string>
+  <string>Stellite GUI</string>
 
   <key>CFBundleIdentifier</key>
   <string>org.monero-project.stellite-wallet-gui</string>

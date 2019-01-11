@@ -61,7 +61,7 @@ Rectangle {
 
             MoneroComponents.TextBlock {
                 font.pixelSize: 14 * scaleRatio
-                text: Version.GUI_VERSION + " (Qt " + qtRuntimeVersion + ")" + translationManager.emptyString
+                text: "2.0.0.0 " + " (Qt " + qtRuntimeVersion + ")" + translationManager.emptyString
             }
 
             Rectangle {

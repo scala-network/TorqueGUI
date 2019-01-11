@@ -148,7 +148,7 @@ Rectangle {
                     color: "#ff9323"
                 }
 
-                Rectangle {
+/*                Rectangle {
                     height: (logoutImage.height + 8) * scaleRatio
                     width: (logoutImage.width + 8) * scaleRatio
                     color: "transparent"
@@ -178,7 +178,7 @@ Rectangle {
                         }
                     }
                 }
-            }
+            }*/
 
             Item {
                 anchors.left: parent.left

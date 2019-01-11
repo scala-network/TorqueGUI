@@ -73,7 +73,7 @@ Rectangle {
     }
 
     function resetFilter(model) {
-        model.dateFromFilter = "2014-04-18" // genesis block
+        model.dateFromFilter = "2018-01-01" // genesis block
         model.dateToFilter = "9999-09-09" // fix before september 9999
         // negative values disable filters here;
         model.amountFromFilter = -1;

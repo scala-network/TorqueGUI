@@ -29,7 +29,7 @@ QList<TransactionInfo *> TransactionHistory::getAll(quint32 accountIndex) const
     qDeleteAll(m_tinfo);
     m_tinfo.clear();
 
-    QDateTime firstDateTime = QDateTime(QDate(2014, 4, 18)); // the genesis block
+    QDateTime firstDateTime = QDateTime(QDate(2018, 1, 22)); // the genesis block
     QDateTime lastDateTime  = QDateTime::currentDateTime().addDays(1); // tomorrow (guard against jitter and timezones)
     quint64 lastTxHeight = 0;
     m_locked = false;
@@ -110,6 +110,6 @@ bool TransactionHistory::TransactionHistory::locked() const
 TransactionHistory::TransactionHistory(Stellite::TransactionHistory *pimpl, QObject *parent)
     : QObject(parent), m_pimpl(pimpl), m_minutesToUnlock(0), m_locked(false)
 {
-    m_firstDateTime  = QDateTime(QDate(2014, 4, 18)); // the genesis block
+    m_firstDateTime  = QDateTime(QDate(2018, 1, 22)); // the genesis block
     m_lastDateTime = QDateTime::currentDateTime().addDays(1); // tomorrow (guard against jitter and timezones)
 }

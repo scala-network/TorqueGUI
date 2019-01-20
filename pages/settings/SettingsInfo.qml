@@ -30,6 +30,8 @@ import QtQuick 2.7
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.0
 import QtQuick.Dialogs 1.2
+import QtQuick.Controls.Styles 1.4
+
 
 import "../../version.js" as Version
 import "../../components" as MoneroComponents
@@ -241,31 +243,86 @@ Rectangle {
             }
         }
 
-        // Copy info to clipboard
-        MoneroComponents.StandardButton {
-            small: true
-            text: qsTr("Copy to clipboard") + translationManager.emptyString
-            onClicked: {
-                var data = "";
-                data += "GUI version: " + "v2.0.0.0 " + " (Qt " + qtRuntimeVersion + ")";
-                data += "\nEmbedded Monero version: " + Version.GUI_MONERO_VERSION;
-                data += "\nWallet path: ";
+    ColumnLayout {
+        id: faqLayout
+//        Layout.fillWidth: true
+//        anchors.left: parent.left
+//        anchors.top: parent.top
+//        anchors.right: parent.right
+//        anchors.margins: (isMobile)? 17 : 20
+//        anchors.topMargin: 0
+//        spacing: 30 * scaleRatio
 
-                var wallet_path = walletPath();
-                if(isIOS)
-                    wallet_path = StelliteAccountsDir + wallet_path;
-                data += wallet_path;
+        GridLayout {
+            columns: 1
+            columnSpacing: 0
 
-                data += "\nWallet creation height: ";
-                if(currentWallet)
-                    data += currentWallet.walletCreationHeight;
-
-                data += "\nWallet log path: " + walletLogPath;
-
-                console.log("Copied to clipboard");
-                clipboard.setText(data);
-                appWindow.showStatusMessage(qsTr("Copied to clipboard"), 3);
+            MoneroComponents.TextBlock {
+                font.pixelSize: 20 * scaleRatio
+                text: qsTr("FAQ ") + translationManager.emptyString
             }
+            MoneroComponents.TextBlock {
+                font.pixelSize: 18 * scaleRatio
+                text: qsTr("Balance issues: ") + translationManager.emptyString
+            }
+
+        Text {
+            textFormat: Text.RichText
+            font.family: Style.fontRegular.name
+            font.pixelSize: 14 * scaleRatio
+			color: "#ffffff"
+            text: qsTr("Check your synchronization status first. Your synchronization status block height should be comparable to block you can find as the last one on https://explorer.stellite.cash.<br>") +
+                  qsTr("If you still dont think your balance is right: Set your Wallet creation height in Settings - Help to 0 and confirm rescan of your wallet cache. ") + translationManager.emptyString
+            wrapMode: Text.Wrap
+            Layout.fillWidth: true;
+//            color: Style.defaultFontColor
         }
+            MoneroComponents.TextBlock {
+                font.pixelSize: 18 * scaleRatio
+                text: qsTr("Remote node: ") + translationManager.emptyString
+            }
+
+        Text {
+            textFormat: Text.RichText
+            font.family: Style.fontRegular.name
+            font.pixelSize: 14 * scaleRatio
+			color: "#ffffff"
+            text: qsTr("Everyone can enable Remote node usage in Settings - Node - Remote node by entering remote node address (port number 20189) - it means you will no longer need to download your blockchain localy. It is better for whole network to sync with as many users as possible, but we want to offer some alternative.<br>") +
+                    qsTr("Remote nodes to use: nodes.stellite.cash, daemons.cryptopool.space or node.stellite.space<br><br> ") + translationManager.emptyString
+            wrapMode: Text.Wrap
+            Layout.fillWidth: true;
+//            color: Style.defaultFontColor
+        }
+
+
+}
+}
+
+        // Copy info to clipboard
+//        MoneroComponents.StandardButton {
+//            small: true
+//            text: qsTr("Copy to clipboard") + translationManager.emptyString
+//            onClicked: {
+//                var data = "";
+//                data += "GUI version: " + "v2.0.0.0 " + " (Qt " + qtRuntimeVersion + ")";
+//                data += "\nEmbedded Monero version: " + Version.GUI_MONERO_VERSION;
+//                data += "\nWallet path: ";
+
+//                var wallet_path = walletPath();
+//                if(isIOS)
+//                    wallet_path = StelliteAccountsDir + wallet_path;
+//                data += wallet_path;
+
+//                data += "\nWallet creation height: ";
+//                if(currentWallet)
+//                    data += currentWallet.walletCreationHeight;
+
+//                data += "\nWallet log path: " + walletLogPath;
+
+//                console.log("Copied to clipboard");
+//                clipboard.setText(data);
+//                appWindow.showStatusMessage(qsTr("Copied to clipboard"), 3);
+//            }
+//        }
     }
 }

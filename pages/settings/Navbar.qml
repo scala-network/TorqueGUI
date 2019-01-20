@@ -305,7 +305,7 @@ Rectangle {
                         font.family: grid.fontFamily
                         font.pixelSize: grid.fontSize
                         font.bold: grid.fontBold
-                        text: qsTr("Info") + translationManager.emptyString
+                        text: qsTr("Help") + translationManager.emptyString
                         color: grid.fontColor
                     }
 

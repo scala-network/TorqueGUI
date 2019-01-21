@@ -1398,6 +1398,15 @@ ApplicationWindow {
                 updateBalance();
             }
 
+            onHelpClicked: {
+                middlePanel.state = "Help";
+                middlePanel.flickable.contentY = 0;
+                if(isMobile) {
+                    hideMenu();
+                }
+                updateBalance();
+            }
+
             onAddressBookClicked: {
                 middlePanel.state = "AddressBook";
                 middlePanel.flickable.contentY = 0;

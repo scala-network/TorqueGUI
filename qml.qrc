@@ -257,5 +257,7 @@
         <file>images/logout@2x.png</file>
         <file>images/minus-white.png</file>
         <file>images/minus-white@2x.png</file>
+        <file>pages/Help.qml</file>
+        <file>images/iconhelp.png</file>
     </qresource>
 </RCC>

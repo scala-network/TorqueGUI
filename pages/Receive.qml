@@ -219,8 +219,9 @@ Rectangle {
 
                 ListView {
                     id: subaddressListView
+                    Layout.fillHeight: true
                     Layout.fillWidth: true
-                    anchors.fill: parent
+//                    anchors.fill: parent
                     clip: true
                     boundsBehavior: ListView.StopAtBounds
                     delegate: Rectangle {
@@ -572,8 +573,9 @@ Rectangle {
 
                     ListView {
                         id: trackingListView
+	                    Layout.fillHeight: true
                         Layout.fillWidth: true
-                        anchors.fill: parent
+//                        anchors.fill: parent
                         clip: true
                         boundsBehavior: ListView.StopAtBounds
                         model: trackingModel

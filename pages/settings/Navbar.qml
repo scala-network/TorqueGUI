@@ -51,7 +51,8 @@ Rectangle {
 
         GridLayout {
             id: grid
-            anchors.horizontalCenter: parent.horizontalCenter
+            Layout.alignment: Qt.AlignHCenter
+//            anchors.horizontalCenter: parent.horizontalCenter
             columnSpacing: 0
             property string fontColor: "white"
             property int fontSize: 13 * scaleRatio

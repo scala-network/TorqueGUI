@@ -52,6 +52,7 @@ Rectangle {
 
     signal dashboardClicked()
     signal historyClicked()
+    signal helpClicked()
     signal transferClicked()
     signal receiveClicked()
     signal txkeyClicked()
@@ -66,6 +67,7 @@ Rectangle {
         menuColumn.previousButton.checked = false
         if(pos === "Dashboard") menuColumn.previousButton = dashboardButton
         else if(pos === "History") menuColumn.previousButton = historyButton
+		else if(pos === "Help") menuColumn.previousButton = helpButton
         else if(pos === "Transfer") menuColumn.previousButton = transferButton
         else if(pos === "Receive")  menuColumn.previousButton = receiveButton
         else if(pos === "AddressBook") menuColumn.previousButton = addressBookButton
@@ -726,6 +728,39 @@ Rectangle {
                 color: "#313131"
                 height: 1
             }
+
+            // ------------- Help tab ---------------
+
+            MoneroComponents.MenuButton {
+                id: helpButton
+												    Image {
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.left: parent.left
+        anchors.leftMargin: 15 * scaleRatio
+        anchors.rightMargin: parent.getOffset()
+        source: "../images/iconhelp.png"
+//        opacity: button.checked ? 1.0 : 0.4
+    }
+                anchors.left: parent.left
+                anchors.right: parent.right
+                text: qsTr("Help") + translationManager.emptyString
+                symbol: qsTr("Q") + translationManager.emptyString
+                dotColor: "#6B0072"
+                onClicked: {
+                    parent.previousButton.checked = false
+                    parent.previousButton = helpButton
+                    panel.helpClicked()
+                }
+            }
+            Rectangle {
+                visible: helpButton.present
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 16
+                color: "#313131"
+                height: 1
+            }
+
 
         } // Column
 

@@ -29,7 +29,11 @@
 import moneroComponents.WalletManager 1.0
 import QtQuick 2.2
 import QtQuick.Layouts 1.1
+import QtQuick.Controls 1.4
+import QtQuick.Controls.Styles 1.4
+import QtQuick.Dialogs 1.2
 import "../components"
+import moneroComponents.Clipboard 1.0
 import "utils.js" as Utils
 
 ColumnLayout {
@@ -87,6 +91,11 @@ ColumnLayout {
     ColumnLayout {
         id: headerColumn
 
+        MessageDialog {
+            id: remoteNodeDialog
+            standardButtons: StandardButton.Ok
+        }
+
         Text {
             Layout.fillWidth: true
             id: titleText
@@ -113,8 +122,20 @@ ColumnLayout {
 //            horizontalAlignment: Text.AlignHCenter
             text: qsTr("To be able to communicate with the Stellite network your wallet needs to be connected to a Stellite node. For best privacy it's recommended to run your own node. \
                         <br><br> \
-                        If you don't have the option to run your own node, there's an option to connect to a remote node.")
-                    + translationManager.emptyString
+                        If you don't have the option to run your own node, there's an option to connect to a remote node.") + qsTr("  !!!Always double check your remote node settings!!!  ") + " <a href='#'>" + qsTr("Help") + "</a>" + translationManager.emptyString
+            onLinkActivated: {
+                remoteNodeDialog.title  = qsTr("Remote node") + translationManager.emptyString;
+                remoteNodeDialog.text = qsTr(
+                    "Always double check your remote daemon settings to avoid connection to other networks!<br>" +
+                    "Stellite Remote nodes:<br><br>" +
+                    "nodes.stellite.cash<br>" +
+                    "node.stellite.space<br>" +
+                    "daemons.cryptopool.space<br>" +
+                    "All running on port 20189<br>"
+                )
+                remoteNodeDialog.icon = StandardIcon.Information
+                remoteNodeDialog.open()
+            }					
         }
     }
 

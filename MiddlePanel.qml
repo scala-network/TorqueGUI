@@ -59,6 +59,7 @@ Rectangle {
     property TxKey txkeyView: TxKey { }
     property SharedRingDB sharedringdbView: SharedRingDB { }
     property History historyView: History { }
+    property Help helpView: Help { }
     property Sign signView: Sign { }
     property Settings settingsView: Settings { }
     property Mining miningView: Mining { }
@@ -115,6 +116,11 @@ Rectangle {
                 PropertyChanges { target: root; currentView: historyView }
                 PropertyChanges { target: historyView; model: appWindow.currentWallet ? appWindow.currentWallet.historyModel : null }
                 PropertyChanges { target: mainFlickable; contentHeight: historyView.tableHeight + 220 * scaleRatio }
+            }, State {
+                name: "Help"
+                PropertyChanges { target: root; currentView: helpView }
+                PropertyChanges { target: helpView; model: appWindow.currentWallet ? appWindow.currentWallet.helpModel : null }
+                PropertyChanges { target: mainFlickable; contentHeight: helpView.tableHeight + 220 * scaleRatio }
             }, State {
                 name: "Transfer"
                 PropertyChanges { target: root; currentView: transferView }

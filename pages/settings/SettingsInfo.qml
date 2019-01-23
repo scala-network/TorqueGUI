@@ -61,7 +61,7 @@ Rectangle {
 
             MoneroComponents.TextBlock {
                 font.pixelSize: 14 * scaleRatio
-                text: "2.0.0.0 " + " (Qt " + qtRuntimeVersion + ")" + translationManager.emptyString
+                text: "2.0.0.1 " + " (Qt " + qtRuntimeVersion + ")" + translationManager.emptyString
             }
 
             Rectangle {
@@ -247,7 +247,7 @@ Rectangle {
             text: qsTr("Copy to clipboard") + translationManager.emptyString
             onClicked: {
                 var data = "";
-                data += "GUI version: " + "v2.0.0.0 " + " (Qt " + qtRuntimeVersion + ")";
+                data += "GUI version: " + "v2.0.0.1 " + " (Qt " + qtRuntimeVersion + ")";
                 data += "\nEmbedded Monero version: " + Version.GUI_MONERO_VERSION;
                 data += "\nWallet path: ";
 

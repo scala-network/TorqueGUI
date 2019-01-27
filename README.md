@@ -90,7 +90,7 @@ See [LICENSE](LICENSE).
 4. Build
 
     ```
-    cd stellite-gui
+    cd StelliteGUI
     QT_SELECT=5 ./build.sh
     ```
 
@@ -136,7 +136,7 @@ The executable can be found in the build/release/bin folder.
 
 7. Go into the repository
 
-  `cd stellite-gui`
+  `cd StelliteGUI`
 
 8. Start the build
 
@@ -216,7 +216,7 @@ The Stellite GUI on Windows is 64 bits only; 32-bit Windows GUI builds are not o
 7. Build
 
     ```
-    cd stellite-gui
+    cd StelliteGUI
     source ./build.sh release-static
     cd build
     make deploy

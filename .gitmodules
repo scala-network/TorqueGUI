@@ -1,4 +1,3 @@
 [submodule "torque"]
 	path = torque
-	url = https://github.com/contribute-torque/torque.git
-	ignore = all
+	url = git@github.com:contribute-torque/torque.git

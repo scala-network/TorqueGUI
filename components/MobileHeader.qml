@@ -21,7 +21,7 @@ Rectangle {
         anchors.verticalCenterOffset: -5
         anchors.left: parent.left
         anchors.leftMargin: 50 * scaleRatio
-        source: "../images/stelliteLogo2.png"
+        source: "../images/torqueLogo2.png"
     }
 
     Image {
@@ -30,7 +30,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
         anchors.leftMargin: 40 * scaleRatio
-        source: "../images/stelliteIcon.png"
+        source: "../images/torqueIcon.png"
     }
 
     Grid {

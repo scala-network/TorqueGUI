@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Stellite Project
+// Copyright (c) 2014-2015, The Torque Project
 // 
 // All rights reserved.
 // 
@@ -75,7 +75,7 @@ Rectangle {
             anchors.verticalCenterOffset: -5
             anchors.left: parent.left
             anchors.leftMargin: 20
-            source: "images/stelliteLogo2.png"
+            source: "images/torqueLogo2.png"
         }
 
         Grid {

@@ -1,7 +1,7 @@
 #include "AddressBook.h"
 #include <QDebug>
 
-AddressBook::AddressBook(Stellite::AddressBook *abImpl,QObject *parent)
+AddressBook::AddressBook(Torque::AddressBook *abImpl,QObject *parent)
   : QObject(parent), m_addressBookImpl(abImpl)
 {
     qDebug(__FUNCTION__);
@@ -18,7 +18,7 @@ int AddressBook::errorCode() const
     return m_addressBookImpl->errorCode();
 }
 
-QList<Stellite::AddressBookRow*> AddressBook::getAll(bool update) const
+QList<Torque::AddressBookRow*> AddressBook::getAll(bool update) const
 {
     qDebug(__FUNCTION__);
 
@@ -38,7 +38,7 @@ QList<Stellite::AddressBookRow*> AddressBook::getAll(bool update) const
 
 }
 
-Stellite::AddressBookRow * AddressBook::getRow(int index) const
+Torque::AddressBookRow * AddressBook::getRow(int index) const
 {
     return m_rows.at(index);
 }

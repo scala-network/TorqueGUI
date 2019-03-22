@@ -7,12 +7,12 @@
 #include <QList>
 #include <QtConcurrent/QtConcurrent>
 
-#include "wallet/api/wallet2_api.h" // we need to have an access to the Stellite::Wallet::Status enum here;
+#include "wallet/api/wallet2_api.h" // we need to have an access to the Torque::Wallet::Status enum here;
 #include "PendingTransaction.h" // we need to have an access to the PendingTransaction::Priority enum here;
 #include "UnsignedTransaction.h"
 #include "NetworkType.h"
 
-namespace Stellite {
+namespace Torque {
     class Wallet; // forward declaration
 }
 
@@ -56,17 +56,17 @@ public:
 
 
     enum Status {
-        Status_Ok       = Stellite::Wallet::Status_Ok,
-        Status_Error    = Stellite::Wallet::Status_Error,
-        Status_Critical = Stellite::Wallet::Status_Critical
+        Status_Ok       = Torque::Wallet::Status_Ok,
+        Status_Error    = Torque::Wallet::Status_Error,
+        Status_Critical = Torque::Wallet::Status_Critical
     };
 
     Q_ENUM(Status)
 
     enum ConnectionStatus {
-        ConnectionStatus_Connected       = Stellite::Wallet::ConnectionStatus_Connected,
-        ConnectionStatus_Disconnected    = Stellite::Wallet::ConnectionStatus_Disconnected,
-        ConnectionStatus_WrongVersion    = Stellite::Wallet::ConnectionStatus_WrongVersion
+        ConnectionStatus_Connected       = Torque::Wallet::ConnectionStatus_Connected,
+        ConnectionStatus_Disconnected    = Torque::Wallet::ConnectionStatus_Disconnected,
+        ConnectionStatus_WrongVersion    = Torque::Wallet::ConnectionStatus_WrongVersion
     };
 
     Q_ENUM(ConnectionStatus)
@@ -320,13 +320,13 @@ signals:
 
 private:
     Wallet(QObject * parent = nullptr);
-    Wallet(Stellite::Wallet *w, QObject * parent = 0);
+    Wallet(Torque::Wallet *w, QObject * parent = 0);
     ~Wallet();
 private:
     friend class WalletManager;
     friend class WalletListenerImpl;
     //! libwallet's
-    Stellite::Wallet * m_walletImpl;
+    Torque::Wallet * m_walletImpl;
     // history lifetime managed by wallet;
     TransactionHistory * m_history;
     // Used for UI history view
@@ -352,7 +352,7 @@ private:
     bool m_connectionStatusRunning;
     QString m_daemonUsername;
     QString m_daemonPassword;
-    Stellite::WalletListener *m_walletListener;
+    Torque::WalletListener *m_walletListener;
 };
 
 

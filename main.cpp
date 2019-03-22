@@ -102,9 +102,9 @@ int main(int argc, char *argv[])
 
     MainApp app(argc, argv);
 
-    app.setApplicationName("stellite-core");
-    app.setOrganizationDomain("stellite.cash");
-    app.setOrganizationName("stellitecoin");
+    app.setApplicationName("torque-core");
+    app.setOrganizationDomain("torque.cash");
+    app.setOrganizationName("torquecoin");
 
 #if defined(Q_OS_LINUX)
     if (isDesktop) app.setWindowIcon(QIcon(":/images/appicon.ico"));
@@ -121,11 +121,11 @@ int main(int argc, char *argv[])
     parser.addHelpOption();
     parser.process(app);
 
-    Stellite::Utils::onStartup();
+    Torque::Utils::onStartup();
 
     // Log settings
     const QString logPath = getLogPath(parser.value(logPathOption));
-    Stellite::Wallet::init(argv[0], "stellite-wallet-gui", logPath.toStdString().c_str(), true);
+    Torque::Wallet::init(argv[0], "torque-wallet-gui", logPath.toStdString().c_str(), true);
     qInstallMessageHandler(messageHandler);
 
 
@@ -245,15 +245,15 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("daemonManager", daemonManager);
 #endif
 
-//  export to QML stellite accounts root directory
+//  export to QML torque accounts root directory
 //  wizard is talking about where
 //  to save the wallet file (.keys, .bin), they have to be user-accessible for
 //  backups - I reckon we save that in My Documents\Monero Accounts\ on
-//  Windows, ~/Stellite Accounts/ on nix / osx
+//  Windows, ~/Torque Accounts/ on nix / osx
 #if defined(Q_OS_WIN) || defined(Q_OS_IOS)
-    QStringList stelliteAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation);
+    QStringList torqueAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation);
 #else
-    QStringList stelliteAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::HomeLocation);
+    QStringList torqueAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::HomeLocation);
 #endif
 
     engine.rootContext()->setContextProperty("isWindows", isWindows);
@@ -269,10 +269,10 @@ int main(int argc, char *argv[])
 #endif
 
 
-    if (!stelliteAccountsRootDir.empty())
+    if (!torqueAccountsRootDir.empty())
     {
-        QString stelliteAccountsDir = stelliteAccountsRootDir.at(0) + "/Stellite/wallets";
-        engine.rootContext()->setContextProperty("stelliteAccountsDir", stelliteAccountsDir);
+        QString torqueAccountsDir = torqueAccountsRootDir.at(0) + "/Torque/wallets";
+        engine.rootContext()->setContextProperty("torqueAccountsDir", torqueAccountsDir);
     }
 
 
@@ -281,7 +281,7 @@ int main(int argc, char *argv[])
     if (accountName.isEmpty())
         accountName = qgetenv("USERNAME"); // Windows
     if (accountName.isEmpty())
-        accountName = "My stellite Account";
+        accountName = "My torque Account";
 
     engine.rootContext()->setContextProperty("defaultAccountName", accountName);
     engine.rootContext()->setContextProperty("applicationDirectory", QApplication::applicationDirPath());

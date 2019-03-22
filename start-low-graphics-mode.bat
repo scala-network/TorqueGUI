@@ -2,4 +2,4 @@
 
 set QMLSCENE_DEVICE=softwarecontext
 
-start /b stellite-wallet-gui.exe
+start /b torque-wallet-gui.exe

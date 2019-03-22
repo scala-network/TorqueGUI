@@ -80,7 +80,7 @@ void UnsignedTransaction::setFilename(const QString &fileName)
     m_fileName = fileName;
 }
 
-UnsignedTransaction::UnsignedTransaction(Stellite::UnsignedTransaction *pt, Stellite::Wallet *walletImpl, QObject *parent)
+UnsignedTransaction::UnsignedTransaction(Torque::UnsignedTransaction *pt, Torque::Wallet *walletImpl, QObject *parent)
     : QObject(parent), m_pimpl(pt), m_walletImpl(walletImpl)
 {
 

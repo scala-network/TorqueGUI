@@ -372,7 +372,7 @@ ColumnLayout {
             Layout.maximumWidth: 600 * scaleRatio
             Layout.minimumWidth: 200 * scaleRatio
             id: fileUrlInput
-            text: stelliteAccountsDir + "/"
+            text: torqueAccountsDir + "/"
 
             // workaround for the bug "filechooser only opens once"
             MouseArea {

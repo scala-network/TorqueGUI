@@ -26,7 +26,7 @@ bool TranslationManager::setLanguage(const QString &language)
     }
 
     QString dir = qApp->applicationDirPath() + "/translations";
-    QString filename = "stellite-core_" + language;
+    QString filename = "torque-core_" + language;
 
     qDebug("%s: loading translation file '%s' from '%s'",
            __FUNCTION__, qPrintable(filename), qPrintable(dir));

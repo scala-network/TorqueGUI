@@ -38,8 +38,8 @@ class Subaddress : public QObject
 {
     Q_OBJECT
 public:
-    Q_INVOKABLE QList<Stellite::SubaddressRow*> getAll(bool update = false) const;
-    Q_INVOKABLE Stellite::SubaddressRow * getRow(int index) const;
+    Q_INVOKABLE QList<Torque::SubaddressRow*> getAll(bool update = false) const;
+    Q_INVOKABLE Torque::SubaddressRow * getRow(int index) const;
     Q_INVOKABLE void addRow(quint32 accountIndex, const QString &label) const;
     Q_INVOKABLE void setLabel(quint32 accountIndex, quint32 addressIndex, const QString &label) const;
     Q_INVOKABLE void refresh(quint32 accountIndex) const;
@@ -52,10 +52,10 @@ signals:
 public slots:
 
 private:
-    explicit Subaddress(Stellite::Subaddress * subaddressImpl, QObject *parent);
+    explicit Subaddress(Torque::Subaddress * subaddressImpl, QObject *parent);
     friend class Wallet;
-    Stellite::Subaddress * m_subaddressImpl;
-    mutable QList<Stellite::SubaddressRow*> m_rows;
+    Torque::Subaddress * m_subaddressImpl;
+    mutable QList<Torque::SubaddressRow*> m_rows;
 };
 
 #endif // SUBADDRESS_H

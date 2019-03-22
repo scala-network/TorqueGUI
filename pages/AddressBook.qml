@@ -63,7 +63,7 @@ Rectangle {
                 id: addressLine
                 labelText: qsTr("Address") + translationManager.emptyString
                 error: true;
-                placeholderText: qsTr("Stellite") + translationManager.emptyString
+                placeholderText: qsTr("Torque") + translationManager.emptyString
                 wrapMode: Text.WrapAnywhere
                 addressValidation: true
             }

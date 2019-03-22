@@ -65,7 +65,7 @@ void PendingTransaction::setFilename(const QString &fileName)
     m_fileName = fileName;
 }
 
-PendingTransaction::PendingTransaction(Stellite::PendingTransaction *pt, QObject *parent)
+PendingTransaction::PendingTransaction(Torque::PendingTransaction *pt, QObject *parent)
     : QObject(parent), m_pimpl(pt)
 {
 

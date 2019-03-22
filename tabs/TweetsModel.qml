@@ -89,7 +89,7 @@ Item {
             console.log("setting demo token")
             bearerToken = encodeURIComponent(Helper.demoToken())
             tweetsModel.phrase = ""
-            tweetsModel.from = "@stellitecash"
+            tweetsModel.from = "@torquecash"
             // reload()
             return;
         }

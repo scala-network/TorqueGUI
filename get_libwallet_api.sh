@@ -1,5 +1,5 @@
 #!/bin/bash
-MONERO_URL=https://github.com/stellitecoin/stellite.git
+MONERO_URL=https://github.com/torquecoin/torque.git
 MONERO_BRANCH=master
 
 pushd $(pwd)
@@ -8,38 +8,38 @@ ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source $ROOT_DIR/utils.sh
 
 INSTALL_DIR=$ROOT_DIR/wallet
-MONERO_DIR=$ROOT_DIR/stellite
+MONERO_DIR=$ROOT_DIR/torque
 BUILD_LIBWALLET=false
 
-# init and update stellite submodule
+# init and update torque submodule
 if [ ! -d $MONERO_DIR/src ]; then
-    git submodule init stellite
+    git submodule init torque
 fi
 git submodule update --remote
 git -C $MONERO_DIR fetch
 
-# get stellite core tag
+# get torque core tag
 get_tag
-# create local stellite branch
+# create local torque branch
 git -C $MONERO_DIR checkout -B $VERSIONTAG
 
 git -C $MONERO_DIR submodule init
 git -C $MONERO_DIR submodule update
 
-# Merge stellite PR dependencies
+# Merge torque PR dependencies
 
 # Workaround for git username requirements
 # Save current user settings and revert back when we are done with merging PR's
 OLD_GIT_USER=$(git -C $MONERO_DIR config --local user.name)
 OLD_GIT_EMAIL=$(git -C $MONERO_DIR config --local user.email)
-git -C $MONERO_DIR config user.name "Stellite GUI"
-git -C $MONERO_DIR config user.email "gui@stellite.local"
+git -C $MONERO_DIR config user.name "Torque GUI"
+git -C $MONERO_DIR config user.email "gui@torque.local"
 # check for PR requirements in most recent commit message (i.e requires #xxxx)
 for PR in $(git log --format=%B -n 1 | grep -io "requires #[0-9]*" | sed 's/[^0-9]*//g'); do
-    echo "Merging stellite push request #$PR"
+    echo "Merging torque push request #$PR"
     # fetch pull request and merge
     git -C $MONERO_DIR fetch origin pull/$PR/head:PR-$PR
-    git -C $MONERO_DIR merge --quiet PR-$PR  -m "Merge stellite PR #$PR"
+    git -C $MONERO_DIR merge --quiet PR-$PR  -m "Merge torque PR #$PR"
     BUILD_LIBWALLET=true
 done
 
@@ -53,7 +53,7 @@ if [ ! -f $MONERO_DIR/lib/libwallet_merged.a ]; then
     BUILD_LIBWALLET=true
 # Build libwallet if no previous version file exists
 elif [ ! -f $MONERO_DIR/version.sh ]; then 
-    echo "stellite/version.h not found - Building libwallet"
+    echo "torque/version.h not found - Building libwallet"
     BUILD_LIBWALLET=true
 ## Compare previously built version with submodule + merged PR's version. 
 else
@@ -69,7 +69,7 @@ else
         echo "Building new libwallet version $GUI_MONERO_VERSION"
         BUILD_LIBWALLET=true
     else
-        echo "latest libwallet ($GUI_MONERO_VERSION) is already built. Remove stellite/lib/libwallet_merged.a to force rebuild"
+        echo "latest libwallet ($GUI_MONERO_VERSION) is already built. Remove torque/lib/libwallet_merged.a to force rebuild"
     fi
 fi
 
@@ -121,7 +121,7 @@ else
 fi
 
 
-echo "cleaning up existing stellite build dir, libs and includes"
+echo "cleaning up existing torque build dir, libs and includes"
 rm -fr $MONERO_DIR/build
 rm -fr $MONERO_DIR/lib
 rm -fr $MONERO_DIR/include
@@ -221,7 +221,7 @@ eval $make_exec  -j$CPU_CORE_COUNT
 eval $make_exec  install -j$CPU_CORE_COUNT
 popd
 
-# Build stellited
+# Build torqued
 # win32 need to build daemon manually with msys2 toolchain
 if [ "$platform" != "mingw32" ] && [ "$ANDROID" != true ]; then
     pushd $MONERO_DIR/build/$BUILD_TYPE/src/daemon

@@ -7,7 +7,7 @@
 #include "wallet/api/wallet2_api.h"
 
 // default log path by OS (should be writable)
-static const QString default_name = "stellite-wallet-gui.log";
+static const QString default_name = "torque-wallet-gui.log";
 #if defined(Q_OS_ANDROID) || defined(Q_OS_IOS)
     static const QString osPath = QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).at(0);
 #elif defined(Q_OS_WIN)
@@ -39,11 +39,11 @@ void messageHandler(QtMsgType type, const QMessageLogContext &context, const QSt
     const std::string msg = message.toStdString();
     switch(type)
     {
-        case QtDebugMsg: Stellite::Wallet::debug(cat, msg); break;
-        case QtInfoMsg: Stellite::Wallet::info(cat, msg); break;
-        case QtWarningMsg: Stellite::Wallet::warning(cat, msg); break;
-        case QtCriticalMsg: Stellite::Wallet::error(cat, msg); break;
-        case QtFatalMsg: Stellite::Wallet::error(cat, msg); break;
+        case QtDebugMsg: Torque::Wallet::debug(cat, msg); break;
+        case QtInfoMsg: Torque::Wallet::info(cat, msg); break;
+        case QtWarningMsg: Torque::Wallet::warning(cat, msg); break;
+        case QtCriticalMsg: Torque::Wallet::error(cat, msg); break;
+        case QtFatalMsg: Torque::Wallet::error(cat, msg); break;
     }
 }
 

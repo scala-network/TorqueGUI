@@ -85,7 +85,7 @@ Rectangle {
             MoneroComponents.TextBlock {
                 id: guiMoneroVersion
                 font.pixelSize: 14 * scaleRatio
-                text: qsTr("Embedded Stellite version: ") + translationManager.emptyString
+                text: qsTr("Embedded Torque version: ") + translationManager.emptyString
             }
 
             MoneroComponents.TextBlock {
@@ -124,7 +124,7 @@ Rectangle {
                 text: {
                     var wallet_path = walletPath();
                     if(isIOS)
-                        wallet_path = stelliteAccountsDir + wallet_path;
+                        wallet_path = torqueAccountsDir + wallet_path;
                     return wallet_path;
                 }
             }
@@ -253,7 +253,7 @@ Rectangle {
 
                 var wallet_path = walletPath();
                 if(isIOS)
-                    wallet_path = StelliteAccountsDir + wallet_path;
+                    wallet_path = TorqueAccountsDir + wallet_path;
                 data += wallet_path;
 
                 data += "\nWallet creation height: ";

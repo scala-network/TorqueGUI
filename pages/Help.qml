@@ -87,7 +87,7 @@ Clipboard { id: clipboard }
 */			
             MoneroComponents.TextBlock {
                 font.pixelSize: 18 * scaleRatio
-                text: qsTr("Stellite daemon issues: ") + translationManager.emptyString
+                text: qsTr("Torque daemon issues: ") + translationManager.emptyString
             }
 
         Text {
@@ -95,8 +95,8 @@ Clipboard { id: clipboard }
 //            font.family: Style.fontRegular.name
             font.pixelSize: 14 * scaleRatio
 			color: "#ffffff"
-            text: qsTr("Please check your Stellite GUI wallet folder that contains stellited (.exe) file. If the file is not there, exclude your Stellite GUI wallet folder from your Antivirus software and extract files from downloaded archive again.<br>") +
-                    qsTr("If you still have a problem and your stellited file exists, please run stellited manually and check log. You can either contact us on our Discord channel or delete c:/\programdata/\stellite (Linux and Mac have this folder in home directory) folder and run stellited again to sync from scratch.<br> ") + translationManager.emptyString
+            text: qsTr("Please check your Torque GUI wallet folder that contains torqued (.exe) file. If the file is not there, exclude your Torque GUI wallet folder from your Antivirus software and extract files from downloaded archive again.<br>") +
+                    qsTr("If you still have a problem and your torqued file exists, please run torqued manually and check log. You can either contact us on our Discord channel or delete c:/\programdata/\torque (Linux and Mac have this folder in home directory) folder and run torqued again to sync from scratch.<br> ") + translationManager.emptyString
             wrapMode: Text.Wrap
             Layout.fillWidth: true;
 //            color: Style.defaultFontColor
@@ -113,7 +113,7 @@ Clipboard { id: clipboard }
             font.pixelSize: 14 * scaleRatio
 			color: "#ffffff"
 			property var style: "<style type='text/css'>a {cursor:pointer;text-decoration: underline; color: #FF6C3C}</style>"
-            text: style + qsTr("Check your synchronization status first. Your synchronization status block height should be comparable to block you can find as the last one on <a href='https://explorer.stellite.cash'>Blockchain Explorer</a><br>") +
+            text: style + qsTr("Check your synchronization status first. Your synchronization status block height should be comparable to block you can find as the last one on <a href='https://explorer.torque.cash'>Blockchain Explorer</a><br>") +
                   qsTr("If you still dont think your balance is right: Set your Wallet creation height to 0 (If you created your wallet after V5 fork, you can enter 500000 to speed up process)in Settings - Info and confirm rescan of your wallet cache.<br> ") + translationManager.emptyString
                 onLinkActivated: Qt.openUrlExternally(link)
 			wrapMode: Text.Wrap
@@ -136,7 +136,7 @@ Clipboard { id: clipboard }
             font.pixelSize: 14 * scaleRatio
 			color: "#ffffff"
             text: qsTr("Everyone can enable Remote node usage in Settings - Node - Remote node by entering remote node address (port number 20189) - it means you will no longer need to download your blockchain localy. It is better for whole network to sync with as many users as possible, but we want to offer some alternative.<br>") +
-                    qsTr("Remote nodes to use: nodes.stellite.cash, daemons.cryptopool.space or node.stellite.space<br> ") + translationManager.emptyString
+                    qsTr("Remote nodes to use: nodes.torque.cash, daemons.cryptopool.space or node.torque.space<br> ") + translationManager.emptyString
             wrapMode: Text.Wrap
             Layout.fillWidth: true;
 //            color: Style.defaultFontColor
@@ -163,7 +163,7 @@ Clipboard { id: clipboard }
             font.pixelSize: 14 * scaleRatio
 			color: "#ffffff"
                 property var style: "<style type='text/css'>a {cursor:pointer;text-decoration: underline; color: #FF6C3C}</style>"
-    text: style + "To learn more about Stellite, visit <a href='https://stellite.cash'>our website.</a>"
+    text: style + "To learn more about Torque, visit <a href='https://torque.cash'>our website.</a>"
     onLinkActivated: Qt.openUrlExternally(link)
 
     MouseArea {
@@ -195,11 +195,11 @@ Clipboard { id: clipboard }
             font.pixelSize: 14 * scaleRatio
 			color: "#ffffff"
                 property var style: "<style type='text/css'>a {cursor:pointer;text-decoration: underline; color: #FF6C3C}</style>"
-    text: style + "To support us directly, you can donate to support future development:<br><a href='#'>XTL address (click to copy)</a>"
+    text: style + "To support us directly, you can donate to support future development:<br><a href='#'>XTC address (click to copy)</a>"
     onLinkActivated: {
 				var data = "SEiTBcLGpfm3uj5b5RaZDGSUoAGnLCyG5aJjAwko67jqRwWEH26NFPd26EUpdL1zh4RTmTdRWLz8WCmk5F4umYaFByMtJT6RLjD6vzApQJWfi";
                 clipboard.setText(data);
-                appWindow.showStatusMessage(qsTr("XTL address copied to clipboard"), 3);
+                appWindow.showStatusMessage(qsTr("XTC address copied to clipboard"), 3);
 
 	}
 	
@@ -216,7 +216,7 @@ Clipboard { id: clipboard }
             font.pixelSize: 14 * scaleRatio
 			color: "#ffffff"
                 property var style: "<style type='text/css'>a {cursor:pointer;text-decoration: underline; color: #FF6C3C}</style>"
-    text: style + "<a href='#'>XTL address (click to open in Send tab)</a>"
+    text: style + "<a href='#'>XTC address (click to open in Send tab)</a>"
     onLinkActivated: {
 var address = "SEiTBcLGpfm3uj5b5RaZDGSUoAGnLCyG5aJjAwko67jqRwWEH26NFPd26EUpdL1zh4RTmTdRWLz8WCmk5F4umYaFByMtJT6RLjD6vzApQJWfi";
 var description = "Donation";
@@ -242,7 +242,7 @@ var paymentId = "";
                 property var style: "<style type='text/css'>a {cursor:pointer;text-decoration: underline; color: #FF6C3C}</style>"
     text: style + "<a href='#'>BTC address (click to copy)</a>"
     onLinkActivated: {
-				var data = "1XTLY5LqdBXRW6hcHtnuMU7c68mAyW6qm";
+				var data = "1XTCY5LqdBXRW6hcHtnuMU7c68mAyW6qm";
                 clipboard.setText(data);
                 appWindow.showStatusMessage(qsTr("BTC address copied to clipboard"), 3);
 					

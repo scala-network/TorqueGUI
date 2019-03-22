@@ -290,7 +290,7 @@ Rectangle {
                         labelText: qsTr("Address") + translationManager.emptyString;
                         addressValidation: true
                         anchors.topMargin: 5 * scaleRatio
-                        placeholderText: "Stellite"
+                        placeholderText: "Torque"
                     }
                 }
             }

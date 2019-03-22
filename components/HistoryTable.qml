@@ -173,7 +173,7 @@ ListView {
                         _amount = (_amount *1);
                     }
 
-                    return _amount + " XTL";
+                    return _amount + " XTC";
                 }
                 color: isOut ? MoneroComponents.Style.white : MoneroComponents.Style.green
 
@@ -327,7 +327,7 @@ ListView {
                     if(!isOut && !fee){
                         return "-";
                     } else if(isOut && fee){
-                        return fee + " XTL";
+                        return fee + " XTC";
                     } else {
                         return "Unknown"
                     }

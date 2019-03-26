@@ -20,8 +20,8 @@
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="66"/>
-        <source>Torque</source>
-        <translation>Torque</translation>
+        <source>Stellite</source>
+        <translation>Stellite</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="74"/>
@@ -358,8 +358,8 @@
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="93"/>
-        <source>WARNING: Do not reuse your Torque keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.</source>
-        <translation>AVISO: Não reutilize suas chaves Torque em outro fork, A NÃO SER QUE este fork tenha mitigações de reutilização embutidas. Fazer isso prejudicará sua privacidade.</translation>
+        <source>WARNING: Do not reuse your Stellite keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.</source>
+        <translation>AVISO: Não reutilize suas chaves Stellite em outro fork, A NÃO SER QUE este fork tenha mitigações de reutilização embutidas. Fazer isso prejudicará sua privacidade.</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="196"/>
@@ -610,8 +610,8 @@
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="82"/>
-        <source>Mining with your computer helps strengthen the Torque network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.&lt;br&gt; &lt;br&gt;Mining also gives you a small chance to earn some Torque. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
-        <translation>Minerar com seu computador ajuda a fortalecer a rede do Torque. Quanto mais pessoas minerarem, mais difícil é para a rede ser atacada, qualquer quantidade ajuda. &lt;br&gt; &lt;br&gt;Minerar também lhe garante uma pequena chance de ganhar Torque. Seu computador irá criar hashes buscando por soluções aos blocos. Caso encontre um bloco, você receberá a recompensa associada. Boa sorte!</translation>
+        <source>Mining with your computer helps strengthen the Stellite network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.&lt;br&gt; &lt;br&gt;Mining also gives you a small chance to earn some Stellite. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
+        <translation>Minerar com seu computador ajuda a fortalecer a rede do Stellite. Quanto mais pessoas minerarem, mais difícil é para a rede ser atacada, qualquer quantidade ajuda. &lt;br&gt; &lt;br&gt;Minerar também lhe garante uma pequena chance de ganhar Stellite. Seu computador irá criar hashes buscando por soluções aos blocos. Caso encontre um bloco, você receberá a recompensa associada. Boa sorte!</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="95"/>
@@ -867,13 +867,13 @@
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="138"/>
-        <source>With more Torque</source>
-        <translation>Com mais Torque</translation>
+        <source>With more Stellite</source>
+        <translation>Com mais Stellite</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="139"/>
-        <source>With not enough Torque</source>
-        <translation>Sem Torque suficiente</translation>
+        <source>With not enough Stellite</source>
+        <translation>Sem Stellite suficiente</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="141"/>
@@ -1041,8 +1041,8 @@
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="89"/>
-        <source>Embedded Torque version: </source>
-        <translation>Versão do Torque embutida: </translation>
+        <source>Embedded Stellite version: </source>
+        <translation>Versão do Stellite embutida: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="118"/>
@@ -1164,13 +1164,13 @@ O arquivo de cache da carteira antiga será renomeado e poderá ser restaurado p
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="232"/>
-        <source>Uses a third-party server to connect to the Torque network. Less secure, but easier on your computer.</source>
-        <translation>Usa um servidor de terceiro para se conectar com a rede Torque. Menos seguro, mas mais leve para seu computador.</translation>
+        <source>Uses a third-party server to connect to the Stellite network. Less secure, but easier on your computer.</source>
+        <translation>Usa um servidor de terceiro para se conectar com a rede Stellite. Menos seguro, mas mais leve para seu computador.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="277"/>
-        <source>To find a remote node, type &apos;Torque remote node&apos; into your favorite search engine. Please ensure the node is run by a trusted third-party.</source>
-        <translation>Para encontrar um nó remoto, digite &apos;nó remoto do Torque&apos; em seu mecanismo de busca favorito. Certifique-se de que o nó seja executado por um terceiro confiável.</translation>
+        <source>To find a remote node, type &apos;Stellite remote node&apos; into your favorite search engine. Please ensure the node is run by a trusted third-party.</source>
+        <translation>Para encontrar um nó remoto, digite &apos;nó remoto do Stellite&apos; em seu mecanismo de busca favorito. Certifique-se de que o nó seja executado por um terceiro confiável.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="291"/>
@@ -1326,8 +1326,8 @@ O arquivo de cache da carteira antiga será renomeado e poderá ser restaurado p
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="97"/>
-        <source>This page allows you to interact with the shared ring database. This database is meant for use by Torque wallets as well as wallets from Torque clones which reuse the Torque keys.</source>
-        <translation>Essa página te permite interagir com a base de dados compartilhada dos anéis. Essa base de dados serve para ser usada por carteiras Torque e outras carteiras de clones do Torque que reutilizam as mesmas chaves.</translation>
+        <source>This page allows you to interact with the shared ring database. This database is meant for use by Stellite wallets as well as wallets from Stellite clones which reuse the Stellite keys.</source>
+        <translation>Essa página te permite interagir com a base de dados compartilhada dos anéis. Essa base de dados serve para ser usada por carteiras Stellite e outras carteiras de clones do Stellite que reutilizam as mesmas chaves.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="110"/>
@@ -1343,8 +1343,8 @@ O arquivo de cache da carteira antiga será renomeado e poderá ser restaurado p
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="113"/>
-        <source>In order to obscure which inputs in a Torque transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Torque uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Torque project and is available on the torque.cash website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Torque clones) yourself using the torque-blockchain-blackball tool to create a list of known spent outputs.&lt;br&gt;</source>
-        <translation>Para ocultar quais entradas estão sendo gastas numa transação em Torque, um terceiro não deve ser capaz de saber quais entradas num anel já foram gastas. Se ele for capaz, a proteção fornecida pelas assinaturas em anel é enfraquecida. Se todas as entradas forem identificadas como gastas, salvo uma, então a verdadeira entrada fica aparente, anulando o efeito das assinaturas em anel, que é uma das três principais camadas de proteção a privacidade que o Torque usa.&lt;br&gt;Para ajudar que as transações evitem essas entradas, uma lista de entradas já gastas pode ser usada para evitar de adicioná-las em novas transações. Tal lista é mantida pelo projeto Torque e está disponível no website torque.cash. Você pode importar essa lista aqui.&lt;br&gt;Como alternativa, você pode escanear o blockchain (e dos clones do Torque que reutilizam as chaves) usando a ferramenta torque-blockchain-blackball para criar uma lista de entradas já gastas.&lt;br&gt;</translation>
+        <source>In order to obscure which inputs in a Stellite transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Stellite uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Stellite project and is available on the stellite.cash website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Stellite clones) yourself using the stellite-blockchain-blackball tool to create a list of known spent outputs.&lt;br&gt;</source>
+        <translation>Para ocultar quais entradas estão sendo gastas numa transação em Stellite, um terceiro não deve ser capaz de saber quais entradas num anel já foram gastas. Se ele for capaz, a proteção fornecida pelas assinaturas em anel é enfraquecida. Se todas as entradas forem identificadas como gastas, salvo uma, então a verdadeira entrada fica aparente, anulando o efeito das assinaturas em anel, que é uma das três principais camadas de proteção a privacidade que o Stellite usa.&lt;br&gt;Para ajudar que as transações evitem essas entradas, uma lista de entradas já gastas pode ser usada para evitar de adicioná-las em novas transações. Tal lista é mantida pelo projeto Stellite e está disponível no website stellite.cash. Você pode importar essa lista aqui.&lt;br&gt;Como alternativa, você pode escanear o blockchain (e dos clones do Stellite que reutilizam as chaves) usando a ferramenta stellite-blockchain-blackball para criar uma lista de entradas já gastas.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="134"/>
@@ -1409,13 +1409,13 @@ O arquivo de cache da carteira antiga será renomeado e poderá ser restaurado p
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="245"/>
-        <source>In order to avoid nullifying the protection afforded by Torque&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing Torque clone allows you to spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by Torque and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing Torque clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your Torque safely.&lt;br&gt;If you do not use a key-reusing Torque clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
-        <translation>Para evitar anular a proteção oferecida pelas assinaturas de anel do Torque, uma saída não deve ser gasta com anéis diferentes em blockchains diferentes. Embora isso normalmente não seja uma preocupação, ela pode se tornar uma quando um clone do Torque que reutiliza chaves permita que você gaste as saídas existentes. Nesse caso, você precisa garantir que essas saídas existentes usem o mesmo anel em ambos blockchains.&lt;br&gt;Isso será feito automaticamente pelo Torque e qualquer software de reutilização de chaves que não esteja tentando privá-lo ativamente de sua privacidade.&lt;br&gt;Se você estiver usando um clone do Torque que também reutiliza chaves, e esse clone não incluir essa proteção, você ainda poderá garantir que suas transações sejam protegidas ao gastar primeiramente no clone e, em seguida, adicionar manualmente o anel nesta página, o que lhe permitirá gastar seu Torque com segurança.&lt;br&gt;Se você não usar um clone do Torque que reutiliza chaves sem esses recursos de segurança, não será necessário fazer nada, pois tudo é automatizado.&lt;br&gt;</translation>
+        <source>In order to avoid nullifying the protection afforded by Stellite&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing Stellite clone allows you to spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by Stellite and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing Stellite clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your Stellite safely.&lt;br&gt;If you do not use a key-reusing Stellite clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
+        <translation>Para evitar anular a proteção oferecida pelas assinaturas de anel do Stellite, uma saída não deve ser gasta com anéis diferentes em blockchains diferentes. Embora isso normalmente não seja uma preocupação, ela pode se tornar uma quando um clone do Stellite que reutiliza chaves permita que você gaste as saídas existentes. Nesse caso, você precisa garantir que essas saídas existentes usem o mesmo anel em ambos blockchains.&lt;br&gt;Isso será feito automaticamente pelo Stellite e qualquer software de reutilização de chaves que não esteja tentando privá-lo ativamente de sua privacidade.&lt;br&gt;Se você estiver usando um clone do Stellite que também reutiliza chaves, e esse clone não incluir essa proteção, você ainda poderá garantir que suas transações sejam protegidas ao gastar primeiramente no clone e, em seguida, adicionar manualmente o anel nesta página, o que lhe permitirá gastar seu Stellite com segurança.&lt;br&gt;Se você não usar um clone do Stellite que reutiliza chaves sem esses recursos de segurança, não será necessário fazer nada, pois tudo é automatizado.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="267"/>
-        <source>This records rings used by outputs spent on Torque on a key reusing chain, so that the same ring may be reused to avoid privacy issues.</source>
-        <translation>Isso registra os anéis usados pelo Torque em um blockchain que reutiliza as mesmas chaves. Dessa maneira o mesmo anel pode ser reutilizado evitando problemas de privacidade.</translation>
+        <source>This records rings used by outputs spent on Stellite on a key reusing chain, so that the same ring may be reused to avoid privacy issues.</source>
+        <translation>Isso registra os anéis usados pelo Stellite em um blockchain que reutiliza as mesmas chaves. Dessa maneira o mesmo anel pode ser reutilizado evitando problemas de privacidade.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="278"/>
@@ -1455,12 +1455,12 @@ O arquivo de cache da carteira antiga será renomeado e poderá ser restaurado p
     <message>
         <location filename="../pages/SharedRingDB.qml" line="364"/>
         <source>I intend to spend on key-reusing fork(s)</source>
-        <translation>Eu pretendo usar um fork que reutiliza as chaves do Torque</translation>
+        <translation>Eu pretendo usar um fork que reutiliza as chaves do Stellite</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="378"/>
         <source>I might want to spend on key-reusing fork(s)</source>
-        <translation>Talvez eu queria usar um fork que reutiliza as chaves do Torque</translation>
+        <translation>Talvez eu queria usar um fork que reutiliza as chaves do Stellite</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="392"/>
@@ -1821,7 +1821,7 @@ O arquivo de cache da carteira antiga será renomeado e poderá ser restaurado p
     <message>
         <location filename="../pages/Transfer.qml" line="619"/>
         <source>Payment sent successfully</source>
-        <translation>Torque enviado com sucesso</translation>
+        <translation>Stellite enviado com sucesso</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="702"/>
@@ -2081,13 +2081,13 @@ Para pagamentos que você realizou, é possível pegar uma prova de pagamento qu
     <name>WizardConfigure</name>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="79"/>
-        <source>We’re almost there - let’s just configure some Torque preferences</source>
+        <source>We’re almost there - let’s just configure some Stellite preferences</source>
         <translation>Estamos quase terminando - vamos configurar algumas preferências</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="97"/>
-        <source>Kickstart the Torque blockchain?</source>
-        <translation>Iniciar o blockchain do Torque?</translation>
+        <source>Kickstart the Stellite blockchain?</source>
+        <translation>Iniciar o blockchain do Stellite?</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="113"/>
@@ -2101,8 +2101,8 @@ Para pagamentos que você realizou, é possível pegar uma prova de pagamento qu
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="140"/>
-        <source>Disk conservation mode uses substantially less disk-space, but the same amount of bandwidth as a regular Torque instance. However, storing the full blockchain is beneficial to the security of the Torque network. If you are on a device with limited disk space, then this option is appropriate for you.</source>
-        <translation>Modo de conservação de espaço no disco utiliza menos espaço, porém a mesma quantidade de banda que o modo normal. Armazenar o blockchain completo ajuda a proteger a rede do Torque. Caso esteja em um dispositivo com espaço em disco limitado, esta opção é para você.</translation>
+        <source>Disk conservation mode uses substantially less disk-space, but the same amount of bandwidth as a regular Stellite instance. However, storing the full blockchain is beneficial to the security of the Stellite network. If you are on a device with limited disk space, then this option is appropriate for you.</source>
+        <translation>Modo de conservação de espaço no disco utiliza menos espaço, porém a mesma quantidade de banda que o modo normal. Armazenar o blockchain completo ajuda a proteger a rede do Stellite. Caso esteja em um dispositivo com espaço em disco limitado, esta opção é para você.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="153"/>
@@ -2111,8 +2111,8 @@ Para pagamentos que você realizou, é possível pegar uma prova de pagamento qu
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="169"/>
-        <source>Mining secures the Torque network, and also pays a small reward for the work done. This option will let Torque mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
-        <translation>A mineração protege a rede do Torque e recompensa o minerador com uma pequena quantidade de Torque pelo trabalho feito. Esta opção fará com que seu computador seja utilizado para minerar Torque quando estiver ocioso. A mineração será interrompida quando você voltar a utilizar o computador.</translation>
+        <source>Mining secures the Stellite network, and also pays a small reward for the work done. This option will let Stellite mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
+        <translation>A mineração protege a rede do Stellite e recompensa o minerador com uma pequena quantidade de Stellite pelo trabalho feito. Esta opção fará com que seu computador seja utilizado para minerar Stellite quando estiver ocioso. A mineração será interrompida quando você voltar a utilizar o computador.</translation>
     </message>
 </context>
 <context>
@@ -2143,8 +2143,8 @@ Para pagamentos que você realizou, é possível pegar uma prova de pagamento qu
     <name>WizardDaemonSettings</name>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="114"/>
-        <source>To be able to communicate with the Torque network your wallet needs to be connected to a Torque node. For best privacy it&apos;s recommended to run your own node.                         &lt;br&gt;&lt;br&gt;                         If you don&apos;t have the option to run your own node, there&apos;s an option to connect to a remote node.</source>
-        <translation>Para se comunicar com a rede Torque, sua carteira precisa estar conectada com um nó Torque. Para maior privacidade, é recomendado que você rode seu próprio nó.                         &lt;br&gt;&lt;br&gt;                         Se você não tem a opção de rodar seu próprio nó, existe a opção de conectar-se a um nó remoto.</translation>
+        <source>To be able to communicate with the Stellite network your wallet needs to be connected to a Stellite node. For best privacy it&apos;s recommended to run your own node.                         &lt;br&gt;&lt;br&gt;                         If you don&apos;t have the option to run your own node, there&apos;s an option to connect to a remote node.</source>
+        <translation>Para se comunicar com a rede Stellite, sua carteira precisa estar conectada com um nó Stellite. Para maior privacidade, é recomendado que você rode seu próprio nó.                         &lt;br&gt;&lt;br&gt;                         Se você não tem a opção de rodar seu próprio nó, existe a opção de conectar-se a um nó remoto.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="126"/>
@@ -2176,8 +2176,8 @@ Para pagamentos que você realizou, é possível pegar uma prova de pagamento qu
     <name>WizardDonation</name>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="93"/>
-        <source>Torque development is solely supported by donations</source>
-        <translation>O desenvolvimento do Torque é suportado através de doações</translation>
+        <source>Stellite development is solely supported by donations</source>
+        <translation>O desenvolvimento do Stellite é suportado através de doações</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="113"/>
@@ -2191,8 +2191,8 @@ Para pagamentos que você realizou, é possível pegar uma prova de pagamento qu
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="162"/>
-        <source>For every transaction, a small transaction fee is charged. This option lets you add an additional amount, as a percentage of that fee, to your transaction to support Torque development. For instance, a 50% autodonation take a transaction fee of 0.005 XMR and add a 0.0025 XMR to support Torque development.</source>
-        <translation>Para cada transação uma pequena taxa é coletada. Esta opção permite você adicionar uma quantidade adicional (porcentagem desta taxa) para ajudar o desenvolvimento do Torque. Por exemplo, 50% de auto-doação em uma taxa de transferência de 0.005 XMR adicionará 0.0025 XMR na taxa para ajudar o desenvolvimento do projeto.</translation>
+        <source>For every transaction, a small transaction fee is charged. This option lets you add an additional amount, as a percentage of that fee, to your transaction to support Stellite development. For instance, a 50% autodonation take a transaction fee of 0.005 XMR and add a 0.0025 XMR to support Stellite development.</source>
+        <translation>Para cada transação uma pequena taxa é coletada. Esta opção permite você adicionar uma quantidade adicional (porcentagem desta taxa) para ajudar o desenvolvimento do Stellite. Por exemplo, 50% de auto-doação em uma taxa de transferência de 0.005 XMR adicionará 0.0025 XMR na taxa para ajudar o desenvolvimento do projeto.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="174"/>
@@ -2201,8 +2201,8 @@ Para pagamentos que você realizou, é possível pegar uma prova de pagamento qu
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="190"/>
-        <source>Mining secures the Torque network, and also pays a small reward for the work done. This option will let Torque mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
-        <translation>A mineração protege a rede do Torque e recompensa o minerador com uma pequena quantidade de Torque pelo trabalho feito. Esta opção fará com que seu computador seja utilizado para minerar Torque quando estive ocioso. A mineração será interrompida quando você voltar a utilizar o computador.</translation>
+        <source>Mining secures the Stellite network, and also pays a small reward for the work done. This option will let Stellite mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
+        <translation>A mineração protege a rede do Stellite e recompensa o minerador com uma pequena quantidade de Stellite pelo trabalho feito. Esta opção fará com que seu computador seja utilizado para minerar Stellite quando estive ocioso. A mineração será interrompida quando você voltar a utilizar o computador.</translation>
     </message>
 </context>
 <context>
@@ -2415,8 +2415,8 @@ Para pagamentos que você realizou, é possível pegar uma prova de pagamento qu
     <name>WizardOptions</name>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="76"/>
-        <source>Welcome to Torque!</source>
-        <translation>Bem-vindo ao Torque!</translation>
+        <source>Welcome to Stellite!</source>
+        <translation>Bem-vindo ao Stellite!</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="87"/>
@@ -2505,8 +2505,8 @@ Para pagamentos que você realizou, é possível pegar uma prova de pagamento qu
     <name>WizardWelcome</name>
     <message>
         <location filename="../wizard/WizardWelcome.qml" line="73"/>
-        <source>Welcome to Torque!</source>
-        <translation>Bem-vindo ao Torque!</translation>
+        <source>Welcome to Stellite!</source>
+        <translation>Bem-vindo ao Stellite!</translation>
     </message>
     <message>
         <location filename="../wizard/WizardWelcome.qml" line="83"/>
@@ -2700,7 +2700,7 @@ Spending address index: </source>
     <message>
         <location filename="../main.qml" line="799"/>
         <source>Payment sent successfully: %1 transaction(s) </source>
-        <translation>Torque enviado com sucesso: %1 transação(ões) </translation>
+        <translation>Stellite enviado com sucesso: %1 transação(ões) </translation>
     </message>
     <message>
         <location filename="../main.qml" line="832"/>
@@ -2723,8 +2723,8 @@ Spending address index: </source>
     </message>
     <message>
         <location filename="../main.qml" line="873"/>
-        <source>This address received %1 torque, with %2 confirmation(s).</source>
-        <translation>Este endereço recebeu %1 torque, com %2 confirmação(ões)</translation>
+        <source>This address received %1 stellite, with %2 confirmation(s).</source>
+        <translation>Este endereço recebeu %1 stellite, com %2 confirmação(ões)</translation>
     </message>
     <message>
         <location filename="../main.qml" line="884"/>
@@ -2798,8 +2798,8 @@ Spending address index: </source>
     </message>
     <message>
         <location filename="../main.qml" line="1789"/>
-        <source>New version of torque-wallet-gui is available: %1&lt;br&gt;%2</source>
-        <translation>Nova versão da carteira (GUI) do Torque disponível: %1&lt;br&gt;%2</translation>
+        <source>New version of stellite-wallet-gui is available: %1&lt;br&gt;%2</source>
+        <translation>Nova versão da carteira (GUI) do Stellite disponível: %1&lt;br&gt;%2</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1821"/>
@@ -2840,8 +2840,8 @@ Spending address index: </source>
     </message>
     <message>
         <location filename="../main.qml" line="870"/>
-        <source>This address received %1 torque, but the transaction is not yet mined</source>
-        <translation>Este endereço recebeu %1 torque, porém a transação ainda não foi minerada</translation>
+        <source>This address received %1 stellite, but the transaction is not yet mined</source>
+        <translation>Este endereço recebeu %1 stellite, porém a transação ainda não foi minerada</translation>
     </message>
     <message>
         <location filename="../main.qml" line="877"/>
@@ -2870,8 +2870,8 @@ Spending address index: </source>
     </message>
     <message>
         <location filename="../main.qml" line="1297"/>
-        <source>Torque</source>
-        <translation>Torque</translation>
+        <source>Stellite</source>
+        <translation>Stellite</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1447"/>

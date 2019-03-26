@@ -20,8 +20,8 @@
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="66"/>
-        <source>Torque</source>
-        <translation>Torque</translation>
+        <source>Stellite</source>
+        <translation>Stellite</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="74"/>
@@ -380,8 +380,8 @@
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="93"/>
-        <source>WARNING: Do not reuse your Torque keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.</source>
-        <translation>ĮSPĖJIMAS: Pakartotinai nenaudokite savo Torque raktų kitoje atšakoje, NEBENT ši atšaka turi pakartotinio naudojimo švelninimo priemones. Panaudojus jūsų privatumas gali būti pažeistas.</translation>
+        <source>WARNING: Do not reuse your Stellite keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.</source>
+        <translation>ĮSPĖJIMAS: Pakartotinai nenaudokite savo Stellite raktų kitoje atšakoje, NEBENT ši atšaka turi pakartotinio naudojimo švelninimo priemones. Panaudojus jūsų privatumas gali būti pažeistas.</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="166"/>
@@ -610,8 +610,8 @@
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="82"/>
-        <source>Mining with your computer helps strengthen the Torque network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.&lt;br&gt; &lt;br&gt;Mining also gives you a small chance to earn some Torque. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
-        <translation>Kasimas jūsų kompiuteriu padeda sustiprinti Torque tinklą. Kuo daugiau žmonių kasa - tuo sunkiau atakuoti tinklą.&lt;br&gt; &lt;br&gt; Kasimas suteikia Jums mažą galimybę gauti šiek tiek Torque. Jūsų kompiuteris kurs &apos;hašus&apos; ir taip bandys atrasti blokų sprendimus. Jeigu rasite bloką, gausite atitinkamą atlygį. Sėkmės!</translation>
+        <source>Mining with your computer helps strengthen the Stellite network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.&lt;br&gt; &lt;br&gt;Mining also gives you a small chance to earn some Stellite. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
+        <translation>Kasimas jūsų kompiuteriu padeda sustiprinti Stellite tinklą. Kuo daugiau žmonių kasa - tuo sunkiau atakuoti tinklą.&lt;br&gt; &lt;br&gt; Kasimas suteikia Jums mažą galimybę gauti šiek tiek Stellite. Jūsų kompiuteris kurs &apos;hašus&apos; ir taip bandys atrasti blokų sprendimus. Jeigu rasite bloką, gausite atitinkamą atlygį. Sėkmės!</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="95"/>
@@ -867,13 +867,13 @@
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="138"/>
-        <source>With more Torque</source>
-        <translation>Su daugiau Torque</translation>
+        <source>With more Stellite</source>
+        <translation>Su daugiau Stellite</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="139"/>
-        <source>With not enough Torque</source>
-        <translation>Su nepakankamai Torque</translation>
+        <source>With not enough Stellite</source>
+        <translation>Su nepakankamai Stellite</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="141"/>
@@ -1041,8 +1041,8 @@
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="89"/>
-        <source>Embedded Torque version: </source>
-        <translation>Integruota Torque versija: </translation>
+        <source>Embedded Stellite version: </source>
+        <translation>Integruota Stellite versija: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="118"/>
@@ -1164,13 +1164,13 @@ Sena piniginės talpyklos rinkmena bus pervadinta ir vėliau galės būti atstat
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="232"/>
-        <source>Uses a third-party server to connect to the Torque network. Less secure, but easier on your computer.</source>
-        <translation>Naudoja trečiosios šalies serverį prisijungti prie &quot;Torque&quot; tinklo. Mažiau saugus, bet reikalauja mažiau vietos diske.</translation>
+        <source>Uses a third-party server to connect to the Stellite network. Less secure, but easier on your computer.</source>
+        <translation>Naudoja trečiosios šalies serverį prisijungti prie &quot;Stellite&quot; tinklo. Mažiau saugus, bet reikalauja mažiau vietos diske.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="277"/>
-        <source>To find a remote node, type &apos;Torque remote node&apos; into your favorite search engine. Please ensure the node is run by a trusted third-party.</source>
-        <translation>Norėdami rasti nuotolinį mazgą, įveskite &quot;Torque remote node&quot; savo mėgstamoje paieškos sistemoje. Įsitikinkite, kad mazgas yra patikimo tiekėjo.</translation>
+        <source>To find a remote node, type &apos;Stellite remote node&apos; into your favorite search engine. Please ensure the node is run by a trusted third-party.</source>
+        <translation>Norėdami rasti nuotolinį mazgą, įveskite &quot;Stellite remote node&quot; savo mėgstamoje paieškos sistemoje. Įsitikinkite, kad mazgas yra patikimo tiekėjo.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="291"/>
@@ -1326,8 +1326,8 @@ Sena piniginės talpyklos rinkmena bus pervadinta ir vėliau galės būti atstat
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="97"/>
-        <source>This page allows you to interact with the shared ring database. This database is meant for use by Torque wallets as well as wallets from Torque clones which reuse the Torque keys.</source>
-        <translation>Šis puslapis leidžia sąveikauti su bendrai naudojama žiedų duomenų baze. Ši duomenų bazė yra skirta naudoti Torque piniginėse, taip pat Torque klonų piniginėse, kurios pakartotinai naudoja Torque raktus.</translation>
+        <source>This page allows you to interact with the shared ring database. This database is meant for use by Stellite wallets as well as wallets from Stellite clones which reuse the Stellite keys.</source>
+        <translation>Šis puslapis leidžia sąveikauti su bendrai naudojama žiedų duomenų baze. Ši duomenų bazė yra skirta naudoti Stellite piniginėse, taip pat Stellite klonų piniginėse, kurios pakartotinai naudoja Stellite raktus.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="110"/>
@@ -1343,7 +1343,7 @@ Sena piniginės talpyklos rinkmena bus pervadinta ir vėliau galės būti atstat
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="113"/>
-        <source>In order to obscure which inputs in a Torque transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Torque uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Torque project and is available on the torque.cash website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Torque clones) yourself using the torque-blockchain-blackball tool to create a list of known spent outputs.&lt;br&gt;</source>
+        <source>In order to obscure which inputs in a Stellite transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Stellite uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Stellite project and is available on the stellite.cash website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Stellite clones) yourself using the stellite-blockchain-blackball tool to create a list of known spent outputs.&lt;br&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1409,12 +1409,12 @@ Sena piniginės talpyklos rinkmena bus pervadinta ir vėliau galės būti atstat
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="245"/>
-        <source>In order to avoid nullifying the protection afforded by Torque&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing Torque clone allows you to spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by Torque and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing Torque clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your Torque safely.&lt;br&gt;If you do not use a key-reusing Torque clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
+        <source>In order to avoid nullifying the protection afforded by Stellite&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing Stellite clone allows you to spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by Stellite and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing Stellite clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your Stellite safely.&lt;br&gt;If you do not use a key-reusing Stellite clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="267"/>
-        <source>This records rings used by outputs spent on Torque on a key reusing chain, so that the same ring may be reused to avoid privacy issues.</source>
+        <source>This records rings used by outputs spent on Stellite on a key reusing chain, so that the same ring may be reused to avoid privacy issues.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1933,7 +1933,7 @@ Ringsize: </source>
     <message>
         <location filename="../pages/Transfer.qml" line="619"/>
         <source>Payment sent successfully</source>
-        <translation>Torque sėkmingai išsiųsti</translation>
+        <translation>Stellite sėkmingai išsiųsti</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="702"/>
@@ -2081,13 +2081,13 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     <name>WizardConfigure</name>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="79"/>
-        <source>We’re almost there - let’s just configure some Torque preferences</source>
-        <translation>Mes jau beveik baigėme.- liko tik keli Torque nustatymai</translation>
+        <source>We’re almost there - let’s just configure some Stellite preferences</source>
+        <translation>Mes jau beveik baigėme.- liko tik keli Stellite nustatymai</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="97"/>
-        <source>Kickstart the Torque blockchain?</source>
-        <translation>Pradėti Torque blokų grandinę?</translation>
+        <source>Kickstart the Stellite blockchain?</source>
+        <translation>Pradėti Stellite blokų grandinę?</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="113"/>
@@ -2101,8 +2101,8 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="140"/>
-        <source>Disk conservation mode uses substantially less disk-space, but the same amount of bandwidth as a regular Torque instance. However, storing the full blockchain is beneficial to the security of the Torque network. If you are on a device with limited disk space, then this option is appropriate for you.</source>
-        <translation>Disko konservavimo režimas naudoja žymiai mažiau disko vietos, tačiau tokio paties pralaidumo kaip normalus &quot;Torque&quot;. Tačiau saugoti visą blokų grandinę naudinga &quot;Torque&quot; tinklo saugumui. Jei esate įrenginyje, kuriame yra ribota disko vieta, ši parinktis jums tinkamiausia.</translation>
+        <source>Disk conservation mode uses substantially less disk-space, but the same amount of bandwidth as a regular Stellite instance. However, storing the full blockchain is beneficial to the security of the Stellite network. If you are on a device with limited disk space, then this option is appropriate for you.</source>
+        <translation>Disko konservavimo režimas naudoja žymiai mažiau disko vietos, tačiau tokio paties pralaidumo kaip normalus &quot;Stellite&quot;. Tačiau saugoti visą blokų grandinę naudinga &quot;Stellite&quot; tinklo saugumui. Jei esate įrenginyje, kuriame yra ribota disko vieta, ši parinktis jums tinkamiausia.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="153"/>
@@ -2111,8 +2111,8 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="169"/>
-        <source>Mining secures the Torque network, and also pays a small reward for the work done. This option will let Torque mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
-        <translation>Kasimas apsaugo &quot;Torque&quot; tinklą, taip pat moka nedidelį atlygį už atliktą darbą. Ši parinktis leis kasti Torque, kai jūsų kompiuteris yra prijungtas prie maitinimo tinklo ir yra nenaudojamas. Jei tęsite darbą, jis nustos kasti.</translation>
+        <source>Mining secures the Stellite network, and also pays a small reward for the work done. This option will let Stellite mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
+        <translation>Kasimas apsaugo &quot;Stellite&quot; tinklą, taip pat moka nedidelį atlygį už atliktą darbą. Ši parinktis leis kasti Stellite, kai jūsų kompiuteris yra prijungtas prie maitinimo tinklo ir yra nenaudojamas. Jei tęsite darbą, jis nustos kasti.</translation>
     </message>
 </context>
 <context>
@@ -2143,8 +2143,8 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     <name>WizardDaemonSettings</name>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="114"/>
-        <source>To be able to communicate with the Torque network your wallet needs to be connected to a Torque node. For best privacy it&apos;s recommended to run your own node.                         &lt;br&gt;&lt;br&gt;                         If you don&apos;t have the option to run your own node, there&apos;s an option to connect to a remote node.</source>
-        <translation>Tam, kad galėtumet komunikuoti Torque tinkle jums reikia piniginę prijungi prie Torque mazgo. Tam, kad užtikrinti geriausią privatumą rekomenduojame paleisti nuosavą mazgą.                          &lt;br&gt;&lt;br&gt;                        Jeigu neturite galimybės paleisti nuosavo mazgo, galite jungti prie nutolusio mazgo.</translation>
+        <source>To be able to communicate with the Stellite network your wallet needs to be connected to a Stellite node. For best privacy it&apos;s recommended to run your own node.                         &lt;br&gt;&lt;br&gt;                         If you don&apos;t have the option to run your own node, there&apos;s an option to connect to a remote node.</source>
+        <translation>Tam, kad galėtumet komunikuoti Stellite tinkle jums reikia piniginę prijungi prie Stellite mazgo. Tam, kad užtikrinti geriausią privatumą rekomenduojame paleisti nuosavą mazgą.                          &lt;br&gt;&lt;br&gt;                        Jeigu neturite galimybės paleisti nuosavo mazgo, galite jungti prie nutolusio mazgo.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="126"/>
@@ -2176,8 +2176,8 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     <name>WizardDonation</name>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="93"/>
-        <source>Torque development is solely supported by donations</source>
-        <translation>Torque vystymas yra remiamas tik aukomis</translation>
+        <source>Stellite development is solely supported by donations</source>
+        <translation>Stellite vystymas yra remiamas tik aukomis</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="113"/>
@@ -2191,8 +2191,8 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="162"/>
-        <source>For every transaction, a small transaction fee is charged. This option lets you add an additional amount, as a percentage of that fee, to your transaction to support Torque development. For instance, a 50% autodonation take a transaction fee of 0.005 XMR and add a 0.0025 XMR to support Torque development.</source>
-        <translation>Už kiekvieną pavedimą taikomas nedidelė rinkliava. Ši parinktis leidžia pridėti papildomą sumą, kaip šios rinkliavos procentą prie jūsų pavedimo. Pvz., 50% automatinis rėmimas už pavedimo rinkliavą sudaro 0,005 XMR ir pridedant 0,0025 XMR, kad būtų remiama &quot;Torque&quot; plėtra.</translation>
+        <source>For every transaction, a small transaction fee is charged. This option lets you add an additional amount, as a percentage of that fee, to your transaction to support Stellite development. For instance, a 50% autodonation take a transaction fee of 0.005 XMR and add a 0.0025 XMR to support Stellite development.</source>
+        <translation>Už kiekvieną pavedimą taikomas nedidelė rinkliava. Ši parinktis leidžia pridėti papildomą sumą, kaip šios rinkliavos procentą prie jūsų pavedimo. Pvz., 50% automatinis rėmimas už pavedimo rinkliavą sudaro 0,005 XMR ir pridedant 0,0025 XMR, kad būtų remiama &quot;Stellite&quot; plėtra.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="174"/>
@@ -2201,8 +2201,8 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="190"/>
-        <source>Mining secures the Torque network, and also pays a small reward for the work done. This option will let Torque mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
-        <translation>Kasimas apsaugo &quot;Torque&quot; tinklą, taip pat moka nedidelį atlygį už atliktą darbą. Ši parinktis leis kasti Torque, kai jūsų kompiuteris yra prijungtas prie maitinimo tinklo ir yra nenaudojamas. Jei tęsite darbą, jis nustos kasti.</translation>
+        <source>Mining secures the Stellite network, and also pays a small reward for the work done. This option will let Stellite mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
+        <translation>Kasimas apsaugo &quot;Stellite&quot; tinklą, taip pat moka nedidelį atlygį už atliktą darbą. Ši parinktis leis kasti Stellite, kai jūsų kompiuteris yra prijungtas prie maitinimo tinklo ir yra nenaudojamas. Jei tęsite darbą, jis nustos kasti.</translation>
     </message>
 </context>
 <context>
@@ -2414,8 +2414,8 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     <name>WizardOptions</name>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="76"/>
-        <source>Welcome to Torque!</source>
-        <translation>Sveiki atvykę į Torque!</translation>
+        <source>Welcome to Stellite!</source>
+        <translation>Sveiki atvykę į Stellite!</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="87"/>
@@ -2504,8 +2504,8 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     <name>WizardWelcome</name>
     <message>
         <location filename="../wizard/WizardWelcome.qml" line="73"/>
-        <source>Welcome to Torque!</source>
-        <translation>Sveiki atvykę į Torque!</translation>
+        <source>Welcome to Stellite!</source>
+        <translation>Sveiki atvykę į Stellite!</translation>
     </message>
     <message>
         <location filename="../wizard/WizardWelcome.qml" line="83"/>
@@ -2699,7 +2699,7 @@ Išlaidų adreso rodyklė: </translation>
     <message>
         <location filename="../main.qml" line="799"/>
         <source>Payment sent successfully: %1 transaction(s) </source>
-        <translation>Torque sėkmingai išsiųsti: %1 operacija (-os) </translation>
+        <translation>Stellite sėkmingai išsiųsti: %1 operacija (-os) </translation>
     </message>
     <message>
         <location filename="../main.qml" line="832"/>
@@ -2722,8 +2722,8 @@ Išlaidų adreso rodyklė: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="873"/>
-        <source>This address received %1 torque, with %2 confirmation(s).</source>
-        <translation>Šis adresas gavo%1 Torque, su%2 patvirtinimu (-ais).</translation>
+        <source>This address received %1 stellite, with %2 confirmation(s).</source>
+        <translation>Šis adresas gavo%1 Stellite, su%2 patvirtinimu (-ais).</translation>
     </message>
     <message>
         <location filename="../main.qml" line="884"/>
@@ -2797,8 +2797,8 @@ Išlaidų adreso rodyklė: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="1789"/>
-        <source>New version of torque-wallet-gui is available: %1&lt;br&gt;%2</source>
-        <translation>Yra nauja torque-wallet-gui versija: %1&lt;br&gt;%2</translation>
+        <source>New version of stellite-wallet-gui is available: %1&lt;br&gt;%2</source>
+        <translation>Yra nauja stellite-wallet-gui versija: %1&lt;br&gt;%2</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1821"/>
@@ -2839,8 +2839,8 @@ Išlaidų adreso rodyklė: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="870"/>
-        <source>This address received %1 torque, but the transaction is not yet mined</source>
-        <translation>Šis adresas gavo%1 Torque, tačiau pavedimas dar nėra iškastas</translation>
+        <source>This address received %1 stellite, but the transaction is not yet mined</source>
+        <translation>Šis adresas gavo%1 Stellite, tačiau pavedimas dar nėra iškastas</translation>
     </message>
     <message>
         <location filename="../main.qml" line="877"/>
@@ -2869,8 +2869,8 @@ Išlaidų adreso rodyklė: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="1297"/>
-        <source>Torque</source>
-        <translation>Torque</translation>
+        <source>Stellite</source>
+        <translation>Stellite</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1447"/>

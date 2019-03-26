@@ -20,8 +20,8 @@
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="66"/>
-        <source>Torque</source>
-        <translation>Torque</translation>
+        <source>Stellite</source>
+        <translation>Stellite</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="74"/>
@@ -358,7 +358,7 @@
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="93"/>
-        <source>WARNING: Do not reuse your Torque keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.</source>
+        <source>WARNING: Do not reuse your Stellite keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -610,8 +610,8 @@
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="82"/>
-        <source>Mining with your computer helps strengthen the Torque network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.&lt;br&gt; &lt;br&gt;Mining also gives you a small chance to earn some Torque. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
-        <translation>Rudarenje vašim računalom pomaže očvršćivanju Torque mreže. Mrežu je teže napasti što više ljudi rudari, svaki komadić pomaže.&lt;br&gt; &lt;br&gt;Rudarenje vam također omogućuje da zaradite Torque. Računanjem kompaktnih vrijednosti računalo će tražiti rješenja za stvaranje blokova. Ukoliko pronađete blok, dobit ćete zasluženu nagradu. Sretno!</translation>
+        <source>Mining with your computer helps strengthen the Stellite network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.&lt;br&gt; &lt;br&gt;Mining also gives you a small chance to earn some Stellite. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
+        <translation>Rudarenje vašim računalom pomaže očvršćivanju Stellite mreže. Mrežu je teže napasti što više ljudi rudari, svaki komadić pomaže.&lt;br&gt; &lt;br&gt;Rudarenje vam također omogućuje da zaradite Stellite. Računanjem kompaktnih vrijednosti računalo će tražiti rješenja za stvaranje blokova. Ukoliko pronađete blok, dobit ćete zasluženu nagradu. Sretno!</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="95"/>
@@ -867,12 +867,12 @@
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="138"/>
-        <source>With more Torque</source>
+        <source>With more Stellite</source>
         <translation>S više Monera</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="139"/>
-        <source>With not enough Torque</source>
+        <source>With not enough Stellite</source>
         <translation>Bez dovoljno Monera</translation>
     </message>
     <message>
@@ -1041,7 +1041,7 @@
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="89"/>
-        <source>Embedded Torque version: </source>
+        <source>Embedded Stellite version: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1157,12 +1157,12 @@ The old wallet cache file will be renamed and can be restored later.
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="232"/>
-        <source>Uses a third-party server to connect to the Torque network. Less secure, but easier on your computer.</source>
+        <source>Uses a third-party server to connect to the Stellite network. Less secure, but easier on your computer.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="277"/>
-        <source>To find a remote node, type &apos;Torque remote node&apos; into your favorite search engine. Please ensure the node is run by a trusted third-party.</source>
+        <source>To find a remote node, type &apos;Stellite remote node&apos; into your favorite search engine. Please ensure the node is run by a trusted third-party.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1319,8 +1319,8 @@ The old wallet cache file will be renamed and can be restored later.
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="97"/>
-        <source>This page allows you to interact with the shared ring database. This database is meant for use by Torque wallets as well as wallets from Torque clones which reuse the Torque keys.</source>
-        <translation>Ova stranica omogućuje pristup zajedničkoj bazi podataka o prstenovima. Ova baza podataka namijenjena je Torque novčanicima, kao i novčanicima iz Torque klonova koji ponovno koriste Torque ključeve.</translation>
+        <source>This page allows you to interact with the shared ring database. This database is meant for use by Stellite wallets as well as wallets from Stellite clones which reuse the Stellite keys.</source>
+        <translation>Ova stranica omogućuje pristup zajedničkoj bazi podataka o prstenovima. Ova baza podataka namijenjena je Stellite novčanicima, kao i novčanicima iz Stellite klonova koji ponovno koriste Stellite ključeve.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="110"/>
@@ -1336,8 +1336,8 @@ The old wallet cache file will be renamed and can be restored later.
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="113"/>
-        <source>In order to obscure which inputs in a Torque transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Torque uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Torque project and is available on the torque.cash website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Torque clones) yourself using the torque-blockchain-blackball tool to create a list of known spent outputs.&lt;br&gt;</source>
-        <translation>Kako bi se zamaskirali ulazi koji se koriste u Torque transakciji, vanjski promatrač nebi smio odgonetnuti koji ulazi su iskorišteni u prstenu. U protivnom bi zaštita, koju nude potpisi prstenja, bila ugrožena. Ako su svi osim jednog ulaza vec bili iskorišteni otprije moguće je doznati koji je ulaz pravi, a to poništava zaštitu potpisa prstenja, odnosno jednu od tri glavne razine Torque zaštite privatnosti.&lt;br&gt;Kako bi pomogli transakcijama zaobići takve ulaze, može se korisiti popis poznatih potrošenih ulaza. Takav popis vodi Torque projekt i može se nabaviti na torque.cash web stranici, te ga onda uvesti ovdje.&lt;br&gt;U protivnom, može se očitati lanac blokova (te lanac blokova drugih Torque klonova koji koriste iste Torque ključeve) i napraviti popis poznatih potrošenih izlaza koristeći torque-blockchain-blackball alat.&gt;</translation>
+        <source>In order to obscure which inputs in a Stellite transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Stellite uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Stellite project and is available on the stellite.cash website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Stellite clones) yourself using the stellite-blockchain-blackball tool to create a list of known spent outputs.&lt;br&gt;</source>
+        <translation>Kako bi se zamaskirali ulazi koji se koriste u Stellite transakciji, vanjski promatrač nebi smio odgonetnuti koji ulazi su iskorišteni u prstenu. U protivnom bi zaštita, koju nude potpisi prstenja, bila ugrožena. Ako su svi osim jednog ulaza vec bili iskorišteni otprije moguće je doznati koji je ulaz pravi, a to poništava zaštitu potpisa prstenja, odnosno jednu od tri glavne razine Stellite zaštite privatnosti.&lt;br&gt;Kako bi pomogli transakcijama zaobići takve ulaze, može se korisiti popis poznatih potrošenih ulaza. Takav popis vodi Stellite projekt i može se nabaviti na stellite.cash web stranici, te ga onda uvesti ovdje.&lt;br&gt;U protivnom, može se očitati lanac blokova (te lanac blokova drugih Stellite klonova koji koriste iste Stellite ključeve) i napraviti popis poznatih potrošenih izlaza koristeći stellite-blockchain-blackball alat.&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="134"/>
@@ -1402,13 +1402,13 @@ The old wallet cache file will be renamed and can be restored later.
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="245"/>
-        <source>In order to avoid nullifying the protection afforded by Torque&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing Torque clone allows you to spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by Torque and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing Torque clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your Torque safely.&lt;br&gt;If you do not use a key-reusing Torque clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
-        <translation>Kako bi ostvarili zaštitu Torquevih potpisa prstenova, izlaz nebi smio biti korišten više puta na drugim prstenovima na drugim lancima blokova. Uobičajeno, to nije razlog za brigu, ali može postati ako Torque klon koji ponovno koristi iste ključeve vam omogućuje korištenje postojećih izlaza. U tom slučaju morate osigurati da ti postojeći izlazi koriste isti prsten na oba lanca.&lt;br&gt;To će učiniti automatski Torque ili bilo koji softver za ponovnu upotrebu ključeva koji ne pokušava aktivno ugroziti vašu privatnost.&lt;br&gt;Ako koristite Torque klon koji ponovno upotrebljava ključeve, a ne uključuje tu zaštitu, uvijek možete osigurati da su vaše transakcije zaštićene tako da platite preko klona prvo, a zatim ručno dodate prsten na ovoj stranici, što vam omogućuje da možete provest Torque uplatu sigurno.&lt;br&gt;Ako ne koristite Torque klon koji ponovno koristi ključeve bez ovih sigurnosnih značajki, ne morate ništa učiniti jer je sve automatizirano.&lt;br&gt;</translation>
+        <source>In order to avoid nullifying the protection afforded by Stellite&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing Stellite clone allows you to spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by Stellite and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing Stellite clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your Stellite safely.&lt;br&gt;If you do not use a key-reusing Stellite clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
+        <translation>Kako bi ostvarili zaštitu Stellitevih potpisa prstenova, izlaz nebi smio biti korišten više puta na drugim prstenovima na drugim lancima blokova. Uobičajeno, to nije razlog za brigu, ali može postati ako Stellite klon koji ponovno koristi iste ključeve vam omogućuje korištenje postojećih izlaza. U tom slučaju morate osigurati da ti postojeći izlazi koriste isti prsten na oba lanca.&lt;br&gt;To će učiniti automatski Stellite ili bilo koji softver za ponovnu upotrebu ključeva koji ne pokušava aktivno ugroziti vašu privatnost.&lt;br&gt;Ako koristite Stellite klon koji ponovno upotrebljava ključeve, a ne uključuje tu zaštitu, uvijek možete osigurati da su vaše transakcije zaštićene tako da platite preko klona prvo, a zatim ručno dodate prsten na ovoj stranici, što vam omogućuje da možete provest Stellite uplatu sigurno.&lt;br&gt;Ako ne koristite Stellite klon koji ponovno koristi ključeve bez ovih sigurnosnih značajki, ne morate ništa učiniti jer je sve automatizirano.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="267"/>
-        <source>This records rings used by outputs spent on Torque on a key reusing chain, so that the same ring may be reused to avoid privacy issues.</source>
-        <translation>Ovdje se zapisuju prstenovi korišteni u izazima na Torque lancima koji ponovno koristi iste ključeve, tako da se isti prsten može ponovo upotrijebiti i pritom izbjegnu problemi sa privatnošću.</translation>
+        <source>This records rings used by outputs spent on Stellite on a key reusing chain, so that the same ring may be reused to avoid privacy issues.</source>
+        <translation>Ovdje se zapisuju prstenovi korišteni u izazima na Stellite lancima koji ponovno koristi iste ključeve, tako da se isti prsten može ponovo upotrijebiti i pritom izbjegnu problemi sa privatnošću.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="278"/>
@@ -1915,7 +1915,7 @@ Ringsize: </translation>
     <message>
         <location filename="../pages/Transfer.qml" line="619"/>
         <source>Payment sent successfully</source>
-        <translation>Torque je uspješno poslan</translation>
+        <translation>Stellite je uspješno poslan</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="687"/>
@@ -2074,13 +2074,13 @@ U slučaju &quot;dokaza potrošnje&quot;, adresa primatelja ne mora se navesti.<
     <name>WizardConfigure</name>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="79"/>
-        <source>We’re almost there - let’s just configure some Torque preferences</source>
-        <translation>Gotovo smo završili - podesimo još samo neke Torque postavke</translation>
+        <source>We’re almost there - let’s just configure some Stellite preferences</source>
+        <translation>Gotovo smo završili - podesimo još samo neke Stellite postavke</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="97"/>
-        <source>Kickstart the Torque blockchain?</source>
-        <translation>Pokrenuti Torque lanac blokova?</translation>
+        <source>Kickstart the Stellite blockchain?</source>
+        <translation>Pokrenuti Stellite lanac blokova?</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="113"/>
@@ -2094,8 +2094,8 @@ U slučaju &quot;dokaza potrošnje&quot;, adresa primatelja ne mora se navesti.<
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="140"/>
-        <source>Disk conservation mode uses substantially less disk-space, but the same amount of bandwidth as a regular Torque instance. However, storing the full blockchain is beneficial to the security of the Torque network. If you are on a device with limited disk space, then this option is appropriate for you.</source>
-        <translation>Način za zaštitu diska koristi znatno manje prostora na disku, ali jednaku količinu širine pojasa kao i regularna instanca Monera. Međutim, čuvanje cijelog lanca blokova korisno je za sigurnost Torque mreže. Ako ste na uređaju s ograničenim prostorom na disku, ova je opcija prikladna za vas.</translation>
+        <source>Disk conservation mode uses substantially less disk-space, but the same amount of bandwidth as a regular Stellite instance. However, storing the full blockchain is beneficial to the security of the Stellite network. If you are on a device with limited disk space, then this option is appropriate for you.</source>
+        <translation>Način za zaštitu diska koristi znatno manje prostora na disku, ali jednaku količinu širine pojasa kao i regularna instanca Monera. Međutim, čuvanje cijelog lanca blokova korisno je za sigurnost Stellite mreže. Ako ste na uređaju s ograničenim prostorom na disku, ova je opcija prikladna za vas.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="153"/>
@@ -2104,8 +2104,8 @@ U slučaju &quot;dokaza potrošnje&quot;, adresa primatelja ne mora se navesti.<
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="169"/>
-        <source>Mining secures the Torque network, and also pays a small reward for the work done. This option will let Torque mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
-        <translation>Rudarenje osigurava Torque mrežu, a također plaća malu nagradu za obavljeni posao. Ova opcija će dopustiti Moneru da rudari kada je vaše računalo uključeno u struju i u stanju mirovanja. Rudarenje će se zaustaviti kada nastavite sa radom.</translation>
+        <source>Mining secures the Stellite network, and also pays a small reward for the work done. This option will let Stellite mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
+        <translation>Rudarenje osigurava Stellite mrežu, a također plaća malu nagradu za obavljeni posao. Ova opcija će dopustiti Moneru da rudari kada je vaše računalo uključeno u struju i u stanju mirovanja. Rudarenje će se zaustaviti kada nastavite sa radom.</translation>
     </message>
 </context>
 <context>
@@ -2136,8 +2136,8 @@ U slučaju &quot;dokaza potrošnje&quot;, adresa primatelja ne mora se navesti.<
     <name>WizardDaemonSettings</name>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="114"/>
-        <source>To be able to communicate with the Torque network your wallet needs to be connected to a Torque node. For best privacy it&apos;s recommended to run your own node.                         &lt;br&gt;&lt;br&gt;                         If you don&apos;t have the option to run your own node, there&apos;s an option to connect to a remote node.</source>
-        <translation>Da biste uspješno komunicirali sa Torque mrežom, vaš novčanik mora biti povezan sa Torque čvorom. Za najveću razinu privatnosti preporuča se da pokrenete vaš vlastiti čvor.                         &lt;br&gt;&lt;br&gt;                         Ukoliko niste u mogućnosti pokrenuti vlastiti čvor, postoji opcija za spajanje sa udaljenim čvorom.</translation>
+        <source>To be able to communicate with the Stellite network your wallet needs to be connected to a Stellite node. For best privacy it&apos;s recommended to run your own node.                         &lt;br&gt;&lt;br&gt;                         If you don&apos;t have the option to run your own node, there&apos;s an option to connect to a remote node.</source>
+        <translation>Da biste uspješno komunicirali sa Stellite mrežom, vaš novčanik mora biti povezan sa Stellite čvorom. Za najveću razinu privatnosti preporuča se da pokrenete vaš vlastiti čvor.                         &lt;br&gt;&lt;br&gt;                         Ukoliko niste u mogućnosti pokrenuti vlastiti čvor, postoji opcija za spajanje sa udaljenim čvorom.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="126"/>
@@ -2169,7 +2169,7 @@ U slučaju &quot;dokaza potrošnje&quot;, adresa primatelja ne mora se navesti.<
     <name>WizardDonation</name>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="93"/>
-        <source>Torque development is solely supported by donations</source>
+        <source>Stellite development is solely supported by donations</source>
         <translation>Ravoj Monera se podržava isključivo od donacija</translation>
     </message>
     <message>
@@ -2184,7 +2184,7 @@ U slučaju &quot;dokaza potrošnje&quot;, adresa primatelja ne mora se navesti.<
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="162"/>
-        <source>For every transaction, a small transaction fee is charged. This option lets you add an additional amount, as a percentage of that fee, to your transaction to support Torque development. For instance, a 50% autodonation take a transaction fee of 0.005 XMR and add a 0.0025 XMR to support Torque development.</source>
+        <source>For every transaction, a small transaction fee is charged. This option lets you add an additional amount, as a percentage of that fee, to your transaction to support Stellite development. For instance, a 50% autodonation take a transaction fee of 0.005 XMR and add a 0.0025 XMR to support Stellite development.</source>
         <translation>Za svaku transakciju se naplaćuje mala provizija. Ova opcija omogućava dodavanje dodatnog iznosa, kao postotka te provizije, vašoj transakciji u svrhu podrške razvoja Monera. Na primjer, postavka od 50% automatske donacije uzima transakcijsku proviziju od 0.005 XMR i dodaje 0.0025 XMR za podršku razvoja Monera.</translation>
     </message>
     <message>
@@ -2194,8 +2194,8 @@ U slučaju &quot;dokaza potrošnje&quot;, adresa primatelja ne mora se navesti.<
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="190"/>
-        <source>Mining secures the Torque network, and also pays a small reward for the work done. This option will let Torque mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
-        <translation>Rudarenje osigurava Torque mrežu, a također plaća malu nagradu za obavljeni posao. Ova opcija će dopustiti Moneru da rudari kada je vaše računalo uključeno u struju i u stanju mirovanja. Rudarenje će se zaustaviti kada nastavite sa radom.</translation>
+        <source>Mining secures the Stellite network, and also pays a small reward for the work done. This option will let Stellite mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
+        <translation>Rudarenje osigurava Stellite mrežu, a također plaća malu nagradu za obavljeni posao. Ova opcija će dopustiti Moneru da rudari kada je vaše računalo uključeno u struju i u stanju mirovanja. Rudarenje će se zaustaviti kada nastavite sa radom.</translation>
     </message>
 </context>
 <context>
@@ -2407,8 +2407,8 @@ U slučaju &quot;dokaza potrošnje&quot;, adresa primatelja ne mora se navesti.<
     <name>WizardOptions</name>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="76"/>
-        <source>Welcome to Torque!</source>
-        <translation>Dobrodošli u Torque!</translation>
+        <source>Welcome to Stellite!</source>
+        <translation>Dobrodošli u Stellite!</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="87"/>
@@ -2497,8 +2497,8 @@ U slučaju &quot;dokaza potrošnje&quot;, adresa primatelja ne mora se navesti.<
     <name>WizardWelcome</name>
     <message>
         <location filename="../wizard/WizardWelcome.qml" line="73"/>
-        <source>Welcome to Torque!</source>
-        <translation>Dobrodošli u Torque!</translation>
+        <source>Welcome to Stellite!</source>
+        <translation>Dobrodošli u Stellite!</translation>
     </message>
     <message>
         <location filename="../wizard/WizardWelcome.qml" line="83"/>
@@ -2680,8 +2680,8 @@ Provizija: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="873"/>
-        <source>This address received %1 torque, with %2 confirmation(s).</source>
-        <translation>Ova adresa je primila %1 torque sa %2 potvrde.</translation>
+        <source>This address received %1 stellite, with %2 confirmation(s).</source>
+        <translation>Ova adresa je primila %1 stellite sa %2 potvrde.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="357"/>
@@ -2748,12 +2748,12 @@ Provizija: </translation>
     <message>
         <location filename="../main.qml" line="799"/>
         <source>Payment sent successfully: %1 transaction(s) </source>
-        <translation>Torque poslan uspješno: %1 transakcija </translation>
+        <translation>Stellite poslan uspješno: %1 transakcija </translation>
     </message>
     <message>
         <location filename="../main.qml" line="870"/>
-        <source>This address received %1 torque, but the transaction is not yet mined</source>
-        <translation>Ova adresa je primila %1 torque ali transakcija još nije izrudarena</translation>
+        <source>This address received %1 stellite, but the transaction is not yet mined</source>
+        <translation>Ova adresa je primila %1 stellite ali transakcija još nije izrudarena</translation>
     </message>
     <message>
         <location filename="../main.qml" line="877"/>
@@ -2832,8 +2832,8 @@ Provizija: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="1297"/>
-        <source>Torque</source>
-        <translation>Torque</translation>
+        <source>Stellite</source>
+        <translation>Stellite</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1447"/>
@@ -2862,8 +2862,8 @@ Provizija: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="1789"/>
-        <source>New version of torque-wallet-gui is available: %1&lt;br&gt;%2</source>
-        <translation>Nova verzija torque-wallet-gui je dostupna: %1&lt;br&gt;%2</translation>
+        <source>New version of stellite-wallet-gui is available: %1&lt;br&gt;%2</source>
+        <translation>Nova verzija stellite-wallet-gui je dostupna: %1&lt;br&gt;%2</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1821"/>

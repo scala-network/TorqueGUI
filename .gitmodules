@@ -1,3 +1,3 @@
 [submodule "torque"]
 	path = torque
-	url = https://github.com/contribute-torque/torque.git
+	url = https://github.com/contribute-torque/torque

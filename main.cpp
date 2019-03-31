@@ -104,7 +104,7 @@ int main(int argc, char *argv[])
 
     app.setApplicationName("torque-core");
     app.setOrganizationDomain("torque.cash");
-    app.setOrganizationName("torquecoin");
+    app.setOrganizationName("contribute-torque");
 
 #if defined(Q_OS_LINUX)
     if (isDesktop) app.setWindowIcon(QIcon(":/images/appicon.ico"));

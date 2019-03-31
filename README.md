@@ -10,7 +10,7 @@ Copyright (c) 2014-2017, The Monero Project
 - Web: [torque.cash](https://torque.cash)
 - Discord: [https://discord.gg/C9JVYHA](https://discord.gg/C9JVYHA)
 - Mail: [admin@torque.cash](mailto:admin@torque.cash)
-- Github: [https://github.com/torquecoin/TorqueGUI/](https://github.com/torquecoin/TorqueGUI/)
+- Github: [https://github.com/contribute-torque/TorqueGUI/](https://github.com/contribute-torque/TorqueGUI/)
 
 ## Introduction
 
@@ -24,7 +24,7 @@ Torque is a private, secure, untraceable, decentralised digital currency. You ar
 
 ## About this Project
 
-This is the GUI for the [core Torque implementation](https://github.com/torquecoin/torque). It is open source and completely free to use without restrictions, except for those specified in the license agreement below. There are no restrictions on anyone creating an alternative implementation of Torque that uses the protocol and network in a compatible manner.
+This is the GUI for the [core Torque implementation](https://github.com/contribute-torque/torque). It is open source and completely free to use without restrictions, except for those specified in the license agreement below. There are no restrictions on anyone creating an alternative implementation of Torque that uses the protocol and network in a compatible manner.
 
 As with many development projects, the repository on Github is considered to be the "staging" area for the latest changes. Before changes are merged into that branch on the main repository, they are tested by individual developers in their own branches, submitted as a pull request, and then subsequently tested by contributors who focus on testing and code reviews. That having been said, the repository should be carefully considered before using it in a production environment, unless there is a patch in the repository for a particular show-stopping issue you are experiencing. It is generally a better idea to use a tagged release for stability.
 
@@ -85,7 +85,7 @@ See [LICENSE](LICENSE).
 
 3. Clone repository
 
-    `git clone https://github.com/torquecoin/TorqueGUI.git`
+    `git clone https://github.com/contribute-torque/TorqueGUI.git`
 
 4. Build
 
@@ -102,7 +102,7 @@ The executable can be found in the build/release/bin folder.
 
 2. Install [homebrew](http://brew.sh/)
 
-3. Install [torque](https://github.com/torquecoin/TorqueGUI) dependencies:
+3. Install [torque](https://github.com/contribute-torque/TorqueGUI) dependencies:
 
   `brew install boost --c++11`
 
@@ -132,7 +132,7 @@ The executable can be found in the build/release/bin folder.
 
 6. Grab an up-to-date copy of the torque-gui repository
 
-  `git clone https://github.com/torquecoin/TorqueGUI.git`
+  `git clone https://github.com/contribute-torque/TorqueGUI.git`
 
 7. Go into the repository
 
@@ -210,7 +210,7 @@ The Torque GUI on Windows is 64 bits only; 32-bit Windows GUI builds are not off
 6. Clone repository
 
     ```
-    git clone https://github.com/torquecoin/TorqueGUI.git
+    git clone https://github.com/contribute-torque/TorqueGUI.git
     ```
 
 7. Build

@@ -6,7 +6,7 @@ source ./utils.sh
 platform=$(get_platform)
 # default build type
 if [ -z $BUILD_TYPE ]; then
-    BUILD_TYPE=release
+    BUILD_TYPE=release-static
 fi
 
 # Return 0 if the command exists, 1 if it does not.

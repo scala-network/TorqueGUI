@@ -1,5 +1,5 @@
 #!/bin/bash
-MONERO_URL=https://github.com/torquecoin/torque.git
+MONERO_URL=https://github.com/contribute-torque/torque.git
 MONERO_BRANCH=master
 
 pushd $(pwd)

@@ -107,7 +107,7 @@ bool TransactionHistory::TransactionHistory::locked() const
 }
 
 
-TransactionHistory::TransactionHistory(Stellite::TransactionHistory *pimpl, QObject *parent)
+TransactionHistory::TransactionHistory(Torque::TransactionHistory *pimpl, QObject *parent)
     : QObject(parent), m_pimpl(pimpl), m_minutesToUnlock(0), m_locked(false)
 {
     m_firstDateTime  = QDateTime(QDate(2018, 1, 22)); // the genesis block

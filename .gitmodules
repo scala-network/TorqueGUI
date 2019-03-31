@@ -1,4 +1,3 @@
-[submodule "stellite"]
-	path = stellite
-	url = https://github.com/stellitecoin/stellite.git
-	ignore = all
+[submodule "torque"]
+	path = torque
+	url = https://github.com/contribute-torque/torque.git

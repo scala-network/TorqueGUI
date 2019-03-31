@@ -9,9 +9,9 @@ class NetworkType : public QObject
 
 public:
     enum Type : uint8_t {
-        MAINNET = Stellite::MAINNET,
-        TESTNET = Stellite::TESTNET,
-        STAGENET = Stellite::STAGENET
+        MAINNET = Torque::MAINNET,
+        TESTNET = Torque::TESTNET,
+        STAGENET = Torque::STAGENET
     };
     Q_ENUM(Type)
 };

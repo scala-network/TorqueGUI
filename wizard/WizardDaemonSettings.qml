@@ -120,16 +120,16 @@ ColumnLayout {
             color: "#4A4646"
             textFormat: Text.RichText
 //            horizontalAlignment: Text.AlignHCenter
-            text: qsTr("To be able to communicate with the Stellite network your wallet needs to be connected to a Stellite node. For best privacy it's recommended to run your own node. \
+            text: qsTr("To be able to communicate with the Torque network your wallet needs to be connected to a Torque node. For best privacy it's recommended to run your own node. \
                         <br><br> \
                         If you don't have the option to run your own node, there's an option to connect to a remote node.") + qsTr("  !!!Always double check your remote node settings!!!  ") + " <a href='#'>" + qsTr("Help") + "</a>" + translationManager.emptyString
             onLinkActivated: {
                 remoteNodeDialog.title  = qsTr("Remote node") + translationManager.emptyString;
                 remoteNodeDialog.text = qsTr(
                     "Always double check your remote daemon settings to avoid connection to other networks!<br>" +
-                    "Stellite Remote nodes:<br><br>" +
-                    "nodes.stellite.cash<br>" +
-                    "node.stellite.space<br>" +
+                    "Torque Remote nodes:<br><br>" +
+                    "nodes.torque.cash<br>" +
+                    "node.torque.space<br>" +
                     "daemons.cryptopool.space<br>" +
                     "All running on port 20189<br>"
                 )

@@ -6,7 +6,7 @@
 #include <QList>
 #include <QDateTime>
 
-namespace Stellite {
+namespace Torque {
 class AddressBook;
 }
 class AddressBookRow;
@@ -15,8 +15,8 @@ class AddressBook : public QObject
 {
     Q_OBJECT
 public:
-    Q_INVOKABLE QList<Stellite::AddressBookRow*> getAll(bool update = false) const;
-    Q_INVOKABLE Stellite::AddressBookRow * getRow(int index) const;
+    Q_INVOKABLE QList<Torque::AddressBookRow*> getAll(bool update = false) const;
+    Q_INVOKABLE Torque::AddressBookRow * getRow(int index) const;
     Q_INVOKABLE bool addRow(const QString &address, const QString &payment_id, const QString &description) const;
     Q_INVOKABLE bool deleteRow(int rowId) const;
     quint64 count() const;
@@ -42,10 +42,10 @@ signals:
 public slots:
 
 private:
-    explicit AddressBook(Stellite::AddressBook * abImpl, QObject *parent);
+    explicit AddressBook(Torque::AddressBook * abImpl, QObject *parent);
     friend class Wallet;
-    Stellite::AddressBook * m_addressBookImpl;
-    mutable QList<Stellite::AddressBookRow*> m_rows;
+    Torque::AddressBook * m_addressBookImpl;
+    mutable QList<Torque::AddressBookRow*> m_rows;
 };
 
 #endif // ADDRESSBOOK_H

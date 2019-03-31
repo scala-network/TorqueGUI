@@ -29,14 +29,14 @@
 #include "Subaddress.h"
 #include <QDebug>
 
-Subaddress::Subaddress(Stellite::Subaddress *subaddressImpl, QObject *parent)
+Subaddress::Subaddress(Torque::Subaddress *subaddressImpl, QObject *parent)
   : QObject(parent), m_subaddressImpl(subaddressImpl)
 {
     qDebug(__FUNCTION__);
     getAll();
 }
 
-QList<Stellite::SubaddressRow*> Subaddress::getAll(bool update) const
+QList<Torque::SubaddressRow*> Subaddress::getAll(bool update) const
 {
     qDebug(__FUNCTION__);
 
@@ -55,7 +55,7 @@ QList<Stellite::SubaddressRow*> Subaddress::getAll(bool update) const
     return m_rows;
 }
 
-Stellite::SubaddressRow * Subaddress::getRow(int index) const
+Torque::SubaddressRow * Subaddress::getRow(int index) const
 {
     return m_rows.at(index);
 }

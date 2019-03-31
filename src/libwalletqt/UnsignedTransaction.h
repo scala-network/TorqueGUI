@@ -20,9 +20,9 @@ class UnsignedTransaction : public QObject
 
 public:
     enum Status {
-        Status_Ok       = Stellite::UnsignedTransaction::Status_Ok,
-        Status_Error    = Stellite::UnsignedTransaction::Status_Error,
-        Status_Critical    = Stellite::UnsignedTransaction::Status_Critical
+        Status_Ok       = Torque::UnsignedTransaction::Status_Ok,
+        Status_Error    = Torque::UnsignedTransaction::Status_Error,
+        Status_Critical    = Torque::UnsignedTransaction::Status_Critical
     };
     Q_ENUM(Status)
 
@@ -40,13 +40,13 @@ public:
     Q_INVOKABLE void setFilename(const QString &fileName);
 
 private:
-    explicit UnsignedTransaction(Stellite::UnsignedTransaction * pt, Stellite::Wallet *walletImpl, QObject *parent = 0);
+    explicit UnsignedTransaction(Torque::UnsignedTransaction * pt, Torque::Wallet *walletImpl, QObject *parent = 0);
     ~UnsignedTransaction();
 private:
     friend class Wallet;
-    Stellite::UnsignedTransaction * m_pimpl;
+    Torque::UnsignedTransaction * m_pimpl;
     QString m_fileName;
-    Stellite::Wallet * m_walletImpl;
+    Torque::Wallet * m_walletImpl;
 };
 
 #endif // UNSIGNEDTRANSACTION_H

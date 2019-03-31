@@ -18,13 +18,13 @@
   <string>????</string>
 
   <key>CFBundleExecutable</key>
-  <string>stellite-wallet-gui</string>
+  <string>torque-wallet-gui</string>
   
   <key>CFBundleName</key>
-  <string>Stellite GUI</string>
+  <string>Torque GUI</string>
 
   <key>CFBundleIdentifier</key>
-  <string>org.monero-project.stellite-wallet-gui</string>
+  <string>org.monero-project.torque-wallet-gui</string>
 
   <key>NSSupportsAutomaticGraphicsSwitching</key>
   <true/>

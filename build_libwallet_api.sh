@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-# MONERO_URL=https://github.com/stellitecoin/stellite.git
+# MONERO_URL=https://github.com/torquecoin/torque.git
 # MONERO_BRANCH=master
 CPU_CORE_COUNT=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || sysctl -n hw.ncpu)
 pushd $(pwd)
@@ -11,7 +11,7 @@ source $ROOT_DIR/utils.sh
 
 
 INSTALL_DIR=$ROOT_DIR/wallet
-MONERO_DIR=$ROOT_DIR/stellite
+MONERO_DIR=$ROOT_DIR/torque
 
 
 mkdir -p $MONERO_DIR/build/release

@@ -10,8 +10,8 @@ Copyright (c) 2014-2018, The Monero Project
 
 # Base environnement
 
-        cd stellite/utils/build_scripts
-        docker build -f android32.Dockerfile -t stellite-android .
+        cd torque/utils/build_scripts
+        docker build -f android32.Dockerfile -t torque-android .
         cd ..
 
 # Build GUI

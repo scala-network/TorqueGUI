@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2017, The Stellite Project
+// Copyright (c) 2014-2017, The Torque Project
 // Copyright (c) 2014-2018, The Monero Project
 //
 // All rights reserved.

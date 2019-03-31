@@ -189,7 +189,7 @@ Item {
             anchors.topMargin: 8 * scaleRatio
             anchors.left: parent.left
             anchors.leftMargin: 12 * scaleRatio
-            source: "../images/stelliteIcon-28x28.png"
+            source: "../images/torqueIcon-28x28.png"
             visible: false
         }
 

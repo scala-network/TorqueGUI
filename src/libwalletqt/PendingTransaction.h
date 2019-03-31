@@ -7,7 +7,7 @@
 
 #include <wallet/api/wallet2_api.h>
 
-//namespace Stellite {
+//namespace Torque {
 //class PendingTransaction;
 //}
 
@@ -25,16 +25,16 @@ class PendingTransaction : public QObject
 
 public:
     enum Status {
-        Status_Ok       = Stellite::PendingTransaction::Status_Ok,
-        Status_Error    = Stellite::PendingTransaction::Status_Error,
-        Status_Critical    = Stellite::PendingTransaction::Status_Critical
+        Status_Ok       = Torque::PendingTransaction::Status_Ok,
+        Status_Error    = Torque::PendingTransaction::Status_Error,
+        Status_Critical    = Torque::PendingTransaction::Status_Critical
     };
     Q_ENUM(Status)
 
     enum Priority {
-        Priority_Low    = Stellite::PendingTransaction::Priority_Low,
-        Priority_Medium = Stellite::PendingTransaction::Priority_Medium,
-        Priority_High   = Stellite::PendingTransaction::Priority_High
+        Priority_Low    = Torque::PendingTransaction::Priority_Low,
+        Priority_Medium = Torque::PendingTransaction::Priority_Medium,
+        Priority_High   = Torque::PendingTransaction::Priority_High
     };
     Q_ENUM(Priority)
 
@@ -51,11 +51,11 @@ public:
     Q_INVOKABLE void setFilename(const QString &fileName);
 
 private:
-    explicit PendingTransaction(Stellite::PendingTransaction * pt, QObject *parent = 0);
+    explicit PendingTransaction(Torque::PendingTransaction * pt, QObject *parent = 0);
 
 private:
     friend class Wallet;
-    Stellite::PendingTransaction * m_pimpl;
+    Torque::PendingTransaction * m_pimpl;
     QString m_fileName;
 };
 

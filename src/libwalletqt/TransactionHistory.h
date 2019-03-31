@@ -5,7 +5,7 @@
 #include <QList>
 #include <QDateTime>
 
-namespace Stellite {
+namespace Torque {
 class TransactionHistory;
 }
 
@@ -41,11 +41,11 @@ public slots:
 
 
 private:
-    explicit TransactionHistory(Stellite::TransactionHistory * pimpl, QObject *parent = 0);
+    explicit TransactionHistory(Torque::TransactionHistory * pimpl, QObject *parent = 0);
 
 private:
     friend class Wallet;
-    Stellite::TransactionHistory * m_pimpl;
+    Torque::TransactionHistory * m_pimpl;
     mutable QList<TransactionInfo*> m_tinfo;
     mutable QDateTime   m_firstDateTime;
     mutable QDateTime   m_lastDateTime;

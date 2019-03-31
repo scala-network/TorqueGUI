@@ -90,7 +90,7 @@ Item {
         wrapMode: Text.Wrap
         //renderType: Text.NativeRendering
         color: "#3F3F3F"
-        text: qsTr("Stellite development is solely supported by donations") + translationManager.emptyString
+        text: qsTr("Torque development is solely supported by donations") + translationManager.emptyString
     }
 
     Column {
@@ -160,8 +160,8 @@ Item {
             color: "#4A4646"
             wrapMode: Text.Wrap
             text: qsTr("For every transaction, a small transaction fee is charged. This option lets you add an additional amount, " +
-                       "as a percentage of that fee, to your transaction to support Stellite development. For instance, a 50% " +
-                       "autodonation take a transaction fee of 0.15 XMR and add a 0.01 XTL to support Stellite development.")
+                       "as a percentage of that fee, to your transaction to support Torque development. For instance, a 50% " +
+                       "autodonation take a transaction fee of 0.15 XMR and add a 0.01 XTC to support Torque development.")
                     + translationManager.emptyString
         }
         Column {
@@ -187,8 +187,8 @@ Item {
                 font.pixelSize: 15
                 color: "#4A4646"
                 wrapMode: Text.Wrap
-                text: qsTr("Mining secures the Stellite network, and also pays a small reward for the work done. This option " +
-                           "will let Stellite mine when your computer is on mains power and is idle. It will stop mining when you continue working.")
+                text: qsTr("Mining secures the Torque network, and also pays a small reward for the work done. This option " +
+                           "will let Torque mine when your computer is on mains power and is idle. It will stop mining when you continue working.")
                       + translationManager.emptyString
             }
         }

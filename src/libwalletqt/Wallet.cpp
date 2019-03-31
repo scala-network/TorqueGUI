@@ -27,7 +27,7 @@ namespace {
     static const int WALLET_CONNECTION_STATUS_CACHE_TTL_SECONDS = 5;
 }
 
-class WalletListenerImpl : public  Stellite::WalletListener
+class WalletListenerImpl : public  Torque::WalletListener
 {
 public:
     WalletListenerImpl(Wallet * w)
@@ -110,11 +110,11 @@ NetworkType::Type Wallet::nettype() const
 
 void Wallet::updateConnectionStatusAsync()
 {
-    QFuture<Stellite::Wallet::ConnectionStatus> future = QtConcurrent::run(m_walletImpl, &Stellite::Wallet::connected);
-    QFutureWatcher<Stellite::Wallet::ConnectionStatus> *connectionWatcher = new QFutureWatcher<Stellite::Wallet::ConnectionStatus>();
+    QFuture<Torque::Wallet::ConnectionStatus> future = QtConcurrent::run(m_walletImpl, &Torque::Wallet::connected);
+    QFutureWatcher<Torque::Wallet::ConnectionStatus> *connectionWatcher = new QFutureWatcher<Torque::Wallet::ConnectionStatus>();
 
-    connect(connectionWatcher, &QFutureWatcher<Stellite::Wallet::ConnectionStatus>::finished, [=]() {
-        QFuture<Stellite::Wallet::ConnectionStatus> future = connectionWatcher->future();
+    connect(connectionWatcher, &QFutureWatcher<Torque::Wallet::ConnectionStatus>::finished, [=]() {
+        QFuture<Torque::Wallet::ConnectionStatus> future = connectionWatcher->future();
         connectionWatcher->deleteLater();
         ConnectionStatus newStatus = static_cast<ConnectionStatus>(future.result());
         if (newStatus != m_connectionStatus || !m_initialized) {
@@ -393,9 +393,9 @@ PendingTransaction *Wallet::createTransaction(const QString &dst_addr, const QSt
                                               PendingTransaction::Priority priority)
 {
     std::set<uint32_t> subaddr_indices;
-    Stellite::PendingTransaction * ptImpl = m_walletImpl->createTransaction(
+    Torque::PendingTransaction * ptImpl = m_walletImpl->createTransaction(
                 dst_addr.toStdString(), payment_id.toStdString(), amount, mixin_count,
-                static_cast<Stellite::PendingTransaction::Priority>(priority), currentSubaddressAccount(), subaddr_indices);
+                static_cast<Torque::PendingTransaction::Priority>(priority), currentSubaddressAccount(), subaddr_indices);
     PendingTransaction * result = new PendingTransaction(ptImpl,0);
     return result;
 }
@@ -421,9 +421,9 @@ PendingTransaction *Wallet::createTransactionAll(const QString &dst_addr, const 
                                                  quint32 mixin_count, PendingTransaction::Priority priority)
 {
     std::set<uint32_t> subaddr_indices;
-    Stellite::PendingTransaction * ptImpl = m_walletImpl->createTransaction(
-                dst_addr.toStdString(), payment_id.toStdString(), Stellite::optional<uint64_t>(), mixin_count,
-                static_cast<Stellite::PendingTransaction::Priority>(priority), currentSubaddressAccount(), subaddr_indices);
+    Torque::PendingTransaction * ptImpl = m_walletImpl->createTransaction(
+                dst_addr.toStdString(), payment_id.toStdString(), Torque::optional<uint64_t>(), mixin_count,
+                static_cast<Torque::PendingTransaction::Priority>(priority), currentSubaddressAccount(), subaddr_indices);
     PendingTransaction * result = new PendingTransaction(ptImpl, this);
     return result;
 }
@@ -447,7 +447,7 @@ void Wallet::createTransactionAllAsync(const QString &dst_addr, const QString &p
 
 PendingTransaction *Wallet::createSweepUnmixableTransaction()
 {
-    Stellite::PendingTransaction * ptImpl = m_walletImpl->createSweepUnmixableTransaction();
+    Torque::PendingTransaction * ptImpl = m_walletImpl->createSweepUnmixableTransaction();
     PendingTransaction * result = new PendingTransaction(ptImpl, this);
     return result;
 }
@@ -469,7 +469,7 @@ void Wallet::createSweepUnmixableTransactionAsync()
 UnsignedTransaction * Wallet::loadTxFile(const QString &fileName)
 {
     qDebug() << "Trying to sign " << fileName;
-    Stellite::UnsignedTransaction * ptImpl = m_walletImpl->loadUnsignedTx(fileName.toStdString());
+    Torque::UnsignedTransaction * ptImpl = m_walletImpl->loadUnsignedTx(fileName.toStdString());
     UnsignedTransaction * result = new UnsignedTransaction(ptImpl, m_walletImpl, this);
     return result;
 }
@@ -543,7 +543,7 @@ SubaddressModel *Wallet::subaddressModel()
 
 QString Wallet::generatePaymentId() const
 {
-    return QString::fromStdString(Stellite::Wallet::genPaymentId());
+    return QString::fromStdString(Torque::Wallet::genPaymentId());
 }
 
 QString Wallet::integratedAddress(const QString &paymentId) const
@@ -735,7 +735,7 @@ void Wallet::setWalletCreationHeight(quint64 height)
 
 QString Wallet::getDaemonLogPath() const
 {
-    return QString::fromStdString(m_walletImpl->getDefaultDataDir()) + "/bitstellite.log";
+    return QString::fromStdString(m_walletImpl->getDefaultDataDir()) + "/bittorque.log";
 }
 
 
@@ -851,7 +851,7 @@ void Wallet::keyReuseMitigation2(bool mitigation)
     m_walletImpl->keyReuseMitigation2(mitigation);
 }
 
-Wallet::Wallet(Stellite::Wallet *w, QObject *parent)
+Wallet::Wallet(Torque::Wallet *w, QObject *parent)
     : QObject(parent)
     , m_walletImpl(w)
     , m_history(nullptr)
@@ -895,7 +895,7 @@ Wallet::~Wallet()
     m_addressBook = NULL;
     delete m_subaddress;
     m_subaddress = NULL;
-    //Stellite::WalletManagerFactory::getWalletManager()->closeWallet(m_walletImpl);
+    //Torque::WalletManagerFactory::getWalletManager()->closeWallet(m_walletImpl);
     if(status() == Status_Critical)
         qDebug("Not storing wallet cache");
     else if( m_walletImpl->store(""))

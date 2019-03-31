@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Stellite Project
+// Copyright (c) 2014-2015, The Torque Project
 // 
 // All rights reserved.
 // 
@@ -35,7 +35,7 @@ import "../version.js" as Version
 
 
 import "../components"
-import stelliteComponents.Clipboard 1.0
+import torqueComponents.Clipboard 1.0
 
 Rectangle {
     property var daemonAddress
@@ -492,9 +492,9 @@ Rectangle {
         }
 
         TextBlock {
-            id: guiStelliteVersion
+            id: guiTorqueVersion
             Layout.fillWidth: true
-            text: qsTr("Embedded Stellite version: 1.2.4.2 Titanium V3, ") + Version.GUI_MONERO_VERSION + translationManager.emptyString
+            text: qsTr("Embedded Torque version: 1.2.4.2 Titanium V3, ") + Version.GUI_MONERO_VERSION + translationManager.emptyString
         }
         TextBlock {
             Layout.fillWidth: true

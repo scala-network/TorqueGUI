@@ -76,7 +76,7 @@ Item {
         wrapMode: Text.Wrap
         //renderType: Text.NativeRendering
         color: "#3F3F3F"
-        text: qsTr("We’re almost there - let’s just configure some Stellite preferences") + translationManager.emptyString
+        text: qsTr("We’re almost there - let’s just configure some Torque preferences") + translationManager.emptyString
     }
 
     Column {
@@ -94,7 +94,7 @@ Item {
             spacing: 12
 
             CheckBox {
-                text: qsTr("Kickstart the Stellite blockchain?") + translationManager.emptyString
+                text: qsTr("Kickstart the Torque blockchain?") + translationManager.emptyString
                 anchors.left: parent.left
                 anchors.right: parent.right
                 background: "#F0EEEE"
@@ -138,8 +138,8 @@ Item {
                 color: "#4A4646"
                 wrapMode: Text.Wrap
                 text: qsTr("Disk conservation mode uses substantially less disk-space, but the same amount of bandwidth as " +
-                           "a regular Stellite instance. However, storing the full blockchain is beneficial to the security " +
-                           "of the Stellite network. If you are on a device with limited disk space, then this option is appropriate for you.")
+                           "a regular Torque instance. However, storing the full blockchain is beneficial to the security " +
+                           "of the Torque network. If you are on a device with limited disk space, then this option is appropriate for you.")
                         + translationManager.emptyString
             }
         }
@@ -166,8 +166,8 @@ Item {
                 font.pixelSize: 15
                 color: "#4A4646"
                 wrapMode: Text.Wrap
-                text: qsTr("Mining secures the Stellite network, and also pays a small reward for the work done. This option " +
-                           "will let Stellite mine when your computer is on mains power and is idle. It will stop mining when you continue working.")
+                text: qsTr("Mining secures the Torque network, and also pays a small reward for the work done. This option " +
+                           "will let Torque mine when your computer is on mains power and is idle. It will stop mining when you continue working.")
                         + translationManager.emptyString
             }
         }

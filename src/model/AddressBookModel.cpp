@@ -36,7 +36,7 @@ QVariant AddressBookModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
-    Stellite::AddressBookRow * ar = m_addressBook->getRow(index.row());
+    Torque::AddressBookRow * ar = m_addressBook->getRow(index.row());
 
     QVariant result = "";
     switch (role) {
